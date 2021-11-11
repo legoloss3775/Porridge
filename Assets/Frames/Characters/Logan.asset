@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c20393005c88e3e46b5c4d5187ab6cfa, type: 3}
+  m_Name: Logan
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 811398594164413659, guid: 6e83cc9d2502d9f4abecd5f700572f4c, type: 3}
+  state: 0
+  characterParts: []
