@@ -17,7 +17,7 @@ public class UIDialogueValues : Values, IFrameUIDialogueSerialization
 
     public string conversationCharacterID { get; set; }
     public int selectedCharacterIndex { get; set; }
-    public UIDialogueValues(FrameUIDialogue dialogue)
+    public UIDialogueValues(FrameUI_Dialogue dialogue)
     {
         position = dialogue.position;
         activeStatus = dialogue.activeStatus;
@@ -85,7 +85,7 @@ public interface IFrameUIDialogueSerialization
     string conversationCharacterID { get; set; }
     int selectedCharacterIndex { get; set; }
 }
-public class FrameUIDialogue : FrameUIWindow, IFrameUIDialogueSerialization
+public class FrameUI_Dialogue : FrameUI_Window, IFrameUIDialogueSerialization
 {
     public string text
     {
@@ -128,6 +128,9 @@ public class FrameUIDialogue : FrameUIWindow, IFrameUIDialogueSerialization
         FrameKey key = FrameManager.frame.currentKey;
         FrameCharacterValues chValues = (FrameCharacterValues)key.frameKeyValues[characterID];
 
+        RemovePreviousCharacter();
+        this.SetConversationCharacterSO();
+
         this.conversationCharacterSO.LoadElementOnScene(FrameManager.frame.GetPair(FrameManager.frame.GetFrameElementObjectByID(characterID)), characterID, character, chValues);
         character = FrameManager.GetFrameElementOnSceneByID<FrameCharacter>(characterID);
         character.dialogueID = this.id;
@@ -138,7 +141,9 @@ public class FrameUIDialogue : FrameUIWindow, IFrameUIDialogueSerialization
         key.UpdateFrameElementKeyValues(character);
 
         character.SetKeyValuesWhileNotInPlayMode<FrameCharacterValues, FrameCharacter>();
-        this.SetKeyValuesWhileNotInPlayMode<UIDialogueValues, FrameUIDialogue>();
+        this.SetKeyValuesWhileNotInPlayMode<UIDialogueValues, FrameUI_Dialogue>();
+
+        void RemovePreviousCharacter() => FrameManager.RemoveElement(this.conversationCharacter.id);
     }
     public void SetConversationCharacter()
     {
@@ -150,13 +155,25 @@ public class FrameUIDialogue : FrameUIWindow, IFrameUIDialogueSerialization
         character = FrameManager.GetFrameElementOnSceneByID<FrameCharacter>(ID);
         character.dialogueID = this.id;
 
-        Debug.Log(ID);
         this.conversationCharacterID = ID;
         this.conversationCharacter = character;
         this.conversationCharacterID = ID;
 
         character.SetKeyValuesWhileNotInPlayMode<FrameCharacterValues, FrameCharacter>();
-        this.SetKeyValuesWhileNotInPlayMode<UIDialogueValues, FrameUIDialogue>();
+        this.SetKeyValuesWhileNotInPlayMode<UIDialogueValues, FrameUI_Dialogue>();
+    }
+    public void SetConversationCharacterSO()
+    {
+        UIDialogueValues values = (UIDialogueValues)frameKeyValues;
+        FrameEditorSO frameEditorSO = AssetManager.GetAtPath<FrameEditorSO>("Scripts/SceneEditor/").FirstOrDefault();
+
+        for (int i = 0; i < frameEditorSO.GetFrameElementsOfType<FrameCharacterSO>().Count; i++)
+        {
+            if (i == values.selectedCharacterIndex)
+            {
+                this.conversationCharacterSO = frameEditorSO.GetFrameElementsOfType<FrameCharacterSO>()[i];
+            }
+        }
     }
 
     #region VALUES_SETTINGS
@@ -181,24 +198,35 @@ public class FrameUIDialogue : FrameUIWindow, IFrameUIDialogueSerialization
         selectedCharacterIndex = values.selectedCharacterIndex;
 
         characterNameField = characterNameField;
+
+        UpdateConversationCharacterFromKey(frameKeyValues);
+    }
+    public void UpdateConversationCharacterFromKey(object frameKeyValues)
+    {
+        UIDialogueValues values = (UIDialogueValues)frameKeyValues;
+
+        if (this.conversationCharacter.id != values.conversationCharacterID)
+        {
+            this.LoadConversationCharacter(values.conversationCharacterID);
+        }
     }
     #endregion
 
     #region EDITOR
 #if UNITY_EDITOR
 
-    [CustomEditor(typeof(FrameUIDialogue))]
+    [CustomEditor(typeof(FrameUI_Dialogue))]
     [CanEditMultipleObjects]
     public class FrameUIDialogueWindowCustomInspector : FrameElementCustomInspector
     {
         public override void OnInspectorGUI()
         {
-            FrameUIDialogue dialogue = (FrameUIDialogue)target;
+            FrameUI_Dialogue dialogue = (FrameUI_Dialogue)target;
             EditorUtility.SetDirty(dialogue);
 
             dialogue.position = dialogue.GetComponent<RectTransform>().anchoredPosition;
 
-            dialogue.SetKeyValuesWhileNotInPlayMode<UIDialogueValues, FrameUIDialogue>();
+            dialogue.SetKeyValuesWhileNotInPlayMode<UIDialogueValues, FrameUI_Dialogue>();
 
             if (targets.Length > 1)
             {
@@ -206,11 +234,11 @@ public class FrameUIDialogue : FrameUIWindow, IFrameUIDialogueSerialization
                 {
                     FrameElement mTarget = (FrameElement)target;
                     dialogue.position = mTarget.GetComponent<RectTransform>().anchoredPosition;
-                    mTarget.SetKeyValuesWhileNotInPlayMode<UIDialogueValues, FrameUIDialogue>();
+                    mTarget.SetKeyValuesWhileNotInPlayMode<UIDialogueValues, FrameUI_Dialogue>();
                 }
             }
 
-            this.SetElementInInspector<FrameUIDialogueSO>();
+            this.SetElementInInspector<FrameUI_DialogueSO>();
         }
     }
 #endif

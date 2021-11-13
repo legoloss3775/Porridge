@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
-using static FrameUIDialogue;
+using static FrameUI_Dialogue;
 
 [System.Serializable]
 public class FrameManager : MonoBehaviour, ISerializationCallbackReceiver
@@ -34,38 +34,48 @@ public class FrameManager : MonoBehaviour, ISerializationCallbackReceiver
             if (selectedFrame > 0)
                 selectedFrame--;
 
-            SetFrame(selectedFrame, selectedFrameKey);
+            SetFrame(selectedFrame);
         }
         else if (Input.GetKeyDown(KeyCode.E))
         {
             if (selectedFrame < AssetManager.GetAtPath<FrameSO>("Frames/").Length)
                 selectedFrame++;
 
-            SetFrame(selectedFrame, selectedFrameKey);
+            SetFrame(selectedFrame);
         }
         if (Input.GetKeyDown(KeyCode.A))
         {
             if (selectedFrameKey > 0)
                 selectedFrameKey--;
 
-            SetFrame(selectedFrame, selectedFrameKey);
+            SetKey(selectedFrameKey);
         }
         else if (Input.GetKeyDown(KeyCode.D))
         {
             if (frame.frameKeys.Count - 1 > selectedFrameKey)
                 selectedFrameKey++;
 
-            SetFrame(selectedFrame, selectedFrameKey);
+            SetKey(selectedFrameKey);
         }
     }
-    public void SetFrame(int frameIndex, int keyIndex)
+    public void SetKey(int keyIndex)
     {
-        if (AssetManager.GetAtPath<FrameSO>("Frames/").Length > frameIndex)
+        if (frame.frameKeys.Count - 1 >= keyIndex &&
+            keyIndex >= 0)
+        {
+            frame.currentKey = frame.frameKeys[keyIndex];
+            ChangeFrameKey();
+        }
+    }
+    public void SetFrame(int frameIndex)
+    {
+        if (AssetManager.GetAtPath<FrameSO>("Frames/").Length > frameIndex &&
+            frameIndex >= 0)
         {
             UICanvas = GameObject.Find("UI Canvas").GetComponent<Canvas>();
             frame = AssetManager.GetAtPath<FrameSO>("Frames/")[frameIndex];
 
-            frame.currentKey = frame.frameKeys[keyIndex];
+            frame.currentKey = frame.frameKeys[0];
 
             ChangeFrame();
             ChangeFrameKey();
@@ -88,7 +98,6 @@ public class FrameManager : MonoBehaviour, ISerializationCallbackReceiver
         foreach (var element in FrameManager.frameElements)
             if (element.id == id)
                 return (T)element;
-        //Debug.LogError(id);
         return null;
     }
     public static bool ContainsElementInManagerByID(string id)
@@ -115,11 +124,11 @@ public class FrameManager : MonoBehaviour, ISerializationCallbackReceiver
     }
     public static void ChangeFrameKey()
     {
-        foreach(var element in frameElements.ToList())
+        foreach (var element in frameElements.ToList())
         {
             if (element == null)
             {
-                ChangeFrame();
+                continue;
             }
 
             if (frame.currentKey.frameKeyValues.ContainsKey(element.id))
@@ -127,7 +136,7 @@ public class FrameManager : MonoBehaviour, ISerializationCallbackReceiver
                 frame.currentKey.UpdateFrameElementKeyValues(element);
                 element.UpdateValuesFromKey(frame.currentKey.frameKeyValues[element.id]);
             }
-            else 
+            else
             {
                 if (element.frameKeyValues != null) frame.currentKey.AddFrameKeyValues(element.id, element.frameKeyValues);
                 else frame.currentKey.AddFrameKeyValues(element.id, element.GetFrameKeyValuesType());
@@ -137,7 +146,7 @@ public class FrameManager : MonoBehaviour, ISerializationCallbackReceiver
     public static void ChangeFrame()
     {
         ClearElements();
-        FrameSO.LoadElementsOnScene<FrameUIDialogueSO, FrameUIDialogue>(frame.usedElementsObjects, new FrameUIDialogue());
+        FrameSO.LoadElementsOnScene<FrameUI_DialogueSO, FrameUI_Dialogue>(frame.usedElementsObjects, new FrameUI_Dialogue());
         FrameSO.LoadElementsOnScene<FrameCharacterSO, FrameCharacter>(frame.usedElementsObjects, new FrameCharacter());
     }
     public static void ClearElements()

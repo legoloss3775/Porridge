@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 870de8273d677804fa0ba38a41bb48b6, type: 3}
+  m_Script: {fileID: 11500000, guid: cfeba599d3b5d684fbebb41c73f9f391, type: 3}
   m_Name: Inner_Fire_Line1
   m_EditorClassIdentifier: 
   prefab: {fileID: 7017645145037971291, guid: 966d15c3440e8464ab3e02064b0e921d, type: 3}

@@ -7,7 +7,7 @@ using UnityEditor;
 using System;
 
 [CreateAssetMenu(fileName = "Window", menuName = "Редактор Сцен/Окно" )]
-public class FrameUIWindowSO : FrameElementSO
+public class FrameUI_WindowSO : FrameElementSO
 {
     public enum FrameUIWindowType
     {

@@ -131,7 +131,7 @@ public class FrameSO : ScriptableObject
 
                         if (chValues != null && chValues.dialogueID != null && chValues.dialogueID != "")
                         {
-                            FrameUIDialogue dialogue = FrameManager.GetFrameElementOnSceneByID<FrameUIDialogue>(chValues.dialogueID);
+                            FrameUI_Dialogue dialogue = FrameManager.GetFrameElementOnSceneByID<FrameUI_Dialogue>(chValues.dialogueID);
                             UIDialogueValues dv = (UIDialogueValues)FrameManager.frame.currentKey.frameKeyValues[chValues.dialogueID];
                             if (dialogue.conversationCharacter == null && dv.conversationCharacterID == id)
                             {

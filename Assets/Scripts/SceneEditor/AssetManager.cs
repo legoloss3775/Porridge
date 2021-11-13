@@ -12,7 +12,7 @@ public class AssetManager
     {
         UpdateFrameAssetsOfType<FrameCharacterSO>("Characters");
         UpdateFrameAssetsOfType<FrameBackgroundSO>("Backgrounds");
-        UpdateFrameAssetsOfType<FrameUIDialogueSO>("UI/Dialogue Windows");
+        UpdateFrameAssetsOfType<FrameUI_DialogueSO>("UI/Dialogue Windows");
     }
     public static void UpdateFrameAssetsOfType<T>(string folderName)
         where T : FrameElementSO

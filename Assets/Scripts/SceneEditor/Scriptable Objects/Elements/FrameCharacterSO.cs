@@ -50,7 +50,7 @@ public class FrameCharacterSO : FrameElementSO
         
         if (cValues != null && cValues.dialogueID != null && cValues.dialogueID != "")
         {
-            FrameUIDialogue dialogue = FrameManager.GetFrameElementOnSceneByID<FrameUIDialogue>(cValues.dialogueID);
+            FrameUI_Dialogue dialogue = FrameManager.GetFrameElementOnSceneByID<FrameUI_Dialogue>(cValues.dialogueID);
             UIDialogueValues dv = (UIDialogueValues)FrameManager.frame.currentKey.frameKeyValues[cValues.dialogueID];
             if (dialogue.conversationCharacter == null && dv.conversationCharacterID == id)
             {

@@ -65,7 +65,7 @@ public abstract class FrameElement : MonoBehaviour, IFrameElementSerialization
     {
         get
         {
-            if (this is FrameUIDialogue)
+            if (this is FrameUI_Dialogue)
                 try
                 {
                     return this.GetComponent<RectTransform>().anchoredPosition;
@@ -84,7 +84,7 @@ public abstract class FrameElement : MonoBehaviour, IFrameElementSerialization
         }
         set
         {
-            if (this is FrameUIDialogue)
+            if (this is FrameUI_Dialogue)
                 GetComponent<RectTransform>().anchoredPosition = value;
             else
                 this.transform.position = value;

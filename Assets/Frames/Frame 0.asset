@@ -1,0 +1,126 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9fb188184a63ff42b050cfef419b0c6, type: 3}
+  m_Name: Frame 0
+  m_EditorClassIdentifier: 
+  type: 0
+  id: Frame_0
+  selectedKeyIndex: 0
+  currentKey:
+    frameKeyValues:
+      keys:
+      - Inner_Fire_Line1_1211D
+      - Noran_9EDDD
+      - Logan_FE09C
+      - Noran_9B49C
+      serializedElementValues: []
+      serializedDialogueValues:
+      - _position: {x: -0.000011444, y: 250.5}
+        _activeStatus: 1
+        _text: "\u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
+          \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430
+          \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
+          \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430
+          \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
+          \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430
+          \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
+          \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430
+          \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
+          \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 "
+        _conversationCharacterID: Logan_FE09C
+        _selectedCharacterIndex: 1
+      serializedFrameCharacterValues:
+      - _position: {x: -8.59, y: 0}
+        _activeStatus: 1
+        _dialogueID: Inner_Fire_Line1_1211D
+      - _position: {x: 0, y: 0}
+        _activeStatus: 1
+        _dialogueID: Inner_Fire_Line1_1211D
+      - _position: {x: 0, y: 0}
+        _activeStatus: 1
+        _dialogueID: 
+  frameKeys:
+  - frameKeyValues:
+      keys:
+      - Inner_Fire_Line1_1211D
+      - Noran_9EDDD
+      - Logan_FE09C
+      - Noran_9B49C
+      serializedElementValues: []
+      serializedDialogueValues:
+      - _position: {x: -0.000011444, y: 250.5}
+        _activeStatus: 1
+        _text: "\u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
+          \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430
+          \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
+          \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430
+          \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
+          \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430
+          \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
+          \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430
+          \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
+          \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 "
+        _conversationCharacterID: Logan_FE09C
+        _selectedCharacterIndex: 1
+      serializedFrameCharacterValues:
+      - _position: {x: -8.59, y: 0}
+        _activeStatus: 1
+        _dialogueID: Inner_Fire_Line1_1211D
+      - _position: {x: 0, y: 0}
+        _activeStatus: 1
+        _dialogueID: Inner_Fire_Line1_1211D
+      - _position: {x: 0, y: 0}
+        _activeStatus: 1
+        _dialogueID: 
+  - frameKeyValues:
+      keys:
+      - Inner_Fire_Line1_1211D
+      - Noran_9EDDD
+      - Logan_FE09C
+      - Noran_9B49C
+      serializedElementValues: []
+      serializedDialogueValues:
+      - _position: {x: -0.000011444, y: 250.5}
+        _activeStatus: 1
+        _text: "\u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
+          \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430
+          \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
+          \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430
+          \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
+          \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430
+          \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
+          \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430
+          \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
+          \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 "
+        _conversationCharacterID: Noran_9EDDD
+        _selectedCharacterIndex: 0
+      serializedFrameCharacterValues:
+      - _position: {x: 9.63, y: 0}
+        _activeStatus: 1
+        _dialogueID: Inner_Fire_Line1_1211D
+      - _position: {x: 0, y: 6.04}
+        _activeStatus: 1
+        _dialogueID: Inner_Fire_Line1_1211D
+      - _position: {x: 0, y: 0}
+        _activeStatus: 1
+        _dialogueID: 
+  usedElementsObjects:
+  - elementObject: {fileID: 11400000, guid: f09224e30d17c1f4f97ea80d60f36783, type: 2}
+    ids:
+    - Inner_Fire_Line1_1211D
+  - elementObject: {fileID: 11400000, guid: f6619c14e28441644b37a6f8bbd6a453, type: 2}
+    ids:
+    - Noran_9EDDD
+    - Noran_9B49C
+  - elementObject: {fileID: 11400000, guid: 65f8bc0e74d17f24bbb3be9b556ed71d, type: 2}
+    ids:
+    - Logan_FE09C

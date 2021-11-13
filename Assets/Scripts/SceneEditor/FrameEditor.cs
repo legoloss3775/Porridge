@@ -24,8 +24,6 @@ public class FrameEditor : EditorWindow
     }
     private void OnGUI()
     {
-        if (Application.isPlaying)
-            return;
 
         if(!isEditingAllowed())
             if (EditorUtility.DisplayDialog("Редактор фрейма", "Начать создание фрейма на данной сцене?", "Да", "Отмена"))
@@ -43,7 +41,7 @@ public class FrameEditor : EditorWindow
             FrameKeySelection();
             
             FrameElementCreationSelection<FrameCharacterSO, FrameCharacter>(new FrameCharacter());
-            FrameElementCreationSelection<FrameUIDialogueSO, FrameUIDialogue>(new FrameUIDialogue());
+            FrameElementCreationSelection<FrameUI_DialogueSO, FrameUI_Dialogue>(new FrameUI_Dialogue());
             FrameEditor_Dialogue.FrameDialogueEditing();
         }
     }

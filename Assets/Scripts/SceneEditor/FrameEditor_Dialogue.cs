@@ -10,12 +10,12 @@ public static class FrameEditor_Dialogue
     {
         FrameEditorSO frameEditorSO = AssetManager.GetAtPath<FrameEditorSO>("Scripts/SceneEditor/").FirstOrDefault();
 
-        foreach (var obj in frameEditorSO.GetFrameElementsOfType<FrameUIDialogueSO>().ToList())
+        foreach (var obj in frameEditorSO.GetFrameElementsOfType<FrameUI_DialogueSO>().ToList())
             if (FrameManager.frame.ContainsFrameElementObject(obj))
                 foreach (var frameDialogueID in FrameManager.frame.GetFrameElementIDsByObject(obj).ToList())
                     foreach (var pair in FrameManager.frame.currentKey.frameKeyValues.Where(ch => ch.Key == frameDialogueID).ToList())
                     {
-                        FrameUIDialogue dialogue = FrameManager.GetFrameElementOnSceneByID<FrameUIDialogue>(frameDialogueID);
+                        FrameUI_Dialogue dialogue = FrameManager.GetFrameElementOnSceneByID<FrameUI_Dialogue>(frameDialogueID);
                         if (dialogue == null) FrameManager.ChangeFrame();
                         if (dialogue == null) return;
 
@@ -36,7 +36,7 @@ public static class FrameEditor_Dialogue
                         }
                     }
     }
-    public static void FrameUIDialogueCharacterSelection(FrameUIDialogue dialogue)
+    public static void FrameUIDialogueCharacterSelection(FrameUI_Dialogue dialogue)
     {
         FrameEditorSO frameEditorSO = AssetManager.GetAtPath<FrameEditorSO>("Scripts/SceneEditor/").FirstOrDefault();
 
@@ -53,7 +53,7 @@ public static class FrameEditor_Dialogue
             }
         }
     }
-    public static void UpdateFrameUIDialogueCharacter(FrameUIDialogue dialogue)
+    public static void UpdateFrameUIDialogueCharacter(FrameUI_Dialogue dialogue)
     {
         var values = (UIDialogueValues)FrameManager.frame.currentKey.frameKeyValues[dialogue.id];
         var key = FrameManager.frame.currentKey;
@@ -92,7 +92,6 @@ public static class FrameEditor_Dialogue
             if (characterWasCreatedPreviously)
                 foreach (var characterID in FrameManager.frame.GetFrameElementIDsByObject(dialogue.conversationCharacterSO))
                 {
-                    RemovePreviousCharacter();
                     dialogue.LoadConversationCharacter(characterID);
                     break;
                 }

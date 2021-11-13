@@ -3,20 +3,20 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-public class FrameUIWindow : FrameElement
+public class FrameUI_Window : FrameElement
 {
     public Canvas canvas;
 
 #if UNITY_EDITOR
 
-    [CustomEditor(typeof(FrameUIWindow))]
+    [CustomEditor(typeof(FrameUI_Window))]
     [CanEditMultipleObjects]
     public class FrameUIWindowCustomInspector : FrameElementCustomInspector
     {
         public override void OnInspectorGUI()
         {
             base.OnInspectorGUI();
-            this.SetElementInInspector<FrameUIWindowSO>();
+            this.SetElementInInspector<FrameUI_WindowSO>();
         }
     }
 #endif
