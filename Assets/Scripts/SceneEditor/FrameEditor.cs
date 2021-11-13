@@ -16,7 +16,6 @@ public class FrameEditor : EditorWindow
     public static readonly Vector2 DEFAULT_ELEMENT_POSITION = Vector2.zero;
     public static readonly bool DEFAULT_ELEMENT_ACTIVESTATE = true;
 
-
     [MenuItem("Window/Редактор фрейма")]
     static void Init()
     {
@@ -25,13 +24,15 @@ public class FrameEditor : EditorWindow
     }
     private void OnGUI()
     {
+        if (Application.isPlaying)
+            return;
+
         if(!isEditingAllowed())
             if (EditorUtility.DisplayDialog("Редактор фрейма", "Начать создание фрейма на данной сцене?", "Да", "Отмена"))
             {
                 UpdateFrameEditorSO();
                 UpdateFrameManager();
-                FrameManager.ChangeFrame();
-                FrameManager.ChangeFrameKey();
+                SetFrame();
             }
         if (isEditingAllowed())
         {
@@ -40,10 +41,9 @@ public class FrameEditor : EditorWindow
 
             FrameSelection();
             FrameKeySelection();
-
+            
             FrameElementCreationSelection<FrameCharacterSO, FrameCharacter>(new FrameCharacter());
             FrameElementCreationSelection<FrameUIDialogueSO, FrameUIDialogue>(new FrameUIDialogue());
-
             FrameEditor_Dialogue.FrameDialogueEditing();
         }
     }
@@ -83,7 +83,7 @@ public class FrameEditor : EditorWindow
             if(GUILayout.Button(elementObject.name, GUILayout.Width(200)))
             {
                 string id = "";
-                FrameSO.CreateElementOnScene(elementObject, frameElement, elementObject.prefab.transform.position, out id);
+                elementObject.CreateElementOnScene(elementObject, frameElement, elementObject.prefab.transform.position, out id);
                 FrameManager.frame.currentKey.AddFrameKeyValues(id, frameElement.GetFrameKeyValuesType());
                 FrameManager.ChangeFrameKey();
             }
@@ -92,33 +92,55 @@ public class FrameEditor : EditorWindow
     }
     private void FrameKeySelection()
     {
-        try
+        if (GUILayout.Button("Новый кадр"))
         {
-            if (GUILayout.Button("Новый кадр"))
-            {
-                FrameManager.frame.currentKey = new FrameKey();
-                FrameManager.frame.AddKey(FrameManager.frame.currentKey);
-                FrameManager.frame.selectedKeyIndex = FrameManager.frame.frameKeys.Count - 1;
-                FrameManager.ChangeFrameKey();
-            }
-            List<string> keyStrings = new List<string>();
-            foreach (var key in FrameManager.frame.frameKeys)
-                keyStrings.Add(FrameManager.frame.frameKeys.IndexOf(key).ToString());
+            FrameManager.frame.currentKey = new FrameKey();
+            FrameManager.frame.AddKey(FrameManager.frame.currentKey);
+            FrameManager.frame.selectedKeyIndex = FrameManager.frame.frameKeys.Count - 1;
+            FrameManager.ChangeFrameKey();
+        }
+        List<string> keyStrings = new List<string>();
+        foreach (var key in FrameManager.frame.frameKeys)
+            keyStrings.Add(FrameManager.frame.frameKeys.IndexOf(key).ToString());
 
-            FrameManager.frame.selectedKeyIndex = GUILayout.SelectionGrid(FrameManager.frame.selectedKeyIndex, keyStrings.ToArray(), 8);
+        FrameManager.frame.selectedKeyIndex = GUILayout.SelectionGrid(FrameManager.frame.selectedKeyIndex, keyStrings.ToArray(), 8);
 
-            foreach (var key in FrameManager.frame.frameKeys)
+        foreach (var key in FrameManager.frame.frameKeys)
+        {
+            if (FrameManager.frame.frameKeys.IndexOf(key) == FrameManager.frame.selectedKeyIndex && FrameManager.frame.currentKey != key)
             {
-                if (FrameManager.frame.frameKeys.IndexOf(key) == FrameManager.frame.selectedKeyIndex && FrameManager.frame.currentKey != key)
+                if(key != null)
                 {
                     FrameManager.frame.currentKey = key;
                     FrameManager.ChangeFrameKey();
                 }
             }
         }
-        catch (System.Exception e)
+    }
+    private void SetFrame()
+    {
+        List<FrameSO> frames = new List<FrameSO>();
+        List<string> frameNames = new List<string>();
+
+        if (AssetManager.GetFrameAssets().Length == 0)
         {
-            Debug.LogError(e.Message);
+            CreateFrame();
+        }
+
+        foreach (var frame in AssetManager.GetFrameAssets())
+        {
+            frames.Add(frame);
+            frameNames.Add(frame.name);
+        }
+        for (int i = 0; i < frames.Count; i++)
+        {
+            if (i == frameEditorSO.selectedFrameIndex)
+            {
+                FrameManager.frame = frames[i];
+                
+                FrameManager.ChangeFrame();
+                FrameManager.ChangeFrameKey();
+            }
         }
     }
     private void FrameSelection()

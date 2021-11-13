@@ -68,6 +68,11 @@ public class FrameCharacter : FrameElement, IFrameCharacterSerialzation
 {
     public string dialogueID { get; set; }
 
+    public bool HasDialogue(string m_dialogueID)
+    {
+        return m_dialogueID == dialogueID ? true : false;
+    }
+
     #region VALUES_SETTINGS
     public override FrameKey.Values GetFrameKeyValuesType()
     {

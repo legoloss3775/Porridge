@@ -150,7 +150,12 @@ public abstract class FrameElement : MonoBehaviour, IFrameElementSerialization
 
     private void Update()
     {
-        //Debug.Log(id);
+
+    }
+    public T GetFrameElementType<T>(T element)
+        where T : FrameElement
+    {
+        return GetComponent<T>();
     }
     public string GetName()
     {

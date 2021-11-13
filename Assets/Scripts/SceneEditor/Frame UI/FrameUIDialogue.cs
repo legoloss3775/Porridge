@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEditor;
 using UnityEngine;
 using static FrameKey;
@@ -90,13 +91,11 @@ public class FrameUIDialogue : FrameUIWindow, IFrameUIDialogueSerialization
     {
         get
         {
-            if (this != null)
-                return this.gameObject.transform.GetChild(1).GetComponent<TMPro.TextMeshProUGUI>().text;
-            else return frameElementObject.prefab.transform.GetChild(1).GetComponent<TMPro.TextMeshProUGUI>().text;
+            return GetTextComponent().text;
         }
         set
         {
-            this.gameObject.transform.GetChild(1).GetComponent<TMPro.TextMeshProUGUI>().text = value;
+            GetTextComponent().text = value;
         }
     }
     public string characterNameField
@@ -118,15 +117,61 @@ public class FrameUIDialogue : FrameUIWindow, IFrameUIDialogueSerialization
     
     public string conversationCharacterID { get; set; }
     public int selectedCharacterIndex { get; set; }
+    
+    public bool HasCharacter(string characterID)
+    {
+        return characterID == conversationCharacterID ? true : false;
+    }
+    public void LoadConversationCharacter(string characterID)
+    {
+        FrameCharacter character = new FrameCharacter();
+        FrameKey key = FrameManager.frame.currentKey;
+        FrameCharacterValues chValues = (FrameCharacterValues)key.frameKeyValues[characterID];
+
+        this.conversationCharacterSO.LoadElementOnScene(FrameManager.frame.GetPair(FrameManager.frame.GetFrameElementObjectByID(characterID)), characterID, character, chValues);
+        character = FrameManager.GetFrameElementOnSceneByID<FrameCharacter>(characterID);
+        character.dialogueID = this.id;
+        this.conversationCharacter = character; 
+        this.conversationCharacterID = characterID;
+        this.conversationCharacterID = characterID;
+
+        key.UpdateFrameElementKeyValues(character);
+
+        character.SetKeyValuesWhileNotInPlayMode<FrameCharacterValues, FrameCharacter>();
+        this.SetKeyValuesWhileNotInPlayMode<UIDialogueValues, FrameUIDialogue>();
+    }
+    public void SetConversationCharacter()
+    {
+        FrameCharacter character = new FrameCharacter();
+
+        this.conversationCharacterSO.CreateElementOnScene(this.conversationCharacterSO, character, this.conversationCharacterSO.prefab.transform.position, out string ID);
+        if (FrameManager.GetFrameElementOnSceneByID<FrameCharacter>(ID) == null)
+            return;
+        character = FrameManager.GetFrameElementOnSceneByID<FrameCharacter>(ID);
+        character.dialogueID = this.id;
+
+        Debug.Log(ID);
+        this.conversationCharacterID = ID;
+        this.conversationCharacter = character;
+        this.conversationCharacterID = ID;
+
+        character.SetKeyValuesWhileNotInPlayMode<FrameCharacterValues, FrameCharacter>();
+        this.SetKeyValuesWhileNotInPlayMode<UIDialogueValues, FrameUIDialogue>();
+    }
 
     #region VALUES_SETTINGS
+    public TextMeshProUGUI GetTextComponent()
+    {
+        if (this != null)
+            return this.gameObject.transform.GetChild(1).GetComponent<TMPro.TextMeshProUGUI>();
+        else return frameElementObject.prefab.transform.GetChild(1).GetComponent<TMPro.TextMeshProUGUI>();
+    }
     public override FrameKey.Values GetFrameKeyValuesType()
     {
         return new UIDialogueValues(this);
     }
     public override void UpdateValuesFromKey(object frameKeyValues)
     {
-        Debug.Log(frameKeyValues.GetType());
         UIDialogueValues values = (UIDialogueValues)frameKeyValues;
         activeStatus = values.activeStatus;
         position = values.position;
@@ -149,28 +194,22 @@ public class FrameUIDialogue : FrameUIWindow, IFrameUIDialogueSerialization
         public override void OnInspectorGUI()
         {
             FrameUIDialogue dialogue = (FrameUIDialogue)target;
-            UIDialogueValues values;
-            if (FrameManager.frame.currentKey.ContainsID(dialogue.id))
-                values = (UIDialogueValues)FrameManager.frame.currentKey.frameKeyValues[dialogue.id];
-            else
-                values = null;
+            EditorUtility.SetDirty(dialogue);
 
-            if (values != null)
+            dialogue.position = dialogue.GetComponent<RectTransform>().anchoredPosition;
+
+            dialogue.SetKeyValuesWhileNotInPlayMode<UIDialogueValues, FrameUIDialogue>();
+
+            if (targets.Length > 1)
             {
-                values.position = dialogue.GetComponent<RectTransform>().anchoredPosition;
-                Debug.Log(dialogue.GetComponent<RectTransform>().anchoredPosition + " " + values.position);
-                dialogue.SetKeyValuesWhileNotInPlayMode<UIDialogueValues, FrameUIDialogue>();
-                Debug.Log(dialogue.id);
-                if (targets.Length > 1)
+                foreach (var target in targets)
                 {
-                    foreach (var target in targets)
-                    {
-                        FrameElement mTarget = (FrameElement)target;
-                        dialogue.position = mTarget.GetComponent<RectTransform>().anchoredPosition;
-                        mTarget.SetKeyValuesWhileNotInPlayMode<UIDialogueValues, FrameUIDialogue>();
-                    }
+                    FrameElement mTarget = (FrameElement)target;
+                    dialogue.position = mTarget.GetComponent<RectTransform>().anchoredPosition;
+                    mTarget.SetKeyValuesWhileNotInPlayMode<UIDialogueValues, FrameUIDialogue>();
                 }
             }
+
             this.SetElementInInspector<FrameUIDialogueSO>();
         }
     }

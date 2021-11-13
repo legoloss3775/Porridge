@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
+using static FrameUIDialogue;
 
 [System.Serializable]
 public class FrameManager : MonoBehaviour, ISerializationCallbackReceiver
@@ -20,9 +21,7 @@ public class FrameManager : MonoBehaviour, ISerializationCallbackReceiver
 
     private void Awake()
     {
-#if UNITY_EDITOR
-        //UpdateDirty();
-#endif
+
     }
     private void Start()
     {
@@ -58,7 +57,6 @@ public class FrameManager : MonoBehaviour, ISerializationCallbackReceiver
 
             SetFrame(selectedFrame, selectedFrameKey);
         }
-        Debug.Log(frame.frameKeys.IndexOf(frame.currentKey));
     }
     public void SetFrame(int frameIndex, int keyIndex)
     {
@@ -90,6 +88,7 @@ public class FrameManager : MonoBehaviour, ISerializationCallbackReceiver
         foreach (var element in FrameManager.frameElements)
             if (element.id == id)
                 return (T)element;
+        //Debug.LogError(id);
         return null;
     }
     public static bool ContainsElementInManagerByID(string id)
@@ -116,13 +115,10 @@ public class FrameManager : MonoBehaviour, ISerializationCallbackReceiver
     }
     public static void ChangeFrameKey()
     {
-        foreach(var element in frameElements)
+        foreach(var element in frameElements.ToList())
         {
             if (element == null)
-                continue;
-            if (element.id == null)
             {
-                ClearElements();
                 ChangeFrame();
             }
 
@@ -133,7 +129,8 @@ public class FrameManager : MonoBehaviour, ISerializationCallbackReceiver
             }
             else 
             {
-                frame.currentKey.AddFrameKeyValues(element.id, element.GetFrameKeyValuesType());
+                if (element.frameKeyValues != null) frame.currentKey.AddFrameKeyValues(element.id, element.frameKeyValues);
+                else frame.currentKey.AddFrameKeyValues(element.id, element.GetFrameKeyValuesType());
             }
         }
     }
@@ -170,7 +167,7 @@ public class FrameManager : MonoBehaviour, ISerializationCallbackReceiver
     }
     public void OnAfterDeserialize()
     {
-        frameElements.Clear();
+        //frameElements.Clear();
         foreach(var element in serializedFrameElementsList)
         {
             

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using static FrameSO;
 
 [CreateAssetMenu(fileName = "Character", menuName = "Редактор Сцен/Персонаж")]
 public class FrameCharacterSO : FrameElementSO
@@ -33,6 +34,30 @@ public class FrameCharacterSO : FrameElementSO
     public override void OnEnable()
     {
         base.OnEnable();
+    }
+    public override void LoadElementOnScene<T>(FrameElementIDPair pair, string id, T element, FrameKey.Values values)
+    {
+        FrameCharacterValues cValues = (FrameCharacterValues)values;
+        if (element.frameElementObject == null)
+            element.frameElementObject = pair.elementObject;
+
+        T elementClone = Instantiate(element.frameElementObject.prefab).AddComponent<T>();
+        elementClone.frameElementObject = pair.elementObject;
+        elementClone.id = id;
+        elementClone.frameKeyValues = cValues;
+        EditorUtility.SetDirty(elementClone);
+        FrameManager.AddElement(elementClone);
+        
+        if (cValues != null && cValues.dialogueID != null && cValues.dialogueID != "")
+        {
+            FrameUIDialogue dialogue = FrameManager.GetFrameElementOnSceneByID<FrameUIDialogue>(cValues.dialogueID);
+            UIDialogueValues dv = (UIDialogueValues)FrameManager.frame.currentKey.frameKeyValues[cValues.dialogueID];
+            if (dialogue.conversationCharacter == null && dv.conversationCharacterID == id)
+            {
+                dialogue.conversationCharacter = FrameManager.GetFrameElementOnSceneByID<FrameCharacter>(id);
+                dialogue.conversationCharacterID = id;
+            }
+        }
     }
 }
 [System.Serializable]

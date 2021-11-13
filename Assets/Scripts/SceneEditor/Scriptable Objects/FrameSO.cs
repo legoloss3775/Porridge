@@ -119,167 +119,36 @@ public class FrameSO : ScriptableObject
         {
             if (pair.elementObject.GetType() == typeof(TKey))
             {
-                if (element is FrameCharacter)
-                    foreach (var id in pair.ids)
+                foreach (var id in pair.ids)
+                {
+                    FrameKey.Values values = null;
+                    if (FrameManager.frame.currentKey.frameKeyValues.ContainsKey(id))
+                        values = FrameManager.frame.currentKey.frameKeyValues[id];
+
+                    if (element is FrameCharacter)
                     {
-                        FrameCharacterValues values = null;
-                        if (FrameManager.frame.currentKey.frameKeyValues.ContainsKey(id))
-                            values = (FrameCharacterValues)FrameManager.frame.currentKey.frameKeyValues[id];
-                        
-                        if (values != null && values.dialogueID != null && values.dialogueID != "")
+                        FrameCharacterValues chValues = (FrameCharacterValues)values;
+
+                        if (chValues != null && chValues.dialogueID != null && chValues.dialogueID != "")
                         {
-                            FrameUIDialogue dialogue = FrameManager.GetFrameElementOnSceneByID<FrameUIDialogue>(values.dialogueID);
-                            UIDialogueValues dv = (UIDialogueValues)FrameManager.frame.currentKey.frameKeyValues[values.dialogueID];
+                            FrameUIDialogue dialogue = FrameManager.GetFrameElementOnSceneByID<FrameUIDialogue>(chValues.dialogueID);
+                            UIDialogueValues dv = (UIDialogueValues)FrameManager.frame.currentKey.frameKeyValues[chValues.dialogueID];
                             if (dialogue.conversationCharacter == null && dv.conversationCharacterID == id)
                             {
-                                LoadElementOnScene(pair, id, element, values);
+                                pair.elementObject.LoadElementOnScene(pair, id, element, chValues);
                                 FrameCharacter character = FrameManager.GetFrameElementOnSceneByID<FrameCharacter>(id);
                                 dialogue.conversationCharacter = character;
                                 dialogue.conversationCharacterID = id;
                             }
                         }
-                        else 
-                            LoadElementOnScene(pair, id, element, values);
+                        else
+                            pair.elementObject.LoadElementOnScene(pair, id, element, values);
+
                     }
-                else if (element is FrameUIDialogue)
-                    foreach (var id in pair.ids)
-                    {
-                        UIDialogueValues values = null;
-                        if (FrameManager.frame.currentKey.frameKeyValues.ContainsKey(id))
-                            values = (UIDialogueValues)FrameManager.frame.currentKey.frameKeyValues[id];
-                        else throw new Exception("Не найден ID в ключе ");
-                        LoadUIElementOnScene(pair, id, element, values);
-                    }
-                else
-                    foreach (var id in pair.ids)
-                    {
-                        FrameElementValues values = null;
-                        if (FrameManager.frame.currentKey.frameKeyValues.ContainsKey(id))
-                            values = (FrameElementValues)FrameManager.frame.currentKey.frameKeyValues[id];
-                        else throw new Exception("Не найден ID в ключе ");
-                        LoadElementOnScene(pair, id, element, values);
-                    }
+                    else
+                        pair.elementObject.LoadElementOnScene(pair, id, element, values);
+                }
             }
         }
-    }
-    public static void LoadElementOnScene<T>(FrameElementIDPair pair, string id, T element, FrameKey.Values values)
-        where T: FrameElement
-    {
-        try
-        {
-            element.frameElementObject = pair.elementObject;
-
-            T elementClone = Instantiate(element.frameElementObject.prefab).AddComponent<T>();
-            elementClone.frameElementObject = pair.elementObject;
-            elementClone.id = id;
-            elementClone.frameKeyValues = values;
-            EditorUtility.SetDirty(elementClone);
-            FrameManager.AddElement(elementClone);
-        }
-        catch(System.Exception e)
-        {
-            Debug.LogError(e.Message);
-        }
-    }
-    public static void LoadUIElementOnScene<T>(FrameElementIDPair pair, string id, T element, FrameKey.Values values)
-    where T : FrameElement
-    {
-        try
-        {
-            element.frameElementObject = pair.elementObject;
-            Debug.Log(element.frameElementObject.prefab.name);
-
-            T elementClone = Instantiate(element.frameElementObject.prefab, FrameManager.UICanvas.transform).AddComponent<T>();
-            elementClone.frameElementObject = pair.elementObject;
-            elementClone.id = id;
-            elementClone.frameKeyValues = values;
-            EditorUtility.SetDirty(elementClone);
-            FrameManager.AddElement(elementClone);
-        }
-        catch (System.Exception e)
-        {
-            Debug.LogError(e.Message);
-        }
-    }
-    public static void CreateElementOnScene<T>(FrameElementSO obj, in T element, Vector2 position, out string elementID)
-        where T : FrameElement
-    {
-        element.frameElementObject = obj;
-
-        T elementClone;
-        if (element is FrameUIWindow)
-            CreateFrameUIElement(obj, element, position, out elementClone);
-        else
-            CreateFrameElement(obj, element, position, out elementClone);
-
-        bool hasElement = false;
-        foreach (var pair in FrameManager.frame.usedElementsObjects)
-        {
-            if (pair.elementObject == obj)
-            {
-                pair.ids.Add(elementClone.id);
-                hasElement = true;
-            }
-        }
-        if (!hasElement)
-        {
-            FrameElementIDPair newPair = new FrameElementIDPair();
-            newPair.ids = new List<string>();
-            newPair.elementObject = obj;
-            newPair.ids.Add(elementClone.id);
-            FrameManager.frame.usedElementsObjects.Add(newPair);
-
-        }
-
-        elementID = elementClone.id;
-    }
-    public static void CreateElementOnScene<T>(FrameElementSO obj, in T element, Vector2 position, string elementID)
-    where T : FrameElement
-    {
-        element.frameElementObject = obj;
-
-        T elementClone;
-        if (element is FrameUIWindow)
-            CreateFrameUIElement(obj, element, position, out elementClone);
-        else
-            CreateFrameElement(obj, element, position, out elementClone);
-
-        elementClone.id = elementID;
-        bool hasElement = false;
-        foreach (var pair in FrameManager.frame.usedElementsObjects)
-        {
-            if (pair.elementObject == obj)
-            {
-                pair.ids.Add(elementClone.id);
-                hasElement = true;
-            }
-        }
-        if (!hasElement)
-        {
-            FrameElementIDPair newPair = new FrameElementIDPair();
-            newPair.ids = new List<string>();
-            newPair.elementObject = obj;
-            newPair.ids.Add(elementClone.id);
-            FrameManager.frame.usedElementsObjects.Add(newPair);
-
-        }
-    }
-    public static void CreateFrameElement<T>(FrameElementSO obj, T element, Vector2 position, out T elementClone)
-        where T: FrameElement
-    {
-        elementClone = Instantiate(element.frameElementObject.prefab, position, new Quaternion()).AddComponent<T>();
-        elementClone.frameElementObject = obj;
-        elementClone.id = obj.id + "_" + Guid.NewGuid().ToString().Substring(0, 5).ToUpper();
-        EditorUtility.SetDirty(elementClone);
-        FrameManager.AddElement(elementClone);
-    }
-    public static void CreateFrameUIElement<T>(FrameElementSO obj, T element, Vector2 position, out T elementClone)
-        where T: FrameElement
-    {
-        elementClone = Instantiate(element.frameElementObject.prefab, position, new Quaternion(), FrameManager.UICanvas.transform).AddComponent<T>();
-        elementClone.frameElementObject = obj;
-        elementClone.id = obj.id + "_" + Guid.NewGuid().ToString().Substring(0, 5).ToUpper();
-        EditorUtility.SetDirty(elementClone);
-        FrameManager.AddElement(elementClone);
     }
 }

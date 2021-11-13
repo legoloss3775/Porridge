@@ -10,49 +10,34 @@ public class AssetManager
 {
     public static void UpdateAssets()
     {
-        try
-        {
-            UpdateFrameAssetsOfType<FrameCharacterSO>("Characters");
-            UpdateFrameAssetsOfType<FrameBackgroundSO>("Backgrounds");
-            UpdateFrameAssetsOfType<FrameUIDialogueSO>("UI/Dialogue Windows");
-        }
-        catch (System.Exception e)
-        {
-            Debug.LogError(e.Message);
-        }
+        UpdateFrameAssetsOfType<FrameCharacterSO>("Characters");
+        UpdateFrameAssetsOfType<FrameBackgroundSO>("Backgrounds");
+        UpdateFrameAssetsOfType<FrameUIDialogueSO>("UI/Dialogue Windows");
     }
     public static void UpdateFrameAssetsOfType<T>(string folderName)
         where T : FrameElementSO
     {
         FrameEditorSO frameEditorSO = AssetManager.GetAtPath<FrameEditorSO>("Scripts/SceneEditor/").FirstOrDefault();
-        try
+        List<T> list = new List<T>();
+        foreach (var obj in frameEditorSO.frameElementsObjects.FindAll(ch => ch is T))
         {
-            List<T> list = new List<T>();
-            foreach (var obj in frameEditorSO.frameElementsObjects.FindAll(ch => ch is T))
-            {
-                list.Add(obj as T);
-            }
-            list = list.Except(
-                AssetManager.GetAtPath<T>("Frames/" + folderName + "/")
-                )
-                .ToList();
-            if (list.Count > 0)
-            {
-                foreach (var obj in list)
-                    frameEditorSO.frameElementsObjects.Remove(obj);
-            }
-            for (int i = 1; i < frameEditorSO.frameElementsObjects.ToList().Count; i++)
-            {
-                if (frameEditorSO.frameElementsObjects[i] == null)
-                    frameEditorSO.frameElementsObjects.RemoveAt(i);
-                if (frameEditorSO.frameElementsObjects[i].name == frameEditorSO.frameElementsObjects[i - 1].name)
-                    frameEditorSO.frameElementsObjects.RemoveAt(i);
-            }
-            Debug.Log(frameEditorSO.frameElementsObjects.Count);//
+            list.Add(obj as T);
         }
-        catch(System.Exception e)
+        list = list.Except(
+            AssetManager.GetAtPath<T>("Frames/" + folderName + "/")
+            )
+            .ToList();
+        if (list.Count > 0)
         {
-            Debug.LogError(e.Message);
+            foreach (var obj in list)
+                frameEditorSO.frameElementsObjects.Remove(obj);
+        }
+        for (int i = 1; i < frameEditorSO.frameElementsObjects.ToList().Count; i++)
+        {
+            if (frameEditorSO.frameElementsObjects[i] == null)
+                frameEditorSO.frameElementsObjects.RemoveAt(i);
+            if (frameEditorSO.frameElementsObjects[i].name == frameEditorSO.frameElementsObjects[i - 1].name)
+                frameEditorSO.frameElementsObjects.RemoveAt(i);
         }
     }
     public static FrameSO[] GetFrameAssets()
@@ -61,35 +46,27 @@ public class AssetManager
     }
     public static T[] GetAtPath<T>(string path)
     {
-        try
+        ArrayList al = new ArrayList();
+        string[] fileEntries = Directory.GetFiles(Application.dataPath + "/" + path);
+        foreach (string fileName in fileEntries)
         {
-            ArrayList al = new ArrayList();
-            string[] fileEntries = Directory.GetFiles(Application.dataPath + "/" + path);
-            foreach (string fileName in fileEntries)
-            {
-                int index = fileName.LastIndexOf("/");
-                string localPath = "Assets/" + path;
+            int index = fileName.LastIndexOf("/");
+            string localPath = "Assets/" + path;
 
-                if (index > 0)
-                    localPath += fileName.Substring(index);
+            if (index > 0)
+                localPath += fileName.Substring(index);
 
-                UnityEngine.Object t = AssetDatabase.LoadAssetAtPath(localPath, typeof(T));
+            UnityEngine.Object t = AssetDatabase.LoadAssetAtPath(localPath, typeof(T));
 
-                if (t != null)
-                    al.Add(t);
-            }
-            T[] result = new T[al.Count];
-            for (int i = 0; i < al.Count; i++)
-                result[i] = (T)al[i];
-
-
-            return result;
+            if (t != null)
+                al.Add(t);
         }
-        catch(System.Exception e)
-        {
-            Debug.LogError(e.Message);
-            return null;
-        }
+        T[] result = new T[al.Count];
+        for (int i = 0; i < al.Count; i++)
+            result[i] = (T)al[i];
+
+
+        return result;
     }
 }
 [Serializable]
