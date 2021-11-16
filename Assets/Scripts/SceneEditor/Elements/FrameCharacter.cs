@@ -1,108 +1,100 @@
-﻿using System.Collections;
+﻿using System;
 using System.Collections.Generic;
-using UnityEngine;
 using UnityEditor;
+using UnityEngine;
 using static FrameKey;
-using System;
 
 #region SERIALIZATION
 [Serializable]
-public class FrameCharacterValues : Values, IFrameCharacterSerialzation
-{
+public class FrameCharacterValues : Values, IFrameCharacterSerialzation {
     public Vector2 position { get; set; }
     public bool activeStatus { get; set; }
     public string dialogueID { get; set; }
-    public FrameCharacterValues(FrameCharacter character)
-    {
+    public FrameCharacter.CharacterType type { get; set; }
+    public FrameCharacterValues(FrameCharacter character) {
         position = character.position;
         activeStatus = character.activeStatus;
         dialogueID = character.dialogueID;
+        type = character.type;
     }
     public FrameCharacterValues() { }
     [Serializable]
-    public struct SerializedFrameCharacterValues : IFrameCharacterSerialzation
-    {
+    public struct SerializedFrameCharacterValues : IFrameCharacterSerialzation {
         [SerializeField]
         private Vector2 _position;
         [SerializeField]
         private bool _activeStatus;
         [SerializeField]
         private string _dialogueID;
+        [SerializeField]
+        private FrameCharacter.CharacterType _type;
 
         public Vector2 position { get => _position; set => _position = value; }
         public bool activeStatus { get => _activeStatus; set => _activeStatus = value; }
         public string dialogueID { get => _dialogueID; set => _dialogueID = value; }
+        public FrameCharacter.CharacterType type { get => _type; set => _type = value; }
     }
     [SerializeField]
     private SerializedFrameCharacterValues serializedFrameCharacterValues;
 
-    public SerializedFrameCharacterValues SetSerializedFrameCharacterValues()
-    {
+    public SerializedFrameCharacterValues SetSerializedFrameCharacterValues() {
         serializedFrameCharacterValues.position = position;
         serializedFrameCharacterValues.activeStatus = activeStatus;
         serializedFrameCharacterValues.dialogueID = dialogueID;
+        serializedFrameCharacterValues.type = type;
 
         return serializedFrameCharacterValues;
     }
-    public static void LoadSerialzedFrameKeyCharacterElementValues(List<SerializedFrameCharacterValues> serializedElementValues,  List<Values> values)
-    {
-        foreach (var svalue in serializedElementValues)
-        {
-            values.Add(new FrameCharacterValues
-            {
+    public static void LoadSerialzedFrameKeyCharacterElementValues(List<SerializedFrameCharacterValues> serializedElementValues, List<Values> values) {
+        foreach (var svalue in serializedElementValues) {
+            values.Add(new FrameCharacterValues {
                 position = svalue.position,
                 activeStatus = svalue.activeStatus,
                 dialogueID = svalue.dialogueID,
+                type = svalue.type,
             });
         }
     }
 }
 #endregion
-public interface IFrameCharacterSerialzation
-{
+public interface IFrameCharacterSerialzation {
     Vector2 position { get; set; }
     bool activeStatus { get; set; }
     string dialogueID { get; set; }
+    FrameCharacter.CharacterType type { get; set; }
 }
-public class FrameCharacter : FrameElement, IFrameCharacterSerialzation
-{
+public class FrameCharacter : FrameElement, IFrameCharacterSerialzation {
     public string dialogueID { get; set; }
-
-    public bool HasDialogue(string m_dialogueID)
-    {
-        return m_dialogueID == dialogueID ? true : false;
+    public CharacterType type { get; set; }
+    public enum CharacterType {
+        Standalone,
+        Conversation,
     }
+
+    public bool HasDialogue(string m_dialogueID) => m_dialogueID == dialogueID ? true : false;
+    public bool HasDialogue() => dialogueID != null ? true : false;
 
     #region VALUES_SETTINGS
-    public override FrameKey.Values GetFrameKeyValuesType()
-    {
+    public override FrameKey.Values GetFrameKeyValuesType() {
         return new FrameCharacterValues(this);
     }
-    public override void UpdateValuesFromKey(object frameKeyValues)
-    {
+    public override void UpdateValuesFromKey(Values frameKeyValues) {
         FrameCharacterValues values = (FrameCharacterValues)frameKeyValues;
         activeStatus = values.activeStatus;
         position = values.position;
         dialogueID = values.dialogueID;
+        type = values.type;
     }
 
     #endregion
 
-    public bool HasDialogue()
-    {
-        if (dialogueID != null)
-            return true;
-        return false;
-    }
     #region EDITOR
 #if UNITY_EDITOR
 
     [CustomEditor(typeof(FrameCharacter))]
     [CanEditMultipleObjects]
-    public class FrameCharacterCustomInspector : FrameElementCustomInspector
-    {
-        public override void OnInspectorGUI()
-        {
+    public class FrameCharacterCustomInspector : FrameElementCustomInspector {
+        public override void OnInspectorGUI() {
             FrameCharacter character = (FrameCharacter)target;
             FrameCharacterValues values;
             if (FrameManager.frame.currentKey.ContainsID(character.id))
@@ -110,15 +102,12 @@ public class FrameCharacter : FrameElement, IFrameCharacterSerialzation
             else
                 values = null;
 
-            if (values != null)
-            {
+            if (values != null) {
                 values.position = character.gameObject.transform.position;
                 character.SetKeyValuesWhileNotInPlayMode<FrameCharacterValues, FrameCharacter>();
-                Debug.Log(character.id);
-                if (targets.Length > 1)
-                {
-                    foreach (var target in targets)
-                    {
+
+                if (targets.Length > 1) {
+                    foreach (var target in targets) {
                         FrameElement mTarget = (FrameElement)target;
                         character.position = character.gameObject.transform.position;
                         mTarget.SetKeyValuesWhileNotInPlayMode<FrameCharacterValues, FrameCharacter>();

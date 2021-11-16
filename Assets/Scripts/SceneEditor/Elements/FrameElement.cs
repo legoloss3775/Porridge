@@ -1,26 +1,21 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEditor;
 using UnityEngine;
 using static FrameKey;
 
 #region SERIALIZATION
 [Serializable]
-public class FrameElementValues : Values, IFrameElementSerialization
-{
+public class FrameElementValues : Values, IFrameElementSerialization {
     public Vector2 position { get; set; }
     public bool activeStatus { get; set; }
-    public FrameElementValues(FrameElement element)
-    {
+    public FrameElementValues(FrameElement element) {
         position = element.position;
         activeStatus = element.activeStatus;
     }
     public FrameElementValues() { }
     [Serializable]
-    public struct SerializedElementValues : IFrameElementSerialization
-    {
+    public struct SerializedElementValues : IFrameElementSerialization {
         [SerializeField]
         private Vector2 _position;
         [SerializeField]
@@ -32,19 +27,15 @@ public class FrameElementValues : Values, IFrameElementSerialization
     [SerializeField]
     private SerializedElementValues serializedElementValues;
 
-    public SerializedElementValues SetSerializedFrameKeyElementValues()
-    {
+    public SerializedElementValues SetSerializedFrameKeyElementValues() {
         serializedElementValues.position = position;
         serializedElementValues.activeStatus = activeStatus;
 
         return serializedElementValues;
     }
-    public static void LoadSerialzedFrameKeyElementValues(List<SerializedElementValues> serializedElementValues, List<Values> values)
-    {
-        foreach (var svalue in serializedElementValues)
-        {
-            values.Add(new FrameElementValues
-            {
+    public static void LoadSerialzedFrameKeyElementValues(List<SerializedElementValues> serializedElementValues, List<Values> values) {
+        foreach (var svalue in serializedElementValues) {
+            values.Add(new FrameElementValues {
                 position = svalue.position,
                 activeStatus = svalue.activeStatus
             });
@@ -52,26 +43,20 @@ public class FrameElementValues : Values, IFrameElementSerialization
     }
 }
 #endregion
-public interface IFrameElementSerialization
-{
+public interface IFrameElementSerialization {
     Vector2 position { get; set; }
     bool activeStatus { get; set; }
 }
 [System.Serializable]
-public abstract class FrameElement : MonoBehaviour, IFrameElementSerialization
-{
+public abstract class FrameElement : MonoBehaviour, IFrameElementSerialization {
     //VALUES
-    public Vector2 position
-    {
-        get
-        {
+    public Vector2 position {
+        get {
             if (this is FrameUI_Dialogue)
-                try
-                {
+                try {
                     return this.GetComponent<RectTransform>().anchoredPosition;
                 }
-                catch (System.Exception)
-                {
+                catch (System.Exception) {
                     if (this != null)
                         return this.gameObject.transform.position;
                     else
@@ -82,93 +67,74 @@ public abstract class FrameElement : MonoBehaviour, IFrameElementSerialization
             else
                 return frameElementObject.prefab.transform.position;
         }
-        set
-        {
+        set {
             if (this is FrameUI_Dialogue)
                 GetComponent<RectTransform>().anchoredPosition = value;
             else
                 this.transform.position = value;
         }
     }
-    public bool activeStatus
-    {
-        get
-        {
+    public bool activeStatus {
+        get {
             if (this != null)
                 return this.gameObject.activeSelf;
             else return true;
         }
-        set
-        {
+        set {
             this.gameObject.SetActive(value);
         }
     }
     //ID объекта задается при его создании, сохранение в ключе не нужно.
     public string id { get; set; }
-    public FrameKey.Values frameKeyValues { get; set; }
+
     public FrameElementSO frameElementObject;
+    private void Update() {
+
+    }
+    public T GetFrameKeyValues<T>() where T : Values => (T)FrameManager.frame.currentKey.GetFrameKeyValuesOfElement(id);
+    public void SetFrameKeyValues() => FrameManager.frame.currentKey.UpdateFrameKeyValues(id, GetFrameKeyValuesType());
+    public T GetFrameElementType<T>(T element) where T: FrameElement => GetComponent<T>();
+    public string GetName() => this.id.Split('_')[0];
 
     #region VALUES_SETTINGS
-    public virtual FrameKey.Values GetFrameKeyValuesType()
-    {
+    public virtual FrameKey.Values GetFrameKeyValuesType() {
         return new FrameElementValues(this);
     }
-    public virtual void UpdateValuesFromKey(object frameKeyValues)
-    {
+    public virtual void UpdateValuesFromKey(Values frameKeyValues) {
         FrameElementValues values = (FrameElementValues)frameKeyValues;
         activeStatus = values.activeStatus;
         position = values.position;
     }
 
     public void SetKeyValuesWhileNotInPlayMode<T, V>()
-        where T: Values
-        where V: FrameElement
-    {
+        where T : Values
+        where V : FrameElement {
         T values = null;
-        if (!Application.isPlaying)
-        {
-            if (FrameManager.frame.currentKey.ContainsID(id))
-            {
+        if (!Application.isPlaying) {
+            if (FrameManager.frame.currentKey.ContainsID(id)) {
                 values = (T)FrameManager.frame.currentKey.frameKeyValues[id];
-                frameKeyValues = values.GetObject<T>((V)this);
+                values = values.GetObject<T>((V)this);
             }
-            if (frameKeyValues != null)
-            {
-                FrameManager.frame.currentKey.UpdateFrameKeyValues(id, frameKeyValues);
-                UpdateValuesFromKey(frameKeyValues);
+            if (values != null) {
+                FrameManager.frame.currentKey.UpdateFrameKeyValues(id, values);
+                UpdateValuesFromKey(values);
             }
-            else
-            {
-                frameKeyValues = GetFrameKeyValuesType();
-                FrameManager.frame.currentKey.AddFrameKeyValues(id, frameKeyValues);
-                UpdateValuesFromKey(frameKeyValues);
+            else {
+                values = (T)GetFrameKeyValuesType();
+                FrameManager.frame.currentKey.AddFrameKeyValues(id, values);
+                //UpdateValuesFromKey(values);
             }
         }
     }
 
     #endregion
 
-    private void Update()
-    {
-
-    }
-    public T GetFrameElementType<T>(T element)
-        where T : FrameElement
-    {
-        return GetComponent<T>();
-    }
-    public string GetName()
-    {
-        return this.id.Split('_')[0];
-    }
     #region EDITOR
 #if UNITY_EDITOR
     [CustomEditor(typeof(FrameElement))]
     [CanEditMultipleObjects]
-    public abstract class FrameElementCustomInspector : Editor
-    {
-        public override void OnInspectorGUI()
-        {
+    public abstract class FrameElementCustomInspector : Editor {
+        public override void OnInspectorGUI() {
             FrameElement element = (FrameElement)target;
             Values values;
             if (FrameManager.frame.currentKey.ContainsID(element.id))
@@ -179,10 +145,8 @@ public abstract class FrameElement : MonoBehaviour, IFrameElementSerialization
             element.position = element.gameObject.transform.position;
 
             Debug.Log(element.id);
-            if(targets.Length > 1)
-            {
-                foreach (var target in targets)
-                {
+            if (targets.Length > 1) {
+                foreach (var target in targets) {
                     FrameElement mTarget = (FrameElement)target;
                     mTarget.position = mTarget.gameObject.transform.position;
                     mTarget.SetKeyValuesWhileNotInPlayMode<FrameElementValues, FrameElement>();
@@ -190,8 +154,7 @@ public abstract class FrameElement : MonoBehaviour, IFrameElementSerialization
             }
         }
         public void SetElementInInspector<T>()
-            where T : FrameElementSO
-        {
+            where T : FrameElementSO {
             FrameElement element = (FrameElement)target;
 
             element.frameElementObject = (T)EditorGUILayout.ObjectField(
