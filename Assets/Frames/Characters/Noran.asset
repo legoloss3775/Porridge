@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c20393005c88e3e46b5c4d5187ab6cfa, type: 3}
   m_Name: Noran
   m_EditorClassIdentifier: 
-  prefab: {fileID: 3222449895300180321, guid: 9833a639288e95349bf793e20716766e, type: 3}
+  prefab: {fileID: 2535608562422811718, guid: 331f6aa5a1a4f714d9139921c403d737, type: 3}
   state: 0
   characterParts: []

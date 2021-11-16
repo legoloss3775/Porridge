@@ -128,18 +128,18 @@ public class FrameUI_Dialogue : FrameUI_Window, IFrameUIDialogueSerialization {
         return characterID == conversationCharacterID ? true : false;
     }
     public void DialogueTypeChange(FrameDialogueElementType type) {
-        var values = GetFrameKeyValues<FrameUI_DialogueValues>();
+        var keyValues = GetFrameKeyValues<FrameUI_DialogueValues>();
         switch (type) {
             case FrameDialogueElementType.OneCharacter: {
                 this.type = type;
                 RemoveAllConversationCharactersFromScene();
-                LoadConversationCharacter(values.conversationCharacterID, FrameDialogueElementType.OneCharacter);
+                LoadConversationCharacter(keyValues.conversationCharacterID, FrameDialogueElementType.OneCharacter);
                 break;
             }
             case FrameDialogueElementType.MultibleCharacters: {
                 this.type = type;
                 RemoveAllConversationCharactersFromScene();
-                foreach (var characterID in values.conversationCharacters.Values) {
+                foreach (var characterID in keyValues.conversationCharacters.Values) {
                     LoadConversationCharacter(characterID, FrameDialogueElementType.MultibleCharacters);
                 }
                 break;
@@ -150,60 +150,57 @@ public class FrameUI_Dialogue : FrameUI_Window, IFrameUIDialogueSerialization {
         if (characterID == null) return;
         if (currentConversationCharacter != null && type == FrameDialogueElementType.OneCharacter) RemovePreviousCharacterOnScene();
 
-        var character = new FrameCharacter();
-        var key = FrameManager.frame.currentKey;
-        FrameCharacterValues chValues = FrameElement.GetFrameKeyValues<FrameCharacterValues>(characterID);
+        FrameCharacterValues characterKeyValues = FrameElement.GetFrameKeyValues<FrameCharacterValues>(characterID);
 
         this.SetConversationCharacterSO();
 
         this.currentConversationCharacterSO.LoadElementOnScene<FrameCharacter>(
-            FrameManager.frame.GetPair(FrameManager.frame.GetFrameElementObjectByID(characterID)), characterID, chValues);
+            FrameManager.frame.GetPair(FrameManager.frame.GetFrameElementObjectByID(characterID)), characterID, characterKeyValues);
 
-        character = FrameManager.GetFrameElementOnSceneByID<FrameCharacter>(characterID);
+        var character = FrameManager.GetFrameElementOnSceneByID<FrameCharacter>(characterID);
         if (character != null) {
             character.dialogueID = this.id;
             this.currentConversationCharacter = character;
             this.conversationCharacterID = characterID;
 
-            character.UpdateValuesFromKey(chValues);
+            character.UpdateValuesFromKey(characterKeyValues);
 
             character.SetKeyValuesWhileNotInPlayMode<FrameCharacterValues>();
             this.SetKeyValuesWhileNotInPlayMode<FrameUI_DialogueValues>();
         }
     }
     public void SetConversationCharacter() {
-        var character = new FrameCharacter();
-        var values = GetFrameKeyValues<FrameUI_DialogueValues>();
+        var keyValues = GetFrameKeyValues<FrameUI_DialogueValues>();
 
         this.currentConversationCharacterSO.CreateElementOnScene<FrameCharacter>(this.currentConversationCharacterSO, this.currentConversationCharacterSO.prefab.transform.position, out string ID);
         if (FrameManager.GetFrameElementOnSceneByID<FrameCharacter>(ID) == null)
             return;
-        character = FrameManager.GetFrameElementOnSceneByID<FrameCharacter>(ID);
+        var character = FrameManager.GetFrameElementOnSceneByID<FrameCharacter>(ID);
         character.dialogueID = this.id;
         character.type = FrameCharacter.CharacterType.Conversation;
 
-        values.conversationCharacterID = ID;
+        keyValues.conversationCharacterID = ID;
         this.conversationCharacterID = ID;
         this.currentConversationCharacter = character;
 
 
         character.SetKeyValuesWhileNotInPlayMode<FrameCharacterValues>();
         this.SetKeyValuesWhileNotInPlayMode<FrameUI_DialogueValues>();
-        values.conversationCharacters.Add(this.currentConversationCharacterSO.id, currentConversationCharacter.id);
+        keyValues.conversationCharacters.Add(this.currentConversationCharacterSO.id, currentConversationCharacter.id);
     }
     public void SetConversationCharacterSO() {
-        var values = GetFrameKeyValues<FrameUI_DialogueValues>();
-        var frameEditorSO = AssetManager.GetAtPath<FrameEditorSO>("Scripts/SceneEditor/").FirstOrDefault();
+        var keyValues = GetFrameKeyValues<FrameUI_DialogueValues>();
+        var frameEditorSO = FrameManager.assetDatabase;
 
         for (int i = 0; i < frameEditorSO.GetFrameElementsOfType<FrameCharacterSO>().Count; i++) {
-            if (i == values.speakingCharacterIndex) {
+            if (i == keyValues.speakingCharacterIndex) {
                 this.currentConversationCharacterSO = frameEditorSO.GetFrameElementsOfType<FrameCharacterSO>()[i];
             }
         }
     }
     public void RemoveAllConversationCharactersFromScene() {
-        var values = GetFrameKeyValues<FrameUI_DialogueValues>();
-        foreach (var character in values.conversationCharacters) {
+        var keyValues = GetFrameKeyValues<FrameUI_DialogueValues>();
+        foreach (var character in keyValues.conversationCharacters) {
             if (FrameManager.GetFrameElementOnSceneByID<FrameCharacter>(character.Value))
                 FrameManager.RemoveElement(character.Value);
         }
@@ -220,30 +217,30 @@ public class FrameUI_Dialogue : FrameUI_Window, IFrameUIDialogueSerialization {
         return new FrameUI_DialogueValues(this);
     }
     public override void UpdateValuesFromKey(Values frameKeyValues) {
-        var values = (FrameUI_DialogueValues)frameKeyValues;
-        activeStatus = values.activeStatus;
-        position = values.position;
-        text = values.text;
+        var keyValues = (FrameUI_DialogueValues)frameKeyValues;
+        activeStatus = keyValues.activeStatus;
+        position = keyValues.position;
+        text = keyValues.text;
 
-        conversationCharacterID = values.conversationCharacterID;
-        speakingCharacterIndex = values.speakingCharacterIndex;
-        conversationCharacters = values.conversationCharacters;
-        type = values.type;
+        conversationCharacterID = keyValues.conversationCharacterID;
+        speakingCharacterIndex = keyValues.speakingCharacterIndex;
+        conversationCharacters = keyValues.conversationCharacters;
+        type = keyValues.type;
 
         characterNameField = characterNameField;
     }
     public void UpdateConversationCharacterFromKey(Values frameKeyValues) {
-        var values = (FrameUI_DialogueValues)frameKeyValues;
+        var keyValues = (FrameUI_DialogueValues)frameKeyValues;
 
-        switch (values.type) {
+        switch (keyValues.type) {
             case FrameDialogueElementType.OneCharacter: {
                 RemoveAllConversationCharactersFromScene();
-                this.LoadConversationCharacter(values.conversationCharacterID, values.type);
+                this.LoadConversationCharacter(keyValues.conversationCharacterID, keyValues.type);
                 break;
             }
             case FrameDialogueElementType.MultibleCharacters: {
                 RemoveAllConversationCharactersFromScene();
-                foreach (var characterID in values.conversationCharacters.Values) {
+                foreach (var characterID in keyValues.conversationCharacters.Values) {
                     LoadConversationCharacter(characterID, FrameDialogueElementType.MultibleCharacters);
                 }
                 break;
@@ -251,10 +248,8 @@ public class FrameUI_Dialogue : FrameUI_Window, IFrameUIDialogueSerialization {
         }
     }
     #endregion
-
     #region EDITOR
 #if UNITY_EDITOR
-
     [CustomEditor(typeof(FrameUI_Dialogue))]
     [CanEditMultipleObjects]
     public class FrameUIDialogueWindowCustomInspector : FrameElementCustomInspector {

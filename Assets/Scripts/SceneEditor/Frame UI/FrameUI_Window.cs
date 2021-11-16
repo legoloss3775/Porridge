@@ -4,8 +4,8 @@ using UnityEngine;
 public class FrameUI_Window : FrameElement {
     public Canvas canvas;
 
-#if UNITY_EDITOR
 
+#if UNITY_EDITOR
     [CustomEditor(typeof(FrameUI_Window))]
     [CanEditMultipleObjects]
     public class FrameUIWindowCustomInspector : FrameElementCustomInspector {

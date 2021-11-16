@@ -29,5 +29,9 @@ public class FrameKey {
         else AddFrameKeyValues(id, values);
     }
     public void AddFrameKeyValues(string id, Values values) => frameKeyValues.Add(id, values);
-    public bool ContainsID(string id) => frameKeyValues.ContainsKey(id);
+    public bool ContainsID(string id) {
+        if (id != null)
+            return frameKeyValues.ContainsKey(id);
+        else return false;
+    }
 }

@@ -96,14 +96,10 @@ public class FrameCharacter : FrameElement, IFrameCharacterSerialzation {
     public class FrameCharacterCustomInspector : FrameElementCustomInspector {
         public override void OnInspectorGUI() {
             FrameCharacter character = (FrameCharacter)target;
-            FrameCharacterValues values;
-            if (FrameManager.frame.currentKey.ContainsID(character.id))
-                values = (FrameCharacterValues)FrameManager.frame.currentKey.frameKeyValues[character.id];
-            else
-                values = null;
+            var keyValues = GetFrameKeyValues<FrameCharacterValues>(character.id);
 
-            if (values != null) {
-                values.position = character.gameObject.transform.position;
+            if (keyValues != null) {
+                keyValues.position = character.gameObject.transform.position;
                 character.SetKeyValuesWhileNotInPlayMode<FrameCharacterValues>();
 
                 if (targets.Length > 1) {

@@ -23,6 +23,12 @@ public class FrameSO : ScriptableObject {
     }
     public List<FrameElementIDPair> usedElementsObjects = new List<FrameElementIDPair>();
     private void OnEnable() {
+#if UNITY_EDITOR
+        FrameEditorSO frameEditorSO = AssetManager.GetAtPath<FrameEditorSO>("Scripts/SceneEditor/").FirstOrDefault();
+        if (!frameEditorSO.frames.Contains(this))
+            frameEditorSO.frames.Add(this);
+#endif
+
         if (currentKey == null) {
             if (frameKeys.Count > 0)
                 currentKey = frameKeys[0];

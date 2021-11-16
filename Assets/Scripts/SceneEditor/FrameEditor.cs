@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
+#if UNITY_EDITOR
 public class FrameEditor : EditorWindow {
 
     public FrameEditorSO frameEditorSO;
@@ -222,7 +223,7 @@ public class FrameEditor : EditorWindow {
         scaler.screenMatchMode = CanvasScaler.ScreenMatchMode.MatchWidthOrHeight;
         scaler.referenceResolution = new Vector2(1920, 1080);
         scaler.matchWidthOrHeight = 1;
-        FrameManager.UICanvas.sortingOrder = 1;
+        FrameManager.UICanvas.sortingOrder = 100;
 
         var go = new GameObject("Event System", typeof(EventSystem));
         var e = go.GetComponent<EventSystem>();
@@ -231,3 +232,4 @@ public class FrameEditor : EditorWindow {
     #endregion
 
 }
+#endif

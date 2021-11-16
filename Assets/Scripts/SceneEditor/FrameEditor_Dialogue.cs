@@ -3,23 +3,24 @@ using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
+#if UNITY_EDITOR
 public static class FrameEditor_Dialogue {
     public static void FrameDialogueEditing() {
-        FrameEditorSO frameEditorSO = AssetManager.GetAtPath<FrameEditorSO>("Scripts/SceneEditor/").FirstOrDefault();
+        var frameEditorSO = AssetManager.GetAtPath<FrameEditorSO>("Scripts/SceneEditor/").FirstOrDefault();
 
         foreach (var obj in frameEditorSO.GetFrameElementsOfType<FrameUI_DialogueSO>().ToList())
             if (FrameManager.frame.ContainsFrameElementObject(obj))
                 foreach (var frameDialogueID in FrameManager.frame.GetFrameElementIDsByObject(obj).ToList()) {
-                    FrameUI_Dialogue dialogue = FrameManager.GetFrameElementOnSceneByID<FrameUI_Dialogue>(frameDialogueID);
+                    var dialogue = FrameManager.GetFrameElementOnSceneByID<FrameUI_Dialogue>(frameDialogueID);
                     if (dialogue == null) FrameManager.ChangeFrame();
                     if (dialogue == null) return;
 
-                    FrameUI_DialogueValues values = FrameElement.GetFrameKeyValues<FrameUI_DialogueValues>(frameDialogueID);
+                    var keyValues = FrameElement.GetFrameKeyValues<FrameUI_DialogueValues>(frameDialogueID);
                     EditorUtility.SetDirty(dialogue);
 
                     if (!Application.isPlaying) {
-                        values.text = GUILayout.TextArea(values.text, GUILayout.MaxHeight(100));
-                        dialogue.text = values.text;
+                        keyValues.text = GUILayout.TextArea(keyValues.text, GUILayout.MaxHeight(100));
+                        dialogue.text = keyValues.text;
 
                         FrameUIDialogueCharacterSelection(dialogue);
                         UpdateFrameUIDialogueCharacter(dialogue);
@@ -31,12 +32,12 @@ public static class FrameEditor_Dialogue {
     }
     public static void FrameUIDialogueCharacterSelection(FrameUI_Dialogue dialogue) {
         var frameEditorSO = AssetManager.GetAtPath<FrameEditorSO>("Scripts/SceneEditor/").FirstOrDefault();
-        var values = dialogue.GetFrameKeyValues<FrameUI_DialogueValues>();
+        var keyValues = dialogue.GetFrameKeyValues<FrameUI_DialogueValues>();
 
-        values.type = (FrameUI_Dialogue.FrameDialogueElementType)EditorGUILayout.EnumPopup("Тип диалога:", values.type);
+        keyValues.type = (FrameUI_Dialogue.FrameDialogueElementType)EditorGUILayout.EnumPopup("Тип диалога:", keyValues.type);
 
-        if (dialogue.type != values.type) {
-            dialogue.DialogueTypeChange(values.type);
+        if (dialogue.type != keyValues.type) {
+            dialogue.DialogueTypeChange(keyValues.type);
             dialogue.SetKeyValuesWhileNotInPlayMode<FrameUI_DialogueValues>();
         } 
 
@@ -53,24 +54,24 @@ public static class FrameEditor_Dialogue {
         }
 
         for (int i = 0; i < frameEditorSO.GetFrameElementsOfType<FrameCharacterSO>().Count; i++) {
-            if (i == values.speakingCharacterIndex) {
+            if (i == keyValues.speakingCharacterIndex) {
                 dialogue.currentConversationCharacterSO = frameEditorSO.GetFrameElementsOfType<FrameCharacterSO>()[i];
             }
         }
         void OneSpeakingCharacterSelection() {
-            values.speakingCharacterIndex = EditorGUILayout.Popup(
+            keyValues.speakingCharacterIndex = EditorGUILayout.Popup(
                     "Собеседник:",
-                    values.speakingCharacterIndex,
+                    keyValues.speakingCharacterIndex,
                     frameEditorSO.GetFrameElementsObjectsNames<FrameCharacterSO>().ToArray()
                     );
-            dialogue.speakingCharacterIndex = values.speakingCharacterIndex;
+            dialogue.speakingCharacterIndex = keyValues.speakingCharacterIndex;
         }
         void MuiltibleSpeakingCharactersSelection() {
             var names = new List<string>();
-            foreach (var character in values.conversationCharacters)
+            foreach (var character in keyValues.conversationCharacters)
                 names.Add(character.Value.Split('_')[0]);
-            values.speakingCharacterIndex = GUILayout.SelectionGrid(values.speakingCharacterIndex, names.ToArray(), 6);
-            dialogue.speakingCharacterIndex = values.speakingCharacterIndex;
+            keyValues.speakingCharacterIndex = GUILayout.SelectionGrid(keyValues.speakingCharacterIndex, names.ToArray(), 6);
+            dialogue.speakingCharacterIndex = keyValues.speakingCharacterIndex;
         }
         void AddMultibleCharacters() {
             if (GUILayout.Button("Добавить персонажа")) {
@@ -79,7 +80,7 @@ public static class FrameEditor_Dialogue {
         }
     }
     public static void UpdateFrameUIDialogueCharacter(FrameUI_Dialogue dialogue) {
-        var values = dialogue.GetFrameKeyValues<FrameUI_DialogueValues>();
+        var keyValues = dialogue.GetFrameKeyValues<FrameUI_DialogueValues>();
         var key = FrameManager.frame.currentKey;
         var characterIDs = new List<string>();
 
@@ -94,11 +95,11 @@ public static class FrameEditor_Dialogue {
         foreach (var characterID in characterIDs)
             if (key.ContainsID(characterID)) {
                 characterKeyValues = FrameElement.GetFrameKeyValues<FrameCharacterValues>(characterID);
-                if (characterKeyValues.dialogueID == dialogue.id && characterID == values.conversationCharacterID)
+                if (characterKeyValues.dialogueID == dialogue.id && characterID == keyValues.conversationCharacterID)
                     break;
             }
 
-        if (values.conversationCharacterID != null)
+        if (keyValues.conversationCharacterID != null)
             firstCharacterCreated = true;
 
 
@@ -107,7 +108,7 @@ public static class FrameEditor_Dialogue {
                 if (!firstCharacterCreated)
                     dialogue.SetConversationCharacter();
 
-                foreach (string id in values.conversationCharacters.Keys)
+                foreach (string id in keyValues.conversationCharacters.Keys)
                     if (dialogue.currentConversationCharacterSO.id == id)
                         characterWasCreatedPreviously = true;
 
@@ -118,7 +119,7 @@ public static class FrameEditor_Dialogue {
 
                 if (selectionChange) {
                     if (characterWasCreatedPreviously)
-                        foreach (var character in values.conversationCharacters) {
+                        foreach (var character in keyValues.conversationCharacters) {
                             if (character.Key == dialogue.currentConversationCharacterSO.id) {
                                 dialogue.LoadConversationCharacter(character.Value, dialogue.type);
                                 SetPreviousCharacterValues();
@@ -148,3 +149,4 @@ public static class FrameEditor_Dialogue {
         }
     }
 }
+#endif

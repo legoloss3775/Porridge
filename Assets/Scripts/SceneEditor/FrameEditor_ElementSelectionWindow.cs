@@ -4,6 +4,7 @@ using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
+#if UNITY_EDITOR
 public class FrameEditor_ElementSelectionWindow : EditorWindow 
 {
     public FrameElementSO selectedFrameElementSO;
@@ -23,3 +24,4 @@ public class FrameEditor_ElementSelectionWindow : EditorWindow
         }
     }
 }
+#endif

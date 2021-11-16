@@ -24,8 +24,9 @@ public class FrameUI_WindowSO : FrameElementSO {
         T elementClone = Instantiate(pair.elementObject.prefab, FrameManager.UICanvas.transform).AddComponent<T>();
         elementClone.frameElementObject = pair.elementObject;
         elementClone.id = id;
-        //elementClone.frameKeyValues = values;
+#if UNITY_EDITOR
         EditorUtility.SetDirty(elementClone);
+#endif
         FrameManager.AddElement(elementClone);
     }
     public override void CreateFrameElement<T>(FrameElementSO obj, Vector2 position, out T elementClone) {
@@ -33,7 +34,9 @@ public class FrameUI_WindowSO : FrameElementSO {
         elementClone.frameElementObject = obj;
         elementClone.id = obj.id + "_" + Guid.NewGuid().ToString().Substring(0, 5).ToUpper();
         FrameManager.frame.currentKey.AddFrameKeyValues(id, elementClone.GetFrameKeyValuesType());
+#if UNITY_EDITOR
         EditorUtility.SetDirty(elementClone);
+#endif
         FrameManager.AddElement(elementClone);
     }
 }

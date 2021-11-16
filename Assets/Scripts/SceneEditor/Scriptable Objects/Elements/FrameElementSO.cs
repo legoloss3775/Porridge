@@ -19,9 +19,11 @@ public abstract class FrameElementSO : ScriptableObject, ISerializationCallbackR
     }
     public virtual void OnEnable() {
         id = name;
+#if UNITY_EDITOR
         FrameEditorSO frameEditorSO = AssetManager.GetAtPath<FrameEditorSO>("Scripts/SceneEditor/").FirstOrDefault();
         if (!frameEditorSO.frameElementsObjects.Contains(this))
             frameEditorSO.frameElementsObjects.Add(this);
+#endif
 
     }
     public virtual void LoadElementOnScene<T>(FrameElementIDPair pair, string id, FrameKey.Values values)
@@ -29,7 +31,9 @@ public abstract class FrameElementSO : ScriptableObject, ISerializationCallbackR
         T elementClone = Instantiate(pair.elementObject.prefab).AddComponent<T>();
         elementClone.frameElementObject = pair.elementObject;
         elementClone.id = id;
+#if UNITY_EDITOR
         EditorUtility.SetDirty(elementClone);
+#endif
         FrameManager.AddElement(elementClone);
     }
     public virtual void CreateElementOnScene<T>(FrameElementSO obj, Vector2 position, out string elementID)
@@ -82,7 +86,9 @@ public abstract class FrameElementSO : ScriptableObject, ISerializationCallbackR
         elementClone.frameElementObject = obj;
         elementClone.id = obj.id + "_" + Guid.NewGuid().ToString().Substring(0, 5).ToUpper();
         FrameManager.frame.currentKey.AddFrameKeyValues(elementClone.id, elementClone.GetFrameKeyValuesType());
+#if UNITY_EDITOR
         EditorUtility.SetDirty(elementClone);
+#endif
         FrameManager.AddElement(elementClone);
 
     }

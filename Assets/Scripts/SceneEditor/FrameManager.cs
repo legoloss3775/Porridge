@@ -4,19 +4,21 @@ using UnityEditor;
 using UnityEngine;
 
 [System.Serializable]
+[RequireComponent(typeof(FrameEditorSO))]
 public class FrameManager : MonoBehaviour, ISerializationCallbackReceiver {
     public static FrameSO frame;
     public static Canvas UICanvas;
     [SerializeField]
     public static List<FrameElement> frameElements = new List<FrameElement>();
     public List<FrameElement> serializedFrameElementsList = new List<FrameElement>();
-
+    public static FrameEditorSO assetDatabase;
+    public FrameEditorSO _assetDatabase;
 
     int selectedFrame = 0;
     int selectedFrameKey = 0;
 
     private void Awake() {
-
+        assetDatabase = _assetDatabase;
     }
     private void Start() {
         SetDefaultFrame();
@@ -29,7 +31,7 @@ public class FrameManager : MonoBehaviour, ISerializationCallbackReceiver {
             SetFrame(selectedFrame);
         }
         else if (Input.GetKeyDown(KeyCode.E)) {
-            if (selectedFrame < AssetManager.GetAtPath<FrameSO>("Frames/").Length)
+            if (selectedFrame < assetDatabase.frames.Count - 1)
                 selectedFrame++;
 
             SetFrame(selectedFrame);
@@ -48,17 +50,17 @@ public class FrameManager : MonoBehaviour, ISerializationCallbackReceiver {
         }
     }
     public void SetKey(int keyIndex) {
-        if (frame.frameKeys.Count - 1 >= keyIndex &&
+        if (frame.frameKeys.Count >= keyIndex &&
             keyIndex >= 0) {
             frame.currentKey = frame.frameKeys[keyIndex];
             ChangeFrameKey();
         }
     }
     public void SetFrame(int frameIndex) {
-        if (AssetManager.GetAtPath<FrameSO>("Frames/").Length > frameIndex &&
+        if (assetDatabase.frames.Count > frameIndex &&
             frameIndex >= 0) {
             UICanvas = GameObject.Find("UI Canvas").GetComponent<Canvas>();
-            frame = AssetManager.GetAtPath<FrameSO>("Frames/")[frameIndex];
+            frame = assetDatabase.frames[frameIndex];
 
             frame.currentKey = frame.frameKeys[0];
 
@@ -67,9 +69,9 @@ public class FrameManager : MonoBehaviour, ISerializationCallbackReceiver {
         }
     }
     public void SetDefaultFrame() {
-        if (AssetManager.GetAtPath<FrameSO>("Frames/").Length > 0) {
+        if (assetDatabase.frames.Count > 0) {
             UICanvas = GameObject.Find("UI Canvas").GetComponent<Canvas>();
-            frame = AssetManager.GetAtPath<FrameSO>("Frames/")[0];
+            frame = assetDatabase.frames[0];
             frame.currentKey = frame.frameKeys[0];
             ChangeFrame();
             ChangeFrameKey();
@@ -107,8 +109,7 @@ public class FrameManager : MonoBehaviour, ISerializationCallbackReceiver {
                 .frameKeyValues
                 .ContainsKey(element.id)) {
 
-                if(element is FrameUI_Dialogue) {
-                    var dialogue = (FrameUI_Dialogue)element;
+                if (element is FrameUI_Dialogue dialogue) {
                     dialogue.UpdateValuesFromKey(frame.currentKey.frameKeyValues[element.id]);
                     dialogue.UpdateConversationCharacterFromKey(frame.currentKey.frameKeyValues[element.id]);
                 }
@@ -135,7 +136,9 @@ public class FrameManager : MonoBehaviour, ISerializationCallbackReceiver {
             if (EditorUtility.IsDirty(element))
                 EditorUtility.ClearDirty(element);
     }
+#endif
     public void OnBeforeSerialize() {
+        assetDatabase = null;
         serializedFrameElementsList.Clear();
         foreach (var element in frameElements) {
             if (element != null)
@@ -150,13 +153,17 @@ public class FrameManager : MonoBehaviour, ISerializationCallbackReceiver {
                 frameElements.Add(element);
 
         }
+        assetDatabase = _assetDatabase;
     }
 }
+#if UNITY_EDITOR
 [CustomEditor(typeof(FrameManager))]
 public class FrameManagerCustomInspector : Editor {
     public override void OnInspectorGUI() {
         base.OnInspectorGUI();
+        var manager = (FrameManager)target;
+        FrameManager.assetDatabase = manager._assetDatabase;
         Debug.Log(target.GetInstanceID());
     }
-#endif
 }
+#endif

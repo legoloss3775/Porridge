@@ -30,26 +30,30 @@ public class FrameCharacterSO : FrameElementSO {
     public override void OnEnable() {
         base.OnEnable();
     }
-    public override void LoadElementOnScene<T>(FrameElementIDPair pair, string id, FrameKey.Values values) {
-        var cValues = (FrameCharacterValues)values;
-        switch (cValues.type) {
+    public override void LoadElementOnScene<T>(FrameElementIDPair pair, string id, FrameKey.Values keyValues) {
+        var characterKeyValues = (FrameCharacterValues)keyValues;
+        switch (characterKeyValues.type) {
             case FrameCharacter.CharacterType.Standalone: {
                 T elementClone = Instantiate(pair.elementObject.prefab).AddComponent<T>();
                 elementClone.frameElementObject = pair.elementObject;
                 elementClone.id = id;
+#if UNITY_EDITOR
                 EditorUtility.SetDirty(elementClone);
+#endif
                 FrameManager.AddElement(elementClone);
                 return;
             }
             case FrameCharacter.CharacterType.Conversation: {
-                var dialogue = FrameManager.GetFrameElementOnSceneByID<FrameUI_Dialogue>(cValues.dialogueID);
-                var dialogueValues = (FrameUI_DialogueValues)FrameManager.frame.currentKey.frameKeyValues[cValues.dialogueID];
+                var dialogue = FrameManager.GetFrameElementOnSceneByID<FrameUI_Dialogue>(characterKeyValues.dialogueID);
+                var dialogueValues = (FrameUI_DialogueValues)FrameManager.frame.currentKey.frameKeyValues[characterKeyValues.dialogueID];
                 foreach (var character in dialogueValues.conversationCharacters)
                     if (character.Key == pair.elementObject.id) {
                         T elementClone = Instantiate(pair.elementObject.prefab).AddComponent<T>();
                         elementClone.frameElementObject = pair.elementObject;
                         elementClone.id = id;
+#if UNITY_EDITOR
                         EditorUtility.SetDirty(elementClone);
+#endif
                         FrameManager.AddElement(elementClone);
 
                         SetCharacterInDialogue(dialogue);
@@ -59,7 +63,7 @@ public class FrameCharacterSO : FrameElementSO {
         }
 
         void SetCharacterInDialogue(FrameUI_Dialogue dialogue) {
-            var dialogueValues = (FrameUI_DialogueValues)FrameManager.frame.currentKey.frameKeyValues[dialogue.id];
+            var dialogueKeyValues = (FrameUI_DialogueValues)FrameManager.frame.currentKey.frameKeyValues[dialogue.id];
             switch (dialogue.type) {
                 case FrameUI_Dialogue.FrameDialogueElementType.OneCharacter: {
                     if (dialogue != null && dialogue.currentConversationCharacter != null) dialogue.RemovePreviousCharacterOnScene();
@@ -69,7 +73,7 @@ public class FrameCharacterSO : FrameElementSO {
                     break;
                 }
                 case FrameUI_Dialogue.FrameDialogueElementType.MultibleCharacters: {
-                    if (dialogueValues.conversationCharacterID == id) {
+                    if (dialogueKeyValues.conversationCharacterID == id) {
                         dialogue.currentConversationCharacter = FrameManager.GetFrameElementOnSceneByID<FrameCharacter>(id);
                         dialogue.conversationCharacterID = id;
                     }

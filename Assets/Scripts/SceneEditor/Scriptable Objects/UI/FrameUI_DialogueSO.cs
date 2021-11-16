@@ -44,7 +44,9 @@ public class FrameUI_DialogueSO : FrameUI_WindowSO {
         elementClone.frameElementObject = pair.elementObject;
         elementClone.id = id;
 
+#if UNITY_EDITOR
         EditorUtility.SetDirty(elementClone);
+#endif
         FrameManager.AddElement(elementClone);
 
         var createdDialogue = FrameManager.GetFrameElementOnSceneByID<FrameUI_Dialogue>(elementClone.id);
@@ -56,7 +58,9 @@ public class FrameUI_DialogueSO : FrameUI_WindowSO {
         elementClone.id = obj.id + "_" + Guid.NewGuid().ToString().Substring(0, 5).ToUpper();
         FrameManager.frame.currentKey.AddFrameKeyValues(elementClone.id, elementClone.GetFrameKeyValuesType());
 
+#if UNITY_EDITOR
         EditorUtility.SetDirty(elementClone);
+#endif
         FrameManager.AddElement(elementClone);
 
         var createdDialogue = FrameManager.GetFrameElementOnSceneByID<FrameUI_Dialogue>(elementClone.id);

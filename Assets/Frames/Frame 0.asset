@@ -14,16 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 0
   id: Frame_0
-  selectedKeyIndex: 1
+  selectedKeyIndex: 0
   currentKey:
     frameKeyValues:
       keys:
-      - Inner_Fire_Line1_5EB68
-      - Noran_10704
-      - Logan_DCB4B
+      - Inner_Fire_Line1_A233C
+      - Noran_ACECA
+      - Logan_44E93
       serializedElementValues: []
       serializedDialogueValues:
-      - _position: {x: 0, y: 540}
+      - _position: {x: 0, y: 276}
         _activeStatus: 1
         _text: "\u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
           \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430
@@ -35,34 +35,34 @@ MonoBehaviour:
           \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430
           \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
           \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 "
-        _conversationCharacterID: Logan_DCB4B
+        _conversationCharacterID: Noran_ACECA
         _speakingCharacterIndex: 0
         _conversationCharacters:
           keys:
           - Noran
           - Logan
           values:
-          - Noran_10704
-          - Logan_DCB4B
-        _type: 1
+          - Noran_ACECA
+          - Logan_44E93
+        _type: 0
       serializedFrameCharacterValues:
-      - _position: {x: 0, y: 0}
+      - _position: {x: 0, y: -5.03}
         _activeStatus: 1
-        _dialogueID: Inner_Fire_Line1_5EB68
+        _dialogueID: Inner_Fire_Line1_A233C
         _type: 1
       - _position: {x: 0, y: 0}
         _activeStatus: 1
-        _dialogueID: Inner_Fire_Line1_5EB68
+        _dialogueID: Inner_Fire_Line1_A233C
         _type: 1
   frameKeys:
   - frameKeyValues:
       keys:
-      - Inner_Fire_Line1_5EB68
-      - Noran_10704
-      - Logan_DCB4B
+      - Inner_Fire_Line1_A233C
+      - Noran_ACECA
+      - Logan_44E93
       serializedElementValues: []
       serializedDialogueValues:
-      - _position: {x: 0, y: 540}
+      - _position: {x: 0, y: 276}
         _activeStatus: 1
         _text: "\u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
           \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430
@@ -74,33 +74,33 @@ MonoBehaviour:
           \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430
           \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
           \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 "
-        _conversationCharacterID: Noran_10704
+        _conversationCharacterID: Noran_ACECA
         _speakingCharacterIndex: 0
         _conversationCharacters:
           keys:
           - Noran
           - Logan
           values:
-          - Noran_10704
-          - Logan_DCB4B
+          - Noran_ACECA
+          - Logan_44E93
         _type: 0
       serializedFrameCharacterValues:
-      - _position: {x: 0, y: 0}
+      - _position: {x: 0, y: -5.03}
         _activeStatus: 1
-        _dialogueID: Inner_Fire_Line1_5EB68
+        _dialogueID: Inner_Fire_Line1_A233C
         _type: 1
       - _position: {x: 0, y: 0}
         _activeStatus: 1
-        _dialogueID: Inner_Fire_Line1_5EB68
+        _dialogueID: Inner_Fire_Line1_A233C
         _type: 1
   - frameKeyValues:
       keys:
-      - Inner_Fire_Line1_5EB68
-      - Noran_10704
-      - Logan_DCB4B
+      - Inner_Fire_Line1_A233C
+      - Noran_ACECA
+      - Logan_44E93
       serializedElementValues: []
       serializedDialogueValues:
-      - _position: {x: 0, y: 540}
+      - _position: {x: 0, y: 276}
         _activeStatus: 1
         _text: "\u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
           \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430
@@ -112,146 +112,32 @@ MonoBehaviour:
           \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430
           \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
           \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 "
-        _conversationCharacterID: Logan_DCB4B
-        _speakingCharacterIndex: 0
-        _conversationCharacters:
-          keys:
-          - Noran
-          - Logan
-          values:
-          - Noran_10704
-          - Logan_DCB4B
-        _type: 1
-      serializedFrameCharacterValues:
-      - _position: {x: 0, y: 0}
-        _activeStatus: 1
-        _dialogueID: Inner_Fire_Line1_5EB68
-        _type: 1
-      - _position: {x: 0, y: 0}
-        _activeStatus: 1
-        _dialogueID: Inner_Fire_Line1_5EB68
-        _type: 1
-  - frameKeyValues:
-      keys:
-      - Inner_Fire_Line1_5EB68
-      - Logan_DCB4B
-      - Noran_10704
-      serializedElementValues: []
-      serializedDialogueValues:
-      - _position: {x: 0, y: 540}
-        _activeStatus: 1
-        _text: "\u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
-          \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430
-          \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
-          \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430
-          \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
-          \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430
-          \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
-          \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430
-          \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
-          \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 "
-        _conversationCharacterID: Logan_DCB4B
+        _conversationCharacterID: Logan_44E93
         _speakingCharacterIndex: 1
         _conversationCharacters:
           keys:
           - Noran
           - Logan
           values:
-          - Noran_10704
-          - Logan_DCB4B
+          - Noran_ACECA
+          - Logan_44E93
         _type: 0
       serializedFrameCharacterValues:
-      - _position: {x: 0, y: 0}
+      - _position: {x: 0, y: -5.03}
         _activeStatus: 1
-        _dialogueID: Inner_Fire_Line1_5EB68
+        _dialogueID: Inner_Fire_Line1_A233C
         _type: 1
       - _position: {x: 0, y: 0}
         _activeStatus: 1
-        _dialogueID: Inner_Fire_Line1_5EB68
-        _type: 1
-  - frameKeyValues:
-      keys:
-      - Inner_Fire_Line1_5EB68
-      - Noran_10704
-      - Logan_DCB4B
-      serializedElementValues: []
-      serializedDialogueValues:
-      - _position: {x: 0, y: 540}
-        _activeStatus: 1
-        _text: "\u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
-          \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430
-          \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
-          \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430
-          \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
-          \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430
-          \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
-          \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430
-          \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
-          \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 "
-        _conversationCharacterID: Logan_DCB4B
-        _speakingCharacterIndex: 1
-        _conversationCharacters:
-          keys:
-          - Noran
-          - Logan
-          values:
-          - Noran_10704
-          - Logan_DCB4B
-        _type: 0
-      serializedFrameCharacterValues:
-      - _position: {x: 0, y: 0}
-        _activeStatus: 1
-        _dialogueID: Inner_Fire_Line1_5EB68
-        _type: 1
-      - _position: {x: 0, y: 0}
-        _activeStatus: 1
-        _dialogueID: Inner_Fire_Line1_5EB68
-        _type: 1
-  - frameKeyValues:
-      keys:
-      - Inner_Fire_Line1_5EB68
-      - Noran_10704
-      - Logan_DCB4B
-      serializedElementValues: []
-      serializedDialogueValues:
-      - _position: {x: 0, y: 540}
-        _activeStatus: 1
-        _text: "\u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
-          \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430
-          \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
-          \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430
-          \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
-          \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430
-          \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
-          \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430
-          \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
-          \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 "
-        _conversationCharacterID: Logan_DCB4B
-        _speakingCharacterIndex: 1
-        _conversationCharacters:
-          keys:
-          - Noran
-          - Logan
-          values:
-          - Noran_10704
-          - Logan_DCB4B
-        _type: 0
-      serializedFrameCharacterValues:
-      - _position: {x: 0, y: 0}
-        _activeStatus: 1
-        _dialogueID: Inner_Fire_Line1_5EB68
-        _type: 1
-      - _position: {x: 0, y: 0}
-        _activeStatus: 1
-        _dialogueID: Inner_Fire_Line1_5EB68
+        _dialogueID: Inner_Fire_Line1_A233C
         _type: 1
   usedElementsObjects:
   - elementObject: {fileID: 11400000, guid: f09224e30d17c1f4f97ea80d60f36783, type: 2}
     ids:
-    - Inner_Fire_Line1_5EB68
+    - Inner_Fire_Line1_A233C
   - elementObject: {fileID: 11400000, guid: f6619c14e28441644b37a6f8bbd6a453, type: 2}
     ids:
-    - Noran_10704
+    - Noran_ACECA
   - elementObject: {fileID: 11400000, guid: 65f8bc0e74d17f24bbb3be9b556ed71d, type: 2}
     ids:
-    - Logan_DCB4B
+    - Logan_44E93

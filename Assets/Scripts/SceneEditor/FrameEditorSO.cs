@@ -2,13 +2,14 @@
 using System.Linq;
 using UnityEngine;
 
-//[CreateAssetMenu(fileName ="Frame Editor Settings", menuName ="Редактор фрейма/Настройки редактора")]
+[CreateAssetMenu(fileName ="Frame Editor Settings", menuName ="Редактор фрейма/Настройки редактора")]
 public class FrameEditorSO : ScriptableObject {
     [SerializeField]
     public int selectedFrameIndex;
     public int selectedKeyIndex;
 
     public List<FrameElementSO> frameElementsObjects = new List<FrameElementSO>();
+    public List<FrameSO> frames = new List<FrameSO>();
 
     public List<string> GetFrameElementsObjectsNames<T>()
         where T : FrameElementSO {

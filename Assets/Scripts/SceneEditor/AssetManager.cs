@@ -5,15 +5,37 @@ using System.IO;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
-
+#if UNITY_EDITOR
 public class AssetManager {
     public static void UpdateAssets() {
         UpdateFrameAssetsOfType<FrameCharacterSO>("Characters");
         UpdateFrameAssetsOfType<FrameBackgroundSO>("Backgrounds");
         UpdateFrameAssetsOfType<FrameUI_DialogueSO>("UI/Dialogue Windows");
+        UpdateFrames();
+    }
+    public static void UpdateFrames() {
+        FrameEditorSO frameEditorSO = AssetManager.GetAtPath<FrameEditorSO>("Scripts/SceneEditor/").FirstOrDefault();
+        List<FrameSO> list = new List<FrameSO>();
+        foreach (var obj in frameEditorSO.frames.FindAll(ch => ch is FrameSO)) {
+            list.Add(obj);
+        }
+        list = list.Except(
+            AssetManager.GetAtPath<FrameSO>("Frames/")
+            )
+            .ToList();
+        if (list.Count > 0) {
+            foreach (var obj in list)
+                frameEditorSO.frames.Remove(obj);
+        }
+        for (int i = 1; i < frameEditorSO.frames.ToList().Count; i++) {
+            if (frameEditorSO.frames[i] == null)
+                frameEditorSO.frames.RemoveAt(i);
+            if (frameEditorSO.frames[i].name == frameEditorSO.frames[i - 1].name)
+                frameEditorSO.frames.RemoveAt(i);
+        }
     }
     public static void UpdateFrameAssetsOfType<T>(string folderName)
-        where T : FrameElementSO {
+        where T : FrameElementSO{
         FrameEditorSO frameEditorSO = AssetManager.GetAtPath<FrameEditorSO>("Scripts/SceneEditor/").FirstOrDefault();
         List<T> list = new List<T>();
         foreach (var obj in frameEditorSO.frameElementsObjects.FindAll(ch => ch is T)) {
@@ -60,6 +82,7 @@ public class AssetManager {
         return result;
     }
 }
+#endif
 [Serializable]
 public class FrameKeyDictionary : Dictionary<string, FrameKey.Values>, ISerializationCallbackReceiver {
     [SerializeField]
@@ -124,7 +147,6 @@ public class SerializableDictionary<TKey, TValue> : Dictionary<TKey, TValue>, IS
     [SerializeField]
     private List<TValue> values = new List<TValue>();
 
-    // save the dictionary to lists
     public void OnBeforeSerialize() {
         keys.Clear();
         values.Clear();
@@ -134,12 +156,11 @@ public class SerializableDictionary<TKey, TValue> : Dictionary<TKey, TValue>, IS
         }
     }
 
-    // load dictionary from lists
     public void OnAfterDeserialize() {
         this.Clear();
 
         if (keys.Count != values.Count)
-            throw new System.Exception(string.Format("there are {0} keys and {1} values after deserialization. Make sure that both key and value types are serializable."));
+            throw new System.Exception(string.Format("oh shit, here we go again"));
 
         for (int i = 0; i < keys.Count; i++)
             this.Add(keys[i], values[i]);
