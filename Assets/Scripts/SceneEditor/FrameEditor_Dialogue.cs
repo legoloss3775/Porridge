@@ -14,7 +14,7 @@ public static class FrameEditor_Dialogue {
                     if (dialogue == null) FrameManager.ChangeFrame();
                     if (dialogue == null) return;
 
-                    FrameUI_DialogueValues values = (FrameUI_DialogueValues)FrameManager.frame.currentKey.frameKeyValues[frameDialogueID];
+                    FrameUI_DialogueValues values = FrameElement.GetFrameKeyValues<FrameUI_DialogueValues>(frameDialogueID);
                     EditorUtility.SetDirty(dialogue);
 
                     if (!Application.isPlaying) {
@@ -31,13 +31,13 @@ public static class FrameEditor_Dialogue {
     }
     public static void FrameUIDialogueCharacterSelection(FrameUI_Dialogue dialogue) {
         var frameEditorSO = AssetManager.GetAtPath<FrameEditorSO>("Scripts/SceneEditor/").FirstOrDefault();
-        var values = (FrameUI_DialogueValues)FrameManager.frame.currentKey.frameKeyValues[dialogue.id];
+        var values = dialogue.GetFrameKeyValues<FrameUI_DialogueValues>();
 
         values.type = (FrameUI_Dialogue.FrameDialogueElementType)EditorGUILayout.EnumPopup("Тип диалога:", values.type);
 
         if (dialogue.type != values.type) {
             dialogue.DialogueTypeChange(values.type);
-            dialogue.SetKeyValuesWhileNotInPlayMode<FrameUI_DialogueValues, FrameUI_Dialogue>();
+            dialogue.SetKeyValuesWhileNotInPlayMode<FrameUI_DialogueValues>();
         } 
 
         switch (dialogue.type) {
@@ -79,7 +79,7 @@ public static class FrameEditor_Dialogue {
         }
     }
     public static void UpdateFrameUIDialogueCharacter(FrameUI_Dialogue dialogue) {
-        var values = (FrameUI_DialogueValues)FrameManager.frame.currentKey.frameKeyValues[dialogue.id];
+        var values = dialogue.GetFrameKeyValues<FrameUI_DialogueValues>();
         var key = FrameManager.frame.currentKey;
         var characterIDs = new List<string>();
 
@@ -93,7 +93,7 @@ public static class FrameEditor_Dialogue {
 
         foreach (var characterID in characterIDs)
             if (key.ContainsID(characterID)) {
-                characterKeyValues = (FrameCharacterValues)key.frameKeyValues[characterID];
+                characterKeyValues = FrameElement.GetFrameKeyValues<FrameCharacterValues>(characterID);
                 if (characterKeyValues.dialogueID == dialogue.id && characterID == values.conversationCharacterID)
                     break;
             }

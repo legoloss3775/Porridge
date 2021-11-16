@@ -104,13 +104,13 @@ public class FrameCharacter : FrameElement, IFrameCharacterSerialzation {
 
             if (values != null) {
                 values.position = character.gameObject.transform.position;
-                character.SetKeyValuesWhileNotInPlayMode<FrameCharacterValues, FrameCharacter>();
+                character.SetKeyValuesWhileNotInPlayMode<FrameCharacterValues>();
 
                 if (targets.Length > 1) {
                     foreach (var target in targets) {
                         FrameElement mTarget = (FrameElement)target;
                         character.position = character.gameObject.transform.position;
-                        mTarget.SetKeyValuesWhileNotInPlayMode<FrameCharacterValues, FrameCharacter>();
+                        mTarget.SetKeyValuesWhileNotInPlayMode<FrameCharacterValues>();
                     }
                 }
             }

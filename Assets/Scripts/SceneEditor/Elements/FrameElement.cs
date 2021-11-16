@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEditor;
 using UnityEngine;
 using static FrameKey;
@@ -92,6 +93,17 @@ public abstract class FrameElement : MonoBehaviour, IFrameElementSerialization {
 
     }
     public T GetFrameKeyValues<T>() where T : Values => (T)FrameManager.frame.currentKey.GetFrameKeyValuesOfElement(id);
+    public static T GetFrameKeyValues<T>(string id) 
+        where T : Values {
+        try {
+            return (T)FrameManager.frame.currentKey.GetFrameKeyValuesOfElement(id);
+        }
+        catch (System.Exception) {
+            var values = (T)FrameManager.frame.frameKeys.Where(ch => ch.ContainsID(id)).Last().frameKeyValues[id];
+            FrameManager.frame.currentKey.AddFrameKeyValues(id, values);
+            return values;
+        }
+    }
     public void SetFrameKeyValues() => FrameManager.frame.currentKey.UpdateFrameKeyValues(id, GetFrameKeyValuesType());
     public T GetFrameElementType<T>(T element) where T: FrameElement => GetComponent<T>();
     public string GetName() => this.id.Split('_')[0];
@@ -106,23 +118,11 @@ public abstract class FrameElement : MonoBehaviour, IFrameElementSerialization {
         position = values.position;
     }
 
-    public void SetKeyValuesWhileNotInPlayMode<T, V>()
-        where T : Values
-        where V : FrameElement {
-        T values = null;
+    public void SetKeyValuesWhileNotInPlayMode<T>()
+        where T : Values {
         if (!Application.isPlaying) {
             if (FrameManager.frame.currentKey.ContainsID(id)) {
-                values = (T)FrameManager.frame.currentKey.frameKeyValues[id];
-                values = values.GetObject<T>((V)this);
-            }
-            if (values != null) {
-                FrameManager.frame.currentKey.UpdateFrameKeyValues(id, values);
-                UpdateValuesFromKey(values);
-            }
-            else {
-                values = (T)GetFrameKeyValuesType();
-                FrameManager.frame.currentKey.AddFrameKeyValues(id, values);
-                //UpdateValuesFromKey(values);
+                SetFrameKeyValues();
             }
         }
     }
@@ -149,7 +149,7 @@ public abstract class FrameElement : MonoBehaviour, IFrameElementSerialization {
                 foreach (var target in targets) {
                     FrameElement mTarget = (FrameElement)target;
                     mTarget.position = mTarget.gameObject.transform.position;
-                    mTarget.SetKeyValuesWhileNotInPlayMode<FrameElementValues, FrameElement>();
+                    mTarget.SetKeyValuesWhileNotInPlayMode<FrameElementValues>();
                 }
             }
         }

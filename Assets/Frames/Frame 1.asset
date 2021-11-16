@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 0
   id: Frame_1
-  selectedKeyIndex: 1
+  selectedKeyIndex: 2
   currentKey:
     frameKeyValues:
       keys:
@@ -44,9 +44,9 @@ MonoBehaviour:
           values:
           - Noran_6F2A8
           - Logan_62273
-        _type: 1
+        _type: 0
       serializedFrameCharacterValues:
-      - _position: {x: 0, y: 12.9}
+      - _position: {x: 6.26, y: 0}
         _activeStatus: 1
         _dialogueID: Inner_Fire_Line1_5D7A1
         _type: 1
@@ -113,7 +113,7 @@ MonoBehaviour:
           \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
           \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 "
         _conversationCharacterID: Logan_62273
-        _speakingCharacterIndex: 1
+        _speakingCharacterIndex: 0
         _conversationCharacters:
           keys:
           - Noran
