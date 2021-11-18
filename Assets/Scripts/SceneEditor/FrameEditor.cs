@@ -20,14 +20,18 @@ public class FrameEditor : EditorWindow {
         frameEditor.Show();
     }
     private void OnGUI() {
-
         if (!isEditingAllowed())
             if (EditorUtility.DisplayDialog("Редактор фрейма", "Начать создание фрейма на данной сцене?", "Да", "Отмена")) {
                 UpdateFrameEditorSO();
                 UpdateFrameManager();
                 SetFrame();
             }
-        if (isEditingAllowed()) {
+            else Close();
+        if(manager._assetDatabase == null || FrameManager.assetDatabase == null) {
+            manager._assetDatabase = AssetManager.GetAtPath<FrameEditorSO>("Scripts/SceneEditor/").FirstOrDefault();
+            FrameManager.assetDatabase = manager._assetDatabase;
+        }
+         if (isEditingAllowed()) {
             AssetManager.UpdateAssets();
             UpdateDirty();
 
@@ -53,6 +57,7 @@ public class FrameEditor : EditorWindow {
             GUILayout.EndVertical();
 
             FrameEditor_Dialogue.FrameDialogueEditing();
+            FrameEditor_Character.FrameCharacterEditing();
         }
     }
     public void UpdateDirty() {
@@ -93,7 +98,13 @@ public class FrameEditor : EditorWindow {
         if (GUILayout.Button("Новый кадр")) {
             FrameManager.frame.AddKey(new FrameKey());
             foreach (var element in FrameManager.frameElements) {
-                FrameManager.frame.frameKeys[FrameManager.frame.frameKeys.Count - 1].AddFrameKeyValues(element.id, FrameManager.frame.frameKeys[FrameManager.frame.frameKeys.Count - 2].frameKeyValues[element.id]);
+                try {
+                    FrameManager.frame.frameKeys[FrameManager.frame.frameKeys.Count - 1].AddFrameKeyValues(element.id, FrameManager.frame.frameKeys[FrameManager.frame.frameKeys.Count - 2].frameKeyValues[element.id]);
+                }
+                catch (System.Exception) {
+                    FrameManager.frame.frameKeys[FrameManager.frame.frameKeys.Count - 1].AddFrameKeyValues(element.id, element.GetFrameKeyValuesType());
+                }
+
             } 
         }
         List<string> keyStrings = new List<string>();
@@ -208,6 +219,7 @@ public class FrameEditor : EditorWindow {
             typeof(FrameManager)
             )
             .GetComponent<FrameManager>();
+        FrameManager.assetDatabase = AssetManager.GetAtPath<FrameEditorSO>("Scripts/SceneEditor/").FirstOrDefault();
     }
     private void SetUICanvas() {
         FrameManager.UICanvas = new GameObject(

@@ -6,7 +6,7 @@ public class FrameKey {
 
     [Serializable]
     public abstract class Values {
-        public T GetObject<T>(params object[] args) {
+        public static T GetObject<T>(params object[] args) {
             return (T)Activator.CreateInstance(typeof(T), args);
         }
     }
@@ -28,7 +28,9 @@ public class FrameKey {
         if (ContainsID(id)) frameKeyValues[id] = values;
         else AddFrameKeyValues(id, values);
     }
-    public void AddFrameKeyValues(string id, Values values) => frameKeyValues.Add(id, values);
+    public void AddFrameKeyValues(string id, Values values) {
+        if (id != null) frameKeyValues.Add(id, values);
+    }
     public bool ContainsID(string id) {
         if (id != null)
             return frameKeyValues.ContainsKey(id);

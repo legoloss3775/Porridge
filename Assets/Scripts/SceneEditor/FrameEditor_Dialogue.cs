@@ -1,36 +1,17 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
 #if UNITY_EDITOR
-public static class FrameEditor_Dialogue {
+public class FrameEditor_Dialogue : FrameEditor_Element {
+
     public static void FrameDialogueEditing() {
-        var frameEditorSO = AssetManager.GetAtPath<FrameEditorSO>("Scripts/SceneEditor/").FirstOrDefault();
-
-        foreach (var obj in frameEditorSO.GetFrameElementsOfType<FrameUI_DialogueSO>().ToList())
-            if (FrameManager.frame.ContainsFrameElementObject(obj))
-                foreach (var frameDialogueID in FrameManager.frame.GetFrameElementIDsByObject(obj).ToList()) {
-                    var dialogue = FrameManager.GetFrameElementOnSceneByID<FrameUI_Dialogue>(frameDialogueID);
-                    if (dialogue == null) FrameManager.ChangeFrame();
-                    if (dialogue == null) return;
-
-                    var keyValues = FrameElement.GetFrameKeyValues<FrameUI_DialogueValues>(frameDialogueID);
-                    EditorUtility.SetDirty(dialogue);
-
-                    if (!Application.isPlaying) {
-                        keyValues.text = GUILayout.TextArea(keyValues.text, GUILayout.MaxHeight(100));
-                        dialogue.text = keyValues.text;
-
-                        FrameUIDialogueCharacterSelection(dialogue);
-                        UpdateFrameUIDialogueCharacter(dialogue);
-                    }
-                    else {
-                        dialogue.text = GUILayout.TextArea(dialogue.text, GUILayout.MaxHeight(100));
-                    }
-                }
+        Action<FrameUI_Dialogue> action = FrameUIDialogueCharacterSelection;
+        ElementEditing<FrameUI_DialogueSO, FrameUI_Dialogue>(action);
     }
-    public static void FrameUIDialogueCharacterSelection(FrameUI_Dialogue dialogue) {
+    private static void FrameUIDialogueCharacterSelection(FrameUI_Dialogue dialogue) {
         var frameEditorSO = AssetManager.GetAtPath<FrameEditorSO>("Scripts/SceneEditor/").FirstOrDefault();
         var keyValues = dialogue.GetFrameKeyValues<FrameUI_DialogueValues>();
 
@@ -78,8 +59,10 @@ public static class FrameEditor_Dialogue {
 
             }
         }
+
+        UpdateFrameUIDialogueCharacter(dialogue);
     }
-    public static void UpdateFrameUIDialogueCharacter(FrameUI_Dialogue dialogue) {
+    private static void UpdateFrameUIDialogueCharacter(FrameUI_Dialogue dialogue) {
         var keyValues = dialogue.GetFrameKeyValues<FrameUI_DialogueValues>();
         var key = FrameManager.frame.currentKey;
         var characterIDs = new List<string>();
@@ -94,7 +77,7 @@ public static class FrameEditor_Dialogue {
 
         foreach (var characterID in characterIDs)
             if (key.ContainsID(characterID)) {
-                characterKeyValues = FrameElement.GetFrameKeyValues<FrameCharacterValues>(characterID);
+                characterKeyValues = FrameElement.GetFrameKeyValues<FrameCharacterValues>(characterID, new FrameCharacter());
                 if (characterKeyValues.dialogueID == dialogue.id && characterID == keyValues.conversationCharacterID)
                     break;
             }

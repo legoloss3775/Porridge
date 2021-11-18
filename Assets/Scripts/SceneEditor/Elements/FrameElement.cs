@@ -93,13 +93,26 @@ public abstract class FrameElement : MonoBehaviour, IFrameElementSerialization {
 
     }
     public T GetFrameKeyValues<T>() where T : Values => (T)FrameManager.frame.currentKey.GetFrameKeyValuesOfElement(id);
-    public static T GetFrameKeyValues<T>(string id) 
+    public static T GetFrameKeyValues<T>(string id, FrameElement element) 
         where T : Values {
         try {
             return (T)FrameManager.frame.currentKey.GetFrameKeyValuesOfElement(id);
         }
         catch (System.Exception) {
-            var values = (T)FrameManager.frame.frameKeys.Where(ch => ch.ContainsID(id)).Last().frameKeyValues[id];
+            T values = null;
+
+            try {
+                values = (T)FrameManager.frame.frameKeys.Where(ch => ch.ContainsID(id)).Last().frameKeyValues[id];
+            }
+            catch (System.Exception) {
+
+            }
+
+            if (values == null) {
+                values = Values.GetObject<T>(element);
+                FrameManager.frame.currentKey.AddFrameKeyValues(id, values);
+                return values;
+            }
             FrameManager.frame.currentKey.AddFrameKeyValues(id, values);
             return values;
         }
@@ -134,25 +147,6 @@ public abstract class FrameElement : MonoBehaviour, IFrameElementSerialization {
     [CustomEditor(typeof(FrameElement))]
     [CanEditMultipleObjects]
     public abstract class FrameElementCustomInspector : Editor {
-        public override void OnInspectorGUI() {
-            FrameElement element = (FrameElement)target;
-            Values values;
-            if (FrameManager.frame.currentKey.ContainsID(element.id))
-                values = FrameManager.frame.currentKey.frameKeyValues[element.id];
-            else
-                values = null;
-
-            element.position = element.gameObject.transform.position;
-
-            Debug.Log(element.id);
-            if (targets.Length > 1) {
-                foreach (var target in targets) {
-                    FrameElement mTarget = (FrameElement)target;
-                    mTarget.position = mTarget.gameObject.transform.position;
-                    mTarget.SetKeyValuesWhileNotInPlayMode<FrameElementValues>();
-                }
-            }
-        }
         public void SetElementInInspector<T>()
             where T : FrameElementSO {
             FrameElement element = (FrameElement)target;

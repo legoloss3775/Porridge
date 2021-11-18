@@ -27,9 +27,12 @@ public class AssetManager {
             foreach (var obj in list)
                 frameEditorSO.frames.Remove(obj);
         }
-        for (int i = 1; i < frameEditorSO.frames.ToList().Count; i++) {
-            if (frameEditorSO.frames[i] == null)
+        for (int i = 0; i < frameEditorSO.frames.ToList().Count; i++) {
+            if (frameEditorSO.frames[i] == null) {
                 frameEditorSO.frames.RemoveAt(i);
+            }
+        }
+        for (int i = 1; i < frameEditorSO.frames.ToList().Count; i++) {
             if (frameEditorSO.frames[i].name == frameEditorSO.frames[i - 1].name)
                 frameEditorSO.frames.RemoveAt(i);
         }
@@ -49,9 +52,11 @@ public class AssetManager {
             foreach (var obj in list)
                 frameEditorSO.frameElementsObjects.Remove(obj);
         }
-        for (int i = 1; i < frameEditorSO.frameElementsObjects.ToList().Count; i++) {
+        for (int i = 0; i < frameEditorSO.frameElementsObjects.ToList().Count; i++) {
             if (frameEditorSO.frameElementsObjects[i] == null)
                 frameEditorSO.frameElementsObjects.RemoveAt(i);
+        }
+        for (int i = 1; i < frameEditorSO.frameElementsObjects.ToList().Count; i++) {
             if (frameEditorSO.frameElementsObjects[i].name == frameEditorSO.frameElementsObjects[i - 1].name)
                 frameEditorSO.frameElementsObjects.RemoveAt(i);
         }

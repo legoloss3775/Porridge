@@ -14,4 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab: {fileID: 811398594164413659, guid: 6e83cc9d2502d9f4abecd5f700572f4c, type: 3}
   state: 0
-  characterParts: []
+  characterParts:
+  - statePrefab: {fileID: 811398594164413659, guid: 6e83cc9d2502d9f4abecd5f700572f4c, type: 3}
+    state: 0
+  - statePrefab: {fileID: 1958920917595592743, guid: 0db757cb4b71f6e43bfb8c08ddcbd120, type: 3}
+    state: 0

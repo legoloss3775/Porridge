@@ -4,7 +4,6 @@ using UnityEditor;
 using UnityEngine;
 
 [System.Serializable]
-[RequireComponent(typeof(FrameEditorSO))]
 public class FrameManager : MonoBehaviour, ISerializationCallbackReceiver {
     public static FrameSO frame;
     public static Canvas UICanvas;
@@ -80,9 +79,11 @@ public class FrameManager : MonoBehaviour, ISerializationCallbackReceiver {
     public static T GetFrameElementOnSceneByID<T>(string id)
     where T : FrameElement {
         foreach (var element in FrameManager.frameElements)
-            if (element.id == id)
+            if (element.id == id) {
                 return (T)element;
-        return null;
+            }
+        var e = frameElements.OfType<T>().Where(ch => ch.id == id).LastOrDefault();
+        return e;
     }
     public static bool ContainsElementInManagerByID(string id) {
         foreach (var element in FrameManager.frameElements)
@@ -125,8 +126,11 @@ public class FrameManager : MonoBehaviour, ISerializationCallbackReceiver {
     }
     public static void ClearElements() {
         foreach (var element in frameElements.ToList()) {
-            if (element != null)
-                DestroyImmediate(element.gameObject);
+            if (element != null) {
+                var go = element.gameObject;
+                DestroyImmediate(element);
+                DestroyImmediate(go);
+            }
         }
         frameElements.Clear();
     }
@@ -138,7 +142,6 @@ public class FrameManager : MonoBehaviour, ISerializationCallbackReceiver {
     }
 #endif
     public void OnBeforeSerialize() {
-        assetDatabase = null;
         serializedFrameElementsList.Clear();
         foreach (var element in frameElements) {
             if (element != null)
