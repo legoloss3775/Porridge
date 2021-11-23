@@ -106,7 +106,7 @@ public class FrameSO : ScriptableObject {
         FrameElement element = FrameManager.GetFrameElementOnSceneByID<FrameElement>(frameElementID);
         DestroyImmediate(element.gameObject);
     }
-    public static void LoadElementsOnScene<TKey, TValue>(List<FrameElementIDPair> pairs, TValue element)
+    public static void LoadElementsOnScene<TKey, TValue>(List<FrameElementIDPair> pairs)
     where TValue : global::FrameElement {
         foreach (var pair in pairs) {
             if (pair.elementObject.GetType() == typeof(TKey)) {

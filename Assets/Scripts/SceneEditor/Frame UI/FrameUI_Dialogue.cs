@@ -108,7 +108,7 @@ public class FrameUI_Dialogue : FrameUI_Window, IFrameUIDialogueSerialization {
         }
         set {
             if (conversationCharacterID != null)
-                this.gameObject.transform.GetChild(0).GetComponent<TMPro.TextMeshProUGUI>().text = conversationCharacterID.Split('_')[0];
+                this.gameObject.transform.GetChild(0).GetComponent<TMPro.TextMeshProUGUI>().text = conversationCharacters.Values.ToList()[speakingCharacterIndex].Split('_')[0];
         }
     }
     public string conversationCharacterID { get; set; }
@@ -119,8 +119,8 @@ public class FrameUI_Dialogue : FrameUI_Window, IFrameUIDialogueSerialization {
     public FrameCharacterSO currentConversationCharacterSO { get; set; }
 
     public enum FrameDialogueElementType {
-        OneCharacter,
-        MultibleCharacters,
+        Одинᅠперсонаж,
+        Несколькоᅠперсонажей,
     }
 
 
@@ -130,17 +130,17 @@ public class FrameUI_Dialogue : FrameUI_Window, IFrameUIDialogueSerialization {
     public void DialogueTypeChange(FrameDialogueElementType type) {
         var keyValues = GetFrameKeyValues<FrameUI_DialogueValues>();
         switch (type) {
-            case FrameDialogueElementType.OneCharacter: {
+            case FrameDialogueElementType.Одинᅠперсонаж: {
                 this.type = type;
                 RemoveAllConversationCharactersFromScene();
-                LoadConversationCharacter(keyValues.conversationCharacterID, FrameDialogueElementType.OneCharacter);
+                LoadConversationCharacter(keyValues.conversationCharacterID, FrameDialogueElementType.Одинᅠперсонаж);
                 break;
             }
-            case FrameDialogueElementType.MultibleCharacters: {
+            case FrameDialogueElementType.Несколькоᅠперсонажей: {
                 this.type = type;
                 RemoveAllConversationCharactersFromScene();
                 foreach (var characterID in keyValues.conversationCharacters.Values) {
-                    LoadConversationCharacter(characterID, FrameDialogueElementType.MultibleCharacters);
+                    LoadConversationCharacter(characterID, FrameDialogueElementType.Несколькоᅠперсонажей);
                 }
                 break;
             }
@@ -148,17 +148,16 @@ public class FrameUI_Dialogue : FrameUI_Window, IFrameUIDialogueSerialization {
     }
     public void LoadConversationCharacter(string characterID, FrameDialogueElementType type) {
         if (characterID == null) return;
-        if (currentConversationCharacter != null && type == FrameDialogueElementType.OneCharacter) RemovePreviousCharacterOnScene();
+        if (currentConversationCharacter != null && type == FrameDialogueElementType.Одинᅠперсонаж) RemovePreviousCharacterOnScene();
 
-        var character = new FrameCharacter();
-        var characterKeyValues = FrameElement.GetFrameKeyValues<FrameCharacterValues>(characterID, character);
+        var characterKeyValues = FrameElement.GetFrameKeyValues<FrameCharacterValues>(characterID);
 
         this.SetConversationCharacterSO();
 
         this.currentConversationCharacterSO.LoadElementOnScene<FrameCharacter>(
             FrameManager.frame.GetPair(FrameManager.frame.GetFrameElementObjectByID(characterID)), characterID, characterKeyValues);
 
-        character = FrameManager.GetFrameElementOnSceneByID<FrameCharacter>(characterID);
+        var character = FrameManager.GetFrameElementOnSceneByID<FrameCharacter>(characterID);
         if (character != null) {
             character.dialogueID = this.id;
             this.currentConversationCharacter = character;
@@ -234,15 +233,15 @@ public class FrameUI_Dialogue : FrameUI_Window, IFrameUIDialogueSerialization {
         var keyValues = (FrameUI_DialogueValues)frameKeyValues;
 
         switch (keyValues.type) {
-            case FrameDialogueElementType.OneCharacter: {
+            case FrameDialogueElementType.Одинᅠперсонаж: {
                 RemoveAllConversationCharactersFromScene();
                 this.LoadConversationCharacter(keyValues.conversationCharacterID, keyValues.type);
                 break;
             }
-            case FrameDialogueElementType.MultibleCharacters: {
+            case FrameDialogueElementType.Несколькоᅠперсонажей: {
                 RemoveAllConversationCharactersFromScene();
                 foreach (var characterID in keyValues.conversationCharacters.Values) {
-                    LoadConversationCharacter(characterID, FrameDialogueElementType.MultibleCharacters);
+                    LoadConversationCharacter(characterID, FrameDialogueElementType.Несколькоᅠперсонажей);
                 }
                 break;
             }

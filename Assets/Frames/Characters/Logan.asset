@@ -19,3 +19,5 @@ MonoBehaviour:
     state: 0
   - statePrefab: {fileID: 1958920917595592743, guid: 0db757cb4b71f6e43bfb8c08ddcbd120, type: 3}
     state: 0
+  - statePrefab: {fileID: 2402299679667047537, guid: 371f6c8c53fd2174a8217cd8b4290358, type: 3}
+    state: 0

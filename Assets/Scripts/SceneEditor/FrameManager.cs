@@ -121,8 +121,8 @@ public class FrameManager : MonoBehaviour, ISerializationCallbackReceiver {
     }
     public static void ChangeFrame() {
         ClearElements();
-        FrameSO.LoadElementsOnScene<FrameUI_DialogueSO, FrameUI_Dialogue>(frame.usedElementsObjects, new FrameUI_Dialogue());
-        FrameSO.LoadElementsOnScene<FrameCharacterSO, FrameCharacter>(frame.usedElementsObjects, new FrameCharacter());
+        FrameSO.LoadElementsOnScene<FrameUI_DialogueSO, FrameUI_Dialogue>(frame.usedElementsObjects);
+        FrameSO.LoadElementsOnScene<FrameCharacterSO, FrameCharacter>(frame.usedElementsObjects);
     }
     public static void ClearElements() {
         foreach (var element in frameElements.ToList()) {

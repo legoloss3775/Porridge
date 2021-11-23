@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
+using static FrameCharacterSO;
 using static FrameKey;
 
 #region SERIALIZATION
@@ -93,22 +94,28 @@ public class FrameCharacter : FrameElement, IFrameCharacterSerialzation {
         var frameCharacterSO = (FrameCharacterSO)frameElementObject;
 
         this.emotionState = state;
-        foreach (var partObject in frameCharacterSO.characterParts.Where(ch => ch.state == emotionState)) {
-            for (int i = 0; i < part.statePrefab.GetComponentsInChildren<SpriteRenderer>().Length; i++) {
-                //Debug.Log(part.statePrefab.GetComponentsInChildren<SpriteRenderer>()[i].sprite + " " + GetCharacterParts()[i].sprite);
-                GetCharacterParts()[i].sprite = part.statePrefab.GetComponentsInChildren<SpriteRenderer>()[i].sprite;
+        foreach (var partElement in GetCharacterParts()) {
+            foreach (var child in part.statePrefab.GetComponentsInChildren<SpriteRenderer>()) {
+                if (partElement.Key == child.gameObject.name) {
+                    partElement.Value.sprite = child.sprite;
+                    break;
+                }
+                else partElement.Value.sprite = frameElementObject.prefab.GetComponentsInChildren<SpriteRenderer>()
+                                                .Where(ch => ch.gameObject.name == partElement.Key)
+                                                .First().sprite;
             }
         }
     }
-    public List<SpriteRenderer> GetCharacterParts() {
-        var sprites = new List<SpriteRenderer>();
+    public SerializableDictionary<string, SpriteRenderer> GetCharacterParts() {
+        var sprites = new SerializableDictionary<string, SpriteRenderer>();
         foreach(var child in transform.GetComponentsInChildren<SpriteRenderer>()) {
-            sprites.Add(child);
+            if (!sprites.ContainsKey(child.gameObject.name))
+                sprites.Add(child.gameObject.name, child);
         }
         return sprites;
     }
     public bool HasDialogue(string m_dialogueID) => m_dialogueID == dialogueID ? true : false;
-    public bool HasDialogue() => dialogueID != null ? true : false;
+    public bool HasDialogue() => dialogueID != null && dialogueID != "" ? true : false;
 
     #region VALUES_SETTINGS
     public override FrameKey.Values GetFrameKeyValuesType() {
@@ -137,7 +144,7 @@ public class FrameCharacter : FrameElement, IFrameCharacterSerialzation {
     public class FrameCharacterCustomInspector : FrameElementCustomInspector {
         public override void OnInspectorGUI() {
             FrameCharacter character = (FrameCharacter)target;
-            var keyValues = GetFrameKeyValues<FrameCharacterValues>(character.id, character);
+            var keyValues = GetFrameKeyValues<FrameCharacterValues>(character.id);
 
             Debug.Log(character.id);
             if (keyValues != null) {

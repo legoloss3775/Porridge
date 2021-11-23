@@ -11,6 +11,7 @@ public class FrameEditor : EditorWindow {
     public FrameEditorSO frameEditorSO;
     public FrameManager manager { get; set; }
 
+    public Vector2 scroll;
     public static readonly Vector2 DEFAULT_ELEMENT_POSITION = Vector2.zero;
     public static readonly bool DEFAULT_ELEMENT_ACTIVESTATE = true;
 
@@ -35,13 +36,14 @@ public class FrameEditor : EditorWindow {
             AssetManager.UpdateAssets();
             UpdateDirty();
 
+
             FrameSelection();
             FrameKeySelection();
 
             GUILayout.BeginVertical("HelpBox");
             GUILayout.BeginHorizontal();
 
-            GUILayout.Label("Создать персонажа на сцене", GUILayout.Width(200));
+            GUILayout.Label("Создать персонажа на сцене", GUILayout.MaxWidth(200));
             FrameElementCreationSelection<FrameCharacterSO, FrameCharacter>();
 
             GUILayout.EndHorizontal();
@@ -50,14 +52,24 @@ public class FrameEditor : EditorWindow {
             GUILayout.BeginVertical("HelpBox");
             GUILayout.BeginHorizontal();
 
-            GUILayout.Label("Создать диалог на сцене", GUILayout.Width(200));
+            GUILayout.Label("Создать диалог на сцене", GUILayout.MaxWidth(200));
             FrameElementCreationSelection<FrameUI_DialogueSO, FrameUI_Dialogue>();
 
             GUILayout.EndHorizontal();
             GUILayout.EndVertical();
 
+            FrameEditor_FrameData.FrameEditing();
+
+            scroll = GUILayout.BeginScrollView(scroll,false, true);
+            GUILayout.BeginVertical("HelpBox");
+            //GUILayout.BeginHorizontal();
             FrameEditor_Dialogue.FrameDialogueEditing();
+            EditorGUILayout.Separator();
+            EditorGUILayout.Separator();
             FrameEditor_Character.FrameCharacterEditing();
+           // GUILayout.EndHorizontal();
+            GUILayout.EndVertical();
+            GUILayout.EndScrollView();
         }
     }
     public void UpdateDirty() {
@@ -86,7 +98,7 @@ public class FrameEditor : EditorWindow {
         where TValue : global::FrameElement {
         foreach (var elementObject in frameEditorSO.frameElementsObjects.FindAll(el => el is TKey)) {
             GUILayout.BeginHorizontal();
-            if (GUILayout.Button(elementObject.name, GUILayout.Width(200))) {
+            if (GUILayout.Button(elementObject.name, GUILayout.MaxWidth(200))) {
                 elementObject.CreateElementOnScene<TValue>(elementObject, Vector2.zero, out string id);
                 FrameManager.ChangeFrameKey();
             }

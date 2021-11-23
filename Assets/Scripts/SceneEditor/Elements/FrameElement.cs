@@ -93,7 +93,7 @@ public abstract class FrameElement : MonoBehaviour, IFrameElementSerialization {
 
     }
     public T GetFrameKeyValues<T>() where T : Values => (T)FrameManager.frame.currentKey.GetFrameKeyValuesOfElement(id);
-    public static T GetFrameKeyValues<T>(string id, FrameElement element) 
+    public static T GetFrameKeyValues<T>(string id) 
         where T : Values {
         try {
             return (T)FrameManager.frame.currentKey.GetFrameKeyValuesOfElement(id);
@@ -109,7 +109,7 @@ public abstract class FrameElement : MonoBehaviour, IFrameElementSerialization {
             }
 
             if (values == null) {
-                values = Values.GetObject<T>(element);
+                values = Values.GetObject<T>();
                 FrameManager.frame.currentKey.AddFrameKeyValues(id, values);
                 return values;
             }

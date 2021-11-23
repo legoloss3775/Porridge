@@ -8,14 +8,50 @@ using UnityEngine;
 public class FrameEditor_Dialogue : FrameEditor_Element {
 
     public static void FrameDialogueEditing() {
-        Action<FrameUI_Dialogue> action = FrameUIDialogueCharacterSelection;
-        ElementEditing<FrameUI_DialogueSO, FrameUI_Dialogue>(action);
+        Action<FrameUI_Dialogue> dialogueCharacterSelection = FrameUI_DialogueCharacterSelection;
+        Action<FrameUI_Dialogue> textEditing = FrameUI_TextEditing;
+
+        GUILayout.BeginVertical();
+
+        foldouts[EditorType.DialogueEditor] = EditorGUILayout.Foldout(foldouts[EditorType.DialogueEditor], "Диалоги");
+
+        if (foldouts[EditorType.DialogueEditor]) {
+            GUILayout.BeginVertical("HelpBox");
+            ElementEditing<FrameUI_DialogueSO, FrameUI_Dialogue>(PositioningType.Vertical, EditorType.DialogueEditor, false, false, dialogueCharacterSelection, textEditing);
+            GUILayout.EndVertical();
+        }
+
+        GUILayout.EndVertical();
     }
-    private static void FrameUIDialogueCharacterSelection(FrameUI_Dialogue dialogue) {
+    private static void FrameUI_TextEditing(FrameUI_Dialogue dialogue) {
+        var keyValues = dialogue.GetFrameKeyValues<FrameUI_DialogueValues>();
+
+        keyValues.text = GUILayout.TextArea(keyValues.text, GUILayout.MaxWidth(450));
+        if (dialogue.text != keyValues.text) dialogue.text = keyValues.text;
+    }
+    private static void FrameUI_DialogueCharacterSelection(FrameUI_Dialogue dialogue) {
         var frameEditorSO = AssetManager.GetAtPath<FrameEditorSO>("Scripts/SceneEditor/").FirstOrDefault();
         var keyValues = dialogue.GetFrameKeyValues<FrameUI_DialogueValues>();
 
-        keyValues.type = (FrameUI_Dialogue.FrameDialogueElementType)EditorGUILayout.EnumPopup("Тип диалога:", keyValues.type);
+        float dialogueTypeSelectionWidth;
+        if (dialogue.type == FrameUI_Dialogue.FrameDialogueElementType.Несколькоᅠперсонажей)
+            dialogueTypeSelectionWidth = 395;
+        else
+            dialogueTypeSelectionWidth = 422.5f;
+
+        GUILayout.Label(dialogue.id);
+
+        GUILayout.BeginHorizontal();
+        ElementSelection(dialogue);
+
+        keyValues.type = (FrameUI_Dialogue.FrameDialogueElementType)EditorGUILayout.EnumPopup(keyValues.type, GUILayout.MaxWidth(dialogueTypeSelectionWidth));
+        if(keyValues.type == FrameUI_Dialogue.FrameDialogueElementType.Одинᅠперсонаж) {
+            GUILayout.EndHorizontal();
+        }
+
+        if(keyValues.type == FrameUI_Dialogue.FrameDialogueElementType.Одинᅠперсонаж) {
+            EditorGUILayout.Separator();
+        }
 
         if (dialogue.type != keyValues.type) {
             dialogue.DialogueTypeChange(keyValues.type);
@@ -23,12 +59,17 @@ public class FrameEditor_Dialogue : FrameEditor_Element {
         } 
 
         switch (dialogue.type) {
-            case FrameUI_Dialogue.FrameDialogueElementType.OneCharacter: {
+            case FrameUI_Dialogue.FrameDialogueElementType.Одинᅠперсонаж: {
                 OneSpeakingCharacterSelection();
                 break;
             }
-            case FrameUI_Dialogue.FrameDialogueElementType.MultibleCharacters: {
+            case FrameUI_Dialogue.FrameDialogueElementType.Несколькоᅠперсонажей: {
                 AddMultibleCharacters();
+
+                GUILayout.EndHorizontal();
+
+                EditorGUILayout.Separator();
+
                 MuiltibleSpeakingCharactersSelection();
                 break;
             }
@@ -43,7 +84,8 @@ public class FrameEditor_Dialogue : FrameEditor_Element {
             keyValues.speakingCharacterIndex = EditorGUILayout.Popup(
                     "Собеседник:",
                     keyValues.speakingCharacterIndex,
-                    frameEditorSO.GetFrameElementsObjectsNames<FrameCharacterSO>().ToArray()
+                    frameEditorSO.GetFrameElementsObjectsNames<FrameCharacterSO>().ToArray(),
+                    GUILayout.MaxWidth(450)
                     );
             dialogue.speakingCharacterIndex = keyValues.speakingCharacterIndex;
         }
@@ -51,18 +93,42 @@ public class FrameEditor_Dialogue : FrameEditor_Element {
             var names = new List<string>();
             foreach (var character in keyValues.conversationCharacters)
                 names.Add(character.Value.Split('_')[0]);
-            keyValues.speakingCharacterIndex = GUILayout.SelectionGrid(keyValues.speakingCharacterIndex, names.ToArray(), 6);
+            GUILayout.Label("Выбор говорящего:");
+            keyValues.speakingCharacterIndex = GUILayout.SelectionGrid(
+                keyValues.speakingCharacterIndex, 
+                names.ToArray(), 
+                4,
+                GUILayout.MaxWidth(450)
+                );
             dialogue.speakingCharacterIndex = keyValues.speakingCharacterIndex;
         }
         void AddMultibleCharacters() {
-            if (GUILayout.Button("Добавить персонажа")) {
+            if (GUILayout.Button("+", GUILayout.MaxWidth(22.5f))) {
+                var editor = EditorWindow.GetWindow<FrameEditor_CreationWindow>();
+                editor.type = FrameEditor_CreationWindow.CreationType.FrameCharacter;
+            }//
+            if (FrameEditor_CreationWindow.createdElementID != "") {
+                var character = FrameManager.GetFrameElementOnSceneByID<FrameCharacter>(FrameEditor_CreationWindow.createdElementID);
+                if (character != null && !dialogue.conversationCharacters.ContainsKey(character.frameElementObject.name)) {
+                    character.type = FrameCharacter.CharacterType.Conversation;
+                    character.dialogueID = dialogue.id;
+                    dialogue.conversationCharacters.Add(character.frameElementObject.name, character.id);
+                    dialogue.currentConversationCharacterSO = (FrameCharacterSO)character.frameElementObject;
+                    dialogue.conversationCharacterID = character.id;
 
+                    character.SetKeyValuesWhileNotInPlayMode<FrameCharacterValues>();
+                    dialogue.SetKeyValuesWhileNotInPlayMode<FrameUI_DialogueValues>();
+
+                    FrameEditor_CreationWindow.createdElementID = "";
+                }
+                else
+                    FrameManager.frame.RemoveElementFromCurrentKey(FrameEditor_CreationWindow.createdElementID);
             }
         }
 
-        UpdateFrameUIDialogueCharacter(dialogue);
+        UpdateFrameUI_DialogueCharacter(dialogue);
     }
-    private static void UpdateFrameUIDialogueCharacter(FrameUI_Dialogue dialogue) {
+    private static void UpdateFrameUI_DialogueCharacter(FrameUI_Dialogue dialogue) {
         var keyValues = dialogue.GetFrameKeyValues<FrameUI_DialogueValues>();
         var key = FrameManager.frame.currentKey;
         var characterIDs = new List<string>();
@@ -77,7 +143,7 @@ public class FrameEditor_Dialogue : FrameEditor_Element {
 
         foreach (var characterID in characterIDs)
             if (key.ContainsID(characterID)) {
-                characterKeyValues = FrameElement.GetFrameKeyValues<FrameCharacterValues>(characterID, new FrameCharacter());
+                characterKeyValues = FrameElement.GetFrameKeyValues<FrameCharacterValues>(characterID);
                 if (characterKeyValues.dialogueID == dialogue.id && characterID == keyValues.conversationCharacterID)
                     break;
             }
@@ -87,7 +153,7 @@ public class FrameEditor_Dialogue : FrameEditor_Element {
 
 
         switch (dialogue.type) {
-            case FrameUI_Dialogue.FrameDialogueElementType.OneCharacter: {
+            case FrameUI_Dialogue.FrameDialogueElementType.Одинᅠперсонаж: {
                 if (!firstCharacterCreated)
                     dialogue.SetConversationCharacter();
 
@@ -117,7 +183,7 @@ public class FrameEditor_Dialogue : FrameEditor_Element {
                 }
                 break;
             }
-            case FrameUI_Dialogue.FrameDialogueElementType.MultibleCharacters: {
+            case FrameUI_Dialogue.FrameDialogueElementType.Несколькоᅠперсонажей: {
                 if (!firstCharacterCreated)
                     dialogue.SetConversationCharacter();
 
