@@ -34,6 +34,7 @@ public class FrameCharacterSO : FrameElementSO {
     }
     public override void LoadElementOnScene<T>(FrameElementIDPair pair, string id, FrameKey.Values keyValues) {
         var characterKeyValues = (FrameCharacterValues)keyValues;
+        if (characterKeyValues == null) return;
         switch (characterKeyValues.type) {
             case FrameCharacter.CharacterType.Standalone: {
                 T elementClone = Instantiate(pair.elementObject.prefab).AddComponent<T>();

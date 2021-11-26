@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 #if UNITY_EDITOR
-public class FrameEditor : EditorWindow {
+public class FrameEditor_Window : EditorWindow {
 
     public FrameEditorSO frameEditorSO;
     public FrameManager manager { get; set; }
@@ -17,7 +17,7 @@ public class FrameEditor : EditorWindow {
 
     [MenuItem("Window/Редактор фрейма")]
     static void Init() {
-        FrameEditor frameEditor = (FrameEditor)EditorWindow.GetWindow(typeof(FrameEditor), false, "Редактор фрейма");
+        FrameEditor_Window frameEditor = (FrameEditor_Window)EditorWindow.GetWindow(typeof(FrameEditor_Window), false, "Редактор фрейма");
         frameEditor.Show();
     }
     private void OnGUI() {
@@ -36,40 +36,26 @@ public class FrameEditor : EditorWindow {
             AssetManager.UpdateAssets();
             UpdateDirty();
 
-
-            FrameSelection();
-            FrameKeySelection();
-
-            GUILayout.BeginVertical("HelpBox");
             GUILayout.BeginHorizontal();
-
-            GUILayout.Label("Создать персонажа на сцене", GUILayout.MaxWidth(200));
-            FrameElementCreationSelection<FrameCharacterSO, FrameCharacter>();
-
-            GUILayout.EndHorizontal();
-            GUILayout.EndVertical();
-
-            GUILayout.BeginVertical("HelpBox");
-            GUILayout.BeginHorizontal();
-
-            GUILayout.Label("Создать диалог на сцене", GUILayout.MaxWidth(200));
-            FrameElementCreationSelection<FrameUI_DialogueSO, FrameUI_Dialogue>();
-
-            GUILayout.EndHorizontal();
-            GUILayout.EndVertical();
-
-            FrameEditor_FrameData.FrameEditing();
+            GUILayout.FlexibleSpace();
 
             scroll = GUILayout.BeginScrollView(scroll,false, true);
-            GUILayout.BeginVertical("HelpBox");
-            //GUILayout.BeginHorizontal();
+            //GUILayout.BeginVertical("HelpBox");
+            GUILayout.BeginHorizontal();
+            GUILayout.FlexibleSpace();
+            FrameEditor_Frame.FrameEditing();
+            GUILayout.FlexibleSpace();
+            GUILayout.EndHorizontal();
+            FrameEditor_Background.FrameBackgroundEditing();
             FrameEditor_Dialogue.FrameDialogueEditing();
-            EditorGUILayout.Separator();
-            EditorGUILayout.Separator();
             FrameEditor_Character.FrameCharacterEditing();
-           // GUILayout.EndHorizontal();
-            GUILayout.EndVertical();
+            GUILayout.FlexibleSpace();
+           // GUILayout.EndVertical();
             GUILayout.EndScrollView();
+            GUILayout.FlexibleSpace();
+            GUILayout.EndHorizontal();
+            if (FrameEditor_CreationWindow.createdElementID != "")
+                FrameEditor_CreationWindow.createdElementID = "";
         }
     }
     public void UpdateDirty() {

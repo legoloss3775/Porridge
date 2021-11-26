@@ -5,10 +5,12 @@ using static FrameSO;
 
 [CreateAssetMenu(fileName = "Dialogue Window", menuName = "Редактор Сцен/UI/Диалоговое окно", order = 0)]
 public class FrameUI_DialogueSO : FrameUI_WindowSO {
+
     public enum DialogueWindowType {
         CharacterLine,
         PlayerAnswer
     }
+    public GameObject dialogueAnswerPrefab;
     public DialogueWindowType type;
     public string text { get { return GetText(); } set { SetText(value); } }
 

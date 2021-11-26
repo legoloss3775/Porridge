@@ -16,6 +16,7 @@ public class FrameUI_DialogueValues : Values, IFrameUIDialogueSerialization {
     public int speakingCharacterIndex { get; set; }
     public SerializableDictionary<string, string> conversationCharacters { get; set; }
     public FrameUI_Dialogue.FrameDialogueElementType type { get; set; }
+    public FrameUI_Dialogue.FrameDialogueState state { get; set; }
     public FrameUI_DialogueValues(FrameUI_Dialogue dialogue) {
         position = dialogue.position;
         activeStatus = dialogue.activeStatus;
@@ -25,6 +26,7 @@ public class FrameUI_DialogueValues : Values, IFrameUIDialogueSerialization {
         speakingCharacterIndex = dialogue.speakingCharacterIndex;
         conversationCharacters = dialogue.conversationCharacters;
         type = dialogue.type;
+        state = dialogue.state;
     }
     public FrameUI_DialogueValues() { }
     [Serializable]
@@ -43,6 +45,8 @@ public class FrameUI_DialogueValues : Values, IFrameUIDialogueSerialization {
         private SerializableDictionary<string, string> _conversationCharacters;
         [SerializeField]
         private FrameUI_Dialogue.FrameDialogueElementType _type;
+        [SerializeField]
+        private FrameUI_Dialogue.FrameDialogueState _state;
 
         public Vector2 position { get => _position; set => _position = value; }
         public bool activeStatus { get => _activeStatus; set => _activeStatus = value; }
@@ -51,11 +55,12 @@ public class FrameUI_DialogueValues : Values, IFrameUIDialogueSerialization {
         public int speakingCharacterIndex { get => _speakingCharacterIndex; set => _speakingCharacterIndex = value; }
         public SerializableDictionary<string, string> conversationCharacters { get => _conversationCharacters; set => _conversationCharacters = value; }
         public FrameUI_Dialogue.FrameDialogueElementType type { get => _type; set => _type = value; }
+        public FrameUI_Dialogue.FrameDialogueState state { get => _state; set => _state = value; }
     }
     [SerializeField]
-    private SerializedDialogueValues serializedDialogueValues;
+    public SerializedDialogueValues serializedDialogueValues;
 
-    public SerializedDialogueValues SetSerializedDialogueValues() {
+    public void SetSerializedDialogueValues() {
         serializedDialogueValues.text = text;
         serializedDialogueValues.position = position;
         serializedDialogueValues.activeStatus = activeStatus;
@@ -63,8 +68,7 @@ public class FrameUI_DialogueValues : Values, IFrameUIDialogueSerialization {
         serializedDialogueValues.conversationCharacterID = conversationCharacterID;
         serializedDialogueValues.conversationCharacters = conversationCharacters;
         serializedDialogueValues.type = type;
-
-        return serializedDialogueValues;
+        serializedDialogueValues.state = state;
     }
     public static void LoadSerialzedDialogueValues(List<SerializedDialogueValues> serializedElementValues, List<Values> values) {
         foreach (var svalue in serializedElementValues) {
@@ -77,6 +81,7 @@ public class FrameUI_DialogueValues : Values, IFrameUIDialogueSerialization {
                 conversationCharacterID = svalue.conversationCharacterID,
                 conversationCharacters = svalue.conversationCharacters,
                 type = svalue.type,
+                state = svalue.state,
             });
         }
     }
@@ -90,6 +95,7 @@ public interface IFrameUIDialogueSerialization {
     int speakingCharacterIndex { get; set; }
     SerializableDictionary<string, string> conversationCharacters { get; set; }
     FrameUI_Dialogue.FrameDialogueElementType type { get; set; }
+    FrameUI_Dialogue.FrameDialogueState state { get; set; }
 }
 public class FrameUI_Dialogue : FrameUI_Window, IFrameUIDialogueSerialization {
     public string text {
@@ -115,12 +121,17 @@ public class FrameUI_Dialogue : FrameUI_Window, IFrameUIDialogueSerialization {
     public int speakingCharacterIndex { get; set; }
     public SerializableDictionary<string, string> conversationCharacters { get; set; }
     public FrameDialogueElementType type { get; set; }
+    public FrameDialogueState state { get; set; }
     public FrameCharacter currentConversationCharacter { get; set; }
     public FrameCharacterSO currentConversationCharacterSO { get; set; }
 
     public enum FrameDialogueElementType {
         Одинᅠперсонаж,
         Несколькоᅠперсонажей,
+    }
+    public enum FrameDialogueState {
+        CharacterLine,
+        PlayerAnswer,
     }
 
 
@@ -171,6 +182,8 @@ public class FrameUI_Dialogue : FrameUI_Window, IFrameUIDialogueSerialization {
     }
     public void SetConversationCharacter() {
         var keyValues = GetFrameKeyValues<FrameUI_DialogueValues>();
+        if (keyValues == null)
+            return;
 
         this.currentConversationCharacterSO.CreateElementOnScene<FrameCharacter>(this.currentConversationCharacterSO, this.currentConversationCharacterSO.prefab.transform.position, out string ID);
         if (FrameManager.GetFrameElementOnSceneByID<FrameCharacter>(ID) == null)
@@ -226,6 +239,7 @@ public class FrameUI_Dialogue : FrameUI_Window, IFrameUIDialogueSerialization {
         speakingCharacterIndex = keyValues.speakingCharacterIndex;
         conversationCharacters = keyValues.conversationCharacters;
         type = keyValues.type;
+        state = keyValues.state;
 
         characterNameField = characterNameField;
     }

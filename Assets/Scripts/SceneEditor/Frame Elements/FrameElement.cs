@@ -26,13 +26,11 @@ public class FrameElementValues : Values, IFrameElementSerialization {
         public bool activeStatus { get => _activeStatus; set => _activeStatus = value; }
     }
     [SerializeField]
-    private SerializedElementValues serializedElementValues;
+    public SerializedElementValues serializedElementValues;
 
-    public SerializedElementValues SetSerializedFrameKeyElementValues() {
+    public void SetSerializedFrameKeyElementValues() {
         serializedElementValues.position = position;
         serializedElementValues.activeStatus = activeStatus;
-
-        return serializedElementValues;
     }
     public static void LoadSerialzedFrameKeyElementValues(List<SerializedElementValues> serializedElementValues, List<Values> values) {
         foreach (var svalue in serializedElementValues) {
@@ -147,6 +145,24 @@ public abstract class FrameElement : MonoBehaviour, IFrameElementSerialization {
     [CustomEditor(typeof(FrameElement))]
     [CanEditMultipleObjects]
     public abstract class FrameElementCustomInspector : Editor {
+        public override void OnInspectorGUI() {
+            FrameElement element = (FrameElement)target;
+            var keyValues = GetFrameKeyValues<FrameElementValues>(element.id);
+
+            Debug.Log(element.id);
+            if (keyValues != null) {
+                keyValues.position = element.gameObject.transform.position;
+                element.SetKeyValuesWhileNotInPlayMode<FrameCharacterValues>();
+
+                if (targets.Length > 1) {
+                    foreach (var target in targets) {
+                        FrameElement mTarget = (FrameElement)target;
+                        element.position = element.gameObject.transform.position;
+                        mTarget.SetKeyValuesWhileNotInPlayMode<FrameCharacterValues>();
+                    }
+                }
+            }
+        }
         public void SetElementInInspector<T>()
             where T : FrameElementSO {
             FrameElement element = (FrameElement)target;

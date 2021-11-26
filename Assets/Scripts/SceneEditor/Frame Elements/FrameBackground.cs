@@ -6,6 +6,7 @@ using UnityEditor;
 public class FrameBackground : FrameElement
 {
 
+
 #if UNITY_EDITOR
     [CustomEditor(typeof(FrameBackground))]
     [CanEditMultipleObjects]

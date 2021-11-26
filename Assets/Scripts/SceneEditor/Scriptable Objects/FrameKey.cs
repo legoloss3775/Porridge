@@ -22,7 +22,7 @@ public class FrameKey {
     }
     public Values GetFrameKeyValuesOfElement(string id) {
         if (ContainsID(id)) return frameKeyValues[id];
-        else throw new Exception("Не найдены значения объекта " + id + " в ключе");
+        else return null;
     }
     public void UpdateFrameKeyValues(string id, Values values) {
         if (ContainsID(id)) frameKeyValues[id] = values;

@@ -88,9 +88,22 @@ public class FrameSO : ScriptableObject {
             if (pair.ids.Contains(id))
                 return pair.elementObject;
         }
-        throw new Exception("Не найдет элемент по ID");
+        return null;
     }
     public void RemoveElementFromCurrentKey(string frameElementID) {
+        foreach (var key in frameKeys) {
+            foreach (var value in key.frameKeyValues.ToList()) {
+                if (FrameManager.frame.GetFrameElementObjectByID(frameElementID) is FrameUI_DialogueSO && value.Key == frameElementID) {
+                    Debug.Log(frameElementID) ;
+                    FrameUI_DialogueValues dialogueValues = (FrameUI_DialogueValues)value.Value;
+                    foreach(var character in dialogueValues.conversationCharacters.Values) {
+                        RemoveElementFromCurrentKey(character);
+                    }
+                }
+                if (value.Key == frameElementID)
+                    key.frameKeyValues.Remove(value.Key);
+            }
+        }
         foreach (var pair in usedElementsObjects.ToList()) {
             if (pair.ids.Contains(frameElementID)) {
                 pair.ids.Remove(frameElementID);
@@ -99,12 +112,12 @@ public class FrameSO : ScriptableObject {
                     usedElementsObjects.Remove(pair);
             }
         }
-        foreach (var value in currentKey.frameKeyValues.Where(ch => ch.Key == frameElementID).ToList())
-            currentKey.frameKeyValues.Remove(value.Key);
     }
     public void DestroyElementOnScene(string frameElementID) {
         FrameElement element = FrameManager.GetFrameElementOnSceneByID<FrameElement>(frameElementID);
-        DestroyImmediate(element.gameObject);
+        if(element != null) {
+            FrameManager.RemoveElement(element.id);
+        }
     }
     public static void LoadElementsOnScene<TKey, TValue>(List<FrameElementIDPair> pairs)
     where TValue : global::FrameElement {

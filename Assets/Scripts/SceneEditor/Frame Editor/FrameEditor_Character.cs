@@ -6,24 +6,26 @@ using System;
 using System.Linq;
 
 #if UNITY_EDITOR
-public class FrameEditor_Character : FrameEditor_Element
+public class FrameEditor_Character : FrameEditor
 {
     public static void FrameCharacterEditing() {
         Action<FrameCharacter> characterStateEditing = FrameCharacterStateEditing;
 
         GUILayout.BeginVertical();
 
-        foldouts[EditorType.CharacterEditor] = EditorGUILayout.Foldout(foldouts[EditorType.CharacterEditor], "Персонажи");
+        GUILayout.BeginHorizontal();
+        foldouts[EditorType.CharacterEditor] = EditorGUILayout.Foldout(foldouts[EditorType.CharacterEditor], "Персонажи", EditorStyles.foldoutHeader);
+        GUILayout.FlexibleSpace();
+        ElementCreation(FrameEditor_CreationWindow.CreationType.FrameCharacter);
+        GUILayout.EndHorizontal();
 
         if (foldouts[EditorType.CharacterEditor]) {
             GUILayout.BeginVertical("HelpBox");
             ElementEditing<FrameCharacterSO, FrameCharacter>(PositioningType.Vertical, EditorType.CharacterEditor, false, true, characterStateEditing);
             GUILayout.EndVertical();
+            GUILayout.FlexibleSpace();
         }
-
         GUILayout.EndVertical();
-
-        GUILayout.FlexibleSpace();
     }
     private static void FrameCharacterStateEditing(FrameCharacter character) {
         var keyValues = character.GetFrameKeyValues<FrameCharacterValues>();
@@ -31,8 +33,15 @@ public class FrameEditor_Character : FrameEditor_Element
 
         GUILayout.BeginHorizontal();
 
+        GUILayout.BeginVertical();
         ElementSelection(character);
-        GUILayout.Label(character.id);
+        if(character.type != FrameCharacter.CharacterType.Conversation)
+            ElementDeletion(character);
+        GUILayout.EndVertical();
+        GUILayout.BeginHorizontal();
+        GUILayout.Label(character.id, EditorStyles.largeLabel);
+        GUILayout.FlexibleSpace();
+        GUILayout.EndHorizontal();
 
         if (character.HasDialogue()) {
             GUILayout.FlexibleSpace();
@@ -41,7 +50,10 @@ public class FrameEditor_Character : FrameEditor_Element
 
         GUILayout.EndHorizontal();
 
-        keyValues.emotionState = (FrameCharacterSO.CharacterEmotionState)EditorGUILayout.EnumPopup("Настроение:", keyValues.emotionState, GUILayout.MaxWidth(350));
+        GUILayout.BeginHorizontal();
+        GUILayout.Label("Настроение:", GUILayout.MaxWidth(300));
+        keyValues.emotionState = (FrameCharacterSO.CharacterEmotionState)EditorGUILayout.EnumPopup(keyValues.emotionState, GUILayout.MaxWidth(145));
+        GUILayout.EndHorizontal();
 
         var characterParts = new SerializableDictionary<int, CharacterPart>();
         foreach (var part in characterSO.characterParts.Where(ch => ch.state == keyValues.emotionState))
@@ -51,13 +63,9 @@ public class FrameEditor_Character : FrameEditor_Element
             CharacterPartPrefabSelection(characterParts);
         else {
             GUILayout.Label("Не найдены пресеты.");
-            if (GUILayout.Button("Добавить")) {
+            //if (GUILayout.Button("Добавить")) {
                 
-            }
-            var editor = CreateEditor(characterSO);
-            var inspector = editor.CreateInspectorGUI();
-            editor.OnInspectorGUI();
-       
+            //}
         }
 
         void CharacterPartPrefabSelection(SerializableDictionary<int, CharacterPart> parts) {
@@ -67,7 +75,7 @@ public class FrameEditor_Character : FrameEditor_Element
                 icons.Add(part.Key, icon);
             }
 
-            keyValues.selectedPartIndex = GUILayout.SelectionGrid(keyValues.selectedPartIndex, icons.Values.ToArray(), 3, GUILayout.MaxWidth(500));
+            keyValues.selectedPartIndex = GUILayout.SelectionGrid(keyValues.selectedPartIndex, icons.Values.ToArray(), 4, GUILayout.MaxWidth(450));
             if (!icons.ContainsKey(keyValues.selectedPartIndex))
                 keyValues.selectedPartIndex = icons.Keys.First();
             var selectedPart = parts[keyValues.selectedPartIndex];

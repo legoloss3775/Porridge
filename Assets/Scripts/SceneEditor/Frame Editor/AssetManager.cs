@@ -114,18 +114,21 @@ public class FrameKeyDictionary : Dictionary<string, FrameKey.Values>, ISerializ
 
         foreach (var pair in this.Where(ch => ch.Value is FrameElementValues)) {
             FrameElementValues _sev = (FrameElementValues)pair.Value;
+            _sev.SetSerializedFrameKeyElementValues();
             keys.Add(pair.Key);
-            serializedElementValues.Add(_sev.SetSerializedFrameKeyElementValues());
+            serializedElementValues.Add(_sev.serializedElementValues);
         }
         foreach (var pair in this.Where(ch => ch.Value is FrameUI_DialogueValues)) {
             FrameUI_DialogueValues _sdv = (FrameUI_DialogueValues)pair.Value;
+            _sdv.SetSerializedDialogueValues();
             keys.Add(pair.Key);
-            serializedDialogueValues.Add(_sdv.SetSerializedDialogueValues());
+            serializedDialogueValues.Add(_sdv.serializedDialogueValues);
         }
         foreach (var pair in this.Where(ch => ch.Value is FrameCharacterValues)) {
             FrameCharacterValues _schv = (FrameCharacterValues)pair.Value;
+            _schv.SetSerializedFrameCharacterValues();
             keys.Add(pair.Key);
-            serializedFrameCharacterValues.Add(_schv.SetSerializedFrameCharacterValues());
+            serializedFrameCharacterValues.Add(_schv.serializedFrameCharacterValues);
         }
     }
 

@@ -1,5 +1,21 @@
 {
   "dependencies": {
+    "com.seneral.nodeeditorframework": {
+      "version": "https://github.com/Seneral/Node_Editor_Framework.git#release-pkg",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.seneral.undopro": "1.0.0"
+      },
+      "hash": "768b0e66dc8be4fc052e1de37cbd9ad060d1d213"
+    },
+    "com.seneral.undopro": {
+      "version": "https://github.com/Seneral/UndoPro.git#release-pkg",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "6a77de2ea6e53ed1b69b149d97217db4a17a4f95"
+    },
     "com.unity.2d.animation": {
       "version": "4.2.6",
       "depth": 0,

@@ -47,17 +47,15 @@ public class FrameCharacterValues : Values, IFrameCharacterSerialzation {
         public int selectedPartIndex { get => _selectedPartIndex; set => _selectedPartIndex = value; }
     }
     [SerializeField]
-    private SerializedFrameCharacterValues serializedFrameCharacterValues;
+    public SerializedFrameCharacterValues serializedFrameCharacterValues;
 
-    public SerializedFrameCharacterValues SetSerializedFrameCharacterValues() {
+    public void SetSerializedFrameCharacterValues() {
         serializedFrameCharacterValues.position = position;
         serializedFrameCharacterValues.activeStatus = activeStatus;
         serializedFrameCharacterValues.dialogueID = dialogueID;
         serializedFrameCharacterValues.type = type;
         serializedFrameCharacterValues.emotionState = emotionState;
         serializedFrameCharacterValues.selectedPartIndex = selectedPartIndex;
-
-        return serializedFrameCharacterValues;
     }
     public static void LoadSerialzedFrameKeyCharacterElementValues(List<SerializedFrameCharacterValues> serializedElementValues, List<Values> values) {
         foreach (var svalue in serializedElementValues) {

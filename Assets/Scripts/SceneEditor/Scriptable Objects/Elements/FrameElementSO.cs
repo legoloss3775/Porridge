@@ -8,6 +8,7 @@ using static FrameSO;
 public abstract class FrameElementSO : ScriptableObject, ISerializationCallbackReceiver {
     public string id { get; set; }
 
+    [Header("Основной префаб")]
     public GameObject prefab;
 
     public virtual void OnAfterDeserialize() {

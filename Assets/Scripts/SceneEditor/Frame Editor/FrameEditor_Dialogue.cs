@@ -5,15 +5,20 @@ using UnityEditor;
 using UnityEngine;
 
 #if UNITY_EDITOR
-public class FrameEditor_Dialogue : FrameEditor_Element {
+public class FrameEditor_Dialogue : FrameEditor {
 
+    public static bool characterCreationButtonPressed = false;
     public static void FrameDialogueEditing() {
         Action<FrameUI_Dialogue> dialogueCharacterSelection = FrameUI_DialogueCharacterSelection;
         Action<FrameUI_Dialogue> textEditing = FrameUI_TextEditing;
 
         GUILayout.BeginVertical();
 
-        foldouts[EditorType.DialogueEditor] = EditorGUILayout.Foldout(foldouts[EditorType.DialogueEditor], "Диалоги");
+        GUILayout.BeginHorizontal();
+        foldouts[EditorType.DialogueEditor] = EditorGUILayout.Foldout(foldouts[EditorType.DialogueEditor], "Диалоги", EditorStyles.foldoutHeader);
+        GUILayout.FlexibleSpace();
+        ElementCreation(FrameEditor_CreationWindow.CreationType.FrameDialogue);
+        GUILayout.EndHorizontal();
 
         if (foldouts[EditorType.DialogueEditor]) {
             GUILayout.BeginVertical("HelpBox");
@@ -25,24 +30,42 @@ public class FrameEditor_Dialogue : FrameEditor_Element {
     }
     private static void FrameUI_TextEditing(FrameUI_Dialogue dialogue) {
         var keyValues = dialogue.GetFrameKeyValues<FrameUI_DialogueValues>();
+        if (keyValues == null)
+            return;
 
-        keyValues.text = GUILayout.TextArea(keyValues.text, GUILayout.MaxWidth(450));
+        GUILayout.BeginHorizontal();
+        GUILayout.Label("Текст диалога:", GUILayout.MaxWidth(95));
+        GUILayout.BeginVertical();
+        GUILayout.Space(10);
+        FrameGUIUtility.GuiLine();
+        GUILayout.EndVertical();
+        GUILayout.EndHorizontal();
+
+        keyValues.text = GUILayout.TextArea(keyValues.text, GUILayout.MaxWidth(450), GUILayout.MaxHeight(150));
         if (dialogue.text != keyValues.text) dialogue.text = keyValues.text;
+        FrameGUIUtility.GuiLine();
     }
     private static void FrameUI_DialogueCharacterSelection(FrameUI_Dialogue dialogue) {
         var frameEditorSO = AssetManager.GetAtPath<FrameEditorSO>("Scripts/SceneEditor/").FirstOrDefault();
         var keyValues = dialogue.GetFrameKeyValues<FrameUI_DialogueValues>();
+        if (keyValues == null) return;
 
         float dialogueTypeSelectionWidth;
         if (dialogue.type == FrameUI_Dialogue.FrameDialogueElementType.Несколькоᅠперсонажей)
-            dialogueTypeSelectionWidth = 395;
+            dialogueTypeSelectionWidth = 425;
         else
-            dialogueTypeSelectionWidth = 422.5f;
-
-        GUILayout.Label(dialogue.id);
+            dialogueTypeSelectionWidth = 450;
 
         GUILayout.BeginHorizontal();
+        GUILayout.BeginVertical();
         ElementSelection(dialogue);
+        ElementDeletion(dialogue);
+        GUILayout.EndVertical();
+        GUILayout.Label(dialogue.id, EditorStyles.largeLabel);
+        GUILayout.FlexibleSpace();
+        GUILayout.EndHorizontal();
+
+        GUILayout.BeginHorizontal();
 
         keyValues.type = (FrameUI_Dialogue.FrameDialogueElementType)EditorGUILayout.EnumPopup(keyValues.type, GUILayout.MaxWidth(dialogueTypeSelectionWidth));
         if(keyValues.type == FrameUI_Dialogue.FrameDialogueElementType.Одинᅠперсонаж) {
@@ -106,8 +129,9 @@ public class FrameEditor_Dialogue : FrameEditor_Element {
             if (GUILayout.Button("+", GUILayout.MaxWidth(22.5f))) {
                 var editor = EditorWindow.GetWindow<FrameEditor_CreationWindow>();
                 editor.type = FrameEditor_CreationWindow.CreationType.FrameCharacter;
-            }//
-            if (FrameEditor_CreationWindow.createdElementID != "") {
+                characterCreationButtonPressed = true;
+            }
+            if (characterCreationButtonPressed && FrameEditor_CreationWindow.createdElementID != "") {
                 var character = FrameManager.GetFrameElementOnSceneByID<FrameCharacter>(FrameEditor_CreationWindow.createdElementID);
                 if (character != null && !dialogue.conversationCharacters.ContainsKey(character.frameElementObject.name)) {
                     character.type = FrameCharacter.CharacterType.Conversation;
@@ -120,9 +144,12 @@ public class FrameEditor_Dialogue : FrameEditor_Element {
                     dialogue.SetKeyValuesWhileNotInPlayMode<FrameUI_DialogueValues>();
 
                     FrameEditor_CreationWindow.createdElementID = "";
+                    characterCreationButtonPressed = false;
                 }
-                else
+                else {
                     FrameManager.frame.RemoveElementFromCurrentKey(FrameEditor_CreationWindow.createdElementID);
+                    characterCreationButtonPressed = false;
+                }
             }
         }
 
@@ -130,6 +157,9 @@ public class FrameEditor_Dialogue : FrameEditor_Element {
     }
     private static void UpdateFrameUI_DialogueCharacter(FrameUI_Dialogue dialogue) {
         var keyValues = dialogue.GetFrameKeyValues<FrameUI_DialogueValues>();
+        if (keyValues == null)
+            return;
+
         var key = FrameManager.frame.currentKey;
         var characterIDs = new List<string>();
 
@@ -148,7 +178,7 @@ public class FrameEditor_Dialogue : FrameEditor_Element {
                     break;
             }
 
-        if (keyValues.conversationCharacterID != null)
+        if (keyValues != null && keyValues.conversationCharacterID != null)
             firstCharacterCreated = true;
 
 

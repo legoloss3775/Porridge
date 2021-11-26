@@ -9,9 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ba6f009af7cde734d94782228f470eed, type: 3}
-  m_Name: "\u0411\u044D\u043A\u0433\u0440\u0430\u0443\u043D\u0434"
+  m_Script: {fileID: 11500000, guid: 4cca06ccc2daa4d48b4f4b0402600ada, type: 3}
+  m_Name: Background
   m_EditorClassIdentifier: 
-  id: 
-  prefab: {fileID: 0}
+  prefab: {fileID: 6920567323995588819, guid: 3b413aa326cecae4889cbda3f591600f, type: 3}
   type: 0
