@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f9fb188184a63ff42b050cfef419b0c6, type: 3}
-  m_Name: Frame 1
+  m_Name: Frame 2
   m_EditorClassIdentifier: 
   type: 0
-  id: Frame_1
+  id: Frame_2
   selectedKeyIndex: 0
   currentKey:
     node: {fileID: 0}
@@ -31,5 +31,5 @@ MonoBehaviour:
       serializedElementValues: []
       serializedDialogueValues: []
       serializedFrameCharacterValues: []
-  nodeCanvas: {fileID: 11400000, guid: d634f672246f76b48baeddd1119ae0c5, type: 2}
+  nodeCanvas: {fileID: 11400000, guid: 211bac440d7727f448bb78a05199ef06, type: 2}
   usedElementsObjects: []

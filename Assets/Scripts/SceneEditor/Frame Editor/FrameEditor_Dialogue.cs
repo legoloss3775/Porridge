@@ -65,21 +65,28 @@ public class FrameEditor_Dialogue : FrameEditor {
         GUILayout.FlexibleSpace();
         GUILayout.EndHorizontal();
 
+        FrameGUIUtility.GuiLine();
         GUILayout.BeginHorizontal();
 
-        keyValues.type = (FrameUI_Dialogue.FrameDialogueElementType)EditorGUILayout.EnumPopup(keyValues.type, GUILayout.MaxWidth(dialogueTypeSelectionWidth));
-        if(keyValues.type == FrameUI_Dialogue.FrameDialogueElementType.Одинᅠперсонаж) {
-            GUILayout.EndHorizontal();
+        keyValues.state = (FrameUI_Dialogue.FrameDialogueState)EditorGUILayout.EnumPopup(keyValues.state, GUILayout.MaxWidth(450));
+        if (dialogue.state != keyValues.state) {
+
         }
 
-        if(keyValues.type == FrameUI_Dialogue.FrameDialogueElementType.Одинᅠперсонаж) {
+        keyValues.type = (FrameUI_Dialogue.FrameDialogueElementType)EditorGUILayout.EnumPopup(keyValues.type, GUILayout.MaxWidth(dialogueTypeSelectionWidth));
+        if (keyValues.type == FrameUI_Dialogue.FrameDialogueElementType.Одинᅠперсонаж) {
+            GUILayout.EndHorizontal();
+            FrameGUIUtility.GuiLine();
+        }
+
+        if (keyValues.type == FrameUI_Dialogue.FrameDialogueElementType.Одинᅠперсонаж) {
             EditorGUILayout.Separator();
         }
 
         if (dialogue.type != keyValues.type) {
             dialogue.DialogueTypeChange(keyValues.type);
             dialogue.SetKeyValuesWhileNotInPlayMode<FrameUI_DialogueValues>();
-        } 
+        }
 
         switch (dialogue.type) {
             case FrameUI_Dialogue.FrameDialogueElementType.Одинᅠперсонаж: {
@@ -90,6 +97,7 @@ public class FrameEditor_Dialogue : FrameEditor {
                 AddMultibleCharacters();
 
                 GUILayout.EndHorizontal();
+                FrameGUIUtility.GuiLine();
 
                 EditorGUILayout.Separator();
 

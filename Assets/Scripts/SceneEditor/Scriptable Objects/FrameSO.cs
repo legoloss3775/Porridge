@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor;
 using UnityEngine;
 
 public class FrameSO : ScriptableObject {
@@ -16,6 +17,7 @@ public class FrameSO : ScriptableObject {
     [SerializeField]
     public FrameKey currentKey;
     public List<FrameKey> frameKeys = new List<FrameKey>();
+    public NodeEditorFramework.NodeCanvas nodeCanvas;
     [Serializable]
     public struct FrameElementIDPair {
         public FrameElementSO elementObject;
@@ -27,19 +29,27 @@ public class FrameSO : ScriptableObject {
         FrameEditorSO frameEditorSO = AssetManager.GetAtPath<FrameEditorSO>("Scripts/SceneEditor/").FirstOrDefault();
         if (!frameEditorSO.frames.Contains(this))
             frameEditorSO.frames.Add(this);
+
 #endif
 
         if (currentKey == null) {
             if (frameKeys.Count > 0)
                 currentKey = frameKeys[0];
-            else {
-                currentKey = new FrameKey();
-                this.AddKey(currentKey);
-            }
         }
+    }
+    public void CreateNodeCanvas() {
+        nodeCanvas = NodeEditorFramework.NodeCanvas.CreateCanvas<NodeEditorFramework.Standard.CalculationCanvasType>();
+
+        NodeEditorFramework.NodeEditorSaveManager.SaveNodeCanvas("Assets/Frames/NodeCanvases/Canvas_" + id + ".asset", ref nodeCanvas, false);
     }
     public void AddKey(FrameKey key) {
         frameKeys.Add(key);
+        key.id = frameKeys.Count - 1;
+
+        key.node = (KeyNode)NodeEditorFramework.Node.Create(KeyNode.ID, Vector2.zero);
+        key.node.frameKey = key;
+        key.node.frameKeyPair.frameID = id;
+        key.node.frameKeyPair.frameKeyID = key.id;
     }
     public List<string> GetAllIDsOfType<T>()
         where T : FrameElementSO {

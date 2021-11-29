@@ -124,6 +124,10 @@ public class FrameManager : MonoBehaviour, ISerializationCallbackReceiver {
         FrameSO.LoadElementsOnScene<FrameBackgroundSO, FrameBackground>(frame.usedElementsObjects);
         FrameSO.LoadElementsOnScene<FrameUI_DialogueSO, FrameUI_Dialogue>(frame.usedElementsObjects);
         FrameSO.LoadElementsOnScene<FrameCharacterSO, FrameCharacter>(frame.usedElementsObjects);
+
+#if UNITY_EDITOR
+        NodeEditorFramework.Standard.NodeEditorWindow.editor.canvasCache.LoadNodeCanvas("Assets/Frames/NodeCanvases/Canvas_" + frame.id + ".asset");
+#endif
     }
     public static void ClearElements() {
         foreach (var element in frameElements.ToList()) {

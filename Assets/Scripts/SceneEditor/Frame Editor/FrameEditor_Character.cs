@@ -82,6 +82,7 @@ public class FrameEditor_Character : FrameEditor
             if (character.emotionState != keyValues.emotionState || character.selectedPartIndex != keyValues.selectedPartIndex) {
                 character.selectedPartIndex = keyValues.selectedPartIndex;
                 character.CharacterPartChange(selectedPart,keyValues.emotionState);
+
             }
         }
     }

@@ -61,6 +61,9 @@ public class AssetManager {
                 frameEditorSO.frameElementsObjects.RemoveAt(i);
         }
     }
+    public static NodeEditorFramework.NodeCanvas[] GetFramesCanvases() {
+        return AssetManager.GetAtPath<NodeEditorFramework.Standard.CalculationCanvasType>("Frames/NodeCanvases/");
+    }
     public static FrameSO[] GetFrameAssets() {
         return AssetManager.GetAtPath<FrameSO>("Frames/");
     }

@@ -103,6 +103,7 @@ public class FrameCharacter : FrameElement, IFrameCharacterSerialzation {
                                                 .First().sprite;
             }
         }
+        SetKeyValuesWhileNotInPlayMode<FrameCharacterValues>();
     }
     public SerializableDictionary<string, SpriteRenderer> GetCharacterParts() {
         var sprites = new SerializableDictionary<string, SpriteRenderer>();

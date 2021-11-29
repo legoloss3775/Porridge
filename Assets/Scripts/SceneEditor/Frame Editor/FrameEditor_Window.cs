@@ -11,6 +11,7 @@ public class FrameEditor_Window : EditorWindow {
     public FrameEditorSO frameEditorSO;
     public FrameManager manager { get; set; }
 
+    public bool isEditing { get; set; }
     public Vector2 scroll;
     public static readonly Vector2 DEFAULT_ELEMENT_POSITION = Vector2.zero;
     public static readonly bool DEFAULT_ELEMENT_ACTIVESTATE = true;
@@ -21,13 +22,11 @@ public class FrameEditor_Window : EditorWindow {
         frameEditor.Show();
     }
     private void OnGUI() {
-        if (!isEditingAllowed())
-            if (EditorUtility.DisplayDialog("Редактор фрейма", "Начать создание фрейма на данной сцене?", "Да", "Отмена")) {
-                UpdateFrameEditorSO();
-                UpdateFrameManager();
-                SetFrame();
-            }
-            else Close();
+        if (!isEditingAllowed()) {
+            UpdateFrameEditorSO();
+            UpdateFrameManager();
+            SetFrame();
+        }//
         if(manager._assetDatabase == null || FrameManager.assetDatabase == null) {
             manager._assetDatabase = AssetManager.GetAtPath<FrameEditorSO>("Scripts/SceneEditor/").FirstOrDefault();
             FrameManager.assetDatabase = manager._assetDatabase;
@@ -40,20 +39,25 @@ public class FrameEditor_Window : EditorWindow {
             GUILayout.FlexibleSpace();
 
             scroll = GUILayout.BeginScrollView(scroll,false, true);
-            //GUILayout.BeginVertical("HelpBox");
+
             GUILayout.BeginHorizontal();
             GUILayout.FlexibleSpace();
+
             FrameEditor_Frame.FrameEditing();
+
             GUILayout.FlexibleSpace();
             GUILayout.EndHorizontal();
+
             FrameEditor_Background.FrameBackgroundEditing();
             FrameEditor_Dialogue.FrameDialogueEditing();
             FrameEditor_Character.FrameCharacterEditing();
+
             GUILayout.FlexibleSpace();
-           // GUILayout.EndVertical();
             GUILayout.EndScrollView();
+
             GUILayout.FlexibleSpace();
             GUILayout.EndHorizontal();
+
             if (FrameEditor_CreationWindow.createdElementID != "")
                 FrameEditor_CreationWindow.createdElementID = "";
         }
@@ -79,53 +83,12 @@ public class FrameEditor_Window : EditorWindow {
     }
 
     #region FRAME_EDITING
-    private void FrameElementCreationSelection<TKey, TValue>()
-        where TKey : global::FrameElementSO
-        where TValue : global::FrameElement {
-        foreach (var elementObject in frameEditorSO.frameElementsObjects.FindAll(el => el is TKey)) {
-            GUILayout.BeginHorizontal();
-            if (GUILayout.Button(elementObject.name, GUILayout.MaxWidth(200))) {
-                elementObject.CreateElementOnScene<TValue>(elementObject, Vector2.zero, out string id);
-                FrameManager.ChangeFrameKey();
-            }
-            GUILayout.EndHorizontal();
-        }
-        GUILayout.FlexibleSpace();
-    }
-    private void FrameKeySelection() {
-        if (GUILayout.Button("Новый кадр")) {
-            FrameManager.frame.AddKey(new FrameKey());
-            foreach (var element in FrameManager.frameElements) {
-                try {
-                    FrameManager.frame.frameKeys[FrameManager.frame.frameKeys.Count - 1].AddFrameKeyValues(element.id, FrameManager.frame.frameKeys[FrameManager.frame.frameKeys.Count - 2].frameKeyValues[element.id]);
-                }
-                catch (System.Exception) {
-                    FrameManager.frame.frameKeys[FrameManager.frame.frameKeys.Count - 1].AddFrameKeyValues(element.id, element.GetFrameKeyValuesType());
-                }
-
-            } 
-        }
-        List<string> keyStrings = new List<string>();
-        foreach (var key in FrameManager.frame.frameKeys)
-            keyStrings.Add(FrameManager.frame.frameKeys.IndexOf(key).ToString());
-
-        FrameManager.frame.selectedKeyIndex = GUILayout.SelectionGrid(FrameManager.frame.selectedKeyIndex, keyStrings.ToArray(), 8);
-
-        foreach (var key in FrameManager.frame.frameKeys) {
-            if (FrameManager.frame.frameKeys.IndexOf(key) == FrameManager.frame.selectedKeyIndex && FrameManager.frame.currentKey != key) {
-                if (key != null) {
-                    FrameManager.frame.currentKey = key;
-                    FrameManager.ChangeFrameKey();
-                }
-            }
-        }
-    }
     private void SetFrame() {
         List<FrameSO> frames = new List<FrameSO>();
         List<string> frameNames = new List<string>();
 
         if (AssetManager.GetFrameAssets().Length == 0) {
-            CreateFrame();
+            FrameEditor_CreationWindow.CreateFrame();
         }
 
         foreach (var frame in AssetManager.GetFrameAssets()) {
@@ -140,47 +103,6 @@ public class FrameEditor_Window : EditorWindow {
                 FrameManager.ChangeFrameKey();
             }
         }
-    }
-    private void FrameSelection() {
-        List<FrameSO> frames = new List<FrameSO>();
-        List<string> frameNames = new List<string>();
-
-        if (AssetManager.GetFrameAssets().Length == 0) {
-            CreateFrame();
-        }
-        if (GUILayout.Button("Создать новый фрейм"))
-            CreateFrame();
-
-        foreach (var frame in AssetManager.GetFrameAssets()) {
-            frames.Add(frame);
-            frameNames.Add(frame.name);
-        }
-        frameEditorSO.selectedFrameIndex = GUILayout.SelectionGrid(frameEditorSO.selectedFrameIndex, frameNames.ToArray(), 8);
-        for (int i = 0; i < frames.Count; i++) {
-            if (i == frameEditorSO.selectedFrameIndex && FrameManager.frame != frames[i]) {
-                FrameManager.frame = frames[i];
-
-                FrameManager.ChangeFrame();
-                FrameManager.ChangeFrameKey();
-            }
-        }
-    }
-    private void CreateFrame() {
-        int count = AssetManager.GetAtPath<FrameSO>("Frames/").Length;
-        string path = "Assets/Frames/Frame " + count + ".asset";
-        FrameSO frame = ScriptableObject.CreateInstance<FrameSO>();
-        frame.selectedKeyIndex = 0;
-        AssetDatabase.CreateAsset(frame, path);
-        frame.id = "Frame_" + count;
-        FrameManager.frame = frame;
-        frameEditorSO.selectedFrameIndex = AssetManager.GetFrameAssets().Length - 1;
-
-
-        FrameManager.ChangeFrame();
-        FrameManager.ChangeFrameKey();
-        AssetDatabase.SaveAssets();
-        AssetDatabase.Refresh();
-
     }
     #endregion
     #region VALUES_SETTINGS

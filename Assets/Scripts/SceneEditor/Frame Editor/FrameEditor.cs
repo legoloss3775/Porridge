@@ -190,6 +190,14 @@ public abstract class FrameEditor : Editor
         where TElement: FrameElement {
         if (GUILayout.Button("X", GUILayout.MaxWidth(25))) {
             FrameManager.frame.RemoveElementFromCurrentKey(element.id);
+
+            if(element is FrameUI_Dialogue) {
+                foreach(var frameElement in FrameManager.frameElements.Where(ch => ch is FrameCharacter).ToList()) {
+                    var dialogueCharacter = (FrameCharacter)frameElement;
+                    if (dialogueCharacter.dialogueID == element.id)
+                        FrameManager.frame.RemoveElementFromCurrentKey(dialogueCharacter.id);
+                }
+            }
         }
     }
 }
@@ -282,6 +290,10 @@ public class FrameEditor_CreationWindow : EditorWindow {
         frameEditorSO.selectedFrameIndex = GUILayout.SelectionGrid(frameEditorSO.selectedFrameIndex, frameNames.ToArray(), 3);
         for (int i = 0; i < frames.Count; i++) {
             if (i == frameEditorSO.selectedFrameIndex && FrameManager.frame != frames[i]) {
+                if (FrameManager.frame.nodeCanvas != null){
+                    NodeEditorFramework.Standard.NodeEditorWindow.editor.canvasCache.SaveNodeCanvas("Assets/Frames/NodeCanvases/Canvas_" + FrameManager.frame.id + ".asset");
+                }
+
                 FrameManager.frame = frames[i];
 
                 FrameManager.ChangeFrame();
@@ -290,8 +302,12 @@ public class FrameEditor_CreationWindow : EditorWindow {
             }
         }
     }
-    private void CreateFrame() {
+    public static void CreateFrame() {
         var frameEditorSO = AssetManager.GetAtPath<FrameEditorSO>("Scripts/SceneEditor/").FirstOrDefault();
+
+        if (FrameManager.frame.nodeCanvas != null) {
+            NodeEditorFramework.Standard.NodeEditorWindow.editor.canvasCache.SaveNodeCanvas("Assets/Frames/NodeCanvases/Canvas_" + FrameManager.frame.id + ".asset");
+        }
 
         int count = AssetManager.GetAtPath<FrameSO>("Frames/").Length;
         string path = "Assets/Frames/Frame " + count + ".asset";
@@ -301,7 +317,8 @@ public class FrameEditor_CreationWindow : EditorWindow {
         frame.id = "Frame_" + count;
         FrameManager.frame = frame;
         frameEditorSO.selectedFrameIndex = AssetManager.GetFrameAssets().Length - 1;
-
+        frame.CreateNodeCanvas();
+        frame.AddKey(new FrameKey());
 
         FrameManager.ChangeFrame();
         FrameManager.ChangeFrameKey();

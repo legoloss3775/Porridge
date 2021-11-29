@@ -2,7 +2,14 @@
 
 [Serializable]
 public class FrameKey {
+
+    public KeyNode node;
+
+    public int id;
     public FrameKeyDictionary frameKeyValues = new FrameKeyDictionary();
+
+    public FrameKey nextKey;
+    public FrameKey previousKey;
 
     [Serializable]
     public abstract class Values {

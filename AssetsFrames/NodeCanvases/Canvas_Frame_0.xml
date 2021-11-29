@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<NodeCanvas type="NodeEditorFramework.Standard.CalculationCanvasType">
+	<EditorStates />
+	<Groups />
+	<Nodes>
+		<Node name="KeyFrame Node" ID="-17100" type="keyNode" pos="0,0">
+			<Port ID="-17102" name="input1Knob" dynamic="False" />
+			<Port ID="-17104" name="output1Knob" dynamic="False" />
+			<Variable name="frameKey" refID="600361472" />
+			<FrameIDKeyPair xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="frameKeyPair">
+				<frameID>Frame_0</frameID>
+				<frameKeyID>0</frameKeyID>
+			</FrameIDKeyPair>
+			<Variable name="inputs" refID="-104773632" />
+			<int name="output">0</int>
+			<Vector2 xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="scroll">
+				<x>0</x>
+				<y>0</y>
+			</Vector2>
+		</Node>
+	</Nodes>
+	<Connections />
+	<Objects>
+		<Object refID="-104773632" type="System.Collections.Generic.List`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+			<ArrayOfInt xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" />
+		</Object>
+	</Objects>
+</NodeCanvas>
