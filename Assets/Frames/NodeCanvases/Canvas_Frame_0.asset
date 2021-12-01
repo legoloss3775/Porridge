@@ -1,153 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-6699256338827705351
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 017e2c7fd038ecb46b317c1e003f31dc, type: 3}
-  m_Name: Output
-  m_EditorClassIdentifier: 
-  body: {fileID: 2359262512596196968}
-  direction: 2
-  maxConnectionCount: 1
-  styleID: Int
-  _connections:
-  - {fileID: 8873983761723880620}
-  side: 2
-  sidePosition: 0
-  sideOffset: 0
---- !u!114 &11400000
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26a89c36c30b2e940804d7efcccaf0bd, type: 3}
-  m_Name: Canvas_Frame_0
-  m_EditorClassIdentifier: 
-  editorStates:
-  - {fileID: 5686578952377049624}
-  saveName: Canvas_Frame_0
-  savePath: Assets\Frames\NodeCanvases\Canvas_Frame_0.asset
-  livesInScene: 0
-  nodes:
-  - {fileID: 2359262512596196968}
-  - {fileID: 9149918196158416166}
-  groups: []
---- !u!114 &2359262512596196968
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0066812b5804b734393478a52ee03726, type: 3}
-  m_Name: KeyFrame Node
-  m_EditorClassIdentifier: 
-  canvas: {fileID: 11400000}
-  position: {x: -472, y: -122}
-  dynamicConnectionPorts: []
-  backgroundColor: {r: 1, g: 1, b: 1, a: 1}
-  frameKey:
-    node: {fileID: 0}
-    id: 0
-    frameKeyValues:
-      keys:
-      - Background_C72BF
-      - Inner_Fire_Line1_CED13
-      - Noran_9FC87
-      - Logan_B0912
-      serializedElementValues:
-      - _position: {x: 0, y: 0}
-        _activeStatus: 1
-      serializedDialogueValues:
-      - _position: {x: 0, y: 540.00006}
-        _activeStatus: 1
-        _text: "\u041F\u0440\u0438\u0432\u0435\u0442"
-        _conversationCharacterID: Noran_9FC87
-        _speakingCharacterIndex: 0
-        _conversationCharacters:
-          keys:
-          - Noran
-          - Logan
-          values:
-          - Noran_9FC87
-          - Logan_B0912
-        _type: 0
-        _state: 0
-        _answerTexts: []
-      serializedFrameCharacterValues:
-      - _position: {x: 0, y: -5.03}
-        _activeStatus: 1
-        _dialogueID: Inner_Fire_Line1_CED13
-        _type: 1
-        _emotionState: 0
-        _selectedPartIndex: 0
-      - _position: {x: 0, y: 0}
-        _activeStatus: 1
-        _dialogueID: Inner_Fire_Line1_CED13
-        _type: 1
-        _emotionState: 0
-        _selectedPartIndex: 1
-  frameKeyPair:
-    frameID: Frame_0
-    frameKeyID: 0
-  input1Knob: {fileID: 2844476911419964963}
-  output1Knob: {fileID: -6699256338827705351}
-  inputs: 
-  output: 0
-  scroll: {x: 0, y: 0}
---- !u!114 &2844476911419964963
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 017e2c7fd038ecb46b317c1e003f31dc, type: 3}
-  m_Name: Input 1
-  m_EditorClassIdentifier: 
-  body: {fileID: 2359262512596196968}
-  direction: 1
-  maxConnectionCount: 0
-  styleID: Int
-  _connections: []
-  side: 4
-  sidePosition: 0
-  sideOffset: 0
---- !u!114 &3035855269532929639
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 017e2c7fd038ecb46b317c1e003f31dc, type: 3}
-  m_Name: Output
-  m_EditorClassIdentifier: 
-  body: {fileID: 9149918196158416166}
-  direction: 2
-  maxConnectionCount: 1
-  styleID: Int
-  _connections: []
-  side: 2
-  sidePosition: 0
-  sideOffset: 0
---- !u!114 &5686578952377049624
+--- !u!114 &-5394153249882035723
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -161,10 +14,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canvas: {fileID: 0}
   parentEditor: {fileID: 0}
-  selectedNode: {fileID: 2359262512596196968}
-  panOffset: {x: 174.8, y: 8.4}
-  zoom: 2
---- !u!114 &8873983761723880620
+  selectedNode: {fileID: 0}
+  panOffset: {x: -262.8, y: -48.6}
+  zoom: 1.8
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26a89c36c30b2e940804d7efcccaf0bd, type: 3}
+  m_Name: Canvas_Frame_0
+  m_EditorClassIdentifier: 
+  editorStates:
+  - {fileID: -5394153249882035723}
+  saveName: Canvas_Frame_0
+  savePath: Assets\Frames\NodeCanvases\Canvas_Frame_0.asset
+  livesInScene: 0
+  nodes:
+  - {fileID: 616219293921528428}
+  groups: []
+--- !u!114 &267344876975385115
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -174,18 +47,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 017e2c7fd038ecb46b317c1e003f31dc, type: 3}
-  m_Name: Input 1
+  m_Name: Output
   m_EditorClassIdentifier: 
-  body: {fileID: 9149918196158416166}
-  direction: 1
-  maxConnectionCount: 0
-  styleID: Int
-  _connections:
-  - {fileID: -6699256338827705351}
-  side: 4
+  body: {fileID: 616219293921528428}
+  direction: 2
+  maxConnectionCount: 1
+  styleID: FrameKey
+  _connections: []
+  side: 2
   sidePosition: 0
   sideOffset: 0
---- !u!114 &9149918196158416166
+--- !u!114 &616219293921528428
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -198,55 +70,407 @@ MonoBehaviour:
   m_Name: KeyFrame Node
   m_EditorClassIdentifier: 
   canvas: {fileID: 11400000}
-  position: {x: 22.400002, y: -120.4}
+  position: {x: -36.800003, y: -17.400002}
   dynamicConnectionPorts: []
   backgroundColor: {r: 1, g: 1, b: 1, a: 1}
   frameKey:
-    node: {fileID: 0}
-    id: 1
+    id: 0
+    transitionType: 0
+    keySequence:
+      nextKey:
+        id: 0
+        transitionType: 0
+        keySequence:
+          nextKey:
+            id: 0
+            transitionType: 0
+            keySequence:
+              nextKey:
+                id: 0
+                transitionType: 0
+                keySequence:
+                  nextKey:
+                    id: 0
+                    transitionType: 0
+                    keySequence:
+                      nextKey:
+                        id: 0
+                        transitionType: 0
+                      previousKey:
+                        id: 0
+                        transitionType: 0
+                    frameKeyValues:
+                      keys: []
+                      serializedElementValues: []
+                      serializedDialogueValues: []
+                      serializedFrameCharacterValues: []
+                  previousKey:
+                    id: 0
+                    transitionType: 0
+                    keySequence:
+                      nextKey:
+                        id: 0
+                        transitionType: 0
+                      previousKey:
+                        id: 0
+                        transitionType: 0
+                    frameKeyValues:
+                      keys: []
+                      serializedElementValues: []
+                      serializedDialogueValues: []
+                      serializedFrameCharacterValues: []
+                frameKeyValues:
+                  keys: []
+                  serializedElementValues: []
+                  serializedDialogueValues: []
+                  serializedFrameCharacterValues: []
+              previousKey:
+                id: 0
+                transitionType: 0
+                keySequence:
+                  nextKey:
+                    id: 0
+                    transitionType: 0
+                    keySequence:
+                      nextKey:
+                        id: 0
+                        transitionType: 0
+                      previousKey:
+                        id: 0
+                        transitionType: 0
+                    frameKeyValues:
+                      keys: []
+                      serializedElementValues: []
+                      serializedDialogueValues: []
+                      serializedFrameCharacterValues: []
+                  previousKey:
+                    id: 0
+                    transitionType: 0
+                    keySequence:
+                      nextKey:
+                        id: 0
+                        transitionType: 0
+                      previousKey:
+                        id: 0
+                        transitionType: 0
+                    frameKeyValues:
+                      keys: []
+                      serializedElementValues: []
+                      serializedDialogueValues: []
+                      serializedFrameCharacterValues: []
+                frameKeyValues:
+                  keys: []
+                  serializedElementValues: []
+                  serializedDialogueValues: []
+                  serializedFrameCharacterValues: []
+            frameKeyValues:
+              keys: []
+              serializedElementValues: []
+              serializedDialogueValues: []
+              serializedFrameCharacterValues: []
+          previousKey:
+            id: 0
+            transitionType: 0
+            keySequence:
+              nextKey:
+                id: 0
+                transitionType: 0
+                keySequence:
+                  nextKey:
+                    id: 0
+                    transitionType: 0
+                    keySequence:
+                      nextKey:
+                        id: 0
+                        transitionType: 0
+                      previousKey:
+                        id: 0
+                        transitionType: 0
+                    frameKeyValues:
+                      keys: []
+                      serializedElementValues: []
+                      serializedDialogueValues: []
+                      serializedFrameCharacterValues: []
+                  previousKey:
+                    id: 0
+                    transitionType: 0
+                    keySequence:
+                      nextKey:
+                        id: 0
+                        transitionType: 0
+                      previousKey:
+                        id: 0
+                        transitionType: 0
+                    frameKeyValues:
+                      keys: []
+                      serializedElementValues: []
+                      serializedDialogueValues: []
+                      serializedFrameCharacterValues: []
+                frameKeyValues:
+                  keys: []
+                  serializedElementValues: []
+                  serializedDialogueValues: []
+                  serializedFrameCharacterValues: []
+              previousKey:
+                id: 0
+                transitionType: 0
+                keySequence:
+                  nextKey:
+                    id: 0
+                    transitionType: 0
+                    keySequence:
+                      nextKey:
+                        id: 0
+                        transitionType: 0
+                      previousKey:
+                        id: 0
+                        transitionType: 0
+                    frameKeyValues:
+                      keys: []
+                      serializedElementValues: []
+                      serializedDialogueValues: []
+                      serializedFrameCharacterValues: []
+                  previousKey:
+                    id: 0
+                    transitionType: 0
+                    keySequence:
+                      nextKey:
+                        id: 0
+                        transitionType: 0
+                      previousKey:
+                        id: 0
+                        transitionType: 0
+                    frameKeyValues:
+                      keys: []
+                      serializedElementValues: []
+                      serializedDialogueValues: []
+                      serializedFrameCharacterValues: []
+                frameKeyValues:
+                  keys: []
+                  serializedElementValues: []
+                  serializedDialogueValues: []
+                  serializedFrameCharacterValues: []
+            frameKeyValues:
+              keys: []
+              serializedElementValues: []
+              serializedDialogueValues: []
+              serializedFrameCharacterValues: []
+        frameKeyValues:
+          keys: []
+          serializedElementValues: []
+          serializedDialogueValues: []
+          serializedFrameCharacterValues: []
+      previousKey:
+        id: 0
+        transitionType: 0
+        keySequence:
+          nextKey:
+            id: 0
+            transitionType: 0
+            keySequence:
+              nextKey:
+                id: 0
+                transitionType: 0
+                keySequence:
+                  nextKey:
+                    id: 0
+                    transitionType: 0
+                    keySequence:
+                      nextKey:
+                        id: 0
+                        transitionType: 0
+                      previousKey:
+                        id: 0
+                        transitionType: 0
+                    frameKeyValues:
+                      keys: []
+                      serializedElementValues: []
+                      serializedDialogueValues: []
+                      serializedFrameCharacterValues: []
+                  previousKey:
+                    id: 0
+                    transitionType: 0
+                    keySequence:
+                      nextKey:
+                        id: 0
+                        transitionType: 0
+                      previousKey:
+                        id: 0
+                        transitionType: 0
+                    frameKeyValues:
+                      keys: []
+                      serializedElementValues: []
+                      serializedDialogueValues: []
+                      serializedFrameCharacterValues: []
+                frameKeyValues:
+                  keys: []
+                  serializedElementValues: []
+                  serializedDialogueValues: []
+                  serializedFrameCharacterValues: []
+              previousKey:
+                id: 0
+                transitionType: 0
+                keySequence:
+                  nextKey:
+                    id: 0
+                    transitionType: 0
+                    keySequence:
+                      nextKey:
+                        id: 0
+                        transitionType: 0
+                      previousKey:
+                        id: 0
+                        transitionType: 0
+                    frameKeyValues:
+                      keys: []
+                      serializedElementValues: []
+                      serializedDialogueValues: []
+                      serializedFrameCharacterValues: []
+                  previousKey:
+                    id: 0
+                    transitionType: 0
+                    keySequence:
+                      nextKey:
+                        id: 0
+                        transitionType: 0
+                      previousKey:
+                        id: 0
+                        transitionType: 0
+                    frameKeyValues:
+                      keys: []
+                      serializedElementValues: []
+                      serializedDialogueValues: []
+                      serializedFrameCharacterValues: []
+                frameKeyValues:
+                  keys: []
+                  serializedElementValues: []
+                  serializedDialogueValues: []
+                  serializedFrameCharacterValues: []
+            frameKeyValues:
+              keys: []
+              serializedElementValues: []
+              serializedDialogueValues: []
+              serializedFrameCharacterValues: []
+          previousKey:
+            id: 0
+            transitionType: 0
+            keySequence:
+              nextKey:
+                id: 0
+                transitionType: 0
+                keySequence:
+                  nextKey:
+                    id: 0
+                    transitionType: 0
+                    keySequence:
+                      nextKey:
+                        id: 0
+                        transitionType: 0
+                      previousKey:
+                        id: 0
+                        transitionType: 0
+                    frameKeyValues:
+                      keys: []
+                      serializedElementValues: []
+                      serializedDialogueValues: []
+                      serializedFrameCharacterValues: []
+                  previousKey:
+                    id: 0
+                    transitionType: 0
+                    keySequence:
+                      nextKey:
+                        id: 0
+                        transitionType: 0
+                      previousKey:
+                        id: 0
+                        transitionType: 0
+                    frameKeyValues:
+                      keys: []
+                      serializedElementValues: []
+                      serializedDialogueValues: []
+                      serializedFrameCharacterValues: []
+                frameKeyValues:
+                  keys: []
+                  serializedElementValues: []
+                  serializedDialogueValues: []
+                  serializedFrameCharacterValues: []
+              previousKey:
+                id: 0
+                transitionType: 0
+                keySequence:
+                  nextKey:
+                    id: 0
+                    transitionType: 0
+                    keySequence:
+                      nextKey:
+                        id: 0
+                        transitionType: 0
+                      previousKey:
+                        id: 0
+                        transitionType: 0
+                    frameKeyValues:
+                      keys: []
+                      serializedElementValues: []
+                      serializedDialogueValues: []
+                      serializedFrameCharacterValues: []
+                  previousKey:
+                    id: 0
+                    transitionType: 0
+                    keySequence:
+                      nextKey:
+                        id: 0
+                        transitionType: 0
+                      previousKey:
+                        id: 0
+                        transitionType: 0
+                    frameKeyValues:
+                      keys: []
+                      serializedElementValues: []
+                      serializedDialogueValues: []
+                      serializedFrameCharacterValues: []
+                frameKeyValues:
+                  keys: []
+                  serializedElementValues: []
+                  serializedDialogueValues: []
+                  serializedFrameCharacterValues: []
+            frameKeyValues:
+              keys: []
+              serializedElementValues: []
+              serializedDialogueValues: []
+              serializedFrameCharacterValues: []
+        frameKeyValues:
+          keys: []
+          serializedElementValues: []
+          serializedDialogueValues: []
+          serializedFrameCharacterValues: []
     frameKeyValues:
-      keys:
-      - Background_C72BF
-      - Inner_Fire_Line1_CED13
-      - Noran_9FC87
-      - Logan_B0912
-      serializedElementValues:
-      - _position: {x: 0, y: 0}
-        _activeStatus: 1
-      serializedDialogueValues:
-      - _position: {x: 0, y: 540.00006}
-        _activeStatus: 1
-        _text: "\u041D\u0435\u0442 \u0431\u043B\u044F\u0442\u044C, \u043F\u043E\u043A\u0430"
-        _conversationCharacterID: Logan_B0912
-        _speakingCharacterIndex: 1
-        _conversationCharacters:
-          keys:
-          - Noran
-          - Logan
-          values:
-          - Noran_9FC87
-          - Logan_B0912
-        _type: 0
-        _state: 0
-        _answerTexts: []
-      serializedFrameCharacterValues:
-      - _position: {x: 0, y: -5.03}
-        _activeStatus: 1
-        _dialogueID: Inner_Fire_Line1_CED13
-        _type: 1
-        _emotionState: 0
-        _selectedPartIndex: 0
-      - _position: {x: 0, y: 0}
-        _activeStatus: 1
-        _dialogueID: Inner_Fire_Line1_CED13
-        _type: 1
-        _emotionState: 0
-        _selectedPartIndex: 0
+      keys: []
+      serializedElementValues: []
+      serializedDialogueValues: []
+      serializedFrameCharacterValues: []
   frameKeyPair:
     frameID: Frame_0
-    frameKeyID: 1
-  input1Knob: {fileID: 8873983761723880620}
-  output1Knob: {fileID: 3035855269532929639}
-  inputs: 
-  output: 0
-  scroll: {x: 0, y: 0}
+    frameKeyID: 0
+  input1Knob: {fileID: 3678016195826730434}
+  output1Knob: {fileID: 267344876975385115}
+  oldPos: 0
+--- !u!114 &3678016195826730434
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 017e2c7fd038ecb46b317c1e003f31dc, type: 3}
+  m_Name: Input 1
+  m_EditorClassIdentifier: 
+  body: {fileID: 616219293921528428}
+  direction: 1
+  maxConnectionCount: 0
+  styleID: FrameKey
+  _connections: []
+  side: 4
+  sidePosition: 0
+  sideOffset: 0

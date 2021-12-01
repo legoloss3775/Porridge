@@ -27,7 +27,7 @@ public class FrameSO : ScriptableObject {
     private void OnEnable() {
 #if UNITY_EDITOR
         FrameEditorSO frameEditorSO = AssetManager.GetAtPath<FrameEditorSO>("Scripts/SceneEditor/").FirstOrDefault();
-        if (!frameEditorSO.frames.Contains(this))
+        if (frameEditorSO != null && !frameEditorSO.frames.Contains(this))
             frameEditorSO.frames.Add(this);
 
 #endif
@@ -45,11 +45,13 @@ public class FrameSO : ScriptableObject {
     public void AddKey(FrameKey key) {
         frameKeys.Add(key);
         key.id = frameKeys.Count - 1;
+        key.keySequence.nextKey = null;
+        key.keySequence.previousKey = null;
 
-        key.node = (KeyNode)NodeEditorFramework.Node.Create(KeyNode.ID, Vector2.zero);
-        key.node.frameKey = key;
-        key.node.frameKeyPair.frameID = id;
-        key.node.frameKeyPair.frameKeyID = key.id;
+        KeyNode node = (KeyNode)NodeEditorFramework.Node.Create(KeyNode.ID, Vector2.zero);
+        node.frameKey = key;
+        node.frameKeyPair.frameID = id;
+        node.frameKeyPair.frameKeyID = key.id;
     }
     public List<string> GetAllIDsOfType<T>()
         where T : FrameElementSO {

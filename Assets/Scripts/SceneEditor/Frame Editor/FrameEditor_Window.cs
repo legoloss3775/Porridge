@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using NodeEditorFramework;
+using NodeEditorFramework.Standard;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
@@ -21,12 +23,15 @@ public class FrameEditor_Window : EditorWindow {
         FrameEditor_Window frameEditor = (FrameEditor_Window)EditorWindow.GetWindow(typeof(FrameEditor_Window), false, "Редактор фрейма");
         frameEditor.Show();
     }
+    private void OnDisable() {
+        SaveFrameEditorNodeCanvas();
+    }
     private void OnGUI() {
         if (!isEditingAllowed()) {
             UpdateFrameEditorSO();
             UpdateFrameManager();
             SetFrame();
-        }//
+        }
         if(manager._assetDatabase == null || FrameManager.assetDatabase == null) {
             manager._assetDatabase = AssetManager.GetAtPath<FrameEditorSO>("Scripts/SceneEditor/").FirstOrDefault();
             FrameManager.assetDatabase = manager._assetDatabase;
@@ -60,6 +65,16 @@ public class FrameEditor_Window : EditorWindow {
 
             if (FrameEditor_CreationWindow.createdElementID != "")
                 FrameEditor_CreationWindow.createdElementID = "";
+        }
+    }
+    public void SaveFrameEditorNodeCanvas() {
+        if (FrameManager.frame != null && FrameManager.frame.nodeCanvas != null) {
+            if (NodeEditorWindow.editor != null && NodeEditorWindow.editor.canvasCache != null) {
+                if (!EditorApplication.isCompiling) {
+                    NodeEditorWindow.editor.canvasCache.SaveNodeCanvas("Assets/Frames/NodeCanvases/Canvas_" + FrameManager.frame.id + ".asset");
+                    NodeEditor.BeginEditingCanvas(FrameManager.frame.nodeCanvas);
+                }
+            }
         }
     }
     public void UpdateDirty() {

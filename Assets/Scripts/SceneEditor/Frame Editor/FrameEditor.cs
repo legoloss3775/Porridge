@@ -287,7 +287,7 @@ public class FrameEditor_CreationWindow : EditorWindow {
             frames.Add(frame);
             frameNames.Add(frame.name);
         }
-        frameEditorSO.selectedFrameIndex = GUILayout.SelectionGrid(frameEditorSO.selectedFrameIndex, frameNames.ToArray(), 3);
+        frameEditorSO.selectedFrameIndex = GUILayout.SelectionGrid(frameEditorSO.selectedFrameIndex, frameNames.ToArray(), 5);
         for (int i = 0; i < frames.Count; i++) {
             if (i == frameEditorSO.selectedFrameIndex && FrameManager.frame != frames[i]) {
                 if (FrameManager.frame.nodeCanvas != null){

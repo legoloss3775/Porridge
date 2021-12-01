@@ -1,16 +1,23 @@
 ﻿using System;
+using System.Diagnostics.Contracts;
 
 [Serializable]
 public class FrameKey {
-
-    public KeyNode node;
-
     public int id;
+    public TransitionType transitionType;
+    public KeySequence keySequence;
     public FrameKeyDictionary frameKeyValues = new FrameKeyDictionary();
-
-    public FrameKey nextKey;
-    public FrameKey previousKey;
-
+    
+    [Serializable]
+    public struct KeySequence {
+        public FrameKey nextKey;
+        public FrameKey previousKey;
+    }
+    public enum TransitionType {
+        Default,
+        DialogueAnswerSelection,
+        DialogueLineContinue,
+    }
     [Serializable]
     public abstract class Values {
         public static T GetObject<T>(params object[] args) {

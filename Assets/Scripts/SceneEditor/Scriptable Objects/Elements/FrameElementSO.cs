@@ -22,7 +22,7 @@ public abstract class FrameElementSO : ScriptableObject, ISerializationCallbackR
         id = name;
 #if UNITY_EDITOR
         FrameEditorSO frameEditorSO = AssetManager.GetAtPath<FrameEditorSO>("Scripts/SceneEditor/").FirstOrDefault();
-        if (!frameEditorSO.frameElementsObjects.Contains(this))
+        if (frameEditorSO != null && !frameEditorSO.frameElementsObjects.Contains(this))
             frameEditorSO.frameElementsObjects.Add(this);
 #endif
 

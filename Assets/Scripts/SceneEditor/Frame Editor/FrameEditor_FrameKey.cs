@@ -15,7 +15,9 @@ public class FrameEditor_FrameKeу : FrameEditor
             chValues.Add((FrameCharacterValues)value.Value);
             chKeys.Add(value.Key);
         }
-        //
+
+        GUILayout.Label(key.keySequence.previousKey?.id.ToString());
+
         switch (dialogueValues?.state) {
             case FrameUI_Dialogue.FrameDialogueState.CharacterLine:
                 GUILayout.TextArea(dialogueValues.text);
@@ -23,7 +25,7 @@ public class FrameEditor_FrameKeу : FrameEditor
             case FrameUI_Dialogue.FrameDialogueState.PlayerAnswer:
                 break;
         }
-
+        
         for(int i = 0; i < chKeys.Count; i++) {
             FrameGUIUtility.GuiLine();
             GUILayout.BeginHorizontal();
@@ -40,6 +42,7 @@ public class FrameEditor_FrameKeу : FrameEditor
             GUILayout.EndHorizontal();
             FrameGUIUtility.GuiLine();
         }
+        GUILayout.Label(key.keySequence.nextKey?.id.ToString());
     }
 }
 #endif

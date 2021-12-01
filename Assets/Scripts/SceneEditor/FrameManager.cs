@@ -5,11 +5,14 @@ using UnityEngine;
 
 [System.Serializable]
 public class FrameManager : MonoBehaviour, ISerializationCallbackReceiver {
+
     public static FrameSO frame;
     public static Canvas UICanvas;
+
     [SerializeField]
     public static List<FrameElement> frameElements = new List<FrameElement>();
     public List<FrameElement> serializedFrameElementsList = new List<FrameElement>();
+
     public static FrameEditorSO assetDatabase;
     public FrameEditorSO _assetDatabase;
 
@@ -127,6 +130,7 @@ public class FrameManager : MonoBehaviour, ISerializationCallbackReceiver {
 
 #if UNITY_EDITOR
         NodeEditorFramework.Standard.NodeEditorWindow.editor.canvasCache.LoadNodeCanvas("Assets/Frames/NodeCanvases/Canvas_" + frame.id + ".asset");
+        EditorUtility.SetDirty(frame.nodeCanvas);
 #endif
     }
     public static void ClearElements() {
