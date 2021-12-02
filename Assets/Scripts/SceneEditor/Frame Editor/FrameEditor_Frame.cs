@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using NodeEditorFramework;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
@@ -7,7 +8,7 @@ using UnityEngine;
 #if UNITY_EDITOR
 public class FrameEditor_Frame : FrameEditor
 {
-    static string frameName;
+    static FrameKey.TransitionType currentKeySequenceType;
     public static void FrameEditing() {
         ShowFrameData();
     }
@@ -65,12 +66,48 @@ public class FrameEditor_Frame : FrameEditor
         GUILayout.Space(5);
         FrameGUIUtility.GuiLine();
 
+        GUILayout.BeginHorizontal();
+        GUILayout.FlexibleSpace();
+        FrameKeyTransitionSelection();
+        GUILayout.FlexibleSpace();
+        GUILayout.EndHorizontal();
+
         GUILayout.EndVertical();
+    }
+    public static void FrameKeyTransitionSelection() {
+        var key = FrameManager.frame.currentKey;
+
+        key.transitionType = (FrameKey.TransitionType)EditorGUILayout.EnumPopup(key.transitionType);
+
+        if(currentKeySequenceType != key.transitionType) {
+            currentKeySequenceType = key.transitionType;
+
+            switch (key.transitionType) {
+                case FrameKey.TransitionType.DialogueAnswerSelection:
+                    foreach (var dialogue in FrameManager.frameElements.Where(ch => ch is FrameUI_Dialogue)) {
+                        ChangeActiveState(dialogue, false);
+                    }
+                    foreach (var dialogueAnswer in FrameManager.frameElements.Where(ch => ch is FrameUI_DialogueAnswer)) {
+                        ChangeActiveState(dialogueAnswer, true);
+                    }
+                    break;
+                case FrameKey.TransitionType.DialogueLineContinue:
+                    foreach (var dialogueAnswer in FrameManager.frameElements.Where(ch => ch is FrameUI_DialogueAnswer)) {
+                        ChangeActiveState(dialogueAnswer, false);
+                    }
+                    foreach (var dialogue in FrameManager.frameElements.Where(ch => ch is FrameUI_Dialogue)) {
+                        ChangeActiveState(dialogue, true);
+                    }
+                    break;
+            }  
+        }
+
     }
     public static void FrameKeySelection() {
         GUILayout.BeginHorizontal();
         if (GUILayout.Button("+", GUILayout.MaxWidth(25))) {
-            FrameManager.frame.AddKey(new FrameKey());
+            var key = new FrameKey();
+            FrameManager.frame.AddKey(key);
             foreach (var element in FrameManager.frameElements) {
                 try {
                     FrameManager.frame.frameKeys[FrameManager.frame.frameKeys.Count - 1].AddFrameKeyValues(element.id, FrameManager.frame.frameKeys[FrameManager.frame.frameKeys.Count - 2].frameKeyValues[element.id]);
@@ -78,7 +115,15 @@ public class FrameEditor_Frame : FrameEditor
                 catch (System.Exception) {
                     FrameManager.frame.frameKeys[FrameManager.frame.frameKeys.Count - 1].AddFrameKeyValues(element.id, element.GetFrameKeyValuesType());
                 }
+                if (element is IInteractable) {
+                    KeyNode node = (KeyNode)NodeEditorFramework.NodeEditor.curNodeCanvas.nodes[key.nodeIndex];
+                    var knob = node.CreateValueConnectionKnob(new ValueConnectionKnobAttribute("Output", Direction.Out, "FrameKey"));
+                    knob.SetPosition(node.oldPos + node.oldPosOffset);
+                    knob.SetValue<FrameKey>(node.frameKey);
+                    node.oldPos = knob.sidePosition;
 
+                    node.dialogueOutputKnobs.Add(element.id, node.outputKnobs.IndexOf(knob));
+                }
             }
         }
         List<string> keyStrings = new List<string>();

@@ -7,42 +7,21 @@ using UnityEngine;
 public class FrameEditor_FrameKeу : FrameEditor
 {
     public static void ShowFrameKeyData(FrameKey key) {
-        var dialogueValues = (FrameUI_DialogueValues)key.frameKeyValues.Where(ch => ch.Value is FrameUI_DialogueValues).FirstOrDefault().Value;
-
-        var chValues = new List<FrameCharacterValues>();
-        var chKeys = new List<string>();
-        foreach (var value in key.frameKeyValues.Where(ch => ch.Value is FrameCharacterValues)) {
-            chValues.Add((FrameCharacterValues)value.Value);
-            chKeys.Add(value.Key);
-        }
+        var dialogueValues = key.frameKeyValues.Values.Where(ch => ch is FrameUI_DialogueValues);
+        var answerValues = key.frameKeyValues.Values.Where(ch => ch is FrameUI_DialogueAnswerValues);
 
         GUILayout.Label(key.keySequence.previousKey?.id.ToString());
 
-        switch (dialogueValues?.state) {
-            case FrameUI_Dialogue.FrameDialogueState.CharacterLine:
-                GUILayout.TextArea(dialogueValues.text);
-                break;
-            case FrameUI_Dialogue.FrameDialogueState.PlayerAnswer:
-                break;
-        }
-        
-        for(int i = 0; i < chKeys.Count; i++) {
-            FrameGUIUtility.GuiLine();
-            GUILayout.BeginHorizontal();
-
-            if (dialogueValues != null && dialogueValues.type == FrameUI_Dialogue.FrameDialogueElementType.Одинᅠперсонаж
-                && chKeys[i] != dialogueValues.conversationCharacterID) {
-                GUILayout.EndHorizontal();
-                continue;
+        if(dialogueValues != null)
+            foreach(var element in dialogueValues) {
+                FrameUI_DialogueValues dialogue = (FrameUI_DialogueValues)element;
+                GUILayout.TextArea(dialogue?.text);
             }
-
-            GUILayout.Label(chKeys[i]);
-            GUILayout.Label(chValues[i].emotionState.ToString());
-            GUILayout.FlexibleSpace();
-            GUILayout.EndHorizontal();
-            FrameGUIUtility.GuiLine();
-        }
-        GUILayout.Label(key.keySequence.nextKey?.id.ToString());
+        if (answerValues != null)
+            foreach (var element in answerValues) {
+                FrameUI_DialogueAnswerValues dialogue = (FrameUI_DialogueAnswerValues)element;
+                GUILayout.TextArea(dialogue?.text);
+            }
     }
 }
 #endif

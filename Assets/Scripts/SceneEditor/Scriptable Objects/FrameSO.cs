@@ -52,6 +52,8 @@ public class FrameSO : ScriptableObject {
         node.frameKey = key;
         node.frameKeyPair.frameID = id;
         node.frameKeyPair.frameKeyID = key.id;
+
+        key.nodeIndex = NodeEditorFramework.NodeEditor.curNodeCanvas.nodes.IndexOf(node);
     }
     public List<string> GetAllIDsOfType<T>()
         where T : FrameElementSO {

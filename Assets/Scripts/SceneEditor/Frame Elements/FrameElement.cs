@@ -49,27 +49,14 @@ public interface IFrameElementSerialization {
 [System.Serializable]
 public abstract class FrameElement : MonoBehaviour, IFrameElementSerialization {
     //VALUES
-    public Vector2 position {
+    public virtual Vector2 position {
         get {
-            if (this is FrameUI_Dialogue)
-                try {
-                    return this.GetComponent<RectTransform>().anchoredPosition;
-                }
-                catch (System.Exception) {
-                    if (this != null)
-                        return this.gameObject.transform.position;
-                    else
-                        return frameElementObject.prefab.transform.position;
-                }
-            else if (this != null)
+            if (this != null)
                 return this.gameObject.transform.position;
             else
                 return frameElementObject.prefab.transform.position;
         }
         set {
-            if (this is FrameUI_Dialogue)
-                GetComponent<RectTransform>().anchoredPosition = value;
-            else
                 this.transform.position = value;
         }
     }
@@ -129,8 +116,7 @@ public abstract class FrameElement : MonoBehaviour, IFrameElementSerialization {
         position = values.position;
     }
 
-    public void SetKeyValuesWhileNotInPlayMode<T>()
-        where T : Values {
+    public void SetKeyValuesWhileNotInPlayMode(){
         if (!Application.isPlaying) {
             if (FrameManager.frame.currentKey.ContainsID(id)) {
                 SetFrameKeyValues();
@@ -152,13 +138,13 @@ public abstract class FrameElement : MonoBehaviour, IFrameElementSerialization {
             Debug.Log(element.id);
             if (keyValues != null) {
                 keyValues.position = element.gameObject.transform.position;
-                element.SetKeyValuesWhileNotInPlayMode<FrameCharacterValues>();
+                element.SetKeyValuesWhileNotInPlayMode();
 
                 if (targets.Length > 1) {
                     foreach (var target in targets) {
                         FrameElement mTarget = (FrameElement)target;
                         element.position = element.gameObject.transform.position;
-                        mTarget.SetKeyValuesWhileNotInPlayMode<FrameCharacterValues>();
+                        mTarget.SetKeyValuesWhileNotInPlayMode();
                     }
                 }
             }

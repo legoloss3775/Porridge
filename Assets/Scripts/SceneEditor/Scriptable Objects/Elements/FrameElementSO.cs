@@ -86,7 +86,8 @@ public abstract class FrameElementSO : ScriptableObject, ISerializationCallbackR
         elementClone = Instantiate(obj.prefab, position, new Quaternion()).AddComponent<T>();
         elementClone.frameElementObject = obj;
         elementClone.id = obj.id + "_" + Guid.NewGuid().ToString().Substring(0, 5).ToUpper();
-        FrameManager.frame.currentKey.AddFrameKeyValues(elementClone.id, elementClone.GetFrameKeyValuesType());
+        foreach(var key in FrameManager.frame.frameKeys)
+            key.AddFrameKeyValues(elementClone.id, elementClone.GetFrameKeyValuesType());
 #if UNITY_EDITOR
         EditorUtility.SetDirty(elementClone);
 #endif

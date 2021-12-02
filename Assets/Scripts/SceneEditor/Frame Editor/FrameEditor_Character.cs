@@ -34,9 +34,12 @@ public class FrameEditor_Character : FrameEditor
         GUILayout.BeginHorizontal();
 
         GUILayout.BeginVertical();
+        GUILayout.BeginHorizontal();
         ElementSelection(character);
-        if(character.type != FrameCharacter.CharacterType.Conversation)
+        ElementActiveStateChange<FrameCharacter>(character);
+        if (character.type != FrameCharacter.CharacterType.Conversation)
             ElementDeletion(character);
+        GUILayout.EndHorizontal();
         GUILayout.EndVertical();
         GUILayout.BeginHorizontal();
         GUILayout.Label(character.id, EditorStyles.largeLabel);
@@ -46,6 +49,12 @@ public class FrameEditor_Character : FrameEditor
         if (character.HasDialogue()) {
             GUILayout.FlexibleSpace();
             GUILayout.Label(character.dialogueID);
+        }
+        if (character.activeStatus == false) {
+            GUILayout.FlexibleSpace();
+            GUILayout.Label("Inactive", EditorStyles.largeLabel);
+            GUILayout.EndHorizontal();
+            return;
         }
 
         GUILayout.EndHorizontal();
@@ -69,6 +78,8 @@ public class FrameEditor_Character : FrameEditor
         }
 
         void CharacterPartPrefabSelection(SerializableDictionary<int, CharacterPart> parts) {
+            if (character.activeStatus == false) return;
+
             var icons = new SerializableDictionary<int, Texture>();
             foreach (var part in parts) {
                 var icon = UnityEditor.AssetPreview.GetAssetPreview(part.Value.statePrefab);

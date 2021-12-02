@@ -103,7 +103,7 @@ public class FrameCharacter : FrameElement, IFrameCharacterSerialzation {
                                                 .First().sprite;
             }
         }
-        SetKeyValuesWhileNotInPlayMode<FrameCharacterValues>();
+        SetKeyValuesWhileNotInPlayMode();
     }
     public SerializableDictionary<string, SpriteRenderer> GetCharacterParts() {
         var sprites = new SerializableDictionary<string, SpriteRenderer>();
@@ -148,13 +148,13 @@ public class FrameCharacter : FrameElement, IFrameCharacterSerialzation {
             Debug.Log(character.id);
             if (keyValues != null) {
                 keyValues.position = character.gameObject.transform.position;
-                character.SetKeyValuesWhileNotInPlayMode<FrameCharacterValues>();
+                character.SetKeyValuesWhileNotInPlayMode();
 
                 if (targets.Length > 1) {
                     foreach (var target in targets) {
                         FrameElement mTarget = (FrameElement)target;
                         character.position = character.gameObject.transform.position;
-                        mTarget.SetKeyValuesWhileNotInPlayMode<FrameCharacterValues>();
+                        mTarget.SetKeyValuesWhileNotInPlayMode();
                     }
                 }
             }

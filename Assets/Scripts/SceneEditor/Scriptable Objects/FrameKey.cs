@@ -4,6 +4,10 @@ using System.Diagnostics.Contracts;
 [Serializable]
 public class FrameKey {
     public int id;
+    public int nodeIndex;
+
+    public KeyNode node;
+
     public TransitionType transitionType;
     public KeySequence keySequence;
     public FrameKeyDictionary frameKeyValues = new FrameKeyDictionary();
@@ -14,9 +18,8 @@ public class FrameKey {
         public FrameKey previousKey;
     }
     public enum TransitionType {
-        Default,
-        DialogueAnswerSelection,
         DialogueLineContinue,
+        DialogueAnswerSelection,
     }
     [Serializable]
     public abstract class Values {

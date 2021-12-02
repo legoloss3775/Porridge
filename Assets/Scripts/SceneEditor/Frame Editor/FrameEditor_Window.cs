@@ -8,6 +8,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 #if UNITY_EDITOR
+
 public class FrameEditor_Window : EditorWindow {
 
     public FrameEditorSO frameEditorSO;
@@ -18,12 +19,13 @@ public class FrameEditor_Window : EditorWindow {
     public static readonly Vector2 DEFAULT_ELEMENT_POSITION = Vector2.zero;
     public static readonly bool DEFAULT_ELEMENT_ACTIVESTATE = true;
 
-    [MenuItem("Window/Редактор фрейма")]
+    [MenuItem("Window/Frame Editor")]
     static void Init() {
-        FrameEditor_Window frameEditor = (FrameEditor_Window)EditorWindow.GetWindow(typeof(FrameEditor_Window), false, "Редактор фрейма");
+        FrameEditor_Window frameEditor = (FrameEditor_Window)EditorWindow.GetWindow(typeof(FrameEditor_Window), false, "Frame Editor");
         frameEditor.Show();
     }
     private void OnDisable() {
+        NodeEditorFramework.Standard.NodeEditorWindow.editor.canvasCache.AssureCanvas();
         SaveFrameEditorNodeCanvas();
     }
     private void OnGUI() {
@@ -67,6 +69,7 @@ public class FrameEditor_Window : EditorWindow {
                 FrameEditor_CreationWindow.createdElementID = "";
         }
     }
+
     public void SaveFrameEditorNodeCanvas() {
         if (FrameManager.frame != null && FrameManager.frame.nodeCanvas != null) {
             if (NodeEditorWindow.editor != null && NodeEditorWindow.editor.canvasCache != null) {

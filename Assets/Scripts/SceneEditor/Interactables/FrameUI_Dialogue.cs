@@ -8,7 +8,9 @@ using static FrameKey;
 
 #region SERIALIZATION
 [Serializable]
-public class FrameUI_DialogueValues : Values, IFrameUIDialogueSerialization {
+public class FrameUI_DialogueValues : Values, IFrameUI_DialogueSerialization {
+    public int nextKeyID { get; set; }
+    public int previousKeyID { get; set; }
     public Vector2 position { get; set; }
     public bool activeStatus { get; set; }
     public string text { get; set; }
@@ -16,9 +18,9 @@ public class FrameUI_DialogueValues : Values, IFrameUIDialogueSerialization {
     public int speakingCharacterIndex { get; set; }
     public SerializableDictionary<string, string> conversationCharacters { get; set; }
     public FrameUI_Dialogue.FrameDialogueElementType type { get; set; }
-    public FrameUI_Dialogue.FrameDialogueState state { get; set; }
-    public string[] answerTexts { get; set; }
     public FrameUI_DialogueValues(FrameUI_Dialogue dialogue) {
+        nextKeyID = dialogue.nextKeyID;
+        previousKeyID = dialogue.previousKeyID;
         position = dialogue.position;
         activeStatus = dialogue.activeStatus;
         text = dialogue.text;
@@ -27,12 +29,14 @@ public class FrameUI_DialogueValues : Values, IFrameUIDialogueSerialization {
         speakingCharacterIndex = dialogue.speakingCharacterIndex;
         conversationCharacters = dialogue.conversationCharacters;
         type = dialogue.type;
-        state = dialogue.state;
-        answerTexts = dialogue.answerTexts;
     }
     public FrameUI_DialogueValues() { }
     [Serializable]
-    public struct SerializedDialogueValues : IFrameUIDialogueSerialization {
+    public struct SerializedDialogueValues : IFrameUI_DialogueSerialization {
+        [SerializeField]
+        private int _nextKeyID;
+        [SerializeField]
+        private int _previousKeyID;
         [SerializeField]
         private Vector2 _position;
         [SerializeField]
@@ -47,11 +51,9 @@ public class FrameUI_DialogueValues : Values, IFrameUIDialogueSerialization {
         private SerializableDictionary<string, string> _conversationCharacters;
         [SerializeField]
         private FrameUI_Dialogue.FrameDialogueElementType _type;
-        [SerializeField]
-        private FrameUI_Dialogue.FrameDialogueState _state;
-        [SerializeField]
-        private string[] _answerTexts;
 
+        public int nextKeyID { get => _nextKeyID; set => _nextKeyID = value; }
+        public int previousKeyID { get => _previousKeyID; set => _previousKeyID = value; }
         public Vector2 position { get => _position; set => _position = value; }
         public bool activeStatus { get => _activeStatus; set => _activeStatus = value; }
         public string text { get => _text; set => _text = value; }
@@ -59,13 +61,13 @@ public class FrameUI_DialogueValues : Values, IFrameUIDialogueSerialization {
         public int speakingCharacterIndex { get => _speakingCharacterIndex; set => _speakingCharacterIndex = value; }
         public SerializableDictionary<string, string> conversationCharacters { get => _conversationCharacters; set => _conversationCharacters = value; }
         public FrameUI_Dialogue.FrameDialogueElementType type { get => _type; set => _type = value; }
-        public FrameUI_Dialogue.FrameDialogueState state { get => _state; set => _state = value; }
-        public string[] answerTexts { get => _answerTexts; set => _answerTexts = value; }
     }
     [SerializeField]
     public SerializedDialogueValues serializedDialogueValues;
 
     public void SetSerializedDialogueValues() {
+        serializedDialogueValues.nextKeyID = nextKeyID;
+        serializedDialogueValues.previousKeyID = previousKeyID;
         serializedDialogueValues.text = text;
         serializedDialogueValues.position = position;
         serializedDialogueValues.activeStatus = activeStatus;
@@ -73,12 +75,12 @@ public class FrameUI_DialogueValues : Values, IFrameUIDialogueSerialization {
         serializedDialogueValues.conversationCharacterID = conversationCharacterID;
         serializedDialogueValues.conversationCharacters = conversationCharacters;
         serializedDialogueValues.type = type;
-        serializedDialogueValues.state = state;
-        serializedDialogueValues.answerTexts = answerTexts;
     }
     public static void LoadSerialzedDialogueValues(List<SerializedDialogueValues> serializedElementValues, List<Values> values) {
         foreach (var svalue in serializedElementValues) {
             values.Add(new FrameUI_DialogueValues {
+                nextKeyID = svalue.nextKeyID,
+                previousKeyID = svalue.previousKeyID,
                 position = svalue.position,
                 activeStatus = svalue.activeStatus,
                 text = svalue.text,
@@ -87,14 +89,12 @@ public class FrameUI_DialogueValues : Values, IFrameUIDialogueSerialization {
                 conversationCharacterID = svalue.conversationCharacterID,
                 conversationCharacters = svalue.conversationCharacters,
                 type = svalue.type,
-                state = svalue.state,
-                answerTexts = svalue.answerTexts,
             });
         }
     }
 }
 #endregion
-public interface IFrameUIDialogueSerialization {
+public interface IFrameUI_DialogueSerialization {
     Vector2 position { get; set; }
     bool activeStatus { get; set; }
     string text { get; set; }
@@ -102,10 +102,26 @@ public interface IFrameUIDialogueSerialization {
     int speakingCharacterIndex { get; set; }
     SerializableDictionary<string, string> conversationCharacters { get; set; }
     FrameUI_Dialogue.FrameDialogueElementType type { get; set; }
-    FrameUI_Dialogue.FrameDialogueState state { get; set; }
-    string[] answerTexts { get; set; }
 }
-public class FrameUI_Dialogue : FrameUI_Window, IFrameUIDialogueSerialization {
+public class FrameUI_Dialogue : FrameUI_Window, IFrameUI_DialogueSerialization, IInteractable {
+    public override Vector2 position {
+        get {
+            try {
+                return this.GetComponent<RectTransform>().anchoredPosition;
+            }
+            catch (System.Exception) {
+                if (this != null)
+                    return this.gameObject.transform.position;
+                else
+                    return frameElementObject.prefab.transform.position;
+            }
+        }
+        set {
+            GetComponent<RectTransform>().anchoredPosition = value;
+        }
+    }
+    public int nextKeyID { get; set; }
+    public int previousKeyID { get; set; }
     public string text {
         get {
             return GetTextComponent().text;
@@ -129,8 +145,6 @@ public class FrameUI_Dialogue : FrameUI_Window, IFrameUIDialogueSerialization {
     public int speakingCharacterIndex { get; set; }
     public SerializableDictionary<string, string> conversationCharacters { get; set; }
     public FrameDialogueElementType type { get; set; }
-    public FrameDialogueState state { get; set; }
-    public string[] answerTexts { get; set; }
     public FrameCharacter currentConversationCharacter { get; set; }
     public FrameCharacterSO currentConversationCharacterSO { get; set; }
 
@@ -143,22 +157,11 @@ public class FrameUI_Dialogue : FrameUI_Window, IFrameUIDialogueSerialization {
         PlayerAnswer,
     }
 
-
     public bool HasCharacter(string characterID) {
         return characterID == conversationCharacterID ? true : false;
     }
     public void DialogueStateChange(FrameDialogueState state) {
 
-    }
-    public List<TextMeshProUGUI> GetAnswerTexts() {
-        var frameDialogueObj = (FrameUI_DialogueSO)frameElementObject;
-        var textContainers = new List<TextMeshProUGUI>();
-
-        for(int i = 0; i < frameDialogueObj.dialogueAnswerPrefab.transform.childCount; i++) {
-            if (frameDialogueObj.dialogueAnswerPrefab.transform.GetChild(i).GetComponent<TMPro.TextMeshProUGUI>() != null)
-                textContainers.Add(frameDialogueObj.dialogueAnswerPrefab.transform.GetChild(i).GetComponent<TMPro.TextMeshProUGUI>());
-        }
-        return textContainers;
     }
     public void DialogueTypeChange(FrameDialogueElementType type) {
         var keyValues = GetFrameKeyValues<FrameUI_DialogueValues>();
@@ -198,8 +201,8 @@ public class FrameUI_Dialogue : FrameUI_Window, IFrameUIDialogueSerialization {
 
             character.UpdateValuesFromKey(characterKeyValues);
 
-            character.SetKeyValuesWhileNotInPlayMode<FrameCharacterValues>();
-            this.SetKeyValuesWhileNotInPlayMode<FrameUI_DialogueValues>();
+            character.SetKeyValuesWhileNotInPlayMode();
+            this.SetKeyValuesWhileNotInPlayMode();
         }
     }
     public void SetConversationCharacter() {
@@ -218,10 +221,13 @@ public class FrameUI_Dialogue : FrameUI_Window, IFrameUIDialogueSerialization {
         this.conversationCharacterID = ID;
         this.currentConversationCharacter = character;
 
-
-        character.SetKeyValuesWhileNotInPlayMode<FrameCharacterValues>();
-        this.SetKeyValuesWhileNotInPlayMode<FrameUI_DialogueValues>();
+        character.SetKeyValuesWhileNotInPlayMode();
+        this.SetKeyValuesWhileNotInPlayMode();
         keyValues.conversationCharacters.Add(this.currentConversationCharacterSO.id, currentConversationCharacter.id);
+        foreach (var key in FrameManager.frame.frameKeys) {
+            key.UpdateFrameKeyValues(character.id, character.GetFrameKeyValues<FrameCharacterValues>());
+            key.UpdateFrameKeyValues(this.id, this.GetFrameKeyValues<FrameUI_DialogueValues>());
+        }
     }
     public void SetConversationCharacterSO() {
         var keyValues = GetFrameKeyValues<FrameUI_DialogueValues>();
@@ -253,6 +259,9 @@ public class FrameUI_Dialogue : FrameUI_Window, IFrameUIDialogueSerialization {
     }
     public override void UpdateValuesFromKey(Values frameKeyValues) {
         var keyValues = (FrameUI_DialogueValues)frameKeyValues;
+
+        nextKeyID = keyValues.nextKeyID;
+        previousKeyID = keyValues.previousKeyID;
         activeStatus = keyValues.activeStatus;
         position = keyValues.position;
         text = keyValues.text;
@@ -261,8 +270,6 @@ public class FrameUI_Dialogue : FrameUI_Window, IFrameUIDialogueSerialization {
         speakingCharacterIndex = keyValues.speakingCharacterIndex;
         conversationCharacters = keyValues.conversationCharacters;
         type = keyValues.type;
-        state = keyValues.state;
-        answerTexts = keyValues.answerTexts;
 
         characterNameField = characterNameField;
     }
@@ -296,13 +303,13 @@ public class FrameUI_Dialogue : FrameUI_Window, IFrameUIDialogueSerialization {
 
             dialogue.position = dialogue.GetComponent<RectTransform>().anchoredPosition;
 
-            dialogue.SetKeyValuesWhileNotInPlayMode<FrameUI_DialogueValues>();
+            dialogue.SetKeyValuesWhileNotInPlayMode();
             Debug.Log(dialogue.id);
             if (targets.Length > 1) {
                 foreach (var target in targets) {
                     FrameElement mTarget = (FrameElement)target;
                     dialogue.position = mTarget.GetComponent<RectTransform>().anchoredPosition;
-                    mTarget.SetKeyValuesWhileNotInPlayMode<FrameUI_DialogueValues>();
+                    mTarget.SetKeyValuesWhileNotInPlayMode();
                 }
             }
 

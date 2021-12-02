@@ -4,10 +4,49 @@ using UnityEngine;
 using UnityEditor;
 using System;
 using System.Linq;
+using NodeEditorFramework;
 
-#if UNITY_EDITOR 
+#if UNITY_EDITOR
 public static class FrameGUIUtility {
     internal static int hotControl;
+    public static GUIStyle SetLabelIconColor(Color imageColor) {
+        GUIStyle labelStyles = new GUIStyle(EditorStyles.label);
+        GUI.contentColor = Color.white;
+        GUI.color = Color.white;
+
+        //Value Color
+        labelStyles.normal.background = MakeTex(2, 2, imageColor);
+
+        //Label Color
+        EditorStyles.label.normal.textColor = imageColor;
+
+        return labelStyles;
+    }
+    private static Texture2D MakeTex(int width, int height, Color col) {
+        Color[] pix = new Color[width * height];
+        for (int i = 0; i < pix.Length; ++i) {
+            pix[i] = col;
+        }
+        Texture2D result = new Texture2D(width, height);
+        result.SetPixels(pix);
+        result.Apply();
+        return result;
+    }
+    public static GUIStyle GetTextStyle(Color textColor, int fontSize) {
+        GUIStyle TextFieldStyles = new GUIStyle(EditorStyles.textArea);
+        GUI.contentColor = Color.white;
+        GUI.color = Color.white;
+
+        //Value Color
+        TextFieldStyles.normal.textColor = textColor;
+
+        //Label Color
+        EditorStyles.label.normal.textColor = textColor;
+
+        TextFieldStyles.fontSize = fontSize;
+
+        return TextFieldStyles;
+    }
 
     public static void GuiLine(int i_height = 1) {
 
@@ -198,7 +237,68 @@ public abstract class FrameEditor : Editor
                         FrameManager.frame.RemoveElementFromCurrentKey(dialogueCharacter.id);
                 }
             }
+            if(element is IInteractable) {
+                foreach (KeyNode node in NodeEditor.curNodeCanvas.nodes) {
+                    if(node.dialogueOutputKnobs.ContainsKey(element.id))
+                        foreach(var knob in node.dialogueOutputKnobs.Where(ch => ch.Key == element.id).ToList()) {
+                            node.dialogueOutputKnobs.Remove(element.id);
+                            node.oldPos -= node.oldPosOffset;
+                            if(node.outputKnobs.Count > knob.Value) {
+                                node.DeleteConnectionPort(node.outputKnobs[knob.Value]);
+                                NodeEditorFramework.ConnectionPortManager.UpdatePortLists(node);
+                            }
+                        }
+                }
+            }
         }
+    }
+    public static void ElementActiveStateChange<TElement>(TElement element)
+        where TElement: FrameElement{
+        if(GUILayout.Button("✔", GUILayout.MaxWidth(25))) {
+            if (element.activeStatus)
+                ChangeActiveState(element, false);
+            else
+                ChangeActiveState(element, true);
+        }
+    }
+    public static void ChangeActiveState<TElement>(TElement element, bool state)
+        where TElement: FrameElement{
+        if (state == false) {
+            element.activeStatus = false;
+            if (element is IInteractable) {
+                foreach (KeyNode node in NodeEditor.curNodeCanvas.nodes) {
+                    if (node.frameKey != FrameManager.frame.currentKey) continue;
+
+                    if (node.dialogueOutputKnobs.ContainsKey(element.id))
+                        foreach (var knob in node.dialogueOutputKnobs.Where(ch => ch.Key == element.id).ToList()) {
+                            node.dialogueOutputKnobs.Remove(element.id);
+                            node.oldPos -= node.oldPosOffset;
+                            if (node.outputKnobs.Count > knob.Value)
+                                node.DeleteConnectionPort(node.outputKnobs[knob.Value]);
+                            NodeEditorFramework.ConnectionPortManager.UpdatePortLists(node);
+                        }
+                }
+            }
+        }
+        else {
+            if (element is IInteractable) {
+                foreach (KeyNode node in NodeEditor.curNodeCanvas.nodes) {
+                    if (node.frameKey != FrameManager.frame.currentKey) continue;
+                    if (node.dialogueOutputKnobs.ContainsKey(element.id)) continue;
+
+                        var knob = node.CreateValueConnectionKnob(new ValueConnectionKnobAttribute("Output", Direction.Out, "FrameKey"));
+                    knob.SetPosition(node.oldPos + node.oldPosOffset);
+                    knob.SetValue<FrameKey>(node.frameKey);
+                    node.oldPos = knob.sidePosition;
+
+                    if(element is FrameUI_Dialogue || element is FrameUI_DialogueAnswer)
+                        node.dialogueOutputKnobs.Add(element.id, node.outputKnobs.IndexOf(knob));
+                }
+            }
+            element.activeStatus = true;
+        }
+
+        element.SetKeyValuesWhileNotInPlayMode();
     }
 }
 public class FrameEditor_CreationWindow : EditorWindow {
@@ -206,6 +306,7 @@ public class FrameEditor_CreationWindow : EditorWindow {
         Frame,
         FrameCharacter,
         FrameDialogue,
+        FrameDialogueAnswer,
         FrameBackground,
     }
     public CreationType type;
@@ -222,6 +323,9 @@ public class FrameEditor_CreationWindow : EditorWindow {
                 break;
             case CreationType.FrameDialogue:
                 FrameElementCreationSelection<FrameUI_DialogueSO, FrameUI_Dialogue>();
+                break;
+            case CreationType.FrameDialogueAnswer:
+                FrameElementCreationSelection<FrameUI_DialogueAnswerSO, FrameUI_DialogueAnswer>();
                 break;
             case CreationType.FrameBackground:
                 FrameElementCreationSelection<FrameBackgroundSO, FrameBackground>();
@@ -257,6 +361,21 @@ public class FrameEditor_CreationWindow : EditorWindow {
             if (GUILayout.Button(icon, GUILayout.MaxWidth(200))) {
                 elementObject.CreateElementOnScene<TValue>(elementObject, Vector2.zero, out string id);
                 createdElementID = id;
+
+                var createdElement = FrameManager.GetFrameElementOnSceneByID<TValue>(createdElementID);
+
+                if(createdElement is IInteractable) {
+                    foreach(KeyNode node in NodeEditor.curNodeCanvas.nodes) {
+                        var knob = node.CreateValueConnectionKnob(new ValueConnectionKnobAttribute("Output", Direction.Out, "FrameKey"));
+                        knob.SetPosition(node.oldPos + node.oldPosOffset);
+                        knob.SetValue<FrameKey>(node.frameKey);
+                        node.oldPos = knob.sidePosition;
+
+                        node.dialogueOutputKnobs.Add(createdElementID, node.outputKnobs.IndexOf(knob));
+                        NodeEditorFramework.ConnectionPortManager.UpdatePortLists(node);
+                    }
+                }
+
                 FrameManager.ChangeFrameKey();
                 Debug.Log(id);
                 Close();

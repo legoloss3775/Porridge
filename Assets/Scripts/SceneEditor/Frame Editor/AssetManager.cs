@@ -11,6 +11,7 @@ public class AssetManager {
         UpdateFrameAssetsOfType<FrameCharacterSO>("Characters");
         UpdateFrameAssetsOfType<FrameBackgroundSO>("Backgrounds");
         UpdateFrameAssetsOfType<FrameUI_DialogueSO>("UI/Dialogue Windows");
+        UpdateFrameAssetsOfType<FrameUI_DialogueAnswerSO>("UI/Dialogue Windows");
         UpdateFrames();
     }
     public static void UpdateFrames() {
@@ -106,13 +107,18 @@ public class FrameKeyDictionary : Dictionary<string, FrameKey.Values>, ISerializ
     private List<FrameUI_DialogueValues.SerializedDialogueValues> serializedDialogueValues =
         new List<FrameUI_DialogueValues.SerializedDialogueValues>();
     [SerializeField]
+    private List<FrameUI_DialogueAnswerValues.SerializedDialogueAnswerValues> serializedDialogueAnswerValues =
+        new List<FrameUI_DialogueAnswerValues.SerializedDialogueAnswerValues>();
+    [SerializeField]
     private List<FrameCharacterValues.SerializedFrameCharacterValues> serializedFrameCharacterValues =
         new List<FrameCharacterValues.SerializedFrameCharacterValues>();
+
     public virtual void OnBeforeSerialize() {
         keys.Clear();
         values.Clear();
         serializedElementValues.Clear();
         serializedDialogueValues.Clear();
+        serializedDialogueAnswerValues.Clear();
         serializedFrameCharacterValues.Clear();
 
         foreach (var pair in this.Where(ch => ch.Value is FrameElementValues)) {
@@ -126,6 +132,12 @@ public class FrameKeyDictionary : Dictionary<string, FrameKey.Values>, ISerializ
             _sdv.SetSerializedDialogueValues();
             keys.Add(pair.Key);
             serializedDialogueValues.Add(_sdv.serializedDialogueValues);
+        }
+        foreach (var pair in this.Where(ch => ch.Value is FrameUI_DialogueAnswerValues)) {
+            FrameUI_DialogueAnswerValues _sdav = (FrameUI_DialogueAnswerValues)pair.Value;
+            _sdav.SetSerializedDialogueValues();
+            keys.Add(pair.Key);
+            serializedDialogueAnswerValues.Add(_sdav.serializedDialogueValues);
         }
         foreach (var pair in this.Where(ch => ch.Value is FrameCharacterValues)) {
             FrameCharacterValues _schv = (FrameCharacterValues)pair.Value;
@@ -141,6 +153,8 @@ public class FrameKeyDictionary : Dictionary<string, FrameKey.Values>, ISerializ
             .LoadSerialzedFrameKeyElementValues(serializedElementValues, values);
         FrameUI_DialogueValues
             .LoadSerialzedDialogueValues(serializedDialogueValues, values);
+        FrameUI_DialogueAnswerValues
+            .LoadSerialzedDialogueValues(serializedDialogueAnswerValues, values);
         FrameCharacterValues
             .LoadSerialzedFrameKeyCharacterElementValues(serializedFrameCharacterValues, values);
 

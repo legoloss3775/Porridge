@@ -5,13 +5,6 @@ using static FrameSO;
 
 [CreateAssetMenu(fileName = "Dialogue Window", menuName = "Редактор Сцен/UI/Диалоговое окно", order = 0)]
 public class FrameUI_DialogueSO : FrameUI_WindowSO {
-
-    public enum DialogueWindowType {
-        CharacterLine,
-        PlayerAnswer
-    }
-    public GameObject dialogueAnswerPrefab;
-    public DialogueWindowType type;
     public string text { get { return GetText(); } set { SetText(value); } }
 
     public override void OnAfterDeserialize() {
@@ -28,7 +21,7 @@ public class FrameUI_DialogueSO : FrameUI_WindowSO {
         try {
             prefab.GetComponent<TMPro.TMP_Text>().text = value;
         }
-        catch (System.NullReferenceException e) {
+        catch (System.NullReferenceException) {
             Debug.LogError("Отсутствует компонент текста в префабе " + prefab.name);
         }
     }
@@ -36,7 +29,7 @@ public class FrameUI_DialogueSO : FrameUI_WindowSO {
         try {
             return prefab.GetComponent<TMPro.TMP_Text>().text;
         }
-        catch (System.NullReferenceException e) {
+        catch (System.NullReferenceException) {
             Debug.LogError("Отсутствует компонент текста в префабе " + prefab.name);
             return "Отсутсвует текст";
         }
@@ -58,7 +51,8 @@ public class FrameUI_DialogueSO : FrameUI_WindowSO {
         elementClone = Instantiate(obj.prefab, position, new Quaternion(), FrameManager.UICanvas.transform).AddComponent<T>();
         elementClone.frameElementObject = obj;
         elementClone.id = obj.id + "_" + Guid.NewGuid().ToString().Substring(0, 5).ToUpper();
-        FrameManager.frame.currentKey.AddFrameKeyValues(elementClone.id, elementClone.GetFrameKeyValuesType());
+        foreach (var key in FrameManager.frame.frameKeys)
+            key.AddFrameKeyValues(elementClone.id, elementClone.GetFrameKeyValuesType());
 
 #if UNITY_EDITOR
         EditorUtility.SetDirty(elementClone);
@@ -67,8 +61,10 @@ public class FrameUI_DialogueSO : FrameUI_WindowSO {
 
         var createdDialogue = FrameManager.GetFrameElementOnSceneByID<FrameUI_Dialogue>(elementClone.id);
         createdDialogue.conversationCharacters = new SerializableDictionary<string, string>();
-        var values = (FrameUI_DialogueValues)FrameManager.frame.currentKey.frameKeyValues[createdDialogue.id];
-        values.conversationCharacters = new SerializableDictionary<string, string>();
+        foreach(var key in FrameManager.frame.frameKeys) {
+            var values = (FrameUI_DialogueValues)key.frameKeyValues[createdDialogue.id];
+            values.conversationCharacters = new SerializableDictionary<string, string>();
+        }
     }
 
 }
