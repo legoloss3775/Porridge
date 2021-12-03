@@ -62,10 +62,6 @@ public class FrameCharacterSO : FrameElementSO {
                         FrameManager.AddElement(elementClone);
 
                         SetCharacterInDialogue(dialogue);
-                        foreach (var key in FrameManager.frame.frameKeys)
-                            key.UpdateFrameKeyValues(elementClone.id, elementClone.GetFrameKeyValues<FrameCharacterValues>());
-                        foreach (var key in FrameManager.frame.frameKeys)
-                            key.UpdateFrameKeyValues(dialogue.id, dialogue.GetFrameKeyValues<FrameUI_DialogueValues>());
                     }
                 break;
             }

@@ -11,8 +11,8 @@ using static FrameKey;
 public class FrameUI_DialogueValues : Values, IFrameUI_DialogueSerialization {
     public int nextKeyID { get; set; }
     public int previousKeyID { get; set; }
-    public Vector2 position { get; set; }
-    public bool activeStatus { get; set; }
+    public override Vector2 position { get; set; }
+    public override bool activeStatus { get; set; }
     public string text { get; set; }
     public string conversationCharacterID { get; set; }
     public int speakingCharacterIndex { get; set; }
@@ -226,7 +226,7 @@ public class FrameUI_Dialogue : FrameUI_Window, IFrameUI_DialogueSerialization, 
         keyValues.conversationCharacters.Add(this.currentConversationCharacterSO.id, currentConversationCharacter.id);
         foreach (var key in FrameManager.frame.frameKeys) {
             key.UpdateFrameKeyValues(character.id, character.GetFrameKeyValues<FrameCharacterValues>());
-            key.UpdateFrameKeyValues(this.id, this.GetFrameKeyValues<FrameUI_DialogueValues>());
+            //key.UpdateFrameKeyValues(this.id, this.GetFrameKeyValues<FrameUI_DialogueValues>());
         }
     }
     public void SetConversationCharacterSO() {

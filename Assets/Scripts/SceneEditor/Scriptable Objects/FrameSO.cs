@@ -45,8 +45,8 @@ public class FrameSO : ScriptableObject {
     public void AddKey(FrameKey key) {
         frameKeys.Add(key);
         key.id = frameKeys.Count - 1;
-        key.keySequence.nextKey = null;
-        key.keySequence.previousKey = null;
+        //key.keySequence.nextKey = null;
+        //key.keySequence.previousKey = null;
 
         KeyNode node = (KeyNode)NodeEditorFramework.Node.Create(KeyNode.ID, Vector2.zero);
         node.frameKey = key;

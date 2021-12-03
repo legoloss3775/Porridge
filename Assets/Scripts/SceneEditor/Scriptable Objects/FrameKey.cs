@@ -1,15 +1,17 @@
 ﻿using System;
 using System.Diagnostics.Contracts;
+using UnityEngine;
 
 [Serializable]
 public class FrameKey {
     public int id;
     public int nodeIndex;
 
-    public KeyNode node;
+    //public KeyNode node;
+    public SerializableDictionary<string, int> dialogueOutputKnobs = new SerializableDictionary<string, int>();
 
     public TransitionType transitionType;
-    public KeySequence keySequence;
+    //public KeySequence keySequence;
     public FrameKeyDictionary frameKeyValues = new FrameKeyDictionary();
     
     [Serializable]
@@ -23,6 +25,8 @@ public class FrameKey {
     }
     [Serializable]
     public abstract class Values {
+        public virtual bool activeStatus { get; set; }
+        public virtual Vector2 position { get; set; }
         public static T GetObject<T>(params object[] args) {
             return (T)Activator.CreateInstance(typeof(T), args);
         }

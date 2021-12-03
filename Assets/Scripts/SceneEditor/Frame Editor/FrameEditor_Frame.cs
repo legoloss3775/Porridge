@@ -8,12 +8,10 @@ using UnityEngine;
 #if UNITY_EDITOR
 public class FrameEditor_Frame : FrameEditor
 {
-    static FrameKey.TransitionType currentKeySequenceType;
     public static void FrameEditing() {
         ShowFrameData();
     }
     public static void ShowFrameData() {
-        var currentFrame = FrameManager.frame;
         var frameEditorSO = AssetManager.GetAtPath<FrameEditorSO>("Scripts/SceneEditor/").FirstOrDefault();
 
         GUILayout.BeginVertical();
@@ -66,40 +64,41 @@ public class FrameEditor_Frame : FrameEditor
         GUILayout.Space(5);
         FrameGUIUtility.GuiLine();
 
-        GUILayout.BeginHorizontal();
-        GUILayout.FlexibleSpace();
         FrameKeyTransitionSelection();
-        GUILayout.FlexibleSpace();
-        GUILayout.EndHorizontal();
 
         GUILayout.EndVertical();
     }
     public static void FrameKeyTransitionSelection() {
-        var key = FrameManager.frame.currentKey;
+        var keyT = FrameManager.frame.currentKey;
 
-        key.transitionType = (FrameKey.TransitionType)EditorGUILayout.EnumPopup(key.transitionType);
+        GUILayout.BeginHorizontal();
+        GUILayout.FlexibleSpace();
+        GUILayout.Label("Режим перехода");
+        GUILayout.FlexibleSpace();
+        GUILayout.EndHorizontal();
 
-        if(currentKeySequenceType != key.transitionType) {
-            currentKeySequenceType = key.transitionType;
-
-            switch (key.transitionType) {
-                case FrameKey.TransitionType.DialogueAnswerSelection:
-                    foreach (var dialogue in FrameManager.frameElements.Where(ch => ch is FrameUI_Dialogue)) {
-                        ChangeActiveState(dialogue, false);
-                    }
-                    foreach (var dialogueAnswer in FrameManager.frameElements.Where(ch => ch is FrameUI_DialogueAnswer)) {
-                        ChangeActiveState(dialogueAnswer, true);
-                    }
-                    break;
-                case FrameKey.TransitionType.DialogueLineContinue:
-                    foreach (var dialogueAnswer in FrameManager.frameElements.Where(ch => ch is FrameUI_DialogueAnswer)) {
-                        ChangeActiveState(dialogueAnswer, false);
-                    }
-                    foreach (var dialogue in FrameManager.frameElements.Where(ch => ch is FrameUI_Dialogue)) {
-                        ChangeActiveState(dialogue, true);
-                    }
-                    break;
-            }  
+        GUILayout.BeginHorizontal();
+        GUILayout.FlexibleSpace();
+        keyT.transitionType = (FrameKey.TransitionType)EditorGUILayout.EnumPopup(keyT.transitionType);
+        GUILayout.FlexibleSpace();
+        GUILayout.EndHorizontal();
+        switch (keyT.transitionType) {
+            case FrameKey.TransitionType.DialogueAnswerSelection:
+                foreach (var dialogue in FrameManager.frameElements.Where(ch => ch is FrameUI_Dialogue)) {
+                    ChangeActiveState(keyT, dialogue, false);
+                }
+                foreach (var dialogueAnswer in FrameManager.frameElements.Where(ch => ch is FrameUI_DialogueAnswer)) {
+                    //ChangeActiveState(keyT, dialogueAnswer, true);
+                }
+                break;
+            case FrameKey.TransitionType.DialogueLineContinue:
+                foreach (var dialogueAnswer in FrameManager.frameElements.Where(ch => ch is FrameUI_DialogueAnswer)) {
+                    ChangeActiveState(keyT, dialogueAnswer, false);
+                }
+                foreach (var dialogue in FrameManager.frameElements.Where(ch => ch is FrameUI_Dialogue)) {
+                    //ChangeActiveState(keyT, dialogue, true);
+                }
+                break;
         }
 
     }
@@ -122,7 +121,7 @@ public class FrameEditor_Frame : FrameEditor
                     knob.SetValue<FrameKey>(node.frameKey);
                     node.oldPos = knob.sidePosition;
 
-                    node.dialogueOutputKnobs.Add(element.id, node.outputKnobs.IndexOf(knob));
+                    node.frameKey.dialogueOutputKnobs.Add(element.id, node.outputKnobs.IndexOf(knob));
                 }
             }
         }

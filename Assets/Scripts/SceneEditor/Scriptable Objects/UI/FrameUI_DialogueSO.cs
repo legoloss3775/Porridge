@@ -51,8 +51,9 @@ public class FrameUI_DialogueSO : FrameUI_WindowSO {
         elementClone = Instantiate(obj.prefab, position, new Quaternion(), FrameManager.UICanvas.transform).AddComponent<T>();
         elementClone.frameElementObject = obj;
         elementClone.id = obj.id + "_" + Guid.NewGuid().ToString().Substring(0, 5).ToUpper();
-        foreach (var key in FrameManager.frame.frameKeys)
+        foreach (var key in FrameManager.frame.frameKeys) {
             key.AddFrameKeyValues(elementClone.id, elementClone.GetFrameKeyValuesType());
+        }
 
 #if UNITY_EDITOR
         EditorUtility.SetDirty(elementClone);

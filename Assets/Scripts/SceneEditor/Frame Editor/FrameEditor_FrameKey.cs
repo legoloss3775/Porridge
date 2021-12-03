@@ -10,7 +10,7 @@ public class FrameEditor_FrameKeу : FrameEditor
         var dialogueValues = key.frameKeyValues.Values.Where(ch => ch is FrameUI_DialogueValues);
         var answerValues = key.frameKeyValues.Values.Where(ch => ch is FrameUI_DialogueAnswerValues);
 
-        GUILayout.Label(key.keySequence.previousKey?.id.ToString());
+        //GUILayout.Label(key.keySequence.previousKey?.id.ToString());
 
         if(dialogueValues != null)
             foreach(var element in dialogueValues) {

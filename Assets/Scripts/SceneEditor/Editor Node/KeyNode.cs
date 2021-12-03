@@ -29,7 +29,6 @@ public class KeyNode : Node
     [ValueConnectionKnob("Input 1", Direction.In, "FrameKey")]
     public ValueConnectionKnob input1Knob;
 
-    public SerializableDictionary<string, int> dialogueOutputKnobs = new SerializableDictionary<string, int>();
     public float oldPos;
     public float oldPosOffset = 50f;
 
@@ -44,7 +43,7 @@ public class KeyNode : Node
             frameKey = AssetManager.GetFrameAssets()[Convert.ToInt32(frameKeyPair.frameID.Split('_')[1])].frameKeys[frameKeyPair.frameKeyID];
         else UpdateFrameKeys();
 
-        frameKey.node = this;
+        //frameKey.node = this;
         //FrameEditor_FrameKeу.ShowFrameKeyData(frameKey);
         input1Knob.maxConnectionCount = NodeEditorFramework.ConnectionCount.Multi;    
 
@@ -55,7 +54,14 @@ public class KeyNode : Node
             GUILayout.FlexibleSpace();
             GUILayout.EndHorizontal();
         }
-
+        else {
+            GUILayout.BeginHorizontal();
+            GUILayout.FlexibleSpace();
+            GUILayout.Label(frameKey.id.ToString(), FrameGUIUtility.GetTextStyle(Color.white, 25));
+            GUILayout.FlexibleSpace();
+            GUILayout.EndHorizontal();
+        }
+        
         /*foreach(var background in FrameManager.frameElements.Where(ch => ch is FrameBackground)) {
             if (background.activeStatus == false) continue;
 
@@ -66,8 +72,10 @@ public class KeyNode : Node
             GUILayout.FlexibleSpace();
             GUILayout.EndHorizontal();
         }*/
-
-        foreach (var dialogueOutputKnob in dialogueOutputKnobs) {
+        GUILayout.FlexibleSpace();
+        FrameGUIUtility.GuiLine(2);
+        GUILayout.Space(5);
+        foreach (var dialogueOutputKnob in frameKey.dialogueOutputKnobs) {
             var dialogueValues = frameKey.frameKeyValues.Where(ch => ch.Value is FrameUI_DialogueValues);
             var answerValues = frameKey.frameKeyValues.Where(ch => ch.Value is FrameUI_DialogueAnswerValues);
 
@@ -129,7 +137,7 @@ public class KeyNode : Node
 
                 }
             }
-               
+            
             if (answerValues != null) {
                 foreach (var element in answerValues) {
                     var adValues = (FrameUI_DialogueAnswerValues)element.Value;
@@ -148,11 +156,16 @@ public class KeyNode : Node
                     valueKnob.maxConnectionCount = ConnectionCount.Single;
                 }
             }
-            GUILayout.FlexibleSpace();
         }
+        GUILayout.Space(5);
+        FrameGUIUtility.GuiLine(2);
+        GUILayout.FlexibleSpace();
+
+        input1Knob.SetPosition(200);
+
         if (input1Knob.connected()) {
-            frameKey.keySequence.previousKey = input1Knob.GetValue<FrameKey>();
-            input1Knob.GetValue<FrameKey>().keySequence.nextKey = frameKey;
+            //frameKey.keySequence.previousKey = input1Knob.GetValue<FrameKey>();
+            //input1Knob.GetValue<FrameKey>().keySequence.nextKey = frameKey;
         }
 
         UpdateFrameKeys();

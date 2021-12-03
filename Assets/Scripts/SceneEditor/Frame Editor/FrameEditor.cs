@@ -237,17 +237,27 @@ public abstract class FrameEditor : Editor
                         FrameManager.frame.RemoveElementFromCurrentKey(dialogueCharacter.id);
                 }
             }
-            if(element is IInteractable) {
+            if (element is IInteractable) {
                 foreach (KeyNode node in NodeEditor.curNodeCanvas.nodes) {
-                    if(node.dialogueOutputKnobs.ContainsKey(element.id))
-                        foreach(var knob in node.dialogueOutputKnobs.Where(ch => ch.Key == element.id).ToList()) {
-                            node.dialogueOutputKnobs.Remove(element.id);
-                            node.oldPos -= node.oldPosOffset;
-                            if(node.outputKnobs.Count > knob.Value) {
-                                node.DeleteConnectionPort(node.outputKnobs[knob.Value]);
-                                NodeEditorFramework.ConnectionPortManager.UpdatePortLists(node);
+                    if (node.frameKey != FrameManager.frame.currentKey || node.frameKey == null) continue;
+
+                    foreach (var n in node.outputKnobs.ToList()) {
+                        if (node.frameKey.dialogueOutputKnobs.ContainsKey(element.id)) {
+                            var removeIndex = node.frameKey.dialogueOutputKnobs[element.id];
+
+                            DestroyImmediate(n, true);
+                            node.frameKey.dialogueOutputKnobs.Remove(element.id);
+
+                            foreach (var killme in node.frameKey.dialogueOutputKnobs.Keys.ToList()) {
+                                if (node.frameKey.dialogueOutputKnobs[killme] >= removeIndex) {
+                                    Debug.Log(removeIndex);
+                                    Debug.Log(node.frameKey.dialogueOutputKnobs[killme]);
+                                    node.frameKey.dialogueOutputKnobs[killme] -= 1;
+                                }
                             }
+                            NodeEditorFramework.ConnectionPortManager.UpdatePortLists(node);
                         }
+                    }
                 }
             }
         }
@@ -256,27 +266,41 @@ public abstract class FrameEditor : Editor
         where TElement: FrameElement{
         if(GUILayout.Button("✔", GUILayout.MaxWidth(25))) {
             if (element.activeStatus)
-                ChangeActiveState(element, false);
+                ChangeActiveState(FrameManager.frame.currentKey,element, false);
             else
-                ChangeActiveState(element, true);
+                ChangeActiveState(FrameManager.frame.currentKey, element, true);
         }
     }
-    public static void ChangeActiveState<TElement>(TElement element, bool state)
+    public static void ChangeActiveState<TElement>(FrameKey key,TElement element, bool state)
         where TElement: FrameElement{
+
+        var elementValues = key.GetFrameKeyValuesOfElement(element.id);
+
         if (state == false) {
             element.activeStatus = false;
+            elementValues.activeStatus = false;
             if (element is IInteractable) {
+                if (NodeEditor.curNodeCanvas == null) return;
                 foreach (KeyNode node in NodeEditor.curNodeCanvas.nodes) {
-                    if (node.frameKey != FrameManager.frame.currentKey) continue;
+                    if (node.frameKey != FrameManager.frame.currentKey || node.frameKey == null) continue;
 
-                    if (node.dialogueOutputKnobs.ContainsKey(element.id))
-                        foreach (var knob in node.dialogueOutputKnobs.Where(ch => ch.Key == element.id).ToList()) {
-                            node.dialogueOutputKnobs.Remove(element.id);
-                            node.oldPos -= node.oldPosOffset;
-                            if (node.outputKnobs.Count > knob.Value)
-                                node.DeleteConnectionPort(node.outputKnobs[knob.Value]);
+                    foreach(var n in node.outputKnobs.ToList()) {
+                        if (node.frameKey.dialogueOutputKnobs.ContainsKey(element.id)) {
+                            var removeIndex = node.frameKey.dialogueOutputKnobs[element.id];
+
+                            DestroyImmediate(n, true);
+                            node.frameKey.dialogueOutputKnobs.Remove(element.id);
+
+                            foreach (var killme in node.frameKey.dialogueOutputKnobs.Keys.ToList()) {
+                                if (node.frameKey.dialogueOutputKnobs[killme] >= removeIndex) {
+                                    Debug.Log(removeIndex);
+                                    Debug.Log(node.frameKey.dialogueOutputKnobs[killme]);
+                                    node.frameKey.dialogueOutputKnobs[killme] -= 1;
+                                }
+                            }
                             NodeEditorFramework.ConnectionPortManager.UpdatePortLists(node);
                         }
+                    }
                 }
             }
         }
@@ -284,21 +308,23 @@ public abstract class FrameEditor : Editor
             if (element is IInteractable) {
                 foreach (KeyNode node in NodeEditor.curNodeCanvas.nodes) {
                     if (node.frameKey != FrameManager.frame.currentKey) continue;
-                    if (node.dialogueOutputKnobs.ContainsKey(element.id)) continue;
+                    if (node.frameKey.dialogueOutputKnobs.ContainsKey(element.id)) continue;
 
-                        var knob = node.CreateValueConnectionKnob(new ValueConnectionKnobAttribute("Output", Direction.Out, "FrameKey"));
-                    knob.SetPosition(node.oldPos + node.oldPosOffset);
+                    var knob = node.CreateValueConnectionKnob(new ValueConnectionKnobAttribute("Output", Direction.Out, "FrameKey"));
                     knob.SetValue<FrameKey>(node.frameKey);
                     node.oldPos = knob.sidePosition;
 
                     if(element is FrameUI_Dialogue || element is FrameUI_DialogueAnswer)
-                        node.dialogueOutputKnobs.Add(element.id, node.outputKnobs.IndexOf(knob));
+                        node.frameKey.dialogueOutputKnobs.Add(element.id, node.connectionKnobs.IndexOf(knob) - 1);
+                    NodeEditorFramework.ConnectionPortManager.UpdatePortLists(node);
                 }
             }
             element.activeStatus = true;
+            elementValues.activeStatus = true;
         }
 
         element.SetKeyValuesWhileNotInPlayMode();
+        
     }
 }
 public class FrameEditor_CreationWindow : EditorWindow {
@@ -366,12 +392,16 @@ public class FrameEditor_CreationWindow : EditorWindow {
 
                 if(createdElement is IInteractable) {
                     foreach(KeyNode node in NodeEditor.curNodeCanvas.nodes) {
+                        if(createdElement is FrameUI_Dialogue) {
+                            if (node.frameKey.transitionType != FrameKey.TransitionType.DialogueLineContinue) continue;
+                        }
+                        if (createdElement is FrameUI_DialogueAnswer) {
+                            if (node.frameKey.transitionType != FrameKey.TransitionType.DialogueAnswerSelection) continue;
+                        }
                         var knob = node.CreateValueConnectionKnob(new ValueConnectionKnobAttribute("Output", Direction.Out, "FrameKey"));
-                        knob.SetPosition(node.oldPos + node.oldPosOffset);
                         knob.SetValue<FrameKey>(node.frameKey);
-                        node.oldPos = knob.sidePosition;
 
-                        node.dialogueOutputKnobs.Add(createdElementID, node.outputKnobs.IndexOf(knob));
+                        node.frameKey.dialogueOutputKnobs.Add(createdElementID, node.outputKnobs.IndexOf(knob));
                         NodeEditorFramework.ConnectionPortManager.UpdatePortLists(node);
                     }
                 }

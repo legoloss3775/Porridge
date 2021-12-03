@@ -8,8 +8,8 @@ using static FrameKey;
 #region SERIALIZATION
 [Serializable]
 public class FrameElementValues : Values, IFrameElementSerialization {
-    public Vector2 position { get; set; }
-    public bool activeStatus { get; set; }
+    public override Vector2 position { get; set; }
+    public override bool activeStatus { get; set; }
     public FrameElementValues(FrameElement element) {
         position = element.position;
         activeStatus = element.activeStatus;

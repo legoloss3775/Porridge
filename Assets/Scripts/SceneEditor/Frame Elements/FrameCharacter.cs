@@ -9,8 +9,8 @@ using static FrameKey;
 #region SERIALIZATION
 [Serializable]
 public class FrameCharacterValues : Values, IFrameCharacterSerialzation {
-    public Vector2 position { get; set; }
-    public bool activeStatus { get; set; }
+    public override Vector2 position { get; set; }
+    public override bool activeStatus { get; set; }
     public string dialogueID { get; set; }
     public FrameCharacter.CharacterType type { get; set; }
     public FrameCharacterSO.CharacterEmotionState emotionState { get; set; }
