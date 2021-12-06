@@ -24,7 +24,7 @@ public class KeyNode : Node
     public override string GetID { get { return ID; } }
 
     public override string Title { get { return "KeyFrame Node"; } }
-    public override Vector2 DefaultSize { get { return new Vector2(400, 400); } }
+    public override Vector2 DefaultSize { get { return new Vector2(250, 250); } }
 
     [ValueConnectionKnob("Input 1", Direction.In, "FrameKey")]
     public ValueConnectionKnob input1Knob;
@@ -35,88 +35,129 @@ public class KeyNode : Node
     Vector2 dialogueScroll;
     Vector2 dialogueAnswerScroll;
 
-#if UNITY_EDITOR
-    private void OnDisable() {
-    }
-    public override void NodeGUI() {
-        if (AssetManager.GetFrameAssets()[Convert.ToInt32(frameKeyPair.frameID.Split('_')[1])].frameKeys.Count > frameKeyPair.frameKeyID)
-            frameKey = AssetManager.GetFrameAssets()[Convert.ToInt32(frameKeyPair.frameID.Split('_')[1])].frameKeys[frameKeyPair.frameKeyID];
-        else UpdateFrameKeys();
+    public SerializableDictionary<string, FrameUI_DialogueValues> dialogueValues = new SerializableDictionary<string, FrameUI_DialogueValues>();
+    public SerializableDictionary<string, FrameUI_DialogueAnswerValues> dialogueAnswerValues = new SerializableDictionary<string, FrameUI_DialogueAnswerValues>();
+    public SerializableDictionary<string, FrameCharacterValues> characterValues = new SerializableDictionary<string, FrameCharacterValues>();
 
+    bool updated = false;
+
+#if UNITY_EDITOR
+    private void Awake() {
+        updated = false;
+    }
+    public static void UpdateKeyNodeValues(KeyNode node, FrameKey.Values values, string id) {
+        if(values is FrameUI_DialogueValues) {
+            node.dialogueValues[id] = (FrameUI_DialogueValues)values;
+        }
+        if(values is FrameUI_DialogueAnswerValues) {
+            node.dialogueAnswerValues[id] = (FrameUI_DialogueAnswerValues)values;
+        }
+        if(values is FrameCharacterValues) {
+            node.characterValues[id] = (FrameCharacterValues)values;
+        }
+    }
+    public static KeyNode CreateKeyNode(string keyNodeID, Vector2 pos, FrameKey key, FrameSO frame) {
+        KeyNode node = (KeyNode)Node.Create(keyNodeID, pos);
+        node.frameKey = key;
+        node.frameKeyPair.frameID = frame.id;
+        node.frameKeyPair.frameKeyID = key.id;
+        node.input1Knob.maxConnectionCount = NodeEditorFramework.ConnectionCount.Multi;
+        return node;
+    }
+    //
+    public override void NodeGUI() {
+        if(frameKey == null) {
+            if (AssetManager.GetFrameAssets()[Convert.ToInt32(frameKeyPair.frameID.Split('_')[1])].frameKeys.Count > frameKeyPair.frameKeyID)
+                frameKey = AssetManager.GetFrameAssets()[Convert.ToInt32(frameKeyPair.frameID.Split('_')[1])].frameKeys[frameKeyPair.frameKeyID];
+            else UpdateFrameKeys();
+        }
+        input1Knob.maxConnectionCount = NodeEditorFramework.ConnectionCount.Multi;
         //frameKey.node = this;
         //FrameEditor_FrameKeу.ShowFrameKeyData(frameKey);
-        input1Knob.maxConnectionCount = NodeEditorFramework.ConnectionCount.Multi;    
+
+        if (!updated && FrameManager.frame != null) {
+            foreach (var key in FrameManager.frame.frameKeys) {
+                foreach (var value in key.frameKeyValues) {
+                    KeyNode node = (KeyNode)NodeEditorFramework.NodeEditor.curNodeCanvas.nodes[key.nodeIndex];
+                    KeyNode.UpdateKeyNodeValues(node, value.Value, value.Key);
+                }
+            }
+            updated = true;
+        }
 
         if (frameKeyPair.frameKeyID == 0) {
             GUILayout.BeginHorizontal();
             GUILayout.FlexibleSpace();
-            GUILayout.Label("Начало", FrameGUIUtility.GetTextStyle(Color.green, 25));
+            GUILayout.Label("Начало", FrameGUIUtility.GetLabelStyle(Color.cyan, 25));
             GUILayout.FlexibleSpace();
             GUILayout.EndHorizontal();
         }
         else {
             GUILayout.BeginHorizontal();
             GUILayout.FlexibleSpace();
-            GUILayout.Label(frameKey.id.ToString(), FrameGUIUtility.GetTextStyle(Color.white, 25));
+            GUILayout.Label(frameKey.id.ToString(), FrameGUIUtility.GetLabelStyle(Color.white, 25));
             GUILayout.FlexibleSpace();
             GUILayout.EndHorizontal();
         }
         
-        /*foreach(var background in FrameManager.frameElements.Where(ch => ch is FrameBackground)) {
-            if (background.activeStatus == false) continue;
-
-            var icon = UnityEditor.AssetPreview.GetAssetPreview(background.frameElementObject.prefab);
-            GUILayout.BeginHorizontal();
-            GUILayout.FlexibleSpace();
-            GUILayout.Label(icon, FrameGUIUtility.SetLabelIconColor(Color.gray), GUILayout.Width(600));
-            GUILayout.FlexibleSpace();
-            GUILayout.EndHorizontal();
-        }*/
         GUILayout.FlexibleSpace();
         FrameGUIUtility.GuiLine(2);
         GUILayout.Space(5);
         foreach (var dialogueOutputKnob in frameKey.dialogueOutputKnobs) {
-            var dialogueValues = frameKey.frameKeyValues.Where(ch => ch.Value is FrameUI_DialogueValues);
-            var answerValues = frameKey.frameKeyValues.Where(ch => ch.Value is FrameUI_DialogueAnswerValues);
 
-            //GUILayout.Label(frameKey.keySequence.previousKey?.id.ToString());
-
-            if (dialogueValues != null) {
+            if (dialogueValues.Count > 0) {
                 foreach (var element in dialogueValues) {
-                    var dValues = (FrameUI_DialogueValues)element.Value;
-                    if (dValues.activeStatus == false) continue;
+                    if (element.Value.activeStatus == false) continue;
 
                     if (element.Key == dialogueOutputKnob.Key) {
-                        FrameUI_DialogueValues dialogue = (FrameUI_DialogueValues)element.Value;
-                        dialogueScroll = GUILayout.BeginScrollView(dialogueScroll); 
-                        GUILayout.TextArea(dialogue?.text, FrameGUIUtility.GetTextStyle(Color.white, 20), GUILayout.MaxHeight(50));
-                        GUILayout.EndScrollView();
+                        //dialogueScroll = GUILayout.BeginScrollView(dialogueScroll); 
+                        GUILayout.BeginHorizontal();
+                        GUILayout.FlexibleSpace();
+                        GUILayout.BeginVertical();
+                        GUILayout.Space(16);
+                        FrameGUIUtility.GuiLine();
+                        GUILayout.EndVertical();
+                        GUILayout.Label(element.Value.conversationCharacterID.Split('_')[0], FrameGUIUtility.GetLabelStyle(Color.white, 17));
+                        GUILayout.BeginVertical();
+                        GUILayout.Space(16);
+                        FrameGUIUtility.GuiLine();
+                        GUILayout.EndVertical();
+                        GUILayout.FlexibleSpace();
+                        GUILayout.EndHorizontal();
+                        GUILayout.TextArea(element.Value?.text, FrameGUIUtility.GetTextAreaStyle(Color.white, 12), GUILayout.MaxHeight(175));
+                        //GUILayout.EndScrollView();
 
                         if (outputKnobs.Count > dialogueOutputKnob.Value)
                             outputKnobs[dialogueOutputKnob.Value].SetPosition();
 
                         GUILayout.BeginHorizontal();
                         GUILayout.FlexibleSpace();
-                        if (dialogue.type == FrameUI_Dialogue.FrameDialogueElementType.Одинᅠперсонаж && dialogue.conversationCharacterID != null && dialogue.conversationCharacterID != "") {
+                        if (element.Value.type == FrameUI_Dialogue.FrameDialogueElementType.Одинᅠперсонаж && element.Value.conversationCharacterID != null && element.Value.conversationCharacterID != "") {
                             try {
-                                if (UnityEditor.AssetPreview.GetAssetPreview(FrameManager.frame.usedElementsObjects.Where(ch => ch.ids.Contains(dialogue.conversationCharacterID)).FirstOrDefault().elementObject.prefab) == null) continue;
+                                if (UnityEditor.AssetPreview.GetAssetPreview(FrameManager.frame.usedElementsObjects.Where(ch => ch.ids.Contains(element.Value.conversationCharacterID)).FirstOrDefault().elementObject.prefab) == null) continue;
                             }
                             catch (Exception) {
                                 continue;
                             }
                             Texture2D icon = UnityEditor.AssetPreview.GetAssetPreview(
                                     FrameManager.frame.usedElementsObjects.Where(
-                                        ch => ch.ids.Contains(dialogue.conversationCharacterID)
+                                        ch => ch.ids.Contains(element.Value.conversationCharacterID)
                                         )
                                     .FirstOrDefault()
                                     .elementObject
                                     .prefab
                                 );
-                            GUILayout.Label(icon, FrameGUIUtility.SetLabelIconColor(Color.gray), GUILayout.Width(600));
+                            GUILayout.Label(icon, FrameGUIUtility.SetLabelIconColor(Color.gray), GUILayout.MaxWidth(100));
                             //GUILayout.FlexibleSpace();//
                         }
                         else {
-                            foreach (var character in dialogue.conversationCharacters) {
+                            foreach (var character in element.Value.conversationCharacters) {
+                                try {
+                                    if (UnityEditor.AssetPreview.GetAssetPreview(FrameManager.frame.usedElementsObjects.Where(ch => ch.ids.Contains(character.Value)).FirstOrDefault().elementObject.prefab) == null) continue;
+                                }
+                                catch (Exception) {
+                                    continue;
+                                }
                                 var icon = UnityEditor.AssetPreview.GetAssetPreview(
                                     FrameManager.frame.usedElementsObjects.Where(
                                         ch => ch.ids.Contains(character.Value)
@@ -125,10 +166,10 @@ public class KeyNode : Node
                                     .elementObject
                                     .prefab
                                  );
-                                if (character.Value == dialogue.conversationCharacterID)
-                                    GUILayout.Label(icon, FrameGUIUtility.SetLabelIconColor(Color.gray), GUILayout.MaxWidth(200));
+                                if (character.Value == element.Value.conversationCharacterID)
+                                    GUILayout.Label(icon, FrameGUIUtility.SetLabelIconColor(Color.gray), GUILayout.MaxWidth(100));
                                 else
-                                    GUILayout.Label(icon, FrameGUIUtility.SetLabelIconColor(Color.black), GUILayout.MaxWidth(200));
+                                    GUILayout.Label(icon, FrameGUIUtility.SetLabelIconColor(new Color(0.169f,0.169f,0.169f, 1)), GUILayout.MaxWidth(75));
                             }
                         }
                         GUILayout.FlexibleSpace();
@@ -138,14 +179,12 @@ public class KeyNode : Node
                 }
             }
             
-            if (answerValues != null) {
-                foreach (var element in answerValues) {
-                    var adValues = (FrameUI_DialogueAnswerValues)element.Value;
-                    if (adValues.activeStatus == false) continue;
+            if (dialogueAnswerValues.Count > 0) {
+                foreach (var element in dialogueAnswerValues) {
+                    if (element.Value.activeStatus == false) continue;
 
                     if (element.Key == dialogueOutputKnob.Key) {
-                        FrameUI_DialogueAnswerValues dialogue = (FrameUI_DialogueAnswerValues)element.Value;
-                        GUILayout.TextArea(dialogue?.text, FrameGUIUtility.GetTextStyle(Color.white, 20));
+                        GUILayout.TextArea(element.Value?.text, FrameGUIUtility.GetTextAreaStyle(Color.white, 20));
                         if (outputKnobs.Count > dialogueOutputKnob.Value)
                             outputKnobs[dialogueOutputKnob.Value].SetPosition();
                     }
@@ -161,32 +200,31 @@ public class KeyNode : Node
         FrameGUIUtility.GuiLine(2);
         GUILayout.FlexibleSpace();
 
-        input1Knob.SetPosition(200);
+        input1Knob.SetPosition(125);
 
         if (input1Knob.connected()) {
             //frameKey.keySequence.previousKey = input1Knob.GetValue<FrameKey>();
             //input1Knob.GetValue<FrameKey>().keySequence.nextKey = frameKey;
         }
-
         UpdateFrameKeys();
     }
-    private void UpdateFrameKeys() {
+    public static void UpdateFrameKeys() {
         if (FrameManager.frame == null || FrameManager.frame.frameKeys == null) return;
         foreach (var key in FrameManager.frame.frameKeys.ToList()) {
             bool hasKey = false;
-            foreach (KeyNode node in canvas.nodes) {
+            foreach (KeyNode node in NodeEditor.curNodeCanvas.nodes) {
                 if (node.frameKeyPair.frameKeyID == key.id)
                     hasKey = true;
             }
             if (!hasKey) {
                 var id = FrameManager.frame.frameKeys.IndexOf(key);
                 FrameManager.frame.frameKeys.Remove(key);
-                foreach (KeyNode node in canvas.nodes) {
+                foreach (KeyNode node in NodeEditor.curNodeCanvas.nodes) {
                     if (node.frameKeyPair.frameKeyID > id)
                         node.frameKeyPair.frameKeyID -= 1;
                 }
                 //if (frameKeyPair.frameKeyID > 0 && frameKeyPair.frameKeyID > id)
-                   //frameKeyPair.frameKeyID -= 1;//
+                //frameKeyPair.frameKeyID -= 1;//
             }
         }
     }

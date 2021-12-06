@@ -11,8 +11,6 @@ using static FrameKey;
 public class FrameUI_DialogueValues : Values, IFrameUI_DialogueSerialization {
     public int nextKeyID { get; set; }
     public int previousKeyID { get; set; }
-    public override Vector2 position { get; set; }
-    public override bool activeStatus { get; set; }
     public string text { get; set; }
     public string conversationCharacterID { get; set; }
     public int speakingCharacterIndex { get; set; }

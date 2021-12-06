@@ -103,25 +103,28 @@ public class FrameEditor_Frame : FrameEditor
 
     }
     public static void FrameKeySelection() {
+        var frameEditorSO = AssetManager.GetAtPath<FrameEditorSO>("Scripts/SceneEditor/").FirstOrDefault();
+
         GUILayout.BeginHorizontal();
         if (GUILayout.Button("+", GUILayout.MaxWidth(25))) {
             var key = new FrameKey();
             FrameManager.frame.AddKey(key);
             foreach (var element in FrameManager.frameElements) {
                 try {
-                    FrameManager.frame.frameKeys[FrameManager.frame.frameKeys.Count - 1].AddFrameKeyValues(element.id, FrameManager.frame.frameKeys[FrameManager.frame.frameKeys.Count - 2].frameKeyValues[element.id]);
+                    FrameManager.frame.frameKeys[FrameManager.frame.frameKeys.IndexOf(key)].AddFrameKeyValues(element.id, FrameManager.frame.frameKeys[FrameManager.frame.frameKeys.IndexOf(key) - 1].frameKeyValues[element.id]);
                 }
                 catch (System.Exception) {
-                    FrameManager.frame.frameKeys[FrameManager.frame.frameKeys.Count - 1].AddFrameKeyValues(element.id, element.GetFrameKeyValuesType());
+                    FrameManager.frame.frameKeys[FrameManager.frame.frameKeys.IndexOf(key)].AddFrameKeyValues(element.id, element.GetFrameKeyValuesType());
                 }
-                if (element is IInteractable) {
-                    KeyNode node = (KeyNode)NodeEditorFramework.NodeEditor.curNodeCanvas.nodes[key.nodeIndex];
-                    var knob = node.CreateValueConnectionKnob(new ValueConnectionKnobAttribute("Output", Direction.Out, "FrameKey"));
-                    knob.SetPosition(node.oldPos + node.oldPosOffset);
-                    knob.SetValue<FrameKey>(node.frameKey);
-                    node.oldPos = knob.sidePosition;
-
-                    node.frameKey.dialogueOutputKnobs.Add(element.id, node.outputKnobs.IndexOf(knob));
+            }
+            FrameManager.frame.selectedKeyIndex = FrameManager.frame.frameKeys.IndexOf(key);
+            foreach (var addkey in FrameManager.frame.frameKeys) {
+                if (FrameManager.frame.frameKeys.IndexOf(key) == FrameManager.frame.selectedKeyIndex && FrameManager.frame.currentKey != key) {
+                    if (key != null) {
+                        FrameManager.frame.currentKey = key;
+                        frameEditorSO.selectedKeyIndex = FrameManager.frame.frameKeys.IndexOf(key);
+                        FrameManager.ChangeFrameKey();
+                    }
                 }
             }
         }
@@ -135,6 +138,7 @@ public class FrameEditor_Frame : FrameEditor
             if (FrameManager.frame.frameKeys.IndexOf(key) == FrameManager.frame.selectedKeyIndex && FrameManager.frame.currentKey != key) {
                 if (key != null) {
                     FrameManager.frame.currentKey = key;
+                    frameEditorSO.selectedKeyIndex = FrameManager.frame.frameKeys.IndexOf(key);
                     FrameManager.ChangeFrameKey();
                 }
             }

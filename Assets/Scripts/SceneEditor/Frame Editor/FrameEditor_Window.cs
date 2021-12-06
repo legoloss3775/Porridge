@@ -69,13 +69,14 @@ public class FrameEditor_Window : EditorWindow {
                 FrameEditor_CreationWindow.createdElementID = "";
         }
     }
-
     public void SaveFrameEditorNodeCanvas() {
         if (FrameManager.frame != null && FrameManager.frame.nodeCanvas != null) {
             if (NodeEditorWindow.editor != null && NodeEditorWindow.editor.canvasCache != null) {
                 if (!EditorApplication.isCompiling) {
                     NodeEditorWindow.editor.canvasCache.SaveNodeCanvas("Assets/Frames/NodeCanvases/Canvas_" + FrameManager.frame.id + ".asset");
                     NodeEditor.BeginEditingCanvas(FrameManager.frame.nodeCanvas);
+                    AssetDatabase.SaveAssets();
+                    
                 }
             }
         }

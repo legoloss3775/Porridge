@@ -67,7 +67,7 @@ public class FrameEditor_Dialogue : FrameEditor {
         GUILayout.EndVertical();
         GUILayout.EndHorizontal();
 
-        keyValues.text = GUILayout.TextArea(keyValues.text, FrameGUIUtility.GetTextStyle(Color.white, 15), GUILayout.MaxWidth(450), GUILayout.MaxHeight(150));
+        keyValues.text = GUILayout.TextArea(keyValues.text, FrameGUIUtility.GetTextAreaStyle(Color.white, 15), GUILayout.MaxWidth(450), GUILayout.MaxHeight(150));
         if (dialogueAnswer.text != keyValues.text) dialogueAnswer.text = keyValues.text;
         FrameGUIUtility.GuiLine();
     }
@@ -86,7 +86,7 @@ public class FrameEditor_Dialogue : FrameEditor {
         GUILayout.EndVertical();
         GUILayout.EndHorizontal();
 
-        keyValues.text = GUILayout.TextArea(keyValues.text, FrameGUIUtility.GetTextStyle(Color.white, 15), GUILayout.MaxWidth(450), GUILayout.MaxHeight(150));
+        keyValues.text = GUILayout.TextArea(keyValues.text, FrameGUIUtility.GetTextAreaStyle(Color.white, 15), GUILayout.MaxWidth(450), GUILayout.MaxHeight(150));
         if (dialogue.text != keyValues.text) dialogue.text = keyValues.text;
         FrameGUIUtility.GuiLine();
     }

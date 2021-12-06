@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using UnityEngine;
 
@@ -48,6 +49,10 @@ public class FrameKey {
     public void UpdateFrameKeyValues(string id, Values values) {
         if (ContainsID(id)) frameKeyValues[id] = values;
         else AddFrameKeyValues(id, values);
+        if(NodeEditorFramework.NodeEditor.curNodeCanvas != null) {
+            KeyNode node = (KeyNode)NodeEditorFramework.NodeEditor.curNodeCanvas.nodes[this.nodeIndex];
+            KeyNode.UpdateKeyNodeValues(node, values, id);
+        }
     }
     public void AddFrameKeyValues(string id, Values values) {
         if (id != null) frameKeyValues.Add(id, values);

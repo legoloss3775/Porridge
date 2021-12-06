@@ -12,8 +12,6 @@ using static FrameKey;
 public class FrameUI_DialogueAnswerValues : Values, IFrameUI_DialogueAnswerSerialization {
     public int nextKeyID { get; set; }
     public int previousKeyID { get; set; }
-    public Vector2 position { get; set; }
-    public bool activeStatus { get; set; }
     public string text { get; set; }
     public FrameUI_DialogueAnswerValues(FrameUI_DialogueAnswer dialogue) {
         nextKeyID = dialogue.nextKeyID;
