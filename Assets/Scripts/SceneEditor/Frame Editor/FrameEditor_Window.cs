@@ -38,6 +38,10 @@ public class FrameEditor_Window : EditorWindow {
             manager._assetDatabase = AssetManager.GetAtPath<FrameEditorSO>("Scripts/SceneEditor/").FirstOrDefault();
             FrameManager.assetDatabase = manager._assetDatabase;
         }
+        if(manager.GetComponent<FrameController>() == null) {
+            FrameController controller = manager.gameObject.AddComponent<FrameController>();
+            controller.manager = manager;
+        }
          if (isEditingAllowed()) {
             AssetManager.UpdateAssets();
             UpdateDirty();
@@ -75,8 +79,7 @@ public class FrameEditor_Window : EditorWindow {
                 if (!EditorApplication.isCompiling) {
                     NodeEditorWindow.editor.canvasCache.SaveNodeCanvas("Assets/Frames/NodeCanvases/Canvas_" + FrameManager.frame.id + ".asset");
                     NodeEditor.BeginEditingCanvas(FrameManager.frame.nodeCanvas);
-                    AssetDatabase.SaveAssets();
-                    
+          
                 }
             }
         }

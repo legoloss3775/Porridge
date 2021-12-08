@@ -1,6 +1,226 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-8589474723282132548
+--- !u!114 &-9216061859566153739
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 017e2c7fd038ecb46b317c1e003f31dc, type: 3}
+  m_Name: Input 1
+  m_EditorClassIdentifier: 
+  body: {fileID: -5486551447364600517}
+  direction: 1
+  maxConnectionCount: 0
+  styleID: FrameKey
+  _connections:
+  - {fileID: 7374799971895643304}
+  side: 4
+  sidePosition: 125
+  sideOffset: 0
+--- !u!114 &-8376072608837595658
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0066812b5804b734393478a52ee03726, type: 3}
+  m_Name: KeyFrame Node
+  m_EditorClassIdentifier: 
+  canvas: {fileID: 11400000}
+  position: {x: 0, y: 0}
+  dynamicConnectionPorts:
+  - {fileID: -5033826669998607933}
+  backgroundColor: {r: 1, g: 1, b: 1, a: 1}
+  frameKey:
+    id: 0
+    nodeIndex: 0
+    dialogueOutputKnobs:
+      keys:
+      - Inner_Fire_Line1_53F05
+      values: 00000000
+    transitionType: 0
+    frameKeyValues:
+      keys:
+      - Background_6B22F
+      - Inner_Fire_Line1_53F05
+      - Inner_Fire_Answer_87CF3
+      - Inner_Fire_Answer_31EB7
+      - Noran_167BE
+      - Logan_84E4C
+      serializedElementValues:
+      - _position: {x: 0, y: 0}
+        _activeStatus: 1
+        _size: {x: 0, y: 0}
+      serializedDialogueValues:
+      - _nextKeyID: 2
+        _previousKeyID: 0
+        _position: {x: 0, y: 265}
+        _activeStatus: 1
+        _size: {x: 0, y: 0}
+        _text: "\u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
+          \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430
+          \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
+          \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430
+          \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
+          \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430
+          \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
+          \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430
+          \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
+          \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 "
+        _conversationCharacterID: Noran_167BE
+        _speakingCharacterIndex: 0
+        _conversationCharacters:
+          keys:
+          - Noran
+          values:
+          - Noran_167BE
+        _type: 0
+      serializedDialogueAnswerValues:
+      - _nextKeyID: 0
+        _previousKeyID: 0
+        _position: {x: 0, y: 539.99994}
+        _activeStatus: 0
+        _size: {x: 0, y: 0}
+        _text: "\u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
+          \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430
+          \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
+          \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430
+          \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
+          \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430
+          \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
+          \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430
+          \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
+          \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 "
+      - _nextKeyID: 0
+        _previousKeyID: 0
+        _position: {x: 0, y: 539.99994}
+        _activeStatus: 0
+        _size: {x: 0, y: 0}
+        _text: "\u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
+          \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430
+          \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
+          \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430
+          \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
+          \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430
+          \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
+          \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430
+          \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
+          \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 "
+      serializedFrameCharacterValues:
+      - _position: {x: 0, y: -5.03}
+        _activeStatus: 1
+        _size: {x: 0, y: 0}
+        _dialogueID: Inner_Fire_Line1_53F05
+        _type: 1
+        _emotionState: 0
+        _selectedPartIndex: 0
+      - _position: {x: 0, y: 0}
+        _activeStatus: 1
+        _size: {x: 0, y: 0}
+        _dialogueID: Inner_Fire_Line1_53F05
+        _type: 1
+        _emotionState: 0
+        _selectedPartIndex: 1
+  frameKeyPair:
+    frameID: Frame_0
+    frameKeyID: 0
+  input1Knob: {fileID: -2314510729194451505}
+  oldPos: 0
+  oldPosOffset: 50
+  dialogueValues:
+    keys:
+    - Inner_Fire_Line1_53F05
+    values:
+    - serializedDialogueValues:
+        _nextKeyID: 2
+        _previousKeyID: 0
+        _position: {x: 0, y: 265}
+        _activeStatus: 1
+        _size: {x: 0, y: 0}
+        _text: "\u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
+          \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430
+          \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
+          \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430
+          \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
+          \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430
+          \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
+          \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430
+          \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
+          \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 "
+        _conversationCharacterID: Noran_167BE
+        _speakingCharacterIndex: 0
+        _conversationCharacters:
+          keys:
+          - Noran
+          values:
+          - Noran_167BE
+        _type: 0
+  dialogueAnswerValues:
+    keys:
+    - Inner_Fire_Answer_87CF3
+    - Inner_Fire_Answer_31EB7
+    values:
+    - serializedDialogueAnswerValues:
+        _nextKeyID: 0
+        _previousKeyID: 0
+        _position: {x: 0, y: 539.99994}
+        _activeStatus: 0
+        _size: {x: 0, y: 0}
+        _text: "\u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
+          \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430
+          \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
+          \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430
+          \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
+          \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430
+          \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
+          \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430
+          \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
+          \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 "
+    - serializedDialogueAnswerValues:
+        _nextKeyID: 0
+        _previousKeyID: 0
+        _position: {x: 0, y: 539.99994}
+        _activeStatus: 0
+        _size: {x: 0, y: 0}
+        _text: "\u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
+          \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430
+          \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
+          \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430
+          \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
+          \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430
+          \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
+          \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430
+          \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
+          \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 "
+  characterValues:
+    keys:
+    - Noran_167BE
+    - Logan_84E4C
+    values:
+    - serializedFrameCharacterValues:
+        _position: {x: 0, y: -5.03}
+        _activeStatus: 1
+        _size: {x: 0, y: 0}
+        _dialogueID: Inner_Fire_Line1_53F05
+        _type: 1
+        _emotionState: 0
+        _selectedPartIndex: 0
+    - serializedFrameCharacterValues:
+        _position: {x: 0, y: 0}
+        _activeStatus: 1
+        _size: {x: 0, y: 0}
+        _dialogueID: Inner_Fire_Line1_53F05
+        _type: 1
+        _emotionState: 0
+        _selectedPartIndex: 1
+--- !u!114 &-6504028709804359354
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -15,8 +235,459 @@ MonoBehaviour:
   canvas: {fileID: 0}
   parentEditor: {fileID: 0}
   selectedNode: {fileID: 0}
-  panOffset: {x: -712.99994, y: -202.60002}
-  zoom: 2
+  panOffset: {x: -537.1998, y: -233.59995}
+  zoom: 2.2
+--- !u!114 &-5486551447364600517
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0066812b5804b734393478a52ee03726, type: 3}
+  m_Name: KeyFrame Node
+  m_EditorClassIdentifier: 
+  canvas: {fileID: 11400000}
+  position: {x: 687.6, y: 316.79996}
+  dynamicConnectionPorts:
+  - {fileID: 1728429453828327055}
+  backgroundColor: {r: 1, g: 1, b: 1, a: 1}
+  frameKey:
+    id: 4
+    nodeIndex: 4
+    dialogueOutputKnobs:
+      keys:
+      - Inner_Fire_Line1_53F05
+      values: 00000000
+    transitionType: 0
+    frameKeyValues:
+      keys:
+      - Background_6B22F
+      - Inner_Fire_Line1_53F05
+      - Inner_Fire_Answer_87CF3
+      - Inner_Fire_Answer_31EB7
+      - Noran_167BE
+      - Logan_84E4C
+      serializedElementValues:
+      - _position: {x: 0, y: 0}
+        _activeStatus: 1
+        _size: {x: 0, y: 0}
+      serializedDialogueValues:
+      - _nextKeyID: 3
+        _previousKeyID: 0
+        _position: {x: 0, y: 265}
+        _activeStatus: 1
+        _size: {x: 0, y: 0}
+        _text: "\u041E\u043D\u043E \u0440\u0430\u0431\u043E\u0442\u0430\u0435\u0442?"
+        _conversationCharacterID: Logan_84E4C
+        _speakingCharacterIndex: 1
+        _conversationCharacters:
+          keys:
+          - Noran
+          - Logan
+          values:
+          - Noran_167BE
+          - Logan_84E4C
+        _type: 0
+      serializedDialogueAnswerValues:
+      - _nextKeyID: 0
+        _previousKeyID: 0
+        _position: {x: 0, y: 539.99994}
+        _activeStatus: 0
+        _size: {x: 0, y: 0}
+        _text: "\u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
+          \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430
+          \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
+          \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430
+          \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
+          \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430
+          \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
+          \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430
+          \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
+          \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 "
+      - _nextKeyID: 0
+        _previousKeyID: 0
+        _position: {x: 0, y: 539.99994}
+        _activeStatus: 0
+        _size: {x: 0, y: 0}
+        _text: "\u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
+          \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430
+          \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
+          \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430
+          \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
+          \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430
+          \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
+          \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430
+          \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
+          \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 "
+      serializedFrameCharacterValues:
+      - _position: {x: 0, y: -5.03}
+        _activeStatus: 1
+        _size: {x: 0, y: 0}
+        _dialogueID: Inner_Fire_Line1_53F05
+        _type: 1
+        _emotionState: 0
+        _selectedPartIndex: 0
+      - _position: {x: 0, y: 0}
+        _activeStatus: 1
+        _size: {x: 0, y: 0}
+        _dialogueID: Inner_Fire_Line1_53F05
+        _type: 1
+        _emotionState: 0
+        _selectedPartIndex: 1
+  frameKeyPair:
+    frameID: Frame_0
+    frameKeyID: 4
+  input1Knob: {fileID: -9216061859566153739}
+  oldPos: 0
+  oldPosOffset: 50
+  dialogueValues:
+    keys:
+    - Inner_Fire_Line1_53F05
+    values:
+    - serializedDialogueValues:
+        _nextKeyID: 3
+        _previousKeyID: 0
+        _position: {x: 0, y: 265}
+        _activeStatus: 1
+        _size: {x: 0, y: 0}
+        _text: "\u041E\u043D\u043E \u0440\u0430\u0431\u043E\u0442\u0430\u0435\u0442?"
+        _conversationCharacterID: Logan_84E4C
+        _speakingCharacterIndex: 1
+        _conversationCharacters:
+          keys:
+          - Noran
+          - Logan
+          values:
+          - Noran_167BE
+          - Logan_84E4C
+        _type: 0
+  dialogueAnswerValues:
+    keys:
+    - Inner_Fire_Answer_87CF3
+    - Inner_Fire_Answer_31EB7
+    values:
+    - serializedDialogueAnswerValues:
+        _nextKeyID: 0
+        _previousKeyID: 0
+        _position: {x: 0, y: 539.99994}
+        _activeStatus: 0
+        _size: {x: 0, y: 0}
+        _text: "\u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
+          \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430
+          \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
+          \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430
+          \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
+          \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430
+          \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
+          \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430
+          \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
+          \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 "
+    - serializedDialogueAnswerValues:
+        _nextKeyID: 0
+        _previousKeyID: 0
+        _position: {x: 0, y: 539.99994}
+        _activeStatus: 0
+        _size: {x: 0, y: 0}
+        _text: "\u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
+          \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430
+          \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
+          \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430
+          \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
+          \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430
+          \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
+          \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430
+          \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
+          \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 "
+  characterValues:
+    keys:
+    - Noran_167BE
+    - Logan_84E4C
+    values:
+    - serializedFrameCharacterValues:
+        _position: {x: 0, y: -5.03}
+        _activeStatus: 1
+        _size: {x: 0, y: 0}
+        _dialogueID: Inner_Fire_Line1_53F05
+        _type: 1
+        _emotionState: 0
+        _selectedPartIndex: 0
+    - serializedFrameCharacterValues:
+        _position: {x: 0, y: 0}
+        _activeStatus: 1
+        _size: {x: 0, y: 0}
+        _dialogueID: Inner_Fire_Line1_53F05
+        _type: 1
+        _emotionState: 0
+        _selectedPartIndex: 1
+--- !u!114 &-5033826669998607933
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 017e2c7fd038ecb46b317c1e003f31dc, type: 3}
+  m_Name: Output
+  m_EditorClassIdentifier: 
+  body: {fileID: -8376072608837595658}
+  direction: 2
+  maxConnectionCount: 0
+  styleID: FrameKey
+  _connections:
+  - {fileID: 3227571765691824892}
+  side: 2
+  sidePosition: 133
+  sideOffset: 0
+--- !u!114 &-4602604709513252709
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 017e2c7fd038ecb46b317c1e003f31dc, type: 3}
+  m_Name: Output
+  m_EditorClassIdentifier: 
+  body: {fileID: 7418196851923168215}
+  direction: 2
+  maxConnectionCount: 0
+  styleID: FrameKey
+  _connections: []
+  side: 2
+  sidePosition: 103
+  sideOffset: 0
+--- !u!114 &-4290887026807337261
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0066812b5804b734393478a52ee03726, type: 3}
+  m_Name: KeyFrame Node
+  m_EditorClassIdentifier: 
+  canvas: {fileID: 11400000}
+  position: {x: 345.8, y: 319.8}
+  dynamicConnectionPorts:
+  - {fileID: 7374799971895643304}
+  backgroundColor: {r: 1, g: 1, b: 1, a: 1}
+  frameKey:
+    id: 2
+    nodeIndex: 2
+    dialogueOutputKnobs:
+      keys:
+      - Inner_Fire_Line1_53F05
+      values: 00000000
+    transitionType: 0
+    frameKeyValues:
+      keys:
+      - Background_6B22F
+      - Inner_Fire_Line1_53F05
+      - Inner_Fire_Answer_87CF3
+      - Inner_Fire_Answer_31EB7
+      - Noran_167BE
+      - Logan_84E4C
+      serializedElementValues:
+      - _position: {x: 0, y: 0}
+        _activeStatus: 1
+        _size: {x: 0, y: 0}
+      serializedDialogueValues:
+      - _nextKeyID: 4
+        _previousKeyID: 0
+        _position: {x: 0, y: 265}
+        _activeStatus: 1
+        _size: {x: 0, y: 0}
+        _text: "\u041A\u0435\u043A\u0446"
+        _conversationCharacterID: Logan_84E4C
+        _speakingCharacterIndex: 1
+        _conversationCharacters:
+          keys:
+          - Noran
+          - Logan
+          values:
+          - Noran_167BE
+          - Logan_84E4C
+        _type: 1
+      serializedDialogueAnswerValues:
+      - _nextKeyID: 0
+        _previousKeyID: 0
+        _position: {x: 0, y: 539.99994}
+        _activeStatus: 0
+        _size: {x: 0, y: 0}
+        _text: "\u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
+          \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430
+          \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
+          \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430
+          \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
+          \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430
+          \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
+          \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430
+          \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
+          \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 "
+      - _nextKeyID: 0
+        _previousKeyID: 0
+        _position: {x: 0, y: 539.99994}
+        _activeStatus: 0
+        _size: {x: 0, y: 0}
+        _text: "\u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
+          \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430
+          \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
+          \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430
+          \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
+          \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430
+          \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
+          \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430
+          \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
+          \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 "
+      serializedFrameCharacterValues:
+      - _position: {x: 0, y: -5.03}
+        _activeStatus: 1
+        _size: {x: 0, y: 0}
+        _dialogueID: Inner_Fire_Line1_53F05
+        _type: 1
+        _emotionState: 0
+        _selectedPartIndex: 0
+      - _position: {x: -3.23, y: 0}
+        _activeStatus: 1
+        _size: {x: 0, y: 0}
+        _dialogueID: Inner_Fire_Line1_53F05
+        _type: 1
+        _emotionState: 0
+        _selectedPartIndex: 1
+  frameKeyPair:
+    frameID: Frame_0
+    frameKeyID: 2
+  input1Knob: {fileID: 3227571765691824892}
+  oldPos: 0
+  oldPosOffset: 50
+  dialogueValues:
+    keys:
+    - Inner_Fire_Line1_53F05
+    values:
+    - serializedDialogueValues:
+        _nextKeyID: 4
+        _previousKeyID: 0
+        _position: {x: 0, y: 265}
+        _activeStatus: 1
+        _size: {x: 0, y: 0}
+        _text: "\u041A\u0435\u043A\u0446"
+        _conversationCharacterID: Logan_84E4C
+        _speakingCharacterIndex: 1
+        _conversationCharacters:
+          keys:
+          - Noran
+          - Logan
+          values:
+          - Noran_167BE
+          - Logan_84E4C
+        _type: 1
+  dialogueAnswerValues:
+    keys:
+    - Inner_Fire_Answer_87CF3
+    - Inner_Fire_Answer_31EB7
+    values:
+    - serializedDialogueAnswerValues:
+        _nextKeyID: 0
+        _previousKeyID: 0
+        _position: {x: 0, y: 539.99994}
+        _activeStatus: 0
+        _size: {x: 0, y: 0}
+        _text: "\u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
+          \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430
+          \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
+          \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430
+          \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
+          \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430
+          \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
+          \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430
+          \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
+          \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 "
+    - serializedDialogueAnswerValues:
+        _nextKeyID: 0
+        _previousKeyID: 0
+        _position: {x: 0, y: 539.99994}
+        _activeStatus: 0
+        _size: {x: 0, y: 0}
+        _text: "\u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
+          \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430
+          \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
+          \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430
+          \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
+          \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430
+          \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
+          \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430
+          \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
+          \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 "
+  characterValues:
+    keys:
+    - Noran_167BE
+    - Logan_84E4C
+    values:
+    - serializedFrameCharacterValues:
+        _position: {x: 0, y: -5.03}
+        _activeStatus: 1
+        _size: {x: 0, y: 0}
+        _dialogueID: Inner_Fire_Line1_53F05
+        _type: 1
+        _emotionState: 0
+        _selectedPartIndex: 0
+    - serializedFrameCharacterValues:
+        _position: {x: -3.23, y: 0}
+        _activeStatus: 1
+        _size: {x: 0, y: 0}
+        _dialogueID: Inner_Fire_Line1_53F05
+        _type: 1
+        _emotionState: 0
+        _selectedPartIndex: 1
+--- !u!114 &-2314510729194451505
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 017e2c7fd038ecb46b317c1e003f31dc, type: 3}
+  m_Name: Input 1
+  m_EditorClassIdentifier: 
+  body: {fileID: -8376072608837595658}
+  direction: 1
+  maxConnectionCount: 0
+  styleID: FrameKey
+  _connections: []
+  side: 4
+  sidePosition: 125
+  sideOffset: 0
+--- !u!114 &-627700555253848057
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 017e2c7fd038ecb46b317c1e003f31dc, type: 3}
+  m_Name: Output
+  m_EditorClassIdentifier: 
+  body: {fileID: 2567639212376535799}
+  direction: 2
+  maxConnectionCount: 0
+  styleID: FrameKey
+  _connections: []
+  side: 2
+  sidePosition: 139.5
+  sideOffset: 0
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30,9 +701,470 @@ MonoBehaviour:
   m_Name: Canvas_Frame_0
   m_EditorClassIdentifier: 
   editorStates:
-  - {fileID: -8589474723282132548}
+  - {fileID: -6504028709804359354}
   saveName: Canvas_Frame_0
   savePath: Assets\Frames\NodeCanvases\Canvas_Frame_0.asset
   livesInScene: 0
-  nodes: []
+  nodes:
+  - {fileID: -8376072608837595658}
+  - {fileID: 7418196851923168215}
+  - {fileID: -4290887026807337261}
+  - {fileID: 2567639212376535799}
+  - {fileID: -5486551447364600517}
   groups: []
+--- !u!114 &192994440491163298
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 017e2c7fd038ecb46b317c1e003f31dc, type: 3}
+  m_Name: Input 1
+  m_EditorClassIdentifier: 
+  body: {fileID: 7418196851923168215}
+  direction: 1
+  maxConnectionCount: 0
+  styleID: FrameKey
+  _connections: []
+  side: 4
+  sidePosition: 125
+  sideOffset: 0
+--- !u!114 &1728429453828327055
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 017e2c7fd038ecb46b317c1e003f31dc, type: 3}
+  m_Name: Output
+  m_EditorClassIdentifier: 
+  body: {fileID: -5486551447364600517}
+  direction: 2
+  maxConnectionCount: 0
+  styleID: FrameKey
+  _connections: []
+  side: 2
+  sidePosition: 103
+  sideOffset: 0
+--- !u!114 &2567639212376535799
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0066812b5804b734393478a52ee03726, type: 3}
+  m_Name: KeyFrame Node
+  m_EditorClassIdentifier: 
+  canvas: {fileID: 11400000}
+  position: {x: 687.6, y: -25.199982}
+  dynamicConnectionPorts:
+  - {fileID: 5385282330276689665}
+  - {fileID: -627700555253848057}
+  backgroundColor: {r: 1, g: 1, b: 1, a: 1}
+  frameKey:
+    id: 3
+    nodeIndex: 3
+    dialogueOutputKnobs:
+      keys:
+      - Inner_Fire_Answer_31EB7
+      - Inner_Fire_Answer_87CF3
+      values: 0100000000000000
+    transitionType: 1
+    frameKeyValues:
+      keys:
+      - Background_6B22F
+      - Inner_Fire_Line1_53F05
+      - Inner_Fire_Answer_87CF3
+      - Inner_Fire_Answer_31EB7
+      - Noran_167BE
+      - Logan_84E4C
+      serializedElementValues:
+      - _position: {x: 0, y: 0}
+        _activeStatus: 1
+        _size: {x: 0, y: 0}
+      serializedDialogueValues:
+      - _nextKeyID: 0
+        _previousKeyID: 0
+        _position: {x: 0, y: 540}
+        _activeStatus: 0
+        _size: {x: 0, y: 0}
+        _text: "\u041A\u0435\u043A\u0446"
+        _conversationCharacterID: Noran_167BE
+        _speakingCharacterIndex: 0
+        _conversationCharacters:
+          keys:
+          - Noran
+          - Logan
+          values:
+          - Noran_167BE
+          - Logan_84E4C
+        _type: 0
+      serializedDialogueAnswerValues:
+      - _nextKeyID: 0
+        _previousKeyID: 0
+        _position: {x: 0, y: 400}
+        _activeStatus: 1
+        _size: {x: 0, y: 0}
+        _text: "\u0414\u0430"
+      - _nextKeyID: 1
+        _previousKeyID: 0
+        _position: {x: 0, y: 247}
+        _activeStatus: 1
+        _size: {x: 0, y: 0}
+        _text: "\u041D\u0435\u0442"
+      serializedFrameCharacterValues:
+      - _position: {x: 0, y: -5.03}
+        _activeStatus: 1
+        _size: {x: 0, y: 0}
+        _dialogueID: Inner_Fire_Line1_53F05
+        _type: 1
+        _emotionState: 0
+        _selectedPartIndex: 0
+      - _position: {x: 0, y: 0}
+        _activeStatus: 1
+        _size: {x: 0, y: 0}
+        _dialogueID: Inner_Fire_Line1_53F05
+        _type: 1
+        _emotionState: 0
+        _selectedPartIndex: 1
+  frameKeyPair:
+    frameID: Frame_0
+    frameKeyID: 3
+  input1Knob: {fileID: 4237637660896267359}
+  oldPos: 0
+  oldPosOffset: 50
+  dialogueValues:
+    keys:
+    - Inner_Fire_Line1_53F05
+    values:
+    - serializedDialogueValues:
+        _nextKeyID: 0
+        _previousKeyID: 0
+        _position: {x: 0, y: 540}
+        _activeStatus: 0
+        _size: {x: 0, y: 0}
+        _text: "\u041A\u0435\u043A\u0446"
+        _conversationCharacterID: Noran_167BE
+        _speakingCharacterIndex: 0
+        _conversationCharacters:
+          keys:
+          - Noran
+          - Logan
+          values:
+          - Noran_167BE
+          - Logan_84E4C
+        _type: 0
+  dialogueAnswerValues:
+    keys:
+    - Inner_Fire_Answer_87CF3
+    - Inner_Fire_Answer_31EB7
+    values:
+    - serializedDialogueAnswerValues:
+        _nextKeyID: 0
+        _previousKeyID: 0
+        _position: {x: 0, y: 400}
+        _activeStatus: 1
+        _size: {x: 0, y: 0}
+        _text: "\u0414\u0430"
+    - serializedDialogueAnswerValues:
+        _nextKeyID: 1
+        _previousKeyID: 0
+        _position: {x: 0, y: 247}
+        _activeStatus: 1
+        _size: {x: 0, y: 0}
+        _text: "\u041D\u0435\u0442"
+  characterValues:
+    keys:
+    - Noran_167BE
+    - Logan_84E4C
+    values:
+    - serializedFrameCharacterValues:
+        _position: {x: 0, y: -5.03}
+        _activeStatus: 1
+        _size: {x: 0, y: 0}
+        _dialogueID: Inner_Fire_Line1_53F05
+        _type: 1
+        _emotionState: 0
+        _selectedPartIndex: 0
+    - serializedFrameCharacterValues:
+        _position: {x: 0, y: 0}
+        _activeStatus: 1
+        _size: {x: 0, y: 0}
+        _dialogueID: Inner_Fire_Line1_53F05
+        _type: 1
+        _emotionState: 0
+        _selectedPartIndex: 1
+--- !u!114 &3227571765691824892
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 017e2c7fd038ecb46b317c1e003f31dc, type: 3}
+  m_Name: Input 1
+  m_EditorClassIdentifier: 
+  body: {fileID: -4290887026807337261}
+  direction: 1
+  maxConnectionCount: 0
+  styleID: FrameKey
+  _connections:
+  - {fileID: -5033826669998607933}
+  side: 4
+  sidePosition: 125
+  sideOffset: 0
+--- !u!114 &4237637660896267359
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 017e2c7fd038ecb46b317c1e003f31dc, type: 3}
+  m_Name: Input 1
+  m_EditorClassIdentifier: 
+  body: {fileID: 2567639212376535799}
+  direction: 1
+  maxConnectionCount: 0
+  styleID: FrameKey
+  _connections: []
+  side: 4
+  sidePosition: 125
+  sideOffset: 0
+--- !u!114 &5385282330276689665
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 017e2c7fd038ecb46b317c1e003f31dc, type: 3}
+  m_Name: Output
+  m_EditorClassIdentifier: 
+  body: {fileID: 2567639212376535799}
+  direction: 2
+  maxConnectionCount: 0
+  styleID: FrameKey
+  _connections: []
+  side: 2
+  sidePosition: 169.5
+  sideOffset: 0
+--- !u!114 &7374799971895643304
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 017e2c7fd038ecb46b317c1e003f31dc, type: 3}
+  m_Name: Output
+  m_EditorClassIdentifier: 
+  body: {fileID: -4290887026807337261}
+  direction: 2
+  maxConnectionCount: 0
+  styleID: FrameKey
+  _connections:
+  - {fileID: -9216061859566153739}
+  side: 2
+  sidePosition: 103
+  sideOffset: 0
+--- !u!114 &7418196851923168215
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0066812b5804b734393478a52ee03726, type: 3}
+  m_Name: KeyFrame Node
+  m_EditorClassIdentifier: 
+  canvas: {fileID: 11400000}
+  position: {x: 350.6, y: -15.599999}
+  dynamicConnectionPorts:
+  - {fileID: -4602604709513252709}
+  backgroundColor: {r: 1, g: 1, b: 1, a: 1}
+  frameKey:
+    id: 1
+    nodeIndex: 1
+    dialogueOutputKnobs:
+      keys:
+      - Inner_Fire_Line1_53F05
+      values: 00000000
+    transitionType: 0
+    frameKeyValues:
+      keys:
+      - Background_6B22F
+      - Inner_Fire_Line1_53F05
+      - Inner_Fire_Answer_87CF3
+      - Inner_Fire_Answer_31EB7
+      - Noran_167BE
+      - Logan_84E4C
+      serializedElementValues:
+      - _position: {x: 0, y: 0}
+        _activeStatus: 1
+        _size: {x: 0, y: 0}
+      serializedDialogueValues:
+      - _nextKeyID: 0
+        _previousKeyID: 0
+        _position: {x: 0, y: 265}
+        _activeStatus: 1
+        _size: {x: 0, y: 0}
+        _text: "\u0410\u043C\u043E\u0433\u0443\u0441 \u0441\u0430\u0441\u0441\u0438
+          \u0431\u0430\u043A\u0430"
+        _conversationCharacterID: Noran_167BE
+        _speakingCharacterIndex: 0
+        _conversationCharacters:
+          keys:
+          - Noran
+          values:
+          - Noran_167BE
+        _type: 0
+      serializedDialogueAnswerValues:
+      - _nextKeyID: 0
+        _previousKeyID: 0
+        _position: {x: 0, y: 539.99994}
+        _activeStatus: 0
+        _size: {x: 0, y: 0}
+        _text: "\u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
+          \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430
+          \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
+          \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430
+          \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
+          \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430
+          \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
+          \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430
+          \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
+          \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 "
+      - _nextKeyID: 0
+        _previousKeyID: 0
+        _position: {x: 0, y: 539.99994}
+        _activeStatus: 0
+        _size: {x: 0, y: 0}
+        _text: "\u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
+          \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430
+          \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
+          \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430
+          \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
+          \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430
+          \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
+          \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430
+          \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
+          \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 "
+      serializedFrameCharacterValues:
+      - _position: {x: 0, y: -5.03}
+        _activeStatus: 1
+        _size: {x: 0, y: 0}
+        _dialogueID: Inner_Fire_Line1_53F05
+        _type: 1
+        _emotionState: 0
+        _selectedPartIndex: 0
+      - _position: {x: 0, y: 0}
+        _activeStatus: 1
+        _size: {x: 0, y: 0}
+        _dialogueID: Inner_Fire_Line1_53F05
+        _type: 1
+        _emotionState: 0
+        _selectedPartIndex: 1
+  frameKeyPair:
+    frameID: Frame_0
+    frameKeyID: 1
+  input1Knob: {fileID: 192994440491163298}
+  oldPos: 0
+  oldPosOffset: 50
+  dialogueValues:
+    keys:
+    - Inner_Fire_Line1_53F05
+    values:
+    - serializedDialogueValues:
+        _nextKeyID: 0
+        _previousKeyID: 0
+        _position: {x: 0, y: 265}
+        _activeStatus: 1
+        _size: {x: 0, y: 0}
+        _text: "\u0410\u043C\u043E\u0433\u0443\u0441 \u0441\u0430\u0441\u0441\u0438
+          \u0431\u0430\u043A\u0430"
+        _conversationCharacterID: Noran_167BE
+        _speakingCharacterIndex: 0
+        _conversationCharacters:
+          keys:
+          - Noran
+          values:
+          - Noran_167BE
+        _type: 0
+  dialogueAnswerValues:
+    keys:
+    - Inner_Fire_Answer_87CF3
+    - Inner_Fire_Answer_31EB7
+    values:
+    - serializedDialogueAnswerValues:
+        _nextKeyID: 0
+        _previousKeyID: 0
+        _position: {x: 0, y: 539.99994}
+        _activeStatus: 0
+        _size: {x: 0, y: 0}
+        _text: "\u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
+          \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430
+          \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
+          \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430
+          \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
+          \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430
+          \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
+          \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430
+          \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
+          \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 "
+    - serializedDialogueAnswerValues:
+        _nextKeyID: 0
+        _previousKeyID: 0
+        _position: {x: 0, y: 539.99994}
+        _activeStatus: 0
+        _size: {x: 0, y: 0}
+        _text: "\u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
+          \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430
+          \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
+          \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430
+          \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
+          \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430
+          \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
+          \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430
+          \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
+          \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 "
+  characterValues:
+    keys:
+    - Noran_167BE
+    - Logan_84E4C
+    values:
+    - serializedFrameCharacterValues:
+        _position: {x: 0, y: -5.03}
+        _activeStatus: 1
+        _size: {x: 0, y: 0}
+        _dialogueID: Inner_Fire_Line1_53F05
+        _type: 1
+        _emotionState: 0
+        _selectedPartIndex: 0
+    - serializedFrameCharacterValues:
+        _position: {x: 0, y: 0}
+        _activeStatus: 1
+        _size: {x: 0, y: 0}
+        _dialogueID: Inner_Fire_Line1_53F05
+        _type: 1
+        _emotionState: 0
+        _selectedPartIndex: 1

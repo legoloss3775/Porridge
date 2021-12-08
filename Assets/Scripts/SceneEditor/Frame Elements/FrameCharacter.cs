@@ -16,6 +16,7 @@ public class FrameCharacterValues : Values, IFrameCharacterSerialzation {
     public FrameCharacterValues(FrameCharacter character) {
         position = character.position;
         activeStatus = character.activeStatus;
+        size = character.size;
         dialogueID = character.dialogueID;
         type = character.type;
         emotionState = character.emotionState;
@@ -29,6 +30,8 @@ public class FrameCharacterValues : Values, IFrameCharacterSerialzation {
         [SerializeField]
         private bool _activeStatus;
         [SerializeField]
+        private Vector2 _size;
+        [SerializeField]
         private string _dialogueID;
         [SerializeField]
         private FrameCharacter.CharacterType _type;
@@ -37,8 +40,10 @@ public class FrameCharacterValues : Values, IFrameCharacterSerialzation {
         [SerializeField]
         private int _selectedPartIndex;
 
+
         public Vector2 position { get => _position; set => _position = value; }
         public bool activeStatus { get => _activeStatus; set => _activeStatus = value; }
+        public Vector2 size { get => _size; set => _size = value; }
         public string dialogueID { get => _dialogueID; set => _dialogueID = value; }
         public FrameCharacter.CharacterType type { get => _type; set => _type = value; }
         public FrameCharacterSO.CharacterEmotionState emotionState { get => _emotionState; set => _emotionState = value; }
@@ -50,6 +55,7 @@ public class FrameCharacterValues : Values, IFrameCharacterSerialzation {
     public void SetSerializedFrameCharacterValues() {
         serializedFrameCharacterValues.position = position;
         serializedFrameCharacterValues.activeStatus = activeStatus;
+        serializedFrameCharacterValues.size = size;
         serializedFrameCharacterValues.dialogueID = dialogueID;
         serializedFrameCharacterValues.type = type;
         serializedFrameCharacterValues.emotionState = emotionState;
@@ -60,6 +66,7 @@ public class FrameCharacterValues : Values, IFrameCharacterSerialzation {
             values.Add(new FrameCharacterValues {
                 position = svalue.position,
                 activeStatus = svalue.activeStatus,
+                size = svalue.size,
                 dialogueID = svalue.dialogueID,
                 type = svalue.type,
                 emotionState = svalue.emotionState,
@@ -72,6 +79,7 @@ public class FrameCharacterValues : Values, IFrameCharacterSerialzation {
 public interface IFrameCharacterSerialzation {
     Vector2 position { get; set; }
     bool activeStatus { get; set; }
+    Vector2 size { get; set; }
     string dialogueID { get; set; }
     FrameCharacter.CharacterType type { get; set; }
     FrameCharacterSO.CharacterEmotionState emotionState { get; set; }
@@ -124,6 +132,7 @@ public class FrameCharacter : FrameElement, IFrameCharacterSerialzation {
 
         activeStatus = values.activeStatus;
         position = values.position;
+        size = values.size;
         dialogueID = values.dialogueID;
         type = values.type;
 

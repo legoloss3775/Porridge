@@ -11,6 +11,7 @@ public class FrameElementValues : Values, IFrameElementSerialization {
     public FrameElementValues(FrameElement element) {
         position = element.position;
         activeStatus = element.activeStatus;
+        size = element.size;
     }
     public FrameElementValues() { }
     [Serializable]
@@ -19,9 +20,12 @@ public class FrameElementValues : Values, IFrameElementSerialization {
         private Vector2 _position;
         [SerializeField]
         private bool _activeStatus;
+        [SerializeField]
+        private Vector2 _size;
 
         public Vector2 position { get => _position; set => _position = value; }
         public bool activeStatus { get => _activeStatus; set => _activeStatus = value; }
+        public Vector2 size { get => _size; set => _size = value; }
     }
     [SerializeField]
     public SerializedElementValues serializedElementValues;
@@ -29,12 +33,14 @@ public class FrameElementValues : Values, IFrameElementSerialization {
     public void SetSerializedFrameKeyElementValues() {
         serializedElementValues.position = position;
         serializedElementValues.activeStatus = activeStatus;
+        serializedElementValues.size = size;
     }
     public static void LoadSerialzedFrameKeyElementValues(List<SerializedElementValues> serializedElementValues, List<Values> values) {
         foreach (var svalue in serializedElementValues) {
             values.Add(new FrameElementValues {
                 position = svalue.position,
-                activeStatus = svalue.activeStatus
+                activeStatus = svalue.activeStatus,
+                size = svalue.size,
             });
         }
     }
@@ -43,6 +49,7 @@ public class FrameElementValues : Values, IFrameElementSerialization {
 public interface IFrameElementSerialization {
     Vector2 position { get; set; }
     bool activeStatus { get; set; }
+    Vector2 size { get; set; }
 }
 [System.Serializable]
 public abstract class FrameElement : MonoBehaviour, IFrameElementSerialization {
@@ -66,6 +73,16 @@ public abstract class FrameElement : MonoBehaviour, IFrameElementSerialization {
         }
         set {
             this.gameObject.SetActive(value);
+        }
+    }
+    public virtual Vector2 size {
+        get {
+            if (this != null)
+                return this.gameObject.transform.localScale;
+            else return frameElementObject.prefab.transform.localScale;
+        }
+        set {
+            this.gameObject.transform.localScale = value;
         }
     }
     //ID объекта задается при его создании, сохранение в ключе не нужно.
@@ -112,6 +129,7 @@ public abstract class FrameElement : MonoBehaviour, IFrameElementSerialization {
         FrameElementValues values = (FrameElementValues)frameKeyValues;
         activeStatus = values.activeStatus;
         position = values.position;
+        size = values.size;
     }
 
     public void SetKeyValuesWhileNotInPlayMode(){
@@ -136,12 +154,14 @@ public abstract class FrameElement : MonoBehaviour, IFrameElementSerialization {
             Debug.Log(element.id);
             if (keyValues != null) {
                 keyValues.position = element.gameObject.transform.position;
+                keyValues.size = element.gameObject.transform.localScale;
                 element.SetKeyValuesWhileNotInPlayMode();
 
                 if (targets.Length > 1) {
                     foreach (var target in targets) {
                         FrameElement mTarget = (FrameElement)target;
                         element.position = element.gameObject.transform.position;
+                        element.size = element.gameObject.transform.localScale;
                         mTarget.SetKeyValuesWhileNotInPlayMode();
                     }
                 }

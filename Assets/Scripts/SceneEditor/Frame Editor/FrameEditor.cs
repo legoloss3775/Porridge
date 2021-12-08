@@ -293,18 +293,18 @@ public abstract class FrameEditor : Editor
     public static void DeleteInteractableTransitionNode(FrameElement element, FrameKey key) {
         if (NodeEditor.curNodeCanvas == null) return;
         foreach (KeyNode node in NodeEditor.curNodeCanvas.nodes) {
-            if (node.frameKey == null || node.frameKey.id != key.id) continue;
+            if (node.frameKey == null || node.frameKeyPair.frameKeyID != key.id) continue;
 
                 foreach (var n in node.outputKnobs.ToList()) {
-                if (node.frameKey.dialogueOutputKnobs.ContainsKey(element.id)) { 
-                    var removeIndex = node.frameKey.dialogueOutputKnobs[element.id];
+                if (key.dialogueOutputKnobs.ContainsKey(element.id)) { 
+                    var removeIndex = key.dialogueOutputKnobs[element.id];
 
+                    key.dialogueOutputKnobs.Remove(element.id);
                     DestroyImmediate(n, true);
-                    node.frameKey.dialogueOutputKnobs.Remove(element.id);
 
-                    foreach (var killme in node.frameKey.dialogueOutputKnobs.Keys.ToList()) {
-                        if (node.frameKey.dialogueOutputKnobs[killme] >= removeIndex) {
-                            node.frameKey.dialogueOutputKnobs[killme] -= 1;
+                    foreach (var killme in key.dialogueOutputKnobs.Keys.ToList()) {
+                        if (key.dialogueOutputKnobs[killme] >= removeIndex) {
+                            key.dialogueOutputKnobs[killme] -= 1;
                         }
                     }
                     NodeEditorFramework.ConnectionPortManager.UpdatePortLists(node);
@@ -314,15 +314,15 @@ public abstract class FrameEditor : Editor
     }
     public static void CreateInteractableTransitionNode(FrameElement element, FrameKey key) {
         foreach (KeyNode node in NodeEditor.curNodeCanvas.nodes) {
-            if (node.frameKey == null || node.frameKey.id != key.id) continue;
-            if (node.frameKey.dialogueOutputKnobs.ContainsKey(element.id)) continue;
+            if (node.frameKey == null || node.frameKeyPair.frameKeyID != key.id) continue;
+            if (key.dialogueOutputKnobs.ContainsKey(element.id)) continue;
 
             var knob = node.CreateValueConnectionKnob(new ValueConnectionKnobAttribute("Output", Direction.Out, "FrameKey"));
             knob.SetValue<FrameKey>(node.frameKey);
             node.oldPos = knob.sidePosition;
 
             if (element is FrameUI_Dialogue || element is FrameUI_DialogueAnswer)
-                node.frameKey.dialogueOutputKnobs.Add(element.id, node.connectionKnobs.IndexOf(knob) - 1);
+                key.dialogueOutputKnobs.Add(element.id, node.connectionKnobs.IndexOf(knob) - 1);
             NodeEditorFramework.ConnectionPortManager.UpdatePortLists(node);
         }
     }
@@ -385,11 +385,18 @@ public class FrameEditor_CreationWindow : EditorWindow {
             var icon = UnityEditor.AssetPreview.GetAssetPreview(elementObject.prefab);
             GUILayout.BeginVertical();
             if (GUILayout.Button(icon, GUILayout.MaxWidth(200))) {
-                elementObject.CreateElementOnScene<TValue>(elementObject, Vector2.zero, out string id);
-                createdElementID = id;
+                if(elementObject is FrameUI_DialogueSO || 
+                    elementObject is FrameUI_DialogueAnswerSO) {
+                    elementObject.CreateElementOnScene<TValue>(elementObject, Vector2.zero, elementObject.prefab.GetComponent<RectTransform>().sizeDelta, out string id);
+                    createdElementID = id;
+                }
+                else {
+                    elementObject.CreateElementOnScene<TValue>(elementObject, Vector2.zero, elementObject.prefab.gameObject.transform.localScale, out string id);
+                    createdElementID = id;
+                }
 
                 var createdElement = FrameManager.GetFrameElementOnSceneByID<TValue>(createdElementID);
-
+                //
                 if(createdElement is IInteractable) {
                     foreach(KeyNode node in NodeEditor.curNodeCanvas.nodes) {
                         if(createdElement is FrameUI_Dialogue) {
@@ -401,13 +408,12 @@ public class FrameEditor_CreationWindow : EditorWindow {
                         var knob = node.CreateValueConnectionKnob(new ValueConnectionKnobAttribute("Output", Direction.Out, "FrameKey"));
                         knob.SetValue<FrameKey>(node.frameKey);
 
-                        node.frameKey.dialogueOutputKnobs.Add(createdElementID, node.outputKnobs.IndexOf(knob));
+                        node.frameKey.dialogueOutputKnobs.Add(createdElementID, node.outputKnobs.IndexOf(knob) );
                         NodeEditorFramework.ConnectionPortManager.UpdatePortLists(node);
                     }
                 }
-
+                
                 FrameManager.ChangeFrameKey();
-                Debug.Log(id);
                 Close();
             }
             GUILayout.BeginHorizontal();
@@ -434,9 +440,11 @@ public class FrameEditor_CreationWindow : EditorWindow {
 
         foreach (var frame in AssetManager.GetFrameAssets()) {
             frames.Add(frame);
+        }
+        foreach(var frame in frames) {
             frameNames.Add(frame.name);
         }
-        frameEditorSO.selectedFrameIndex = GUILayout.SelectionGrid(frameEditorSO.selectedFrameIndex, frameNames.ToArray(), 5);
+        frameEditorSO.selectedFrameIndex = GUILayout.SelectionGrid(frameEditorSO.selectedFrameIndex, frameNames.ToArray(), 3 );
         for (int i = 0; i < frames.Count; i++) {
             if (i == frameEditorSO.selectedFrameIndex && FrameManager.frame != frames[i]) {
                 if (FrameManager.frame.nodeCanvas != null){
@@ -454,7 +462,7 @@ public class FrameEditor_CreationWindow : EditorWindow {
     public static void CreateFrame() {
         var frameEditorSO = AssetManager.GetAtPath<FrameEditorSO>("Scripts/SceneEditor/").FirstOrDefault();
 
-        if (FrameManager.frame.nodeCanvas != null) {
+        if (FrameManager.frame != null && FrameManager.frame.nodeCanvas != null) {
             NodeEditorFramework.Standard.NodeEditorWindow.editor.canvasCache.SaveNodeCanvas("Assets/Frames/NodeCanvases/Canvas_" + FrameManager.frame.id + ".asset");
         }
 

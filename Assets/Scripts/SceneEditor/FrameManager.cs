@@ -25,32 +25,7 @@ public class FrameManager : MonoBehaviour, ISerializationCallbackReceiver {
     private void Start() {
         SetDefaultFrame();
     }
-    private void Update() {
-        if (Input.GetKeyDown(KeyCode.Q)) {
-            if (selectedFrame > 0)
-                selectedFrame--;
 
-            SetFrame(selectedFrame);
-        }
-        else if (Input.GetKeyDown(KeyCode.E)) {
-            if (selectedFrame < assetDatabase.frames.Count - 1)
-                selectedFrame++;
-
-            SetFrame(selectedFrame);
-        }
-        if (Input.GetKeyDown(KeyCode.A)) {
-            if (selectedFrameKey > 0)
-                selectedFrameKey--;
-
-            SetKey(selectedFrameKey);
-        }
-        else if (Input.GetKeyDown(KeyCode.D)) {
-            if (frame.frameKeys.Count - 1 > selectedFrameKey)
-                selectedFrameKey++;
-
-            SetKey(selectedFrameKey);
-        }
-    }
     public void SetKey(int keyIndex) {
         if (frame.frameKeys.Count >= keyIndex &&
             keyIndex >= 0) {

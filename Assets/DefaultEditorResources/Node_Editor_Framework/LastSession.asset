@@ -1,87 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-7890686620285932214
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 017e2c7fd038ecb46b317c1e003f31dc, type: 3}
-  m_Name: Output
-  m_EditorClassIdentifier: 
-  body: {fileID: 8159813455727705522}
-  direction: 2
-  maxConnectionCount: 0
-  styleID: FrameKey
-  _connections: []
-  side: 2
-  sidePosition: 168.5
-  sideOffset: 0
---- !u!114 &-7063321012946046948
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 017e2c7fd038ecb46b317c1e003f31dc, type: 3}
-  m_Name: Output
-  m_EditorClassIdentifier: 
-  body: {fileID: 7191055894184734491}
-  direction: 2
-  maxConnectionCount: 0
-  styleID: FrameKey
-  _connections:
-  - {fileID: 3843252322465132374}
-  side: 2
-  sidePosition: 133
-  sideOffset: 0
---- !u!114 &-6864902965397978769
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 017e2c7fd038ecb46b317c1e003f31dc, type: 3}
-  m_Name: Input 1
-  m_EditorClassIdentifier: 
-  body: {fileID: 7191055894184734491}
-  direction: 1
-  maxConnectionCount: 0
-  styleID: FrameKey
-  _connections: []
-  side: 4
-  sidePosition: 125
-  sideOffset: 0
---- !u!114 &-5897255325140945071
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 017e2c7fd038ecb46b317c1e003f31dc, type: 3}
-  m_Name: Output
-  m_EditorClassIdentifier: 
-  body: {fileID: 8159813455727705522}
-  direction: 2
-  maxConnectionCount: 0
-  styleID: FrameKey
-  _connections: []
-  side: 2
-  sidePosition: 139.5
-  sideOffset: 0
---- !u!114 &-161860198033181260
+--- !u!114 &-9197543428735598401
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -93,11 +12,181 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6ab6487237ff124ea4c2aa5de9ce3fb, type: 3}
   m_Name: MainEditorState
   m_EditorClassIdentifier: 
-  canvas: {fileID: 0}
+  canvas: {fileID: 11400000}
   parentEditor: {fileID: 0}
-  selectedNode: {fileID: 8159813455727705522}
-  panOffset: {x: -621, y: -188.6}
-  zoom: 1.4
+  selectedNode: {fileID: -301306636872264941}
+  panOffset: {x: -345.8, y: -284}
+  zoom: 3
+--- !u!114 &-7009042869349020756
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 017e2c7fd038ecb46b317c1e003f31dc, type: 3}
+  m_Name: Input 1
+  m_EditorClassIdentifier: 
+  body: {fileID: 2237829894840438497}
+  direction: 1
+  maxConnectionCount: 0
+  styleID: FrameKey
+  _connections:
+  - {fileID: -4043554145962360321}
+  side: 4
+  sidePosition: 125
+  sideOffset: 0
+--- !u!114 &-4043554145962360321
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 017e2c7fd038ecb46b317c1e003f31dc, type: 3}
+  m_Name: Output
+  m_EditorClassIdentifier: 
+  body: {fileID: -301306636872264941}
+  direction: 2
+  maxConnectionCount: 0
+  styleID: FrameKey
+  _connections:
+  - {fileID: -7009042869349020756}
+  side: 2
+  sidePosition: 101
+  sideOffset: 0
+--- !u!114 &-301306636872264941
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0066812b5804b734393478a52ee03726, type: 3}
+  m_Name: KeyFrame Node
+  m_EditorClassIdentifier: 
+  canvas: {fileID: 11400000}
+  position: {x: 0, y: 0}
+  dynamicConnectionPorts:
+  - {fileID: -4043554145962360321}
+  backgroundColor: {r: 1, g: 1, b: 1, a: 1}
+  frameKey:
+    id: 0
+    nodeIndex: 0
+    dialogueOutputKnobs:
+      keys:
+      - Inner_Fire_Line1_6D318
+      values: 00000000
+    transitionType: 0
+    frameKeyValues:
+      keys:
+      - Background_6A18F
+      - Inner_Fire_Line1_6D318
+      - Inner_Fire_Answer_838F8
+      - Inner_Fire_Answer_6E892
+      - Noran_053DC
+      serializedElementValues:
+      - _position: {x: 0, y: 0}
+        _activeStatus: 1
+        _size: {x: 1, y: 1}
+      serializedDialogueValues:
+      - _nextKeyID: 1
+        _previousKeyID: 0
+        _position: {x: 0, y: 284}
+        _activeStatus: 1
+        _size: {x: 1404.4652, y: 425.62552}
+        _text: "\u0422\u0435\u043A\u0441\u0442 \u0434\u0438\u0430\u043B\u043E\u0433\u0430"
+        _conversationCharacterID: Noran_053DC
+        _speakingCharacterIndex: 0
+        _conversationCharacters:
+          keys:
+          - Noran
+          values:
+          - Noran_053DC
+        _type: 0
+      serializedDialogueAnswerValues:
+      - _nextKeyID: 0
+        _previousKeyID: 0
+        _position: {x: -0.023804, y: 443}
+        _activeStatus: 0
+        _size: {x: 227.01086, y: 123.437164}
+        _text: "\u0414\u0430"
+      - _nextKeyID: 0
+        _previousKeyID: 0
+        _position: {x: -0.011902, y: 265.47}
+        _activeStatus: 0
+        _size: {x: 226.98706, y: 123.437164}
+        _text: "\u041D\u0435\u0442"
+      serializedFrameCharacterValues:
+      - _position: {x: 0, y: -5.03}
+        _activeStatus: 1
+        _size: {x: 1, y: 1}
+        _dialogueID: Inner_Fire_Line1_6D318
+        _type: 1
+        _emotionState: 0
+        _selectedPartIndex: 0
+  frameKeyPair:
+    frameID: Frame_4
+    frameKeyID: 0
+  input1Knob: {fileID: 6569442412884557297}
+  oldPos: 0
+  oldPosOffset: 50
+  dialogueValues:
+    keys:
+    - Inner_Fire_Line1_6D318
+    values:
+    - serializedDialogueValues:
+        _nextKeyID: 1
+        _previousKeyID: 0
+        _position: {x: 0, y: 284}
+        _activeStatus: 1
+        _size: {x: 1404.4652, y: 425.62552}
+        _text: "\u0422\u0435\u043A\u0441\u0442 \u0434\u0438\u0430\u043B\u043E\u0433\u0430"
+        _conversationCharacterID: Noran_053DC
+        _speakingCharacterIndex: 0
+        _conversationCharacters:
+          keys:
+          - Noran
+          values:
+          - Noran_053DC
+        _type: 0
+  dialogueAnswerValues:
+    keys:
+    - Inner_Fire_Answer_838F8
+    - Inner_Fire_Answer_6E892
+    values:
+    - serializedDialogueAnswerValues:
+        _nextKeyID: 0
+        _previousKeyID: 0
+        _position: {x: -0.023804, y: 443}
+        _activeStatus: 0
+        _size: {x: 227.01086, y: 123.437164}
+        _text: "\u0414\u0430"
+    - serializedDialogueAnswerValues:
+        _nextKeyID: 0
+        _previousKeyID: 0
+        _position: {x: -0.011902, y: 265.47}
+        _activeStatus: 0
+        _size: {x: 226.98706, y: 123.437164}
+        _text: "\u041D\u0435\u0442"
+  characterValues:
+    keys:
+    - Noran_053DC
+    values:
+    - serializedFrameCharacterValues:
+        _position: {x: 0, y: -5.03}
+        _activeStatus: 1
+        _size: {x: 1, y: 1}
+        _dialogueID: Inner_Fire_Line1_6D318
+        _type: 1
+        _emotionState: 0
+        _selectedPartIndex: 0
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -111,15 +200,185 @@ MonoBehaviour:
   m_Name: LastSession
   m_EditorClassIdentifier: 
   editorStates:
-  - {fileID: -161860198033181260}
-  saveName: Canvas_Frame_1
-  savePath: Assets\Frames\NodeCanvases\Canvas_Frame_1.asset
+  - {fileID: -9197543428735598401}
+  saveName: Canvas_Frame_4
+  savePath: Assets\Frames\NodeCanvases\Canvas_Frame_4.asset
   livesInScene: 0
   nodes:
-  - {fileID: 7191055894184734491}
-  - {fileID: 8159813455727705522}
+  - {fileID: -301306636872264941}
+  - {fileID: 2237829894840438497}
   groups: []
---- !u!114 &3843252322465132374
+--- !u!114 &643556272477862980
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 017e2c7fd038ecb46b317c1e003f31dc, type: 3}
+  m_Name: Output
+  m_EditorClassIdentifier: 
+  body: {fileID: 2237829894840438497}
+  direction: 2
+  maxConnectionCount: 0
+  styleID: FrameKey
+  _connections: []
+  side: 2
+  sidePosition: 139.5
+  sideOffset: 0
+--- !u!114 &2237829894840438497
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0066812b5804b734393478a52ee03726, type: 3}
+  m_Name: KeyFrame Node
+  m_EditorClassIdentifier: 
+  canvas: {fileID: 11400000}
+  position: {x: 395.19998, y: -5.2}
+  dynamicConnectionPorts:
+  - {fileID: 643556272477862980}
+  - {fileID: 4696865395338606989}
+  backgroundColor: {r: 1, g: 1, b: 1, a: 1}
+  frameKey:
+    id: 1
+    nodeIndex: 1
+    dialogueOutputKnobs:
+      keys:
+      - Inner_Fire_Answer_838F8
+      - Inner_Fire_Answer_6E892
+      values: 0000000001000000
+    transitionType: 1
+    frameKeyValues:
+      keys:
+      - Background_6A18F
+      - Inner_Fire_Line1_6D318
+      - Inner_Fire_Answer_838F8
+      - Inner_Fire_Answer_6E892
+      - Noran_053DC
+      serializedElementValues:
+      - _position: {x: 0, y: 0}
+        _activeStatus: 1
+        _size: {x: 1, y: 1}
+      serializedDialogueValues:
+      - _nextKeyID: 0
+        _previousKeyID: 0
+        _position: {x: 0, y: 539.99994}
+        _activeStatus: 0
+        _size: {x: 1404.4652, y: 425.62552}
+        _text: "\u0422\u0435\u043A\u0441\u0442 \u0434\u0438\u0430\u043B\u043E\u0433\u0430"
+        _conversationCharacterID: Noran_053DC
+        _speakingCharacterIndex: 0
+        _conversationCharacters:
+          keys:
+          - Noran
+          values:
+          - Noran_053DC
+        _type: 0
+      serializedDialogueAnswerValues:
+      - _nextKeyID: 0
+        _previousKeyID: 0
+        _position: {x: -343, y: 691.09}
+        _activeStatus: 1
+        _size: {x: 227.01086, y: 123.437164}
+        _text: "\u0414\u0430"
+      - _nextKeyID: 0
+        _previousKeyID: 0
+        _position: {x: 392, y: 691.09}
+        _activeStatus: 1
+        _size: {x: 226.98706, y: 123.437164}
+        _text: "\u041D\u0435\u0442"
+      serializedFrameCharacterValues:
+      - _position: {x: 0, y: -5.03}
+        _activeStatus: 1
+        _size: {x: 1, y: 1}
+        _dialogueID: Inner_Fire_Line1_6D318
+        _type: 1
+        _emotionState: 0
+        _selectedPartIndex: 0
+  frameKeyPair:
+    frameID: Frame_4
+    frameKeyID: 1
+  input1Knob: {fileID: -7009042869349020756}
+  oldPos: 0
+  oldPosOffset: 50
+  dialogueValues:
+    keys:
+    - Inner_Fire_Line1_6D318
+    values:
+    - serializedDialogueValues:
+        _nextKeyID: 0
+        _previousKeyID: 0
+        _position: {x: 0, y: 539.99994}
+        _activeStatus: 0
+        _size: {x: 1404.4652, y: 425.62552}
+        _text: "\u0422\u0435\u043A\u0441\u0442 \u0434\u0438\u0430\u043B\u043E\u0433\u0430"
+        _conversationCharacterID: Noran_053DC
+        _speakingCharacterIndex: 0
+        _conversationCharacters:
+          keys:
+          - Noran
+          values:
+          - Noran_053DC
+        _type: 0
+  dialogueAnswerValues:
+    keys:
+    - Inner_Fire_Answer_838F8
+    - Inner_Fire_Answer_6E892
+    values:
+    - serializedDialogueAnswerValues:
+        _nextKeyID: 0
+        _previousKeyID: 0
+        _position: {x: -343, y: 691.09}
+        _activeStatus: 1
+        _size: {x: 227.01086, y: 123.437164}
+        _text: "\u0414\u0430"
+    - serializedDialogueAnswerValues:
+        _nextKeyID: 0
+        _previousKeyID: 0
+        _position: {x: 392, y: 691.09}
+        _activeStatus: 1
+        _size: {x: 226.98706, y: 123.437164}
+        _text: "\u041D\u0435\u0442"
+  characterValues:
+    keys:
+    - Noran_053DC
+    values:
+    - serializedFrameCharacterValues:
+        _position: {x: 0, y: -5.03}
+        _activeStatus: 1
+        _size: {x: 1, y: 1}
+        _dialogueID: Inner_Fire_Line1_6D318
+        _type: 1
+        _emotionState: 0
+        _selectedPartIndex: 0
+--- !u!114 &4696865395338606989
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 017e2c7fd038ecb46b317c1e003f31dc, type: 3}
+  m_Name: Output
+  m_EditorClassIdentifier: 
+  body: {fileID: 2237829894840438497}
+  direction: 2
+  maxConnectionCount: 0
+  styleID: FrameKey
+  _connections: []
+  side: 2
+  sidePosition: 168.5
+  sideOffset: 0
+--- !u!114 &6569442412884557297
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -131,247 +390,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 017e2c7fd038ecb46b317c1e003f31dc, type: 3}
   m_Name: Input 1
   m_EditorClassIdentifier: 
-  body: {fileID: 8159813455727705522}
+  body: {fileID: -301306636872264941}
   direction: 1
   maxConnectionCount: 0
   styleID: FrameKey
-  _connections:
-  - {fileID: -7063321012946046948}
+  _connections: []
   side: 4
   sidePosition: 125
   sideOffset: 0
---- !u!114 &7191055894184734491
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0066812b5804b734393478a52ee03726, type: 3}
-  m_Name: KeyFrame Node
-  m_EditorClassIdentifier: 
-  canvas: {fileID: 0}
-  position: {x: 0, y: 0}
-  dynamicConnectionPorts:
-  - {fileID: -7063321012946046948}
-  backgroundColor: {r: 1, g: 1, b: 1, a: 1}
-  frameKey:
-    id: 0
-    nodeIndex: 0
-    dialogueOutputKnobs:
-      keys:
-      - Inner_Fire_Line1_DF036
-      values: 00000000
-    transitionType: 0
-    frameKeyValues:
-      keys: []
-      serializedElementValues: []
-      serializedDialogueValues: []
-      serializedDialogueAnswerValues: []
-      serializedFrameCharacterValues: []
-  frameKeyPair:
-    frameID: Frame_1
-    frameKeyID: 0
-  input1Knob: {fileID: -6864902965397978769}
-  oldPos: 0
-  oldPosOffset: 50
-  dialogueValues:
-    keys:
-    - Inner_Fire_Line1_DF036
-    values:
-    - serializedDialogueValues:
-        _nextKeyID: 0
-        _previousKeyID: 0
-        _position: {x: 0, y: 539.99994}
-        _activeStatus: 1
-        _text: "\u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
-          \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430
-          \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
-          \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430
-          \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
-          \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430
-          \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
-          \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430
-          \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
-          \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 "
-        _conversationCharacterID: Noran_F0D7C
-        _speakingCharacterIndex: 0
-        _conversationCharacters:
-          keys:
-          - Noran
-          values:
-          - Noran_F0D7C
-        _type: 0
-  dialogueAnswerValues:
-    keys:
-    - Inner_Fire_Answer_BCDFC
-    - Inner_Fire_Answer_3700F
-    values:
-    - serializedDialogueValues:
-        _nextKeyID: 0
-        _previousKeyID: 0
-        _position: {x: -0.000011444, y: 250.5}
-        _activeStatus: 0
-        _text: "\u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
-          \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430
-          \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
-          \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430
-          \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
-          \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430
-          \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
-          \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430
-          \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
-          \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 "
-    - serializedDialogueValues:
-        _nextKeyID: 0
-        _previousKeyID: 0
-        _position: {x: -0.000011444, y: 250.5}
-        _activeStatus: 0
-        _text: "\u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
-          \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430
-          \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
-          \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430
-          \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
-          \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430
-          \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
-          \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430
-          \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
-          \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 "
-  characterValues:
-    keys:
-    - Noran_F0D7C
-    values:
-    - serializedFrameCharacterValues:
-        _position: {x: 0, y: -5.03}
-        _activeStatus: 1
-        _dialogueID: Inner_Fire_Line1_DF036
-        _type: 1
-        _emotionState: 0
-        _selectedPartIndex: 0
---- !u!114 &8159813455727705522
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0066812b5804b734393478a52ee03726, type: 3}
-  m_Name: KeyFrame Node
-  m_EditorClassIdentifier: 
-  canvas: {fileID: 0}
-  position: {x: 508.60007, y: -8.399995}
-  dynamicConnectionPorts:
-  - {fileID: -5897255325140945071}
-  - {fileID: -7890686620285932214}
-  backgroundColor: {r: 1, g: 1, b: 1, a: 1}
-  frameKey:
-    id: 1
-    nodeIndex: 1
-    dialogueOutputKnobs:
-      keys:
-      - Inner_Fire_Answer_3700F
-      - Inner_Fire_Answer_BCDFC
-      values: 0000000001000000
-    transitionType: 1
-    frameKeyValues:
-      keys:
-      - Inner_Fire_Line1_DF036
-      - Inner_Fire_Answer_BCDFC
-      - Inner_Fire_Answer_3700F
-      - Noran_F0D7C
-      serializedElementValues: []
-      serializedDialogueValues:
-      - _nextKeyID: 0
-        _previousKeyID: 0
-        _position: {x: 0, y: 539.99994}
-        _activeStatus: 0
-        _text: "\u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
-          \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430
-          \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
-          \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430
-          \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
-          \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430
-          \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
-          \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430
-          \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B
-          \u0438\u0446\u0430 \u041A\u0438\u0440\u0438\u043B\u043B \u0438\u0446\u0430 "
-        _conversationCharacterID: Noran_F0D7C
-        _speakingCharacterIndex: 0
-        _conversationCharacters:
-          keys:
-          - Noran
-          values:
-          - Noran_F0D7C
-        _type: 0
-      serializedDialogueAnswerValues:
-      - _nextKeyID: 0
-        _previousKeyID: 0
-        _position: {x: 0, y: 539.99994}
-        _activeStatus: 1
-        _text: 1
-      - _nextKeyID: 0
-        _previousKeyID: 0
-        _position: {x: 0, y: 539.99994}
-        _activeStatus: 1
-        _text: 2
-      serializedFrameCharacterValues:
-      - _position: {x: 0, y: -5.03}
-        _activeStatus: 1
-        _dialogueID: Inner_Fire_Line1_DF036
-        _type: 1
-        _emotionState: 0
-        _selectedPartIndex: 0
-  frameKeyPair:
-    frameID: Frame_1
-    frameKeyID: 1
-  input1Knob: {fileID: 3843252322465132374}
-  oldPos: 0
-  oldPosOffset: 50
-  dialogueValues:
-    keys:
-    - Inner_Fire_Line1_DF036
-    values:
-    - serializedDialogueValues:
-        _nextKeyID: 0
-        _previousKeyID: 0
-        _position: {x: 0, y: 0}
-        _activeStatus: 0
-        _text: 
-        _conversationCharacterID: 
-        _speakingCharacterIndex: 0
-        _conversationCharacters:
-          keys: []
-          values: []
-        _type: 0
-  dialogueAnswerValues:
-    keys:
-    - Inner_Fire_Answer_BCDFC
-    - Inner_Fire_Answer_3700F
-    values:
-    - serializedDialogueValues:
-        _nextKeyID: 0
-        _previousKeyID: 0
-        _position: {x: 0, y: 539.99994}
-        _activeStatus: 1
-        _text: 1
-    - serializedDialogueValues:
-        _nextKeyID: 0
-        _previousKeyID: 0
-        _position: {x: 0, y: 539.99994}
-        _activeStatus: 1
-        _text: 2
-  characterValues:
-    keys:
-    - Noran_F0D7C
-    values:
-    - serializedFrameCharacterValues:
-        _position: {x: 0, y: -5.03}
-        _activeStatus: 1
-        _dialogueID: Inner_Fire_Line1_DF036
-        _type: 1
-        _emotionState: 0
-        _selectedPartIndex: 0

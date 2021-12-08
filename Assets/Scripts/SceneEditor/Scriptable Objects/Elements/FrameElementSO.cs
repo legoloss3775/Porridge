@@ -37,9 +37,9 @@ public abstract class FrameElementSO : ScriptableObject, ISerializationCallbackR
 #endif
         FrameManager.AddElement(elementClone);
     }
-    public virtual void CreateElementOnScene<T>(FrameElementSO obj, Vector2 position, out string elementID)
+    public virtual void CreateElementOnScene<T>(FrameElementSO obj, Vector2 position, Vector2 size, out string elementID)
     where T : FrameElement {
-        CreateFrameElement(obj, position, out T elementClone);
+        CreateFrameElement(obj, position, size, out T elementClone);
 
         bool hasElement = false;
         foreach (var pair in FrameManager.frame.usedElementsObjects) {
@@ -59,10 +59,10 @@ public abstract class FrameElementSO : ScriptableObject, ISerializationCallbackR
 
         elementID = elementClone.id;
     }
-    public virtual void CreateElementOnScene<T>(FrameElementSO obj, Vector2 position, string elementID)
+    public virtual void CreateElementOnScene<T>(FrameElementSO obj, Vector2 position, Vector2 size, string elementID)
     where T : FrameElement {
         T elementClone;
-        CreateFrameElement(obj, position, out elementClone);
+        CreateFrameElement(obj, position, size, out elementClone);
 
         elementClone.id = elementID;
         bool hasElement = false;
@@ -81,9 +81,10 @@ public abstract class FrameElementSO : ScriptableObject, ISerializationCallbackR
 
         }
     }
-    public virtual void CreateFrameElement<T>(FrameElementSO obj, Vector2 position, out T elementClone)
+    public virtual void CreateFrameElement<T>(FrameElementSO obj, Vector2 position, Vector2 size, out T elementClone)
     where T : FrameElement {
         elementClone = Instantiate(obj.prefab, position, new Quaternion()).AddComponent<T>();
+        elementClone.size = size;
         elementClone.frameElementObject = obj;
         elementClone.id = obj.id + "_" + Guid.NewGuid().ToString().Substring(0, 5).ToUpper();
         foreach(var key in FrameManager.frame.frameKeys)

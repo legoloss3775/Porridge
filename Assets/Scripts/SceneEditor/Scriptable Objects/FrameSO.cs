@@ -48,9 +48,11 @@ public class FrameSO : ScriptableObject {
         //key.keySequence.nextKey = null;
         //key.keySequence.previousKey = null;
 
+#if UNITY_EDITOR
         KeyNode node = KeyNode.CreateKeyNode(KeyNode.ID, Vector2.zero, key, this);
 
         key.nodeIndex = NodeEditorFramework.NodeEditor.curNodeCanvas.nodes.IndexOf(node);
+#endif
     }
     public List<string> GetAllIDsOfType<T>()
         where T : FrameElementSO {

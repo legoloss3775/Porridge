@@ -79,7 +79,18 @@ public class FrameEditor_Frame : FrameEditor
 
         GUILayout.BeginHorizontal();
         GUILayout.FlexibleSpace();
-        keyT.transitionType = (FrameKey.TransitionType)EditorGUILayout.EnumPopup(keyT.transitionType);
+
+        bool connected = false;
+        foreach (KeyNode node in NodeEditor.curNodeCanvas.nodes) {
+            if (node.frameKeyPair.frameKeyID == FrameManager.frame.currentKey.id) {
+                foreach (var con in node.connectionKnobs) {
+                    if (con.connected())
+                        connected = true;
+                }
+            }
+        }
+        if(connected) GUILayout.Label("Перед изменением типа перехода нужно убрать все связи ключа", EditorStyles.largeLabel);
+        else keyT.transitionType = (FrameKey.TransitionType)EditorGUILayout.EnumPopup(keyT.transitionType);
         GUILayout.FlexibleSpace();
         GUILayout.EndHorizontal();
         switch (keyT.transitionType) {
@@ -100,7 +111,7 @@ public class FrameEditor_Frame : FrameEditor
                 }
                 break;
         }
-
+        //
     }
     public static void FrameKeySelection() {
         var frameEditorSO = AssetManager.GetAtPath<FrameEditorSO>("Scripts/SceneEditor/").FirstOrDefault();

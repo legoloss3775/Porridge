@@ -13,5 +13,4 @@ MonoBehaviour:
   m_Name: Inner_Fire_Line1
   m_EditorClassIdentifier: 
   prefab: {fileID: 7017645145037971291, guid: 966d15c3440e8464ab3e02064b0e921d, type: 3}
-  windowType: 0
-  type: 0
+  windowType: 1

@@ -29,8 +29,9 @@ public class FrameUI_WindowSO : FrameElementSO {
 #endif
         FrameManager.AddElement(elementClone);
     }
-    public override void CreateFrameElement<T>(FrameElementSO obj, Vector2 position, out T elementClone) {
+    public override void CreateFrameElement<T>(FrameElementSO obj, Vector2 position, Vector2 size, out T elementClone) {
         elementClone = Instantiate(obj.prefab, position, new Quaternion(), FrameManager.UICanvas.transform).AddComponent<T>();
+        elementClone.size = size;
         elementClone.frameElementObject = obj;
         elementClone.id = obj.id + "_" + Guid.NewGuid().ToString().Substring(0, 5).ToUpper();
         foreach (var key in FrameManager.frame.frameKeys)

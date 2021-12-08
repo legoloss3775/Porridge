@@ -28,6 +28,7 @@ public class FrameKey {
     public abstract class Values {
         public virtual bool activeStatus { get; set; }
         public virtual Vector2 position { get; set; }
+        public virtual Vector2 size { get; set; }
         public static T GetObject<T>(params object[] args) {
             return (T)Activator.CreateInstance(typeof(T), args);
         }
@@ -49,10 +50,13 @@ public class FrameKey {
     public void UpdateFrameKeyValues(string id, Values values) {
         if (ContainsID(id)) frameKeyValues[id] = values;
         else AddFrameKeyValues(id, values);
-        if(NodeEditorFramework.NodeEditor.curNodeCanvas != null) {
+#if UNITY_EDITOR
+        if(NodeEditorFramework.NodeEditor.curNodeCanvas != null && NodeEditorFramework.NodeEditor.curNodeCanvas.nodes.Count > this.nodeIndex) {
             KeyNode node = (KeyNode)NodeEditorFramework.NodeEditor.curNodeCanvas.nodes[this.nodeIndex];
             KeyNode.UpdateKeyNodeValues(node, values, id);
+            NodeEditorFramework.Standard.NodeEditorWindow.editor.Repaint();
         }
+#endif
     }
     public void AddFrameKeyValues(string id, Values values) {
         if (id != null) frameKeyValues.Add(id, values);

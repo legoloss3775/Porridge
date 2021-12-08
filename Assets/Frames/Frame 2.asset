@@ -19,8 +19,9 @@ MonoBehaviour:
     id: 0
     nodeIndex: 0
     dialogueOutputKnobs:
-      keys: []
-      values: 
+      keys:
+      - Inner_Fire_Answer_56F1E
+      values: 00000000
     transitionType: 0
     frameKeyValues:
       keys: []
@@ -32,8 +33,9 @@ MonoBehaviour:
   - id: 0
     nodeIndex: 0
     dialogueOutputKnobs:
-      keys: []
-      values: 
+      keys:
+      - Inner_Fire_Answer_56F1E
+      values: 00000000
     transitionType: 0
     frameKeyValues:
       keys: []
@@ -41,5 +43,5 @@ MonoBehaviour:
       serializedDialogueValues: []
       serializedDialogueAnswerValues: []
       serializedFrameCharacterValues: []
-  nodeCanvas: {fileID: 11400000, guid: 870ed7c61fece15409300fff3538c804, type: 2}
+  nodeCanvas: {fileID: 11400000, guid: a5d089ae68974bb4fb043211a9ea8d38, type: 2}
   usedElementsObjects: []
