@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 560a47425bc099e4b808af499da55478, type: 3}
   m_Name: "\u041D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0438"
   m_EditorClassIdentifier: 
-  selectedFrameIndex: 0
-  selectedKeyIndex: 3
+  selectedFrameIndex: 2
+  selectedKeyIndex: 0
   UI_CanvasPrefab: {fileID: 1617878546602089526, guid: 24599586e4412514c915f1c623948e0f, type: 3}
   frameElementsObjects:
   - {fileID: 11400000, guid: f6619c14e28441644b37a6f8bbd6a453, type: 2}
@@ -23,3 +23,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 5799dc34a5e8a0648ade55bbe2fed1e4, type: 2}
   frames:
   - {fileID: 11400000, guid: 8f5429a600172754d842c0bb0bbfd64d, type: 2}
+  - {fileID: 11400000, guid: 16da86c99b663f244bb038b81bedb60c, type: 2}
+  - {fileID: 11400000, guid: e24dd357047ac0b44aef5c400cb641d0, type: 2}

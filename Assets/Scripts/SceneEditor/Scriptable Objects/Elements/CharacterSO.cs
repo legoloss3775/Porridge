@@ -22,8 +22,6 @@ namespace FrameCore {
 
             [HideInInspector]
             public CharacterEmotionState state;
-
-            [OneLine.OneLine]
             public List<CharacterPart> characterParts;
 
             public override void OnAfterDeserialize() {

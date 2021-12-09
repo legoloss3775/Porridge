@@ -2,6 +2,7 @@
 using FrameCore.ScriptableObjects;
 using FrameCore.ScriptableObjects.UI;
 using FrameCore.Serialization;
+using NodeEditorFramework;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -72,9 +73,6 @@ namespace FrameCore {
                     frameEditorSO.frameElementsObjects.RemoveAt(i);
             }
         }
-        public static NodeEditorFramework.NodeCanvas[] GetFramesCanvases() {
-            return AssetManager.GetAtPath<NodeEditorFramework.Standard.CalculationCanvasType>("Frames/NodeCanvases/");
-        }
         public static FrameSO[] GetFrameAssets() {
             return AssetManager.GetAtPath<FrameSO>("Frames/");
         }
@@ -101,8 +99,8 @@ namespace FrameCore {
             return result;
         }
     }
-#endif
 }
+#endif
 [Serializable]
 public class FrameKeyDictionary : Dictionary<string, Values>, ISerializationCallbackReceiver {
     [SerializeField]

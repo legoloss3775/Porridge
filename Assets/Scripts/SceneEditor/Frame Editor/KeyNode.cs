@@ -36,10 +36,13 @@ public class KeyNode : Node
     public SerializableDictionary<string, DialogueAnswerValues> dialogueAnswerValues = new SerializableDictionary<string, DialogueAnswerValues>();
     public SerializableDictionary<string, CharacterValues> characterValues = new SerializableDictionary<string, CharacterValues>();
 
+    public FrameEditorSO frameEditorSO;
+
     bool updated = false;
 
 #if UNITY_EDITOR
     private void Awake() {
+        frameEditorSO = FrameManager.assetDatabase;
         updated = false;
     }
     public static void UpdateKeyNodeValues(KeyNode node, Values values, string id) {
@@ -66,9 +69,8 @@ public class KeyNode : Node
     /// нужна срочная оптимизация, иначе придется работать с NodeEditor в 20 fps 
     /// </summary>
     public override void NodeGUI() {
-        if (AssetManager.GetFrameAssets()[Convert.ToInt32(frameKeyPair.frameID.Split('_')[1])].frameKeys.Count > frameKeyPair.frameKeyID)
-            frameKey = AssetManager.GetFrameAssets()[Convert.ToInt32(frameKeyPair.frameID.Split('_')[1])].frameKeys[frameKeyPair.frameKeyID];
-        else UpdateFrameKeys();
+        frameKey = frameEditorSO.frames.Where(ch => ch.id == frameKeyPair.frameID).FirstOrDefault().frameKeys[frameKeyPair.frameKeyID];
+
 
         input1Knob.maxConnectionCount = NodeEditorFramework.ConnectionCount.Multi;
 

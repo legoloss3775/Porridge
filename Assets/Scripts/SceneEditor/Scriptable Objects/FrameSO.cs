@@ -1,5 +1,6 @@
 ﻿using FrameCore.ScriptableObjects.UI;
 using FrameCore.Serialization;
+using NodeEditorFramework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,7 +22,7 @@ namespace FrameCore {
             [SerializeField]
             public FrameKey currentKey;
             public List<FrameKey> frameKeys = new List<FrameKey>();
-            public NodeEditorFramework.NodeCanvas nodeCanvas;
+            public NodeCanvas nodeCanvas;
             [Serializable]
             public struct FrameElementIDPair {
                 public FrameElementSO elementObject;

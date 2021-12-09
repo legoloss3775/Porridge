@@ -14,6 +14,7 @@ namespace FrameCore {
 
         public static FrameSO frame;
         public static Canvas UICanvas;
+        public Canvas _UICanvas;
 
         [SerializeField]
         public static List<FrameElement> frameElements = new List<FrameElement>();
@@ -148,6 +149,7 @@ namespace FrameCore {
                     frameElements.Add(element);
 
             }
+            UICanvas = _UICanvas;
             assetDatabase = _assetDatabase;
         }
     }

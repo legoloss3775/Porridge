@@ -161,7 +161,7 @@ namespace FrameEditor {
                 else
                     SetUICanvas();
             }
-
+            FrameManager.UICanvas.worldCamera = Camera.main;
         }
         private void SetFrameManager() {
             manager = new GameObject(
@@ -172,7 +172,7 @@ namespace FrameEditor {
             FrameManager.assetDatabase = AssetManager.GetAtPath<FrameEditorSO>("Scripts/SceneEditor/").FirstOrDefault();
         }
         private void SetUICanvas() {
-            FrameManager.UICanvas = Instantiate(AssetManager.GetAtPath<FrameEditorSO>("Scripts/SceneEditor/").FirstOrDefault().UI_CanvasPrefab).GetComponent<Canvas>();
+            FrameManager.UICanvas = Instantiate(AssetManager.GetAtPath<FrameEditorSO>("Scripts/SceneEditor/").FirstOrDefault().UI_CanvasPrefab).GetComponentInChildren<Canvas>();
         }
         #endregion
 
