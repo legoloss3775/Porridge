@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2335114e155a69649b10a4d631e1842e, type: 3}
   m_Name: Inner_Fire_Answer
   m_EditorClassIdentifier: 
-  prefab: {fileID: 1784347030880685010, guid: c0a5a35c4514e1b41b06a5ecf358b70c, type: 3}
+  prefab: {fileID: 6991304247644491018, guid: 3c30e8e6b151cd942af2db7bc31ed507, type: 3}
   windowType: 1
