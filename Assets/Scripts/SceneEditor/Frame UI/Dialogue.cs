@@ -185,14 +185,12 @@ namespace FrameCore {
                 Одинᅠперсонаж,
                 Несколькоᅠперсонажей,
             }
-            public enum FrameDialogueState {
-                CharacterLine,
-                PlayerAnswer,
-            }
             private void Update() {
                 KeyTransitionInput();
             }
             public void KeyTransitionInput() {
+                if (FrameController.INPUT_BLOCK) return;
+
                 if (Input.GetKeyDown(KeyCode.D)) {
                     if (nextKeyID != 0) FrameManager.SetKey(this.nextKeyID);
                 }
@@ -202,9 +200,6 @@ namespace FrameCore {
             }
 
             #region DIALOGUE_SETUP
-            public void DialogueStateChange(FrameDialogueState state) {
-
-            }
             public void DialogueTypeChange(FrameDialogueElementType type) {
                 var keyValues = GetFrameKeyValues<Serialization.DialogueValues>();
                 switch (type) {

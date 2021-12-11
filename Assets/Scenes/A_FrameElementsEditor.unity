@@ -123,7 +123,7 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &575033097
+--- !u!1 &1481433024
 GameObject:
   m_ObjectHideFlags: 3
   m_CorrespondingSourceObject: {fileID: 0}
@@ -131,8 +131,8 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 575033099}
-  - component: {fileID: 575033098}
+  - component: {fileID: 1481433026}
+  - component: {fileID: 1481433025}
   m_Layer: 0
   m_Name: UndoProRecords
   m_TagString: Untagged
@@ -140,13 +140,13 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &575033098
+--- !u!114 &1481433025
 MonoBehaviour:
   m_ObjectHideFlags: 3
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 575033097}
+  m_GameObject: {fileID: 1481433024}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: efa53029e0a62304caf81173265515b9, type: 3}
@@ -158,57 +158,11 @@ MonoBehaviour:
     undoRecords:
     - Selection Change
     - Selection Change
-    - ' Drag Instantiate'
-    - Selection Change
-    - ' Drag Instantiate'
     - Selection Change
     - Selection Change
-    - Selection Change
-    - Selection Change
-    - Selection Change
-    - Selection Change
-    - Selection Change
-    - Selection Change
-    - Selection Change
-    - Selection Change
-    - Selection Change
-    - Delete Game Objects
-    - Delete Game Objects
-    - Selection Change
-    - Selection Change
-    - Selection Change
-    - Selection Change
-    - Selection Change
-    - Selection Change
-    - Selection Change
-    - "Paste \u0422\u0435\u043A\u0441\u0442 \u0434\u0438\u0430\u043B\u043E\u0433\u0430"
-    - Selection Change
-    - Selection Change
-    - Selection Change
-    - Selection Change
-    - Delete Game Objects
-    - Delete Game Objects
-    - Delete Game Objects
-    - Selection Change
+    - Paste Blackout Screen (from black)
     - Inspector
-    - Selection Change
-    - Resize
-    - Resize
-    - Selection Change
-    - Selection Change
-    - Selection Change
-    - Resize
-    - Move
-    - Move
-    - Resize
-    - Selection Change
     - Inspector
-    - Selection Change
-    - Selection Change
-    - Selection Change
-    - Inspector
-    - Selection Change
-    - Selection Change
     - Create/Replace Prefab
     - Create/Replace prefab
     - Create/Replace prefab
@@ -221,60 +175,13 @@ MonoBehaviour:
     - Selection Change
     - Selection Change
     - Selection Change
-    - Selection Change
-    - Selection Change
-    - Selection Change
-    - Unpack Prefab instance
-    - Selection Change
-    - Create/Replace Prefab
-    - Create/Replace prefab
-    - Create/Replace prefab
-    - Selection Change
-    - Selection Change
-    - Selection Change
-    - Selection Change
-    - Selection Change
-    - Selection Change
-    - Selection Change
-    - Unpack Prefab instance
-    - Selection Change
-    - Selection Change
-    - Create/Replace Prefab
-    - Create/Replace prefab
-    - Create/Replace prefab
-    - Selection Change
-    - Selection Change
-    - Selection Change
-    - Selection Change
-    - Selection Change
-    - Selection Change
-    - Selection Change
-    - Selection Change
-    - Selection Change
-    - Selection Change
-    - Selection Change
-    - Selection Change
-    - Selection Change
-    - Selection Change
-    - Selection Change
-    - Selection Change
-    - Selection Change
-    - Selection Change
-    - Selection Change
-    - Selection Change
-    - Selection Change
-    - Inspector
-    - Inspector
-    - Inspector
-    - Selection Change
-    - Selection Change
---- !u!4 &575033099
+--- !u!4 &1481433026
 Transform:
   m_ObjectHideFlags: 3
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 575033097}
+  m_GameObject: {fileID: 1481433024}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -479,3 +386,117 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 371f6c8c53fd2174a8217cd8b4290358, type: 3}
+--- !u!1001 &8565722456768765146
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 6159413078669955836, guid: 0067255c1f7af8342a9c84d534b2176c, type: 3}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6159413078669955836, guid: 0067255c1f7af8342a9c84d534b2176c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.105685174
+      objectReference: {fileID: 0}
+    - target: {fileID: 6159413078669955836, guid: 0067255c1f7af8342a9c84d534b2176c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.47854763
+      objectReference: {fileID: 0}
+    - target: {fileID: 6159413078669955836, guid: 0067255c1f7af8342a9c84d534b2176c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 9.955608
+      objectReference: {fileID: 0}
+    - target: {fileID: 6159413078669955836, guid: 0067255c1f7af8342a9c84d534b2176c, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6159413078669955836, guid: 0067255c1f7af8342a9c84d534b2176c, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6159413078669955836, guid: 0067255c1f7af8342a9c84d534b2176c, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6159413078669955836, guid: 0067255c1f7af8342a9c84d534b2176c, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6159413078669955836, guid: 0067255c1f7af8342a9c84d534b2176c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6159413078669955836, guid: 0067255c1f7af8342a9c84d534b2176c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6159413078669955836, guid: 0067255c1f7af8342a9c84d534b2176c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6159413078669955837, guid: 0067255c1f7af8342a9c84d534b2176c, type: 3}
+      propertyPath: m_Name
+      value: Blackout Screen (to black)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 0067255c1f7af8342a9c84d534b2176c, type: 3}
+--- !u!1001 &8691258698577112609
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 8691258698662488234, guid: aeb25c73ab277c94787697927732273a, type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8691258698662488234, guid: aeb25c73ab277c94787697927732273a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.105685174
+      objectReference: {fileID: 0}
+    - target: {fileID: 8691258698662488234, guid: aeb25c73ab277c94787697927732273a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.47854763
+      objectReference: {fileID: 0}
+    - target: {fileID: 8691258698662488234, guid: aeb25c73ab277c94787697927732273a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 9.955608
+      objectReference: {fileID: 0}
+    - target: {fileID: 8691258698662488234, guid: aeb25c73ab277c94787697927732273a, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8691258698662488234, guid: aeb25c73ab277c94787697927732273a, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8691258698662488234, guid: aeb25c73ab277c94787697927732273a, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8691258698662488234, guid: aeb25c73ab277c94787697927732273a, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8691258698662488234, guid: aeb25c73ab277c94787697927732273a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8691258698662488234, guid: aeb25c73ab277c94787697927732273a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8691258698662488234, guid: aeb25c73ab277c94787697927732273a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8691258698662488235, guid: aeb25c73ab277c94787697927732273a, type: 3}
+      propertyPath: m_Name
+      value: Blackout Screen (from black)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: aeb25c73ab277c94787697927732273a, type: 3}

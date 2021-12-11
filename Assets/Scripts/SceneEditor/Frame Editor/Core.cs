@@ -1,15 +1,13 @@
-﻿ using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEditor;
-using System;
-using System.Linq;
-using NodeEditorFramework;
-using FrameCore;
+﻿using FrameCore;
 using FrameCore.ScriptableObjects;
-using FrameCore.Serialization;
 using FrameCore.ScriptableObjects.UI;
 using FrameCore.UI;
+using NodeEditorFramework;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using UnityEditor;
+using UnityEngine;
 
 #if UNITY_EDITOR
 namespace FrameEditor {
@@ -18,6 +16,21 @@ namespace FrameEditor {
     /// </summary>
     public static class FrameGUIUtility {
         internal static int hotControl;
+        public static GUIStyle GetPopupStyle(Color textColor) {
+            GUIStyle TextFieldStyles = new GUIStyle(EditorStyles.popup);
+            GUI.contentColor = Color.white;
+            GUI.color = Color.white;
+
+            //Value Color
+            TextFieldStyles.normal.textColor = textColor;
+
+            //Label Color
+            EditorStyles.label.normal.textColor = textColor;
+
+            //TextFieldStyles.fontSize = fontSize;
+
+            return TextFieldStyles;
+        }
         public static GUIStyle SetLabelIconColor(Color imageColor) {
             GUIStyle labelStyles = new GUIStyle(EditorStyles.label);
             GUI.contentColor = Color.white;
@@ -96,24 +109,28 @@ namespace FrameEditor {
             DialogueEditor,     ///<see cref="FrameEditor.Dialogue">
             CharacterEditor,    ///<see cref="FrameEditor.Character">
             BackgroundEditor,   ///<see cref="FrameEditor.Background">
+            FrameEffectEditor,  ///<see cref="FrameEditor.FrameEffect">
         }
         //Список для позиций ползунка для каждого из редакторов
         public static SerializableDictionary<EditorType, Vector2> scrollPositions = new SerializableDictionary<EditorType, Vector2> {
         { EditorType.DialogueEditor, new Vector2()},
         { EditorType.CharacterEditor, new Vector2()},
         { EditorType.BackgroundEditor, new Vector2()},
+        { EditorType.FrameEffectEditor, new Vector2()},
     };
         //Список для поля поиска для каждого из редакторов
         public static SerializableDictionary<EditorType, string> searchTexts = new SerializableDictionary<EditorType, string> {
         { EditorType.DialogueEditor, ""},
         { EditorType.CharacterEditor, ""},
         { EditorType.BackgroundEditor, ""},
+        { EditorType.FrameEffectEditor, ""},
     };
         //Список для опции сворачивания для каждого из редакторов
         public static SerializableDictionary<EditorType, bool> foldouts = new SerializableDictionary<EditorType, bool> {
         { EditorType.DialogueEditor, true},
         { EditorType.CharacterEditor, true},
         { EditorType.BackgroundEditor, true},
+        { EditorType.FrameEffectEditor, true},
     };
         //Типы расположений элементов при их отрисовке в ElementEditing
         public enum PositioningType {
@@ -251,10 +268,51 @@ namespace FrameEditor {
                 }
             }
         }
+        /**public static void ElementAnimationSelection(FrameElement element){
+            var keyValues = FrameElement.GetFrameKeyValues<Values>(element.id);
+            var path = AssetDatabase.GetAssetPath(element.frameElementObject.prefab);
+            path = path.Replace("Assets/", "");
+            path = path.Replace(element.frameElementObject.prefab.name + ".prefab", "");
+            if (element is FrameCore.Character) path = path.Replace(element.frameElementObject.prefab.name + ".psb", "");
+            //Debug.Log(path);
+            var animations = AssetManager.GetAtPath<AnimationClip>(path);
+            var names = new List<string>();
+            foreach(var animation in animations) {
+                names.Add(animation.name);
+            }
+            if (names.Count == 0) return;
+
+            int onStartAnimationSelected = 0;
+            //int onActionAnimationSelected = 0;
+            if(element.onStartAnimation != null && element.onStartAnimation != "") {
+                onStartAnimationSelected = names.IndexOf(element.onStartAnimation);
+            }
+            if (element.onActionAnimation != null && element.onActionAnimation != "") {
+                onActionAnimationSelected = names.IndexOf(element.onActionAnimation);
+            }
+            GUILayout.Space(10);
+            GUILayout.Label("Анимация на старте:");
+            onStartAnimationSelected = GUILayout.SelectionGrid(onStartAnimationSelected, names.ToArray(), 5, GUILayout.MaxWidth(450));
+            GUILayout.Space(10);
+             GUILayout.BeginHorizontal();
+             GUILayout.Label("Анимация на старте:");
+             onActionAnimationSelected = GUILayout.SelectionGrid(onActionAnimationSelected, names.ToArray(), 5);
+             GUILayout.EndHorizontal();
+
+            if (onStartAnimationSelected < names.Count)
+                element.onStartAnimation = names[onStartAnimationSelected];
+            /if (onActionAnimationSelected < names.Count)
+                element.onActionAnimation = names[onActionAnimationSelected];
+
+            if (element.onStartAnimation != keyValues.onStartAnimation)
+                keyValues.onStartAnimation = element.onStartAnimation;
+            if (element.onActionAnimation != keyValues.onActionAnimation)
+                keyValues.onActionAnimation = element.onActionAnimation;
+        }**/
         public static void ElementCreation(CreationWindow.CreationType creationType) {
             if (creationType == CreationWindow.CreationType.Frame) {
                 if (GUILayout.Button("Выбрать фрейм", GUILayout.MaxWidth(282.5f))) {
-                    var editor = EditorWindow.GetWindow<CreationWindow>();
+                    var editor = EditorWindow.GetWindow<CreationWindow>("Создание элемента");
                     editor.type = creationType;
                     editor.ShowPopup();
                 }
@@ -285,7 +343,7 @@ namespace FrameEditor {
             if (GUILayout.Button("X", GUILayout.MaxWidth(25))) {
 
                 if (!EditorUtility.DisplayDialog("Удаление элемента", "Вы точно хотите удалить элемент?", "Да", "Отмена")) return;
-                 
+
                 FrameManager.frame.RemoveElementFromCurrentKey(element.id);
 
                 if (element is FrameCore.UI.Dialogue) {
@@ -341,24 +399,24 @@ namespace FrameEditor {
         }
         public static void DeleteInteractableTransitionNode(FrameElement element, FrameKey key) {
             if (NodeEditor.curNodeCanvas == null) return;
-            foreach (KeyNode node in NodeEditor.curNodeCanvas.nodes) {
+            foreach (FrameKeyNode node in NodeEditor.curNodeCanvas.nodes) {
                 if (node.frameKey == null || node.frameKeyPair.frameKeyID != key.id) continue;
 
                 foreach (var n in node.outputKnobs.ToList()) {
-                    if (key.dialogueOutputKnobs.ContainsKey(element.id)) {
+                    if (key.frameKeyTransitionKnobs.ContainsKey(element.id)) {
                         //Удаление outputKnob из KeyNode
-                        var removeIndex = key.dialogueOutputKnobs[element.id];
+                        var removeIndex = key.frameKeyTransitionKnobs[element.id];
 
-                        key.dialogueOutputKnobs.Remove(element.id);
+                        key.frameKeyTransitionKnobs.Remove(element.id);
                         DestroyImmediate(n, true);
 
                         //смещение индекса outputKnobs в словаре outputKnobs, привязанном к элементу, из-за которого
                         //они и удаляются
-                        ///<see cref="FrameKey.dialogueOutputKnobs">
+                        ///<see cref="FrameKey.frameKeyTransitionKnobs">
                         ///
-                        foreach (var killme in key.dialogueOutputKnobs.Keys.ToList()) {
-                            if (key.dialogueOutputKnobs[killme] >= removeIndex) {
-                                key.dialogueOutputKnobs[killme] -= 1;
+                        foreach (var killme in key.frameKeyTransitionKnobs.Keys.ToList()) {
+                            if (key.frameKeyTransitionKnobs[killme] >= removeIndex) {
+                                key.frameKeyTransitionKnobs[killme] -= 1;
                             }
                         }
                         NodeEditorFramework.ConnectionPortManager.UpdatePortLists(node);
@@ -367,15 +425,15 @@ namespace FrameEditor {
             }
         }
         public static void CreateInteractableTransitionNode(FrameElement element, FrameKey key) {
-            foreach (KeyNode node in NodeEditor.curNodeCanvas.nodes) {
+            foreach (FrameKeyNode node in NodeEditor.curNodeCanvas.nodes) {
                 if (node.frameKey == null || node.frameKeyPair.frameKeyID != key.id) continue;
-                if (key.dialogueOutputKnobs.ContainsKey(element.id)) continue;
+                if (key.frameKeyTransitionKnobs.ContainsKey(element.id)) continue;
 
                 var knob = node.CreateValueConnectionKnob(new ValueConnectionKnobAttribute("Output", Direction.Out, "FrameKey"));
                 knob.SetValue<FrameKey>(node.frameKey);
 
                 if (element is FrameCore.UI.Dialogue || element is DialogueAnswer)
-                    key.dialogueOutputKnobs.Add(element.id, node.connectionKnobs.IndexOf(knob) - 1);
+                    key.frameKeyTransitionKnobs.Add(element.id, node.connectionKnobs.IndexOf(knob) - 1);
                 NodeEditorFramework.ConnectionPortManager.UpdatePortLists(node);
             }
         }
@@ -393,6 +451,7 @@ namespace FrameEditor {
             FrameDialogue,
             FrameDialogueAnswer,
             FrameBackground,
+            FrameEffect,
         }
         public CreationType type;
         //ID создаваемого элемента записывается в эту статическую переменную, чтобы
@@ -416,6 +475,9 @@ namespace FrameEditor {
                     break;
                 case CreationType.FrameBackground:
                     FrameElementCreationSelection<BackgroundSO, FrameCore.Background>();
+                    break;
+                case CreationType.FrameEffect:
+                    FrameElementCreationSelection<FrameEffectSO, FrameCore.FrameEffect>();
                     break;
                 case CreationType.Frame: //для фрейма создана отдельная функция, потому что класс фрейма не относится к FrameElement
                     FrameSelection();
@@ -445,6 +507,8 @@ namespace FrameEditor {
                 GUILayout.BeginHorizontal();
                 var icon = UnityEditor.AssetPreview.GetAssetPreview(elementObject.prefab);
                 GUILayout.BeginVertical();
+                GUILayout.BeginHorizontal();
+                GUILayout.FlexibleSpace();
                 if (GUILayout.Button(icon, GUILayout.MaxWidth(200))) {
                     elementObject.CreateElementOnScene<TValue>(elementObject, Vector2.zero, elementObject.GetPrefabSize(), out string id);
                     createdElementID = id;
@@ -467,14 +531,19 @@ namespace FrameEditor {
                         }
                     }**/
 
-                    if (createdElement.activeStatus) Core.ChangeActiveState(FrameManager.frame.currentKey, createdElement, true);
+                    foreach(var key in FrameManager.frame.frameKeys) {
+                        Core.ChangeActiveState(key, createdElement, false);
+                    }
 
                     FrameManager.ChangeFrameKey();
                     Close();
                 }
+                GUILayout.FlexibleSpace();
+                GUILayout.EndHorizontal();
                 GUILayout.BeginHorizontal();
-                GUILayout.Space(75);
+                GUILayout.FlexibleSpace();
                 GUILayout.Label(elementObject.name);
+                GUILayout.FlexibleSpace();
                 GUILayout.EndHorizontal();
                 GUILayout.EndVertical();
                 GUILayout.EndHorizontal();

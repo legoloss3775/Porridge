@@ -23,6 +23,7 @@ namespace FrameCore {
             UpdateFrameAssetsOfType<BackgroundSO>("Backgrounds");
             UpdateFrameAssetsOfType<DialogueSO>("UI/Dialogue Windows");
             UpdateFrameAssetsOfType<DialogueAnswerSO>("UI/Dialogue Windows");
+            UpdateFrameAssetsOfType<FrameEffectSO>("Effects");
             UpdateFrames();
         }
         public static void UpdateFrames() {

@@ -145,6 +145,7 @@ GameObject:
   - component: {fileID: 7017645145037971292}
   - component: {fileID: 7017645145037971294}
   - component: {fileID: 7017645145037971293}
+  - component: {fileID: -5755478156161322440}
   m_Layer: 0
   m_Name: InnerFire_Line
   m_TagString: Untagged
@@ -211,6 +212,25 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!95 &-5755478156161322440
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7017645145037971291}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: d5abe909904389341a73ea9e84fbbabb, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &7017645145465946145
 GameObject:
   m_ObjectHideFlags: 0

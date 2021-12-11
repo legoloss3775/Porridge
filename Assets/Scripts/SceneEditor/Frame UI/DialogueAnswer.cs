@@ -138,7 +138,10 @@ namespace FrameCore {
                 button = GetComponent<Button>();
                 KeyTransitionInput();
             }
-
+            private void Update() {
+                if (FrameController.INPUT_BLOCK) button.enabled = false;
+                else button.enabled = true;
+            }
             public void KeyTransitionInput() => button.onClick.AddListener(() => FrameManager.SetKey(nextKeyID));
 
             #region VALUES_SETTINGS
@@ -174,8 +177,7 @@ namespace FrameCore {
                     answer.position = answer.GetComponent<RectTransform>().anchoredPosition;
                     answer.size = answer.GetComponent<RectTransform>().sizeDelta;
 
-                    answer.SetKeyValuesWhileNotInPlayMode();
-                    Debug.Log(answer.id);
+                    answer.SetKeyValuesWhileNotInPlayMode();    
                     if (targets.Length > 1) {
                         foreach (var target in targets) {
                             FrameElement mTarget = (FrameElement)target;

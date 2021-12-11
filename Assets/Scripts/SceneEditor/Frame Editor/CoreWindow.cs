@@ -16,6 +16,7 @@ namespace FrameEditor {
     /// Класс главного окна FrameEditor
     /// </summary>
     public class CoreWindow : EditorWindow {
+        public static CoreWindow core { get { return (CoreWindow)EditorWindow.GetWindow(typeof(CoreWindow)); } }
 
         public FrameEditorSO frameEditorSO;
         public FrameManager manager { get; set; } 
@@ -32,10 +33,13 @@ namespace FrameEditor {
             NodeEditorFramework.Standard.NodeEditorWindow.editor.canvasCache.AssureCanvas();
             SaveFrameEditorNodeCanvas();
         }
+
         private void OnGUI() {
 
-            if (Application.isPlaying) return;
-            else NodeEditorWindow.editor.ShowTab();
+            if (Application.isPlaying) {
+                return;
+            }
+            else if (focusedWindow == this) NodeEditorWindow.editor.ShowTab();
 
             if (!isEditingAllowed()) {
                 UpdateFrameEditorSO();
@@ -67,9 +71,25 @@ namespace FrameEditor {
                 GUILayout.FlexibleSpace();
                 GUILayout.EndHorizontal();
 
-                Background.FrameBackgroundEditing();
-                Dialogue.FrameDialogueEditing();
-                Character.FrameCharacterEditing();
+                switch (FrameManager.GAME_TYPE) {
+                    case GameType.FrameInteraction:
+
+                        FrameEffect.FrameEffectEditing();
+
+                        Background.FrameBackgroundEditing();
+
+                        Dialogue.FrameDialogueEditing();
+
+                        Character.FrameCharacterEditing();
+
+                        break;
+                    case GameType.InnerFireFastSession:
+                        break;
+                    case GameType.InnerFireLongSession:
+                        break;
+                    case GameType.InnerFireFreeRoam:
+                        break;
+                }
 
                 GUILayout.FlexibleSpace();
                 GUILayout.EndScrollView();
@@ -79,12 +99,22 @@ namespace FrameEditor {
 
                 if (CreationWindow.createdElementID != "")
                     CreationWindow.createdElementID = "";
+
+                //DisableEffectsInEditor();
+            }
+        }
+        public void DisableEffectsInEditor() {
+            foreach(var effect in FrameManager.frameElements.Where(ch => ch is FrameCore.FrameEffect)) {
+                foreach(var child in effect.GetComponentsInChildren<SpriteRenderer>()) {
+                    child.enabled = false;
+                }
             }
         }
         public void SaveFrameEditorNodeCanvas() {
             if (FrameManager.frame != null && FrameManager.frame.nodeCanvas != null) {
                 if (NodeEditorWindow.editor != null && NodeEditorWindow.editor.canvasCache != null) {
                     if (!EditorApplication.isCompiling) {
+                        if (Application.isPlaying) return;
                         NodeEditorWindow.editor.canvasCache.SaveNodeCanvas("Assets/Frames/NodeCanvases/Canvas_" + FrameManager.frame.id + ".asset");
                         NodeEditor.BeginEditingCanvas(FrameManager.frame.nodeCanvas);
 

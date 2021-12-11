@@ -18,35 +18,36 @@ MonoBehaviour:
   currentKey:
     id: 0
     nodeIndex: 0
-    dialogueOutputKnobs:
-      keys: []
-      values: 
+    frameKeyTransitionKnobs:
+      keys:
+      - Inner_Fire_Line1_53765
+      values: 00000000
     keySequence:
       previousKey:
         id: 0
         nodeIndex: 0
-        dialogueOutputKnobs:
+        frameKeyTransitionKnobs:
           keys: []
           values: 
         keySequence:
           previousKey:
             id: 0
             nodeIndex: 0
-            dialogueOutputKnobs:
+            frameKeyTransitionKnobs:
               keys: []
               values: 
             keySequence:
               previousKey:
                 id: 0
                 nodeIndex: 0
-                dialogueOutputKnobs:
+                frameKeyTransitionKnobs:
                   keys: []
                   values: 
                 keySequence:
                   previousKey:
                     id: 0
                     nodeIndex: 0
-                    dialogueOutputKnobs:
+                    frameKeyTransitionKnobs:
                       keys: []
                       values: 
                     keySequence:
@@ -54,7 +55,9 @@ MonoBehaviour:
                         id: 0
                         nodeIndex: 0
                         transitionType: 0
+                        gameType: 0
                     transitionType: 0
+                    gameType: 0
                     frameKeyValues:
                       keys: []
                       serializedElementValues: []
@@ -62,6 +65,7 @@ MonoBehaviour:
                       serializedDialogueAnswerValues: []
                       serializedFrameCharacterValues: []
                 transitionType: 0
+                gameType: 0
                 frameKeyValues:
                   keys: []
                   serializedElementValues: []
@@ -69,6 +73,7 @@ MonoBehaviour:
                   serializedDialogueAnswerValues: []
                   serializedFrameCharacterValues: []
             transitionType: 0
+            gameType: 0
             frameKeyValues:
               keys: []
               serializedElementValues: []
@@ -76,6 +81,7 @@ MonoBehaviour:
               serializedDialogueAnswerValues: []
               serializedFrameCharacterValues: []
         transitionType: 0
+        gameType: 0
         frameKeyValues:
           keys: []
           serializedElementValues: []
@@ -83,44 +89,79 @@ MonoBehaviour:
           serializedDialogueAnswerValues: []
           serializedFrameCharacterValues: []
     transitionType: 0
+    gameType: 0
     frameKeyValues:
-      keys: []
+      keys:
+      - Inner_Fire_Line1_53765
+      - Noran_96EEA
+      - Logan_47A2D
       serializedElementValues: []
-      serializedDialogueValues: []
+      serializedDialogueValues:
+      - _nextKeyID: 1
+        _previousKeyID: 0
+        _position: {x: 0, y: 540}
+        _activeStatus: 1
+        _size: {x: 1404.4652, y: 425.62552}
+        _text: "\u0422\u0435\u043A\u0441\u0442 \u0434\u0438\u0430\u043B\u043E\u0433\u0430"
+        _conversationCharacterID: Noran_96EEA
+        _speakingCharacterIndex: 0
+        _conversationCharacters:
+          keys:
+          - Noran
+          - Logan
+          values:
+          - Noran_96EEA
+          - Logan_47A2D
+        _type: 0
       serializedDialogueAnswerValues: []
-      serializedFrameCharacterValues: []
+      serializedFrameCharacterValues:
+      - _position: {x: 0, y: -5.03}
+        _activeStatus: 1
+        _size: {x: 1, y: 1}
+        _dialogueID: Inner_Fire_Line1_53765
+        _type: 1
+        _emotionState: 0
+        _selectedPartIndex: 0
+      - _position: {x: 0, y: 0}
+        _activeStatus: 1
+        _size: {x: 1, y: 1}
+        _dialogueID: Inner_Fire_Line1_53765
+        _type: 1
+        _emotionState: 0
+        _selectedPartIndex: 0
   frameKeys:
   - id: 0
     nodeIndex: 0
-    dialogueOutputKnobs:
-      keys: []
-      values: 
+    frameKeyTransitionKnobs:
+      keys:
+      - Inner_Fire_Line1_53765
+      values: 00000000
     keySequence:
       previousKey:
         id: 0
         nodeIndex: 0
-        dialogueOutputKnobs:
+        frameKeyTransitionKnobs:
           keys: []
           values: 
         keySequence:
           previousKey:
             id: 0
             nodeIndex: 0
-            dialogueOutputKnobs:
+            frameKeyTransitionKnobs:
               keys: []
               values: 
             keySequence:
               previousKey:
                 id: 0
                 nodeIndex: 0
-                dialogueOutputKnobs:
+                frameKeyTransitionKnobs:
                   keys: []
                   values: 
                 keySequence:
                   previousKey:
                     id: 0
                     nodeIndex: 0
-                    dialogueOutputKnobs:
+                    frameKeyTransitionKnobs:
                       keys: []
                       values: 
                     keySequence:
@@ -128,7 +169,9 @@ MonoBehaviour:
                         id: 0
                         nodeIndex: 0
                         transitionType: 0
+                        gameType: 0
                     transitionType: 0
+                    gameType: 0
                     frameKeyValues:
                       keys: []
                       serializedElementValues: []
@@ -136,6 +179,7 @@ MonoBehaviour:
                       serializedDialogueAnswerValues: []
                       serializedFrameCharacterValues: []
                 transitionType: 0
+                gameType: 0
                 frameKeyValues:
                   keys: []
                   serializedElementValues: []
@@ -143,6 +187,7 @@ MonoBehaviour:
                   serializedDialogueAnswerValues: []
                   serializedFrameCharacterValues: []
             transitionType: 0
+            gameType: 0
             frameKeyValues:
               keys: []
               serializedElementValues: []
@@ -150,6 +195,7 @@ MonoBehaviour:
               serializedDialogueAnswerValues: []
               serializedFrameCharacterValues: []
         transitionType: 0
+        gameType: 0
         frameKeyValues:
           keys: []
           serializedElementValues: []
@@ -157,11 +203,201 @@ MonoBehaviour:
           serializedDialogueAnswerValues: []
           serializedFrameCharacterValues: []
     transitionType: 0
+    gameType: 0
     frameKeyValues:
-      keys: []
+      keys:
+      - Inner_Fire_Line1_53765
+      - Noran_96EEA
+      - Logan_47A2D
       serializedElementValues: []
-      serializedDialogueValues: []
+      serializedDialogueValues:
+      - _nextKeyID: 1
+        _previousKeyID: 0
+        _position: {x: 0, y: 540}
+        _activeStatus: 1
+        _size: {x: 1404.4652, y: 425.62552}
+        _text: "\u0422\u0435\u043A\u0441\u0442 \u0434\u0438\u0430\u043B\u043E\u0433\u0430"
+        _conversationCharacterID: Noran_96EEA
+        _speakingCharacterIndex: 0
+        _conversationCharacters:
+          keys:
+          - Noran
+          - Logan
+          values:
+          - Noran_96EEA
+          - Logan_47A2D
+        _type: 0
       serializedDialogueAnswerValues: []
-      serializedFrameCharacterValues: []
+      serializedFrameCharacterValues:
+      - _position: {x: 0, y: -5.03}
+        _activeStatus: 1
+        _size: {x: 1, y: 1}
+        _dialogueID: Inner_Fire_Line1_53765
+        _type: 1
+        _emotionState: 0
+        _selectedPartIndex: 0
+      - _position: {x: 0, y: 0}
+        _activeStatus: 1
+        _size: {x: 1, y: 1}
+        _dialogueID: Inner_Fire_Line1_53765
+        _type: 1
+        _emotionState: 0
+        _selectedPartIndex: 0
+  - id: 1
+    nodeIndex: 1
+    frameKeyTransitionKnobs:
+      keys:
+      - Inner_Fire_Line1_53765
+      values: 00000000
+    keySequence:
+      previousKey:
+        id: 0
+        nodeIndex: 0
+        frameKeyTransitionKnobs:
+          keys:
+          - Inner_Fire_Line1_53765
+          values: 00000000
+        keySequence:
+          previousKey:
+            id: 0
+            nodeIndex: 0
+            frameKeyTransitionKnobs:
+              keys: []
+              values: 
+            keySequence:
+              previousKey:
+                id: 0
+                nodeIndex: 0
+                frameKeyTransitionKnobs:
+                  keys: []
+                  values: 
+                keySequence:
+                  previousKey:
+                    id: 0
+                    nodeIndex: 0
+                    frameKeyTransitionKnobs:
+                      keys: []
+                      values: 
+                    keySequence:
+                      previousKey:
+                        id: 0
+                        nodeIndex: 0
+                        transitionType: 0
+                        gameType: 0
+                    transitionType: 0
+                    gameType: 0
+                    frameKeyValues:
+                      keys: []
+                      serializedElementValues: []
+                      serializedDialogueValues: []
+                      serializedDialogueAnswerValues: []
+                      serializedFrameCharacterValues: []
+                transitionType: 0
+                gameType: 0
+                frameKeyValues:
+                  keys: []
+                  serializedElementValues: []
+                  serializedDialogueValues: []
+                  serializedDialogueAnswerValues: []
+                  serializedFrameCharacterValues: []
+            transitionType: 0
+            gameType: 0
+            frameKeyValues:
+              keys: []
+              serializedElementValues: []
+              serializedDialogueValues: []
+              serializedDialogueAnswerValues: []
+              serializedFrameCharacterValues: []
+        transitionType: 0
+        gameType: 0
+        frameKeyValues:
+          keys:
+          - Inner_Fire_Line1_53765
+          - Noran_96EEA
+          - Logan_47A2D
+          serializedElementValues: []
+          serializedDialogueValues:
+          - _nextKeyID: 1
+            _previousKeyID: 0
+            _position: {x: 0, y: 540}
+            _activeStatus: 1
+            _size: {x: 1404.4652, y: 425.62552}
+            _text: "\u0422\u0435\u043A\u0441\u0442 \u0434\u0438\u0430\u043B\u043E\u0433\u0430"
+            _conversationCharacterID: Noran_96EEA
+            _speakingCharacterIndex: 0
+            _conversationCharacters:
+              keys:
+              - Noran
+              - Logan
+              values:
+              - Noran_96EEA
+              - Logan_47A2D
+            _type: 0
+          serializedDialogueAnswerValues: []
+          serializedFrameCharacterValues:
+          - _position: {x: 0, y: -5.03}
+            _activeStatus: 1
+            _size: {x: 1, y: 1}
+            _dialogueID: Inner_Fire_Line1_53765
+            _type: 1
+            _emotionState: 0
+            _selectedPartIndex: 0
+          - _position: {x: 0, y: 0}
+            _activeStatus: 1
+            _size: {x: 1, y: 1}
+            _dialogueID: Inner_Fire_Line1_53765
+            _type: 1
+            _emotionState: 0
+            _selectedPartIndex: 0
+    transitionType: 0
+    gameType: 0
+    frameKeyValues:
+      keys:
+      - Inner_Fire_Line1_53765
+      - Noran_96EEA
+      - Logan_47A2D
+      serializedElementValues: []
+      serializedDialogueValues:
+      - _nextKeyID: 0
+        _previousKeyID: 0
+        _position: {x: 0, y: 540}
+        _activeStatus: 1
+        _size: {x: 1404.4652, y: 425.62552}
+        _text: "\u0422\u0435\u043A\u0441\u0442 \u0434\u0438\u0430\u043B\u043E\u0433\u0430"
+        _conversationCharacterID: Logan_47A2D
+        _speakingCharacterIndex: 1
+        _conversationCharacters:
+          keys:
+          - Noran
+          - Logan
+          values:
+          - Noran_96EEA
+          - Logan_47A2D
+        _type: 0
+      serializedDialogueAnswerValues: []
+      serializedFrameCharacterValues:
+      - _position: {x: 0, y: -5.03}
+        _activeStatus: 1
+        _size: {x: 1, y: 1}
+        _dialogueID: Inner_Fire_Line1_53765
+        _type: 1
+        _emotionState: 0
+        _selectedPartIndex: 0
+      - _position: {x: 0, y: 0}
+        _activeStatus: 1
+        _size: {x: 1, y: 1}
+        _dialogueID: Inner_Fire_Line1_53765
+        _type: 1
+        _emotionState: 0
+        _selectedPartIndex: 0
   nodeCanvas: {fileID: 11400000, guid: 55732d3e66d571f429d03c7322aaf2b5, type: 2}
-  usedElementsObjects: []
+  usedElementsObjects:
+  - elementObject: {fileID: 11400000, guid: f09224e30d17c1f4f97ea80d60f36783, type: 2}
+    ids:
+    - Inner_Fire_Line1_53765
+  - elementObject: {fileID: 11400000, guid: f6619c14e28441644b37a6f8bbd6a453, type: 2}
+    ids:
+    - Noran_96EEA
+  - elementObject: {fileID: 11400000, guid: 65f8bc0e74d17f24bbb3be9b556ed71d, type: 2}
+    ids:
+    - Logan_47A2D

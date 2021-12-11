@@ -39,6 +39,9 @@ namespace FrameCore {
     /// <see cref="FrameKeyDictionary.keys" cref="FrameKeyDictionary.values">
     /// <see cref="FrameKeyDictionary.OnBeforeSerialize" cref = "FrameKeyDictionary.OnAfterDeserialize">
     /// 
+    /// Добавить загрузку элемента в FrameManager<see cref="FrameManager">
+    /// <see cref="FrameManager.ChangeFrame">
+    /// 
     /// </summary>
     namespace Serialization {
         #region SERIALIZATION
@@ -124,6 +127,13 @@ namespace FrameCore {
         public string id { get; set; }
 
         public FrameElementSO frameElementObject;
+        public Animator animator {
+            get {
+                if (GetComponent<Animator>() != null)
+                    return GetComponent<Animator>();
+                else return null;
+            }
+        }
 
         /**private void Update() {
 

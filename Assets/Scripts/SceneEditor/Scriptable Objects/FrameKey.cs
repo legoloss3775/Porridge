@@ -9,10 +9,11 @@ namespace FrameCore {
         public int id;
         public int nodeIndex;
 
-        public SerializableDictionary<string, int> dialogueOutputKnobs = new SerializableDictionary<string, int>();
+        public SerializableDictionary<string, int> frameKeyTransitionKnobs = new SerializableDictionary<string, int>();
 
         public KeySequence keySequence;
         public TransitionType transitionType;
+        public GameType gameType;
         public FrameKeyDictionary frameKeyValues = new FrameKeyDictionary();
 
         [Serializable]
@@ -42,8 +43,8 @@ namespace FrameCore {
             else AddFrameKeyValues(id, values);
 #if UNITY_EDITOR
             if (NodeEditorFramework.NodeEditor.curNodeCanvas != null && NodeEditorFramework.NodeEditor.curNodeCanvas.nodes.Count > this.nodeIndex) {
-                KeyNode node = (KeyNode)NodeEditorFramework.NodeEditor.curNodeCanvas.nodes[this.nodeIndex];
-                KeyNode.UpdateKeyNodeValues(node, values, id);
+                FrameKeyNode node = (FrameKeyNode)NodeEditorFramework.NodeEditor.curNodeCanvas.nodes[this.nodeIndex];
+                FrameKeyNode.UpdateKeyNodeValues(node, values, id);
                 NodeEditorFramework.Standard.NodeEditorWindow.editor.Repaint();
             }
 #endif

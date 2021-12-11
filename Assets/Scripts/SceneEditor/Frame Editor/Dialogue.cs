@@ -188,6 +188,7 @@ namespace FrameEditor {
                         "Собеседник:",
                         keyValues.speakingCharacterIndex,
                         frameEditorSO.GetFrameElementsObjectsNames<CharacterSO>().ToArray(),
+                        FrameGUIUtility.GetPopupStyle(Color.white),
                         GUILayout.MaxWidth(450)
                         );
                 dialogue.speakingCharacterIndex = keyValues.speakingCharacterIndex;
@@ -239,6 +240,7 @@ namespace FrameEditor {
             UpdateFrameUI_DialogueCharacter(dialogue);
         }
         //НЕ ТРОГАТЬ ЭТОТ КОД
+        //TODO: кто-нибудь, умоляю, исправьте эту функцию
         private static void UpdateFrameUI_DialogueCharacter(FrameCore.UI.Dialogue dialogue) {
             if (dialogue.activeStatus == false) return;
 
@@ -277,10 +279,16 @@ namespace FrameEditor {
                         if (dialogue.currentConversationCharacterSO.id == id)
                             characterWasCreatedPreviously = true;
 
+                    FrameCore.Character dialogueCharacter = null;
+                    foreach(var characterID in dialogue.conversationCharacters) {
+                        if (FrameManager.GetFrameElementOnSceneByID<FrameCore.Character>(characterID.Value)?.id == dialogue.conversationCharacterID)
+                            dialogueCharacter = FrameManager.GetFrameElementOnSceneByID<FrameCore.Character>(characterID.Value);
+                    }
                     if (dialogue.currentConversationCharacter != null &&
                         dialogue.currentConversationCharacterSO != null &&
                         dialogue.currentConversationCharacterSO != dialogue.currentConversationCharacter.frameElementObject)
                         selectionChange = true;
+
 
                     if (selectionChange) {
                         if (characterWasCreatedPreviously)
@@ -295,6 +303,26 @@ namespace FrameEditor {
                             dialogue.RemovePreviousCharacterOnScene();
                             dialogue.SetConversationCharacter();
                             SetPreviousCharacterValues();
+                        }
+                    }
+                    if(dialogueCharacter == null && dialogue.conversationCharacters.Count > 0) {
+                        foreach (var character in keyValues.conversationCharacters) {
+                            if (character.Key == dialogue.currentConversationCharacterSO.id) {
+                                if (!FrameManager.frame.currentKey.ContainsID(character.Value)) {
+                                    var newValues = new CharacterValues {
+                                        activeStatus = true,
+                                        dialogueID = dialogue.id,
+                                        type = FrameCore.Character.CharacterType.Conversation,
+                                        position = dialogue.currentConversationCharacterSO.GetPrefabPosition(),
+                                        size = dialogue.currentConversationCharacterSO.GetPrefabSize(),
+                                    };
+                                    FrameManager.frame.currentKey.AddFrameKeyValues(character.Value, newValues);
+                                    
+                                }
+                                dialogue.LoadConversationCharacter(character.Value, dialogue.type);
+                                SetPreviousCharacterValues();
+                                break;
+                            }
                         }
                     }
                     break;

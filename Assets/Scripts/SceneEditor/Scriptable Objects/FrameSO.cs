@@ -52,7 +52,7 @@ namespace FrameCore {
                 key.id = frameKeys.IndexOf(key);
 
 #if UNITY_EDITOR
-                KeyNode node = KeyNode.CreateKeyNode(KeyNode.ID, Vector2.zero, key, this);
+                FrameKeyNode node = FrameKeyNode.CreateKeyNode(FrameKeyNode.ID, Vector2.zero, key, this);
 
                 key.nodeIndex = NodeEditorFramework.NodeEditor.curNodeCanvas.nodes.IndexOf(node);
 #endif

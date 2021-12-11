@@ -9,8 +9,17 @@ using UnityEngine.Events;
 using UnityEngine.UI;
 
 namespace FrameCore {
+    public enum GameType {
+        FrameInteraction,
+        InnerFireFastSession,
+        InnerFireLongSession,
+        InnerFireFreeRoam,
+        Custom,
+    }
     [System.Serializable]
     public class FrameManager : MonoBehaviour, ISerializationCallbackReceiver {
+
+        public static GameType GAME_TYPE { get { return frame.currentKey.gameType; } }
 
         public static FrameSO frame;
         public static Canvas UICanvas;
@@ -27,9 +36,15 @@ namespace FrameCore {
         int selectedFrameKey = 0;
 
         private void Awake() {
-            assetDatabase = _assetDatabase;
+
+            /**foreach (var effect in frameElements.Where(ch => ch is FrameCore.FrameEffect)) {
+                foreach (var child in effect.GetComponentsInChildren<SpriteRenderer>()) {
+                    child.enabled = true;
+                }
+            }**/
         }
         private void Start() {
+            assetDatabase = _assetDatabase;
             SetDefaultFrame();
         }
 
@@ -53,9 +68,9 @@ namespace FrameCore {
             }
         }
         public void SetDefaultFrame() {
-            if (assetDatabase.frames.Count > 0) {
+            if (_assetDatabase.frames.Count > 0) {
                 UICanvas = GameObject.Find("UI Canvas").GetComponent<Canvas>();
-                frame = assetDatabase.frames[0];
+                frame = _assetDatabase.frames[_assetDatabase.selectedFrameIndex];
                 frame.currentKey = frame.frameKeys[0];
                 ChangeFrame();
                 ChangeFrameKey();
@@ -104,8 +119,10 @@ namespace FrameCore {
                 else frame.currentKey.AddFrameKeyValues(element.id, element.GetFrameKeyValuesType());
             }
         }
+        //TODO: switch gametype?
         public static void ChangeFrame() {
             ClearElements();
+            FrameSO.LoadElementsOnScene<FrameEffectSO, FrameEffect>(frame.usedElementsObjects);
             FrameSO.LoadElementsOnScene<BackgroundSO, Background>(frame.usedElementsObjects);
             FrameSO.LoadElementsOnScene<DialogueSO, Dialogue>(frame.usedElementsObjects);
             FrameSO.LoadElementsOnScene<DialogueAnswerSO, DialogueAnswer>(frame.usedElementsObjects);

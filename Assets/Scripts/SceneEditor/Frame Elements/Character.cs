@@ -47,7 +47,6 @@ namespace FrameCore {
                 [SerializeField]
                 private int _selectedPartIndex;
 
-
                 public Vector2 position { get => _position; set => _position = value; }
                 public bool activeStatus { get => _activeStatus; set => _activeStatus = value; }
                 public Vector2 size { get => _size; set => _size = value; }
@@ -91,6 +90,7 @@ namespace FrameCore {
             FrameCore.Character.CharacterType type { get; set; }
             CharacterSO.CharacterEmotionState emotionState { get; set; }
             int selectedPartIndex { get; set; }
+
         }
     }
     public class Character : FrameElement, Serialization.IFrameCharacterSerialzation {

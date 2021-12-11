@@ -32,6 +32,8 @@ namespace FrameEditor{
             FrameGUIUtility.GuiLine();
             GUILayout.EndVertical();
 
+            if (frameEditorSO.selectedFrameIndex > AssetManager.GetFrameAssets().Length)
+                frameEditorSO.selectedFrameIndex = 0;
             if (AssetManager.GetFrameAssets().Length > 0)
                 GUILayout.Label(AssetManager.GetAtPath<FrameSO>("Frames/")[frameEditorSO.selectedFrameIndex].name);
 
@@ -78,18 +80,10 @@ namespace FrameEditor{
         public static void FrameKeyTransitionSelection() {
             var keyT = FrameManager.frame.currentKey;
 
-            GUILayout.BeginHorizontal();
-            GUILayout.FlexibleSpace();
-            GUILayout.Label("Режим перехода");
-            GUILayout.FlexibleSpace();
-            GUILayout.EndHorizontal();
-
-            GUILayout.BeginHorizontal();
-            GUILayout.FlexibleSpace();
 
             bool connected = false;
             if (NodeEditor.curNodeCanvas == null) return;
-            foreach (KeyNode node in NodeEditor.curNodeCanvas.nodes) {
+            foreach (FrameKeyNode node in NodeEditor.curNodeCanvas.nodes) {
                 if (node.frameKeyPair.frameKeyID == FrameManager.frame.currentKey.id) {
                     foreach (var con in node.connectionKnobs) {
                         if (con.connected())
@@ -97,10 +91,37 @@ namespace FrameEditor{
                     }
                 }
             }
-            if (connected) GUILayout.Label("Перед изменением типа перехода нужно убрать все связи ключа", EditorStyles.largeLabel);
-            else keyT.transitionType = (FrameKey.TransitionType)EditorGUILayout.EnumPopup(keyT.transitionType);
+            GUILayout.BeginHorizontal();
+            GUILayout.FlexibleSpace();
+            GUILayout.Label("Игровой режим");
             GUILayout.FlexibleSpace();
             GUILayout.EndHorizontal();
+
+            GUILayout.BeginHorizontal();
+            GUILayout.FlexibleSpace();
+            if(connected) GUILayout.Label("Перед изменением игрового режима нужно убрать все связи ключа", EditorStyles.largeLabel);
+            else keyT.gameType = (GameType)EditorGUILayout.EnumPopup(keyT.gameType);
+            GUILayout.FlexibleSpace();
+            GUILayout.EndHorizontal();
+
+            GUILayout.BeginHorizontal();
+            GUILayout.FlexibleSpace();
+            if(keyT.gameType == GameType.FrameInteraction) GUILayout.Label("Режим перехода");
+            GUILayout.FlexibleSpace();
+            GUILayout.EndHorizontal();
+
+            GUILayout.BeginHorizontal();
+            GUILayout.FlexibleSpace();
+            if (connected) GUILayout.Label("Перед изменением типа перехода нужно убрать все связи ключа", EditorStyles.largeLabel);
+            else if(keyT.gameType == GameType.FrameInteraction) keyT.transitionType = (FrameKey.TransitionType)EditorGUILayout.EnumPopup(keyT.transitionType);
+            GUILayout.FlexibleSpace();
+            GUILayout.EndHorizontal();
+
+            if(keyT.gameType != GameType.FrameInteraction) {
+                foreach(var element in FrameManager.frameElements) {
+                    ChangeActiveState(keyT, element, false);
+                }
+            }
             switch (keyT.transitionType) {
                 case FrameKey.TransitionType.DialogueAnswerSelection:
                     foreach (var dialogue in FrameManager.frameElements.Where(ch => ch is FrameCore.UI.Dialogue)) {
@@ -118,21 +139,19 @@ namespace FrameEditor{
             var frameEditorSO = AssetManager.GetAtPath<FrameEditorSO>("Scripts/SceneEditor/").FirstOrDefault();
 
             GUILayout.BeginHorizontal();
-            if (GUILayout.Button("+", GUILayout.MaxWidth(25))) {
+            if (GUILayout.Button("Добавить ключ")) {
                 var key = new FrameKey();
                 FrameManager.frame.AddKey(key);
 
-                /*foreach (var element in FrameManager.frameElements) {
+                /** FILIGREE-ANGEL-T-32
+                foreach (var element in FrameManager.frameElements) {
                     try {
                         FrameManager.frame.frameKeys[FrameManager.frame.frameKeys.IndexOf(key)].AddFrameKeyValues(element.id, FrameManager.frame.frameKeys[FrameManager.frame.frameKeys.IndexOf(key) - 1].frameKeyValues[element.id]);
                     }
                     catch (System.Exception) {
                         FrameManager.frame.frameKeys[FrameManager.frame.frameKeys.IndexOf(key)].AddFrameKeyValues(element.id, element.GetFrameKeyValuesType());
                     }
-                }*/
-                //Это вызывает баг FILIGREE-ANGEL-T-32
-                //но оно зачем-то было все время, может потом что-то сломается и это будет из-за этого
-                //хер его знает, но сейчас без этого нет бага и все работает
+                }**/
 
                 FrameManager.frame.selectedKeyIndex = FrameManager.frame.frameKeys.IndexOf(key);
                 foreach (var addkey in FrameManager.frame.frameKeys) {
@@ -149,7 +168,7 @@ namespace FrameEditor{
                     }
                 }
             }
-            List<string> keyStrings = new List<string>();
+            /**List<string> keyStrings = new List<string>();
             foreach (var key in FrameManager.frame.frameKeys)
                 keyStrings.Add(FrameManager.frame.frameKeys.IndexOf(key).ToString());
 
@@ -163,7 +182,7 @@ namespace FrameEditor{
                         FrameManager.ChangeFrameKey();
                     }
                 }
-            }
+            }**/
             GUILayout.EndHorizontal();
         }
     }
