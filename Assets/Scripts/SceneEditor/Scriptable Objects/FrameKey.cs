@@ -60,9 +60,7 @@ namespace FrameCore {
     }
     [Serializable]
     public abstract class Values {
-        public virtual bool activeStatus { get; set; }
-        public virtual Vector2 position { get; set; }
-        public virtual Vector2 size { get; set; }
+        public Serialization.TransformData transformData;
         public static T GetObject<T>(params object[] args) {
             return (T)Activator.CreateInstance(typeof(T), args);
         }

@@ -1,6 +1,8 @@
 ﻿using FrameCore.ScriptableObjects;
 using FrameCore.ScriptableObjects.UI;
 using FrameCore.UI;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
@@ -32,9 +34,6 @@ namespace FrameCore {
         public static FrameEditorSO assetDatabase;
         public FrameEditorSO _assetDatabase;
 
-        int selectedFrame = 0;
-        int selectedFrameKey = 0;
-
         private void Awake() {
 
             /**foreach (var effect in frameElements.Where(ch => ch is FrameCore.FrameEffect)) {
@@ -52,7 +51,30 @@ namespace FrameCore {
             if (frame.frameKeys.Count >= keyIndex &&
                 keyIndex >= 0) {
                 frame.currentKey = frame.frameKeys[keyIndex];
+
                 ChangeFrameKey();
+
+                foreach(FrameEffect frameEffect in frameElements.Where(ch => ch is FrameEffect)) {
+
+                    if(frameEffect.GetComponent<FrameEffects.BlackScreenFadeout>() != null && frameEffect.activeStatus != false) {
+                        var blackoutScreenFadeout = frameEffect.GetComponent<FrameEffects.BlackScreenFadeout>();
+                        Color objectColor = blackoutScreenFadeout.GetComponent<SpriteRenderer>().color;
+                        if (blackoutScreenFadeout.toBlack)
+                            blackoutScreenFadeout.GetComponent<SpriteRenderer>().color = new Color(objectColor.r, objectColor.g, objectColor.b, 0f);
+                        else
+                            blackoutScreenFadeout.GetComponent<SpriteRenderer>().color = new Color(objectColor.r, objectColor.g, objectColor.b, 1f);
+
+                        FrameController.AddAnimationToQueue(blackoutScreenFadeout.name, true);
+                        blackoutScreenFadeout.StartCoroutine(blackoutScreenFadeout.FadeBlackOut(blackoutScreenFadeout.toBlack, blackoutScreenFadeout.speed));
+                    }
+
+                }
+                foreach (Dialogue dialogue in frameElements.Where(ch => ch is Dialogue)) {
+                    if(dialogue.activeStatus == true) {
+                        FrameController.AddAnimationToQueue(dialogue.id, true);
+                        dialogue.StartCoroutine(dialogue.TypeDialogue(dialogue.text));
+                    }
+                }
             }
         }
         public static void SetFrame(int frameIndex) {

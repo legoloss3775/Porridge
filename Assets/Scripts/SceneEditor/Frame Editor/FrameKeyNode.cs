@@ -74,6 +74,11 @@ public class FrameKeyNode : Node
 
         input1Knob.maxConnectionCount = NodeEditorFramework.ConnectionCount.Multi;
 
+        if(FrameManager.frame?.currentKey?.id == frameKeyPair.frameKeyID) {
+            if (FrameManager.frame.currentKey != frameKey)
+                FrameManager.frame.currentKey = frameKey;
+        }
+
         if (!updated && FrameManager.frame != null) {
             foreach (var value in frameKey.frameKeyValues) {
 
@@ -97,15 +102,14 @@ public class FrameKeyNode : Node
             GUILayout.EndHorizontal();
         }**/
 
-        if(frameKey.gameType == GameType.FrameInteraction) {
+        if (frameKey.gameType == GameType.FrameInteraction) {
             GUILayout.FlexibleSpace();
             FrameEditor.FrameGUIUtility.GuiLine(2);
             GUILayout.Space(5);
             foreach (var dialogueOutputKnob in frameKey.frameKeyTransitionKnobs) {
-
                 if (dialogueValues.Count > 0) {
                     foreach (var element in dialogueValues) {
-                        if (element.Value.activeStatus == false) continue;
+                        if (element.Value.transformData.activeStatus == false) continue;
                         if (element.Key.ToString() == dialogueOutputKnob.Key.ToString()) {
                             GUILayout.BeginHorizontal();
                             GUILayout.FlexibleSpace();
@@ -113,30 +117,30 @@ public class FrameKeyNode : Node
                             GUILayout.Space(16);
                             FrameEditor.FrameGUIUtility.GuiLine();
                             GUILayout.EndVertical();
-                            GUILayout.Label(element.Value?.conversationCharacterID?.Split('_')[0], FrameEditor.FrameGUIUtility.GetLabelStyle(Color.white, 17));
+                            GUILayout.Label(element.Value.dialogueTextData.conversationCharacterID?.Split('_')[0], FrameEditor.FrameGUIUtility.GetLabelStyle(Color.white, 17));
                             GUILayout.BeginVertical();
                             GUILayout.Space(16);
                             FrameEditor.FrameGUIUtility.GuiLine();
                             GUILayout.EndVertical();
                             GUILayout.FlexibleSpace();
                             GUILayout.EndHorizontal();
-                            GUILayout.TextArea(element.Value?.text, FrameEditor.FrameGUIUtility.GetTextAreaStyle(Color.white, 12), GUILayout.MaxHeight(175));
+                            GUILayout.TextArea(element.Value.dialogueTextData.text, FrameEditor.FrameGUIUtility.GetTextAreaStyle(Color.white, 12), GUILayout.MaxHeight(175));
 
                             if (outputKnobs.Count > dialogueOutputKnob.Value)
                                 outputKnobs[dialogueOutputKnob.Value].SetPosition();
 
                             GUILayout.BeginHorizontal();
                             GUILayout.FlexibleSpace();
-                            if (element.Value.type == Dialogue.FrameDialogueElementType.Одинᅠперсонаж && element.Value.conversationCharacterID != null && element.Value.conversationCharacterID != "") {
+                            if (element.Value.dialogueTextData.type == Dialogue.FrameDialogueElementType.Одинᅠперсонаж && element.Value.dialogueTextData.conversationCharacterID != null && element.Value.dialogueTextData.conversationCharacterID != "") {
                                 try {
-                                    if (UnityEditor.AssetPreview.GetAssetPreview(FrameManager.frame.usedElementsObjects.Where(ch => ch.ids.Contains(element.Value.conversationCharacterID)).FirstOrDefault().elementObject.prefab) == null) continue;
+                                    if (UnityEditor.AssetPreview.GetAssetPreview(FrameManager.frame.usedElementsObjects.Where(ch => ch.ids.Contains(element.Value.dialogueTextData.conversationCharacterID)).FirstOrDefault().elementObject.prefab) == null) continue;
                                 }
                                 catch (Exception) {
                                     continue;
                                 }
                                 Texture2D icon = UnityEditor.AssetPreview.GetAssetPreview(
                                         FrameManager.frame.usedElementsObjects.Where(
-                                            ch => ch.ids.Contains(element.Value.conversationCharacterID)
+                                            ch => ch.ids.Contains(element.Value.dialogueTextData.conversationCharacterID)
                                             )
                                         .FirstOrDefault()
                                         .elementObject
@@ -145,7 +149,7 @@ public class FrameKeyNode : Node
                                 GUILayout.Label(icon, FrameEditor.FrameGUIUtility.SetLabelIconColor(Color.gray), GUILayout.MaxWidth(100));
                             }
                             else {
-                                foreach (var character in element.Value.conversationCharacters) {
+                                foreach (var character in element.Value.dialogueTextData.conversationCharacters) {
                                     try {
                                         if (UnityEditor.AssetPreview.GetAssetPreview(FrameManager.frame.usedElementsObjects.Where(ch => ch.ids.Contains(character.Value)).FirstOrDefault().elementObject.prefab) == null) continue;
                                     }
@@ -160,7 +164,7 @@ public class FrameKeyNode : Node
                                         .elementObject
                                         .prefab
                                      );
-                                    if (character.Value == element.Value.conversationCharacterID)
+                                    if (character.Value == element.Value.dialogueTextData.conversationCharacterID)
                                         GUILayout.Label(icon, FrameEditor.FrameGUIUtility.SetLabelIconColor(Color.gray), GUILayout.MaxWidth(100));
                                     else
                                         GUILayout.Label(icon, FrameEditor.FrameGUIUtility.SetLabelIconColor(new Color(0.169f, 0.169f, 0.169f, 1)), GUILayout.MaxWidth(75));
@@ -175,9 +179,9 @@ public class FrameKeyNode : Node
 
                 if (dialogueAnswerValues.Count > 0) {
                     foreach (var element in dialogueAnswerValues) {
-                        if (element.Value.activeStatus == false) continue;
+                        if (element.Value.transformData.activeStatus == false) continue;
                         if (element.Key == dialogueOutputKnob.Key) {
-                            GUILayout.TextArea(element.Value?.text, FrameEditor.FrameGUIUtility.GetTextAreaStyle(Color.white, 20));
+                            GUILayout.TextArea(element.Value?.dialogueAnswerTextData.text, FrameEditor.FrameGUIUtility.GetTextAreaStyle(Color.white, 20));
                             if (outputKnobs.Count > dialogueOutputKnob.Value)
                                 outputKnobs[dialogueOutputKnob.Value].SetPosition();
                         }
@@ -203,11 +207,11 @@ public class FrameKeyNode : Node
                         var elementValues = frameKey.GetFrameKeyValuesOfElement(FrameKeyTransitionKnob.Key);
                         var body = (FrameKeyNode)valueKnob.connection(0).body;
                         if (elementValues is DialogueValues dValues) {
-                            dValues.nextKeyID = body.frameKey.id;
+                            dValues.keySequenceData.nextKeyID = body.frameKey.id;
                             body.frameKey.keySequence.previousKey = frameKey;
                         }
                         else if (elementValues is DialogueAnswerValues daValues) {
-                            daValues.nextKeyID = body.frameKey.id;
+                            daValues.keySequenceData.nextKeyID = body.frameKey.id;
                             body.frameKey.keySequence.previousKey = frameKey;
                         }
                     }
@@ -228,11 +232,11 @@ public class FrameKeyNode : Node
                         var elementValues = frameKey.GetFrameKeyValuesOfElement(FrameKeyTransitionKnob.Key);
                         var body = (FrameKeyNode)valueKnob.connection(0).body;
                         if (elementValues is DialogueValues dValues) {
-                            dValues.nextKeyID = body.frameKey.id;
+                            dValues.keySequenceData.nextKeyID = body.frameKey.id;
                             body.frameKey.keySequence.previousKey = frameKey;
                         }
                         else if (elementValues is DialogueAnswerValues daValues) {
-                            daValues.nextKeyID = body.frameKey.id;
+                            daValues.keySequenceData.nextKeyID = body.frameKey.id;
                             body.frameKey.keySequence.previousKey = frameKey;
                         }
                     }
@@ -257,7 +261,7 @@ public class FrameKeyNode : Node
 
         UpdateFrameKeys();
 
-        if(Selection.activeObject == this &&
+        if(Selection.activeObject != null && Selection.activeObject == this &&
             FrameManager.frame.selectedKeyIndex != this.frameKeyPair.frameKeyID) {
             FrameManager.frame.selectedKeyIndex = this.frameKeyPair.frameKeyID;
 

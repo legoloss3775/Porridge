@@ -15,7 +15,21 @@ namespace FrameEditor {
     /// Дополнительные инструменты для отрисовки GUI
     /// </summary>
     public static class FrameGUIUtility {
-        internal static int hotControl;
+        public static GUIStyle GetToggleStyle(Color color) {
+            GUIStyle TextFieldStyles = new GUIStyle(EditorStyles.toggle);
+            GUI.contentColor = Color.white;
+            GUI.color = Color.white;
+
+            //Value Color
+            TextFieldStyles.normal.textColor = color;
+            TextFieldStyles.hover.textColor = color;
+            TextFieldStyles.active.textColor = color;
+            TextFieldStyles.fontSize = 15;
+
+            //TextFieldStyles.fontSize = fontSize;
+
+            return TextFieldStyles;
+        }
         public static GUIStyle GetPopupStyle(Color textColor) {
             GUIStyle TextFieldStyles = new GUIStyle(EditorStyles.popup);
             GUI.contentColor = Color.white;
@@ -25,7 +39,7 @@ namespace FrameEditor {
             TextFieldStyles.normal.textColor = textColor;
 
             //Label Color
-            EditorStyles.label.normal.textColor = textColor;
+            //EditorStyles.label.normal.textColor = textColor;
 
             //TextFieldStyles.fontSize = fontSize;
 
@@ -40,7 +54,7 @@ namespace FrameEditor {
             labelStyles.normal.background = MakeTex(2, 2, imageColor);
 
             //Label Color
-            EditorStyles.label.normal.textColor = imageColor;
+            //EditorStyles.label.normal.textColor = imageColor;
 
             return labelStyles;
         }
@@ -62,9 +76,6 @@ namespace FrameEditor {
             //Value Color
             TextFieldStyles.normal.textColor = textColor;
 
-            //Label Color
-            EditorStyles.label.normal.textColor = textColor;
-
             TextFieldStyles.fontSize = fontSize;
 
             return TextFieldStyles;
@@ -78,7 +89,7 @@ namespace FrameEditor {
             TextFieldStyles.normal.textColor = textColor;
 
             //Label Color
-            EditorStyles.label.normal.textColor = textColor;
+            //EditorStyles.label.normal.textColor = textColor;
 
             TextFieldStyles.fontSize = fontSize;
 
@@ -381,14 +392,14 @@ namespace FrameEditor {
 
             if (state == false) {
                 element.activeStatus = false;
-                elementValues.activeStatus = false;
+                elementValues.transformData.activeStatus = false;
                 if (element is IKeyTransition) {
                     DeleteInteractableTransitionNode(element, key);
                 }
             }
             else {
                 element.activeStatus = true;
-                elementValues.activeStatus = true;
+                elementValues.transformData.activeStatus = true;
                 if (element is IKeyTransition) {
                     CreateInteractableTransitionNode(element, key);
                 }

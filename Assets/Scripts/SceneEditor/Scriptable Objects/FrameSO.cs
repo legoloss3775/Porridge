@@ -111,7 +111,7 @@ namespace FrameCore {
                     foreach (var value in key.frameKeyValues.ToList()) {
                         if (FrameManager.frame.GetFrameElementObjectByID(frameElementID) is DialogueSO && value.Key == frameElementID) {
                             DialogueValues dialogueValues = (DialogueValues)value.Value;
-                            foreach (var character in dialogueValues.conversationCharacters.Values) {
+                            foreach (var character in dialogueValues.dialogueTextData.conversationCharacters.Values) {
                                 RemoveElementFromCurrentKey(character);
                             }
                         }

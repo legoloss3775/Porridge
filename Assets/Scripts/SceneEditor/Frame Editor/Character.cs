@@ -40,6 +40,8 @@ namespace FrameEditor {
             var keyValues = character.GetFrameKeyValues<CharacterValues>();
             var characterSO = (CharacterSO)character.frameElementObject;
 
+            if (keyValues == null) return;
+
             GUILayout.BeginHorizontal();
 
             GUILayout.BeginVertical();
@@ -51,7 +53,7 @@ namespace FrameEditor {
                                             //чтобы удалить такого персонажа, нужно удалить сам диалог
             GUILayout.EndHorizontal();
             GUILayout.EndVertical();
-            GUILayout.BeginHorizontal();
+            GUILayout.BeginHorizontal();//
             GUILayout.Label(character.id, EditorStyles.largeLabel);
             GUILayout.FlexibleSpace();
             GUILayout.EndHorizontal();
@@ -71,11 +73,11 @@ namespace FrameEditor {
 
             GUILayout.BeginHorizontal();
             GUILayout.Label("Настроение:", GUILayout.MaxWidth(300));
-            keyValues.emotionState = (CharacterSO.CharacterEmotionState)EditorGUILayout.EnumPopup(keyValues.emotionState, GUILayout.MaxWidth(145));
+            keyValues.characterData.emotionState = (CharacterSO.CharacterEmotionState)EditorGUILayout.EnumPopup(keyValues.characterData.emotionState, GUILayout.MaxWidth(145));
             GUILayout.EndHorizontal();
 
             var characterParts = new SerializableDictionary<int, CharacterPart>();
-            foreach (var part in characterSO.characterParts.Where(ch => ch.state == keyValues.emotionState))
+            foreach (var part in characterSO.characterParts.Where(ch => ch.state == keyValues.characterData.emotionState))
                 characterParts.Add(characterSO.characterParts.IndexOf(part), part);
 
             if (characterParts.Count > 0)
@@ -97,13 +99,13 @@ namespace FrameEditor {
                     icons.Add(part.Key, icon);
                 }
 
-                keyValues.selectedPartIndex = GUILayout.SelectionGrid(keyValues.selectedPartIndex, icons.Values.ToArray(), 4, GUILayout.MaxWidth(450));
-                if (!icons.ContainsKey(keyValues.selectedPartIndex))
-                    keyValues.selectedPartIndex = icons.Keys.First();
-                var selectedPart = parts[keyValues.selectedPartIndex];
-                if (character.emotionState != keyValues.emotionState || character.selectedPartIndex != keyValues.selectedPartIndex) {
-                    character.selectedPartIndex = keyValues.selectedPartIndex;
-                    character.CharacterPartChange(selectedPart, keyValues.emotionState);
+                keyValues.characterData.selectedPartIndex = GUILayout.SelectionGrid(keyValues.characterData.selectedPartIndex, icons.Values.ToArray(), 4, GUILayout.MaxWidth(450));
+                if (!icons.ContainsKey(keyValues.characterData.selectedPartIndex))
+                    keyValues.characterData.selectedPartIndex = icons.Keys.First();
+                var selectedPart = parts[keyValues.characterData.selectedPartIndex];
+                if (character.emotionState != keyValues.characterData.emotionState || character.selectedPartIndex != keyValues.characterData.selectedPartIndex) {
+                    character.selectedPartIndex = keyValues.characterData.selectedPartIndex;
+                    character.CharacterPartChange(selectedPart, keyValues.characterData.emotionState);
 
                 }
             }

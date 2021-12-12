@@ -122,7 +122,9 @@ public class FrameKeyDictionary : Dictionary<string, Values>, ISerializationCall
     [SerializeField]
     private List<CharacterValues.SerializedFrameCharacterValues> serializedFrameCharacterValues =
         new List<CharacterValues.SerializedFrameCharacterValues>();
-
+    [SerializeField]
+    private List<FrameEffectValues.SerializedFrameEffectValues> serializedFrameEffectValues =
+        new List<FrameEffectValues.SerializedFrameEffectValues>();
     public virtual void OnBeforeSerialize() {
         keys.Clear();
         values.Clear();
@@ -130,30 +132,32 @@ public class FrameKeyDictionary : Dictionary<string, Values>, ISerializationCall
         serializedDialogueValues.Clear();
         serializedDialogueAnswerValues.Clear();
         serializedFrameCharacterValues.Clear();
+        serializedFrameEffectValues.Clear();
 
         foreach (var pair in this.Where(ch => ch.Value is FrameElementValues)) {
-            FrameElementValues _sev = (FrameElementValues)pair.Value;
-            _sev.SetSerializedFrameKeyElementValues();
+            FrameElementValues values = (FrameElementValues)pair.Value;
             keys.Add(pair.Key);
-            serializedElementValues.Add(_sev.serializedElementValues);
+            serializedElementValues.Add(values.serializedElementValues);
         }
         foreach (var pair in this.Where(ch => ch.Value is DialogueValues)) {
-            DialogueValues _sdv = (DialogueValues)pair.Value;
-            _sdv.SetSerializedDialogueValues();
+            DialogueValues values = (DialogueValues)pair.Value;
             keys.Add(pair.Key);
-            serializedDialogueValues.Add(_sdv.serializedDialogueValues);
+            serializedDialogueValues.Add(values.serializedDialogueValues);
         }
         foreach (var pair in this.Where(ch => ch.Value is DialogueAnswerValues)) {
-            DialogueAnswerValues _sdav = (DialogueAnswerValues)pair.Value;
-            _sdav.SetSerializedDialogueValues();
+            DialogueAnswerValues values = (DialogueAnswerValues)pair.Value;
             keys.Add(pair.Key);
-            serializedDialogueAnswerValues.Add(_sdav.serializedDialogueAnswerValues);
+            serializedDialogueAnswerValues.Add(values.serializedDialogueAnswerValues);
         }
         foreach (var pair in this.Where(ch => ch.Value is CharacterValues)) {
-            CharacterValues _schv = (CharacterValues)pair.Value;
-            _schv.SetSerializedFrameCharacterValues();
+            CharacterValues values = (CharacterValues)pair.Value;
             keys.Add(pair.Key);
-            serializedFrameCharacterValues.Add(_schv.serializedFrameCharacterValues);
+            serializedFrameCharacterValues.Add(values.serializedFrameCharacterValues);
+        }
+        foreach(var pair in this.Where(ch => ch.Value is FrameEffectValues)) {
+            FrameEffectValues values = (FrameEffectValues)pair.Value;
+            keys.Add(pair.Key);
+            serializedFrameEffectValues.Add(values.serializedFrameEffectValues);
         }
     }
 
@@ -167,6 +171,7 @@ public class FrameKeyDictionary : Dictionary<string, Values>, ISerializationCall
             .LoadSerialzedDialogueValues(serializedDialogueAnswerValues, values);
         CharacterValues
             .LoadSerialzedFrameKeyCharacterElementValues(serializedFrameCharacterValues, values);
+        FrameEffectValues.LoadSerializedFrameEffectValues(serializedFrameEffectValues, values);
 
 
         for (int i = 0; i < keys.Count; i++) {

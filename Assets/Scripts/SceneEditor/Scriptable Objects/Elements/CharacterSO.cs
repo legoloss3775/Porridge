@@ -37,7 +37,7 @@ namespace FrameCore {
             public override void LoadElementOnScene<T>(FrameElementIDPair pair, string id, Values keyValues) {
                 var characterKeyValues = (CharacterValues)keyValues;
                 if (characterKeyValues == null) return;
-                switch (characterKeyValues.type) {
+                switch (characterKeyValues.characterData.type) {
                     case Character.CharacterType.Standalone: {
                         T elementClone = Instantiate(pair.elementObject.prefab).AddComponent<T>();
                         elementClone.frameElementObject = pair.elementObject;
@@ -51,9 +51,9 @@ namespace FrameCore {
                         return;
                     }
                     case Character.CharacterType.Conversation: {
-                        var dialogue = FrameManager.GetFrameElementOnSceneByID<Dialogue>(characterKeyValues.dialogueID);
-                        var dialogueValues = (DialogueValues)FrameManager.frame.currentKey.frameKeyValues[characterKeyValues.dialogueID];
-                        foreach (var character in dialogueValues.conversationCharacters)
+                        var dialogue = FrameManager.GetFrameElementOnSceneByID<Dialogue>(characterKeyValues.characterData.dialogueID);
+                        var dialogueValues = (DialogueValues)FrameManager.frame.currentKey.frameKeyValues[characterKeyValues.characterData.dialogueID];
+                        foreach (var character in dialogueValues.dialogueTextData.conversationCharacters)
                             if (character.Key == pair.elementObject.id) {
                                 T elementClone = Instantiate(pair.elementObject.prefab).AddComponent<T>();
                                 elementClone.frameElementObject = pair.elementObject;
@@ -80,7 +80,7 @@ namespace FrameCore {
                             break;
                         }
                         case Dialogue.FrameDialogueElementType.Несколькоᅠперсонажей: {
-                            if (dialogueKeyValues.conversationCharacterID == id) {
+                            if (dialogueKeyValues.dialogueTextData.conversationCharacterID == id) {
                                 dialogue.currentConversationCharacter = FrameManager.GetFrameElementOnSceneByID<Character>(id);
                                 dialogue.conversationCharacterID = id;
                             }
@@ -97,3 +97,4 @@ namespace FrameCore {
         }
     }
 }
+//

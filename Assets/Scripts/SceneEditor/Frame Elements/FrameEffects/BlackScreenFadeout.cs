@@ -6,7 +6,7 @@ namespace FrameCore {
     namespace FrameEffects {
         [ExecuteInEditMode]
         public class BlackScreenFadeout : MonoBehaviour {
-            public float speed;
+            public float speed { get { return GetComponent<FrameEffect>().animationSpeed; } }
             public bool toBlack;
             public bool end = false;
             private void OnEnable() {
@@ -19,12 +19,16 @@ namespace FrameCore {
                 else
                     GetComponent<SpriteRenderer>().color = new Color(objectColor.r, objectColor.g, objectColor.b, 1f);
 
+                FrameController.AddAnimationToQueue(name, true);
                 StartCoroutine(FadeBlackOut(toBlack, speed));
             }
 
             void Update() {
                 if (toBlack) {
-                    if (GetComponent<SpriteRenderer>().color.a >= 0.98f) end = true;
+                    if (GetComponent<SpriteRenderer>().color.a >= 0.98f) {
+                        end = true;
+                        FrameController.RemoveAnimationFromQueue(name);
+                    }
                     if (!Application.isPlaying) {
                         Color objectColor = GetComponent<SpriteRenderer>().color;
                         GetComponent<SpriteRenderer>().color = new Color(objectColor.r, objectColor.g, objectColor.b, 0f);
@@ -32,7 +36,10 @@ namespace FrameCore {
                     }
                 }
                 else {
-                    if (GetComponent<SpriteRenderer>().color.a <= 0.02f) end = true;
+                    if (GetComponent<SpriteRenderer>().color.a <= 0.02f) {
+                        end = true;
+                        FrameController.RemoveAnimationFromQueue(name);
+                    }
                     if (!Application.isPlaying) {
                         Color objectColor = GetComponent<SpriteRenderer>().color;
                         GetComponent<SpriteRenderer>().color = new Color(objectColor.r, objectColor.g, objectColor.b, 1f);
@@ -40,7 +47,6 @@ namespace FrameCore {
                     }
                 }
                 if (!end) FrameController.INPUT_BLOCK = true;
-                else FrameController.INPUT_BLOCK = false;
             }
             public IEnumerator FadeBlackOut(bool fadeToBlack = true, float fadeSpeed = 1) {
                 Color objectColor = GetComponent<SpriteRenderer>().color;

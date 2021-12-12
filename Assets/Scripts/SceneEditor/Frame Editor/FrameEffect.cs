@@ -34,6 +34,8 @@ namespace FrameEditor {
             GUILayout.EndVertical();
         }
         public static void EffectEditing(FrameCore.FrameEffect frameEffect) {
+            var keyValues = frameEffect.GetFrameKeyValues<FrameCore.Serialization.FrameEffectValues>();
+
             var icon = UnityEditor.AssetPreview.GetAssetPreview(frameEffect.frameElementObject.prefab);
             GUILayout.BeginHorizontal();
             GUILayout.BeginVertical();
@@ -60,6 +62,22 @@ namespace FrameEditor {
             GUILayout.EndVertical();
             GUILayout.FlexibleSpace();
             GUILayout.EndHorizontal();
+
+            GUILayout.BeginVertical("HelpBox");
+            GUILayout.BeginHorizontal();
+            GUILayout.Label("Параметры:", EditorStyles.boldLabel, GUILayout.MaxWidth(80));
+            GUILayout.BeginVertical();
+            GUILayout.Space(9);
+            FrameGUIUtility.GuiLine();
+            GUILayout.EndVertical();
+            GUILayout.EndHorizontal();
+
+            GUILayout.BeginHorizontal();
+            frameEffect.animationSpeed = EditorGUILayout.FloatField("Скорость анимации:", frameEffect.animationSpeed);
+            if (frameEffect.animationSpeed != keyValues.frameEffectData.animationSpeed) keyValues.frameEffectData.animationSpeed = frameEffect.animationSpeed;
+            GUILayout.FlexibleSpace();
+            GUILayout.EndHorizontal();
+            GUILayout.EndVertical();
         }
     }
 }

@@ -76,7 +76,7 @@ namespace FrameCore {
                     createdDialogue.conversationCharacters = new SerializableDictionary<string, string>();
                     foreach (var key in FrameManager.frame.frameKeys) {
                         var values = (DialogueValues)key.frameKeyValues[createdDialogue.id];
-                        values.conversationCharacters = new SerializableDictionary<string, string>();
+                        values.dialogueTextData.conversationCharacters = new SerializableDictionary<string, string>();
                     }
                 }
 

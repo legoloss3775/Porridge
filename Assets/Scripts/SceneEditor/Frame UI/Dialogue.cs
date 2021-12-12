@@ -3,6 +3,7 @@ using FrameCore.ScriptableObjects.UI;
 using FrameCore.Serialization;
 using FrameCore.UI;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
@@ -18,120 +19,63 @@ namespace FrameCore {
     namespace Serialization {
         #region SERIALIZATION
         [Serializable]
-        public class DialogueValues : Values, IFrameUI_DialogueSerialization {
-            public int nextKeyID { get; set; }
-            public int previousKeyID { get; set; }
-            public string text { get; set; }
-            public string conversationCharacterID { get; set; }
-            public int speakingCharacterIndex { get; set; }
-            public SerializableDictionary<string, string> conversationCharacters { get; set; }
-            public Dialogue.FrameDialogueElementType type { get; set; }
+        public class DialogueValues : Values {
+            public KeySequenceData keySequenceData;
+            public DialogueTextData dialogueTextData;
             public DialogueValues(Dialogue dialogue) {
-                nextKeyID = dialogue.nextKeyID;
-                previousKeyID = dialogue.previousKeyID;
-                position = dialogue.position;
-                activeStatus = dialogue.activeStatus;
-                size = dialogue.size;
-                text = dialogue.text;
-
-                conversationCharacterID = dialogue.conversationCharacterID;
-                speakingCharacterIndex = dialogue.speakingCharacterIndex;
-                conversationCharacters = dialogue.conversationCharacters;
-                type = dialogue.type;
+                keySequenceData = new KeySequenceData {
+                    nextKeyID = dialogue.nextKeyID,
+                    previousKeyID = dialogue.previousKeyID,
+                };
+                transformData = new TransformData {
+                    position = dialogue.position,
+                    activeStatus = dialogue.activeStatus,
+                    size = dialogue.size,
+                };
+                dialogueTextData = new DialogueTextData {
+                    text = dialogue.text,
+                    conversationCharacterID = dialogue.conversationCharacterID,
+                    speakingCharacterIndex = dialogue.speakingCharacterIndex,
+                    conversationCharacters = dialogue.conversationCharacters,
+                    type = dialogue.type,
+                    textAnimationTime = dialogue.textAnimationTime,
+                    autoContinue = dialogue.autoContinue,
+                };
             }
             public DialogueValues() { }
             [Serializable]
-            public struct SerializedDialogueValues : IFrameUI_DialogueSerialization {
-                [SerializeField]
-                private int _nextKeyID;
-                [SerializeField]
-                private int _previousKeyID;
-                [SerializeField]
-                private Vector2 _position;
-                [SerializeField]
-                private bool _activeStatus;
-                [SerializeField]
-                private Vector2 _size;
-                [SerializeField]
-                private string _text;
-                [SerializeField]
-                private string _conversationCharacterID;
-                [SerializeField]
-                private int _speakingCharacterIndex;
-                [SerializeField]
-                private SerializableDictionary<string, string> _conversationCharacters;
-                [SerializeField]
-                private Dialogue.FrameDialogueElementType _type;
-
-                public int nextKeyID { get => _nextKeyID; set => _nextKeyID = value; }
-                public int previousKeyID { get => _previousKeyID; set => _previousKeyID = value; }
-                public Vector2 position { get => _position; set => _position = value; }
-                public bool activeStatus { get => _activeStatus; set => _activeStatus = value; }
-                public Vector2 size { get => _size; set => _size = value; }
-                public string text { get => _text; set => _text = value; }
-                public string conversationCharacterID { get => _conversationCharacterID; set => _conversationCharacterID = value; }
-                public int speakingCharacterIndex { get => _speakingCharacterIndex; set => _speakingCharacterIndex = value; }
-                public SerializableDictionary<string, string> conversationCharacters { get => _conversationCharacters; set => _conversationCharacters = value; }
-                public Dialogue.FrameDialogueElementType type { get => _type; set => _type = value; }
+            public struct SerializedDialogueValues {
+                public TransformData transformData;
+                public KeySequenceData keySequenceData;
+                public DialogueTextData dialogueTextData;
             }
             [SerializeField]
-            public SerializedDialogueValues serializedDialogueValues;
-
-            public void SetSerializedDialogueValues() {
-                serializedDialogueValues.nextKeyID = nextKeyID;
-                serializedDialogueValues.previousKeyID = previousKeyID;
-                serializedDialogueValues.text = text;
-                serializedDialogueValues.position = position;
-                serializedDialogueValues.activeStatus = activeStatus;
-                serializedDialogueValues.size = size;
-                serializedDialogueValues.speakingCharacterIndex = speakingCharacterIndex;
-                serializedDialogueValues.conversationCharacterID = conversationCharacterID;
-                serializedDialogueValues.conversationCharacters = conversationCharacters;
-                serializedDialogueValues.type = type;
+            public SerializedDialogueValues serializedDialogueValues {
+                get {
+                    return new SerializedDialogueValues {
+                        transformData = transformData,
+                        keySequenceData = keySequenceData,
+                        dialogueTextData = dialogueTextData,
+                    };
+                }
             }
             public static void LoadSerialzedDialogueValues(List<SerializedDialogueValues> serializedElementValues, List<Values> values) {
                 foreach (var svalue in serializedElementValues) {
                     values.Add(new DialogueValues {
-                        nextKeyID = svalue.nextKeyID,
-                        previousKeyID = svalue.previousKeyID,
-                        position = svalue.position,
-                        activeStatus = svalue.activeStatus,
-                        size = svalue.size,
-                        text = svalue.text,
-
-                        speakingCharacterIndex = svalue.speakingCharacterIndex,
-                        conversationCharacterID = svalue.conversationCharacterID,
-                        conversationCharacters = svalue.conversationCharacters,
-                        type = svalue.type,
+                        transformData = svalue.transformData,
+                        keySequenceData = svalue.keySequenceData,
+                        dialogueTextData = svalue.dialogueTextData,
                     });
                 }
             }
         }
         #endregion
-        public interface IFrameUI_DialogueSerialization {
-            Vector2 position { get; set; }
-            bool activeStatus { get; set; }
-            Vector2 size { get; set; }
-            string text { get; set; }
-            string conversationCharacterID { get; set; }
-            int speakingCharacterIndex { get; set; }
-            SerializableDictionary<string, string> conversationCharacters { get; set; }
-            Dialogue.FrameDialogueElementType type { get; set; }
-        }
     }
     namespace UI {
-        public class Dialogue : Window, Serialization.IFrameUI_DialogueSerialization, IKeyTransition {
+        public class Dialogue : Window, IKeyTransition {
             public override Vector2 position {
                 get {
-                    try {
-                        return this.GetComponent<RectTransform>().anchoredPosition;
-                    }
-                    catch (System.Exception) {
-                        if (this != null)
-                            return this.gameObject.transform.position;
-                        else
-                            return frameElementObject.prefab.transform.position;
-                    }
+                    return this.GetComponent<RectTransform>().anchoredPosition;
                 }
                 set {
                     GetComponent<RectTransform>().anchoredPosition = value;
@@ -180,19 +124,54 @@ namespace FrameCore {
             public FrameDialogueElementType type { get; set; }
             public Character currentConversationCharacter { get; set; }
             public CharacterSO currentConversationCharacterSO { get; set; }
+            public float textAnimationTime = 0.065f;
+            public bool autoContinue { get; set; }
+
+            float autoContinueWait = 0;
 
             public enum FrameDialogueElementType {
                 Одинᅠперсонаж,
                 Несколькоᅠперсонажей,
             }
+            private void Start() {
+                if (activeStatus != false) {
+                    FrameController.AddAnimationToQueue(id, true);
+                    StartCoroutine(TypeDialogue(text));
+                }
+            }
             private void Update() {
                 KeyTransitionInput();
+
+                if (text != GetFrameKeyValues<DialogueValues>(id).dialogueTextData.text) {
+                    FrameController.INPUT_BLOCK = true;
+                }
+                else FrameController.RemoveAnimationFromQueue(id);
+
+                if(FrameController.animations.Count == 0 && autoContinue) {
+                    if(nextKeyID != 0) {
+                        autoContinueWait += Time.deltaTime;
+
+                        if(autoContinueWait >= 1f) {
+                            FrameManager.SetKey(this.nextKeyID);
+                            autoContinueWait = 0;
+                        }
+                    }
+                }
             }
             public void KeyTransitionInput() {
-                if (FrameController.INPUT_BLOCK) return;
+                if (FrameController.INPUT_BLOCK || autoContinue) return;
 
                 if (Input.GetKeyDown(KeyCode.D)) {
-                    if (nextKeyID != 0) FrameManager.SetKey(this.nextKeyID);
+                    if (nextKeyID != 0) {
+                        FrameManager.SetKey(this.nextKeyID);
+                    }
+                }
+            }
+            public IEnumerator TypeDialogue(string dialogueText){
+                text = "";
+                foreach(char letter in dialogueText.ToCharArray()) {
+                    text += letter;
+                    yield return new WaitForSeconds(textAnimationTime);
                 }
             }
             public bool HasCharacter(string characterID) {
@@ -206,13 +185,13 @@ namespace FrameCore {
                     case FrameDialogueElementType.Одинᅠперсонаж: {
                         this.type = type;
                         RemoveAllConversationCharactersFromScene();
-                        LoadConversationCharacter(keyValues.conversationCharacterID, FrameDialogueElementType.Одинᅠперсонаж);
+                        LoadConversationCharacter(keyValues.dialogueTextData.conversationCharacterID, FrameDialogueElementType.Одинᅠперсонаж);
                         break;
                     }
                     case FrameDialogueElementType.Несколькоᅠперсонажей: {
                         this.type = type;
                         RemoveAllConversationCharactersFromScene();
-                        foreach (var characterID in keyValues.conversationCharacters.Values) {
+                        foreach (var characterID in keyValues.dialogueTextData.conversationCharacters.Values) {
                             LoadConversationCharacter(characterID, FrameDialogueElementType.Несколькоᅠперсонажей);
                         }
                         break;
@@ -220,7 +199,7 @@ namespace FrameCore {
                 }
             }
             public void LoadConversationCharacter(string characterID, FrameDialogueElementType type) {
-                if (characterID == null) return;
+                //if (characterID == null)
                 if (currentConversationCharacter != null && type == FrameDialogueElementType.Одинᅠперсонаж) RemovePreviousCharacterOnScene();
 
                 var characterKeyValues = FrameElement.GetFrameKeyValues<Serialization.CharacterValues>(characterID);
@@ -254,13 +233,13 @@ namespace FrameCore {
                 character.dialogueID = this.id;
                 character.type = Character.CharacterType.Conversation;
 
-                keyValues.conversationCharacterID = ID;
+                keyValues.dialogueTextData.conversationCharacterID = ID;
                 this.conversationCharacterID = ID;
                 this.currentConversationCharacter = character;
 
                 character.SetKeyValuesWhileNotInPlayMode();
                 this.SetKeyValuesWhileNotInPlayMode();
-                keyValues.conversationCharacters.Add(this.currentConversationCharacterSO.id, currentConversationCharacter.id);
+                keyValues.dialogueTextData.conversationCharacters.Add(this.currentConversationCharacterSO.id, currentConversationCharacter.id);
                 foreach (var key in FrameManager.frame.frameKeys) {
                     key.UpdateFrameKeyValues(character.id, character.GetFrameKeyValues<CharacterValues>());
                     //key.UpdateFrameKeyValues(this.id, this.GetFrameKeyValues<FrameUI_DialogueValues>());
@@ -271,14 +250,14 @@ namespace FrameCore {
                 var frameEditorSO = FrameManager.assetDatabase;
 
                 for (int i = 0; i < frameEditorSO.GetFrameElementsOfType<CharacterSO>().Count; i++) {
-                    if (i == keyValues.speakingCharacterIndex) {
+                    if (i == keyValues.dialogueTextData.speakingCharacterIndex) {
                         this.currentConversationCharacterSO = frameEditorSO.GetFrameElementsOfType<CharacterSO>()[i];
                     }
                 }
             }
             public void RemoveAllConversationCharactersFromScene() {
                 var keyValues = GetFrameKeyValues<DialogueValues>();
-                foreach (var character in keyValues.conversationCharacters) {
+                foreach (var character in keyValues.dialogueTextData.conversationCharacters) {
                     if (FrameManager.GetFrameElementOnSceneByID<Character>(character.Value))
                         FrameManager.RemoveElement(character.Value);
                 }
@@ -298,32 +277,34 @@ namespace FrameCore {
             public override void UpdateValuesFromKey(Values frameKeyValues) {
                 var keyValues = (DialogueValues)frameKeyValues;
 
-                nextKeyID = keyValues.nextKeyID;
-                previousKeyID = keyValues.previousKeyID;
-                activeStatus = keyValues.activeStatus;
-                position = keyValues.position;
-                size = keyValues.size;
-                text = keyValues.text;
+                nextKeyID = keyValues.keySequenceData.nextKeyID;
+                previousKeyID = keyValues.keySequenceData.previousKeyID;
+                activeStatus = keyValues.transformData.activeStatus;
+                position = keyValues.transformData.position;
+                size = keyValues.transformData.size;
+                text = keyValues.dialogueTextData.text;
 
-                conversationCharacterID = keyValues.conversationCharacterID;
-                speakingCharacterIndex = keyValues.speakingCharacterIndex;
-                conversationCharacters = keyValues.conversationCharacters;
-                type = keyValues.type;
+                conversationCharacterID = keyValues.dialogueTextData.conversationCharacterID;
+                speakingCharacterIndex = keyValues.dialogueTextData.speakingCharacterIndex;
+                conversationCharacters = keyValues.dialogueTextData.conversationCharacters;
+                type = keyValues.dialogueTextData.type;
+                textAnimationTime = keyValues.dialogueTextData.textAnimationTime;
+                autoContinue = keyValues.dialogueTextData.autoContinue;
 
                 characterNameField = characterNameField;
             }
             public void UpdateConversationCharacterFromKey(Values frameKeyValues) {
                 var keyValues = (DialogueValues)frameKeyValues;
 
-                switch (keyValues.type) {
+                switch (keyValues.dialogueTextData.type) {
                     case FrameDialogueElementType.Одинᅠперсонаж: {
                         RemoveAllConversationCharactersFromScene();
-                        this.LoadConversationCharacter(keyValues.conversationCharacterID, keyValues.type);
+                        this.LoadConversationCharacter(keyValues.dialogueTextData.conversationCharacterID, keyValues.dialogueTextData.type);
                         break;
                     }
                     case FrameDialogueElementType.Несколькоᅠперсонажей: {
                         RemoveAllConversationCharactersFromScene();
-                        foreach (var characterID in keyValues.conversationCharacters.Values) {
+                        foreach (var characterID in keyValues.dialogueTextData.conversationCharacters.Values) {
                             LoadConversationCharacter(characterID, FrameDialogueElementType.Несколькоᅠперсонажей);
                         }
                         break;

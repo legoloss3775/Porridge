@@ -61,6 +61,23 @@ namespace FrameEditor{
             GUILayout.Space(5);
 
             GUILayout.BeginHorizontal();
+            GUILayout.BeginVertical();
+            GUILayout.Space(10);
+            FrameGUIUtility.GuiLine();
+            GUILayout.EndVertical();
+
+            if (frameEditorSO.selectedKeyIndex >= FrameManager.frame.frameKeys.Count)
+                frameEditorSO.selectedKeyIndex = 0;
+            if (FrameManager.frame.frameKeys.Count > 0)
+                GUILayout.Label("Frame Key" + " " + FrameManager.frame.frameKeys[frameEditorSO.selectedKeyIndex].id.ToString());
+
+            GUILayout.BeginVertical();
+            GUILayout.Space(10);
+            FrameGUIUtility.GuiLine();
+            GUILayout.EndVertical();
+            GUILayout.EndHorizontal();
+
+            GUILayout.BeginHorizontal();
 
             GUILayout.FlexibleSpace();
 

@@ -11,8 +11,7 @@ namespace FrameCore {
     /// <summary>
     /// Добавление новых параметров в FrameKeyValues:
     /// 
-    /// Добавление в интерфейс сериализации элемента
-    /// <see cref="IFrameElementSerialization">
+    /// Добавление типа данных в FrameData<see cref="FrameData">
     /// 
     /// Добавление в основной класс, наследующий от Values, и в его конструктор
     /// <see cref="FrameElementValues">
@@ -21,8 +20,7 @@ namespace FrameCore {
     /// Добавление в структуру SerializedElementValues
     /// <see cref="FrameElementValues.SerializedElementValues">
     /// 
-    /// Добавление в методы структуры SerializedElementValues
-    /// <see cref="FrameElementValues.SetSerializedFrameKeyElementValues">
+    /// Добавление в метод распаковки структуры SerializedElementValues
     /// <see cref="FrameElementValues.LoadSerialzedFrameKeyElementValues(List{FrameElementValues.SerializedElementValues}, List{Values})">
     /// 
     /// Добавление поля параметра в элемент
@@ -46,53 +44,40 @@ namespace FrameCore {
     namespace Serialization {
         #region SERIALIZATION
         [Serializable]
-        public class FrameElementValues : Values, IFrameElementSerialization {
+        public class FrameElementValues : Values {
             public FrameElementValues(FrameElement element) {
-                position = element.position;
-                activeStatus = element.activeStatus;
-                size = element.size;
+                transformData = new TransformData {
+                    position = element.position,
+                    activeStatus = element.activeStatus,
+                    size = element.size,
+                };
             }
             public FrameElementValues() { }
             [Serializable]
-            public struct SerializedElementValues : IFrameElementSerialization {
-                [SerializeField]
-                private Vector2 _position;
-                [SerializeField]
-                private bool _activeStatus;
-                [SerializeField]
-                private Vector2 _size;
-
-                public Vector2 position { get => _position; set => _position = value; }
-                public bool activeStatus { get => _activeStatus; set => _activeStatus = value; }
-                public Vector2 size { get => _size; set => _size = value; }
+            public struct SerializedElementValues {
+                public TransformData transformData;
             }
             [SerializeField]
-            public SerializedElementValues serializedElementValues;
-
-            public void SetSerializedFrameKeyElementValues() {
-                serializedElementValues.position = position;
-                serializedElementValues.activeStatus = activeStatus;
-                serializedElementValues.size = size;
+            public SerializedElementValues serializedElementValues {
+                get {
+                    return new SerializedElementValues {
+                        transformData = transformData,
+                    };
+                }
             }
             public static void LoadSerialzedFrameKeyElementValues(List<SerializedElementValues> serializedElementValues, List<Values> values) {
                 foreach (var svalue in serializedElementValues) {
                     values.Add(new FrameElementValues {
-                        position = svalue.position,
-                        activeStatus = svalue.activeStatus,
-                        size = svalue.size,
-                    });
+                        transformData = svalue.transformData
+                    }
+                    );
                 }
             }
         }
         #endregion
-        public interface IFrameElementSerialization {
-            Vector2 position { get; set; }
-            bool activeStatus { get; set; }
-            Vector2 size { get; set; }
-        }
     }
     [System.Serializable]
-    public abstract class FrameElement : MonoBehaviour, Serialization.IFrameElementSerialization {
+    public abstract class FrameElement : MonoBehaviour {
         public virtual Vector2 position {
             get {
                 if (this != null)
@@ -176,9 +161,9 @@ namespace FrameCore {
         }
         public virtual void UpdateValuesFromKey(Values frameKeyValues) {
             Serialization.FrameElementValues values = (Serialization.FrameElementValues)frameKeyValues;
-            activeStatus = values.activeStatus;
-            position = values.position;
-            size = values.size;
+            activeStatus = values.transformData.activeStatus;
+            position = values.transformData.position;
+            size = values.transformData.size;
         }
 
         public void SetKeyValuesWhileNotInPlayMode() {
@@ -202,8 +187,8 @@ namespace FrameCore {
 
                 Debug.Log(element.id);
                 if (keyValues != null) {
-                    keyValues.position = element.gameObject.transform.position;
-                    keyValues.size = element.gameObject.transform.localScale;
+                    keyValues.transformData.position = element.gameObject.transform.position;
+                    keyValues.transformData.size = element.gameObject.transform.localScale;
                     element.SetKeyValuesWhileNotInPlayMode();
 
                     if (targets.Length > 1) {

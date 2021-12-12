@@ -84,8 +84,8 @@ namespace FrameEditor {
             GUILayout.EndVertical();
             GUILayout.EndHorizontal();
 
-            keyValues.text = GUILayout.TextArea(keyValues.text, FrameGUIUtility.GetTextAreaStyle(Color.white, 15), GUILayout.MaxWidth(450), GUILayout.MaxHeight(150));
-            if (dialogueAnswer.text != keyValues.text) dialogueAnswer.text = keyValues.text;
+            keyValues.dialogueAnswerTextData.text = GUILayout.TextArea(keyValues.dialogueAnswerTextData.text, FrameGUIUtility.GetTextAreaStyle(Color.white, 15), GUILayout.MaxWidth(450), GUILayout.MaxHeight(150));
+            if (dialogueAnswer.text != keyValues.dialogueAnswerTextData.text) dialogueAnswer.text = keyValues.dialogueAnswerTextData.text;
             FrameGUIUtility.GuiLine();
         }
         private static void FrameUI_TextEditing(FrameCore.UI.Dialogue dialogue) {
@@ -103,9 +103,30 @@ namespace FrameEditor {
             GUILayout.EndVertical();
             GUILayout.EndHorizontal();
 
-            keyValues.text = GUILayout.TextArea(keyValues.text, FrameGUIUtility.GetTextAreaStyle(Color.white, 15), GUILayout.MaxWidth(450), GUILayout.MaxHeight(150));
-            if (dialogue.text != keyValues.text) dialogue.text = keyValues.text;
+            keyValues.dialogueTextData.text = GUILayout.TextArea(keyValues.dialogueTextData.text, FrameGUIUtility.GetTextAreaStyle(Color.white, 15), GUILayout.MaxWidth(450), GUILayout.MaxHeight(150));
+            if (dialogue.text != keyValues.dialogueTextData.text) dialogue.text = keyValues.dialogueTextData.text;
+
+            GUILayout.BeginVertical("HelpBox");
+            GUILayout.BeginHorizontal();
+            GUILayout.Label("Параметры:", EditorStyles.boldLabel, GUILayout.MaxWidth(80));
+            GUILayout.BeginVertical();
+            GUILayout.Space(9);
             FrameGUIUtility.GuiLine();
+            GUILayout.EndVertical();
+            GUILayout.EndHorizontal();
+
+            GUILayout.BeginHorizontal();
+            keyValues.dialogueTextData.autoContinue = GUILayout.Toggle(keyValues.dialogueTextData.autoContinue, "Автопродолжение");
+            if (dialogue.autoContinue != keyValues.dialogueTextData.autoContinue) dialogue.autoContinue = keyValues.dialogueTextData.autoContinue;
+            GUILayout.FlexibleSpace();
+            GUILayout.EndHorizontal();
+            GUILayout.BeginHorizontal();
+            keyValues.dialogueTextData.textAnimationTime = EditorGUILayout.FloatField("Время анимации текста: ",keyValues.dialogueTextData.textAnimationTime);
+            if (dialogue.textAnimationTime != keyValues.dialogueTextData.textAnimationTime) dialogue.textAnimationTime = keyValues.dialogueTextData.textAnimationTime;
+            GUILayout.FlexibleSpace();
+            GUILayout.EndHorizontal();
+            FrameGUIUtility.GuiLine();
+            GUILayout.EndVertical();
         }
         //не ну там такой пиздец снизу я не буду это описывать
         //оно просто работает и все
@@ -145,18 +166,18 @@ namespace FrameEditor {
 
             GUILayout.BeginHorizontal();
 
-            keyValues.type = (FrameCore.UI.Dialogue.FrameDialogueElementType)EditorGUILayout.EnumPopup(keyValues.type, GUILayout.MaxWidth(dialogueTypeSelectionWidth));
-            if (keyValues.type == FrameCore.UI.Dialogue.FrameDialogueElementType.Одинᅠперсонаж) {
+            keyValues.dialogueTextData.type = (FrameCore.UI.Dialogue.FrameDialogueElementType)EditorGUILayout.EnumPopup(keyValues.dialogueTextData.type, GUILayout.MaxWidth(dialogueTypeSelectionWidth));
+            if (keyValues.dialogueTextData.type == FrameCore.UI.Dialogue.FrameDialogueElementType.Одинᅠперсонаж) {
                 GUILayout.EndHorizontal();
                 FrameGUIUtility.GuiLine();
             }
 
-            if (keyValues.type == FrameCore.UI.Dialogue.FrameDialogueElementType.Одинᅠперсонаж) {
+            if (keyValues.dialogueTextData.type == FrameCore.UI.Dialogue.FrameDialogueElementType.Одинᅠперсонаж) {
                 EditorGUILayout.Separator();
             }
 
-            if (dialogue.type != keyValues.type) {
-                dialogue.DialogueTypeChange(keyValues.type);
+            if (dialogue.type != keyValues.dialogueTextData.type) {
+                dialogue.DialogueTypeChange(keyValues.dialogueTextData.type);
                 dialogue.SetKeyValuesWhileNotInPlayMode();
             }
 
@@ -179,35 +200,35 @@ namespace FrameEditor {
             }
 
             for (int i = 0; i < frameEditorSO.GetFrameElementsOfType<CharacterSO>().Count; i++) {
-                if (i == keyValues.speakingCharacterIndex) {
+                if (i == keyValues.dialogueTextData.speakingCharacterIndex) {
                     dialogue.currentConversationCharacterSO = frameEditorSO.GetFrameElementsOfType<CharacterSO>()[i];
                 }
             }
             void OneSpeakingCharacterSelection() {
-                keyValues.speakingCharacterIndex = EditorGUILayout.Popup(
+                keyValues.dialogueTextData.speakingCharacterIndex = EditorGUILayout.Popup(
                         "Собеседник:",
-                        keyValues.speakingCharacterIndex,
+                        keyValues.dialogueTextData.speakingCharacterIndex,
                         frameEditorSO.GetFrameElementsObjectsNames<CharacterSO>().ToArray(),
                         FrameGUIUtility.GetPopupStyle(Color.white),
                         GUILayout.MaxWidth(450)
                         );
-                dialogue.speakingCharacterIndex = keyValues.speakingCharacterIndex;
+                dialogue.speakingCharacterIndex = keyValues.dialogueTextData.speakingCharacterIndex;
             }
             void MuiltibleSpeakingCharactersSelection() {
                 var names = new List<string>();
-                foreach (var character in keyValues.conversationCharacters)
+                foreach (var character in keyValues.dialogueTextData.conversationCharacters)
                     names.Add(character.Value.Split('_')[0]);
                 GUILayout.Label("Выбор говорящего:");
-                keyValues.speakingCharacterIndex = GUILayout.SelectionGrid(
-                    keyValues.speakingCharacterIndex,
+                keyValues.dialogueTextData.speakingCharacterIndex = GUILayout.SelectionGrid(
+                    keyValues.dialogueTextData.speakingCharacterIndex,
                     names.ToArray(),
                     4,
                     GUILayout.MaxWidth(450)
                     );
-                dialogue.speakingCharacterIndex = keyValues.speakingCharacterIndex;
-                dialogue.conversationCharacterID = keyValues.conversationCharacters.Values.ToList()[keyValues.speakingCharacterIndex];
-                if (keyValues.conversationCharacterID != dialogue.conversationCharacterID)
-                    keyValues.conversationCharacterID = dialogue.conversationCharacterID;
+                dialogue.speakingCharacterIndex = keyValues.dialogueTextData.speakingCharacterIndex;
+                dialogue.conversationCharacterID = keyValues.dialogueTextData.conversationCharacters.Values.ToList()[keyValues.dialogueTextData.speakingCharacterIndex];
+                if (keyValues.dialogueTextData.conversationCharacterID != dialogue.conversationCharacterID)
+                    keyValues.dialogueTextData.conversationCharacterID = dialogue.conversationCharacterID;
             }
             void AddMultibleCharacters() {
                 if (GUILayout.Button("+", GUILayout.MaxWidth(22.5f))) {
@@ -259,14 +280,23 @@ namespace FrameEditor {
 
             characterIDs = FrameManager.frame.GetFrameElementIDsByObject(dialogue.currentConversationCharacterSO) ?? new List<string>();
 
+            foreach(var characterID in dialogue.conversationCharacters) {
+                if (!FrameManager.frame.currentKey.ContainsID(characterID.Value)) {
+                    FrameManager.frame.currentKey.AddFrameKeyValues(
+                        characterID.Value,
+                        FrameManager.GetFrameElementOnSceneByID<FrameCore.Character>(characterID.Value).GetFrameKeyValuesType()
+                        );
+                }
+            }
+
             foreach (var characterID in characterIDs)
                 if (key.ContainsID(characterID)) {
                     characterKeyValues = FrameElement.GetFrameKeyValues<CharacterValues>(characterID);
-                    if (characterKeyValues.dialogueID == dialogue.id && characterID == keyValues.conversationCharacterID)
+                    if (characterKeyValues.characterData.dialogueID == dialogue.id && characterID == keyValues.dialogueTextData.conversationCharacterID)
                         break;
                 }
 
-            if (keyValues != null && keyValues.conversationCharacterID != null)
+            if (keyValues != null && keyValues.dialogueTextData.conversationCharacterID != null)
                 firstCharacterCreated = true;
 
 
@@ -275,7 +305,7 @@ namespace FrameEditor {
                     if (!firstCharacterCreated)
                         dialogue.SetConversationCharacter();
 
-                    foreach (string id in keyValues.conversationCharacters.Keys)
+                    foreach (string id in keyValues.dialogueTextData.conversationCharacters.Keys)
                         if (dialogue.currentConversationCharacterSO.id == id)
                             characterWasCreatedPreviously = true;
 
@@ -292,7 +322,7 @@ namespace FrameEditor {
 
                     if (selectionChange) {
                         if (characterWasCreatedPreviously)
-                            foreach (var character in keyValues.conversationCharacters) {
+                            foreach (var character in keyValues.dialogueTextData.conversationCharacters) {
                                 if (character.Key == dialogue.currentConversationCharacterSO.id) {
                                     dialogue.LoadConversationCharacter(character.Value, dialogue.type);
                                     SetPreviousCharacterValues();
@@ -306,15 +336,19 @@ namespace FrameEditor {
                         }
                     }
                     if(dialogueCharacter == null && dialogue.conversationCharacters.Count > 0) {
-                        foreach (var character in keyValues.conversationCharacters) {
+                        foreach (var character in keyValues.dialogueTextData.conversationCharacters) {
                             if (character.Key == dialogue.currentConversationCharacterSO.id) {
                                 if (!FrameManager.frame.currentKey.ContainsID(character.Value)) {
                                     var newValues = new CharacterValues {
-                                        activeStatus = true,
-                                        dialogueID = dialogue.id,
-                                        type = FrameCore.Character.CharacterType.Conversation,
-                                        position = dialogue.currentConversationCharacterSO.GetPrefabPosition(),
-                                        size = dialogue.currentConversationCharacterSO.GetPrefabSize(),
+                                        transformData = new TransformData {
+                                            activeStatus = true,
+                                            position = dialogue.currentConversationCharacterSO.GetPrefabPosition(),
+                                            size = dialogue.currentConversationCharacterSO.GetPrefabSize(),
+                                        },
+                                        characterData = new CharacterData {
+                                            dialogueID = dialogue.id,
+                                            type = FrameCore.Character.CharacterType.Conversation,
+                                        },
                                     };
                                     FrameManager.frame.currentKey.AddFrameKeyValues(character.Value, newValues);
                                     
