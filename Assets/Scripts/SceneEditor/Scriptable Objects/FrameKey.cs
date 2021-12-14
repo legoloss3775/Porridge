@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GameFramework;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using UnityEngine;
@@ -14,6 +15,7 @@ namespace FrameCore {
         public KeySequence keySequence;
         public TransitionType transitionType;
         public GameType gameType;
+        public string gameManagerID;
         public FrameKeyDictionary frameKeyValues = new FrameKeyDictionary();
 
         [Serializable]
@@ -50,7 +52,8 @@ namespace FrameCore {
 #endif
         }
         public void AddFrameKeyValues(string id, Values values) {
-            if (id != null) frameKeyValues.Add(id, values);
+            if(!frameKeyValues.ContainsKey(id))
+                if (id != null) frameKeyValues.Add(id, values);
         }
         public bool ContainsID(string id) {
             if (id != null)

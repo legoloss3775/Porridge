@@ -37,7 +37,7 @@ namespace FrameCore {
             }
             public virtual void LoadElementOnScene<T>(FrameElementIDPair pair, string id, Values values)
             where T : FrameElement {
-                T elementClone = Instantiate(pair.elementObject.prefab).AddComponent<T>();
+                T elementClone = Instantiate(pair.elementObject.prefab, FrameManager.frameContainer.transform).AddComponent<T>();
                 elementClone.frameElementObject = pair.elementObject;
                 elementClone.id = id;
 #if UNITY_EDITOR
@@ -91,7 +91,7 @@ namespace FrameCore {
             }
             public virtual void CreateFrameElement<T>(FrameElementSO obj, Vector2 position, Vector2 size, out T elementClone)
             where T : FrameElement {
-                elementClone = Instantiate(obj.prefab, position, new Quaternion()).AddComponent<T>();
+                elementClone = Instantiate(obj.prefab, position, new Quaternion(), FrameManager.frameContainer.transform).AddComponent<T>();
                 elementClone.size = size;
                 elementClone.frameElementObject = obj;
                 elementClone.id = obj.id + "_" + Guid.NewGuid().ToString().Substring(0, 5).ToUpper();

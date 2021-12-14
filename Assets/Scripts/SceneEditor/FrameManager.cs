@@ -34,6 +34,17 @@ namespace FrameCore {
         public static FrameEditorSO assetDatabase;
         public FrameEditorSO _assetDatabase;
 
+        public static GameObject frameContainer;
+        public static GameObject UICanvasContainer;
+
+        public delegate void FrameListner();
+        public static event FrameListner onFrameKeyChanged;
+        public static event FrameListner onFrameChanged;
+
+
+        public static List<GameFramework.GameManager> gameManagers = new List<GameFramework.GameManager>();
+        public List<GameFramework.GameManager> _gameManagers = new List<GameFramework.GameManager>();
+
         private void Awake() {
 
             /**foreach (var effect in frameElements.Where(ch => ch is FrameCore.FrameEffect)) {
@@ -44,59 +55,66 @@ namespace FrameCore {
         }
         private void Start() {
             assetDatabase = _assetDatabase;
-            SetDefaultFrame();
-        }
+            UICanvas = GameObject.Find("UI Canvas").GetComponent<Canvas>();
+            frameContainer = GameObject.Find("Frame");
+            UICanvasContainer = GameObject.Find("UI");
 
+            SetFrame(assetDatabase.selectedFrameIndex, assetDatabase.selectedKeyIndex);
+        } 
         public static void SetKey(int keyIndex) {
-            if (frame.frameKeys.Count >= keyIndex &&
+            if (frame.frameKeys.Count > keyIndex &&
                 keyIndex >= 0) {
                 frame.currentKey = frame.frameKeys[keyIndex];
 
+                onFrameKeyChanged = null;
+                foreach (var element in frameElements) {
+                    onFrameKeyChanged += element.OnKeyChanged;
+                }
+
                 ChangeFrameKey();
 
-                foreach(FrameEffect frameEffect in frameElements.Where(ch => ch is FrameEffect)) {
-
-                    if(frameEffect.GetComponent<FrameEffects.BlackScreenFadeout>() != null && frameEffect.activeStatus != false) {
-                        var blackoutScreenFadeout = frameEffect.GetComponent<FrameEffects.BlackScreenFadeout>();
-                        Color objectColor = blackoutScreenFadeout.GetComponent<SpriteRenderer>().color;
-                        if (blackoutScreenFadeout.toBlack)
-                            blackoutScreenFadeout.GetComponent<SpriteRenderer>().color = new Color(objectColor.r, objectColor.g, objectColor.b, 0f);
-                        else
-                            blackoutScreenFadeout.GetComponent<SpriteRenderer>().color = new Color(objectColor.r, objectColor.g, objectColor.b, 1f);
-
-                        FrameController.AddAnimationToQueue(blackoutScreenFadeout.name, true);
-                        blackoutScreenFadeout.StartCoroutine(blackoutScreenFadeout.FadeBlackOut(blackoutScreenFadeout.toBlack, blackoutScreenFadeout.speed));
-                    }
-
+                switch (frame.currentKey.gameType) {
+                    case GameType.FrameInteraction:
+                        foreach(var gameManager in gameManagers) {
+                            gameManager.gameObject.SetActive(false);
+                        }
+                        break;
+                    case GameType.InnerFireFastSession:
+                        GetGameManager<GameFramework.InnerFire.FastSessionManager>().gameObject.SetActive(true);
+                        frame.currentKey.gameManagerID = GetGameManager<GameFramework.InnerFire.FastSessionManager>().id;
+                        break;
+                    case GameType.InnerFireLongSession:
+                        break;
+                    case GameType.InnerFireFreeRoam:
+                        break;
+                    case GameType.Custom:
+                        break;
                 }
-                foreach (Dialogue dialogue in frameElements.Where(ch => ch is Dialogue)) {
-                    if(dialogue.activeStatus == true) {
-                        FrameController.AddAnimationToQueue(dialogue.id, true);
-                        dialogue.StartCoroutine(dialogue.TypeDialogue(dialogue.text));
-                    }
-                }
+
+                onFrameKeyChanged?.Invoke();
             }
         }
-        public static void SetFrame(int frameIndex) {
+        public static void SetFrame(int frameIndex, int keyIndex) {
             if (assetDatabase.frames.Count > frameIndex &&
                 frameIndex >= 0) {
-                UICanvas = GameObject.Find("UI Canvas").GetComponent<Canvas>();
                 frame = assetDatabase.frames[frameIndex];
 
-                frame.currentKey = frame.frameKeys[0];
+                if (keyIndex > frame.frameKeys.Count)
+                    frame.selectedKeyIndex = keyIndex;
+                else frame.selectedKeyIndex = 0;
 
                 ChangeFrame();
-                ChangeFrameKey();
+                if (keyIndex < frame.frameKeys.Count)
+                    SetKey(keyIndex);
+                else SetKey(0);
             }
         }
         public void SetDefaultFrame() {
-            if (_assetDatabase.frames.Count > 0) {
-                UICanvas = GameObject.Find("UI Canvas").GetComponent<Canvas>();
-                frame = _assetDatabase.frames[_assetDatabase.selectedFrameIndex];
-                frame.currentKey = frame.frameKeys[0];
-                ChangeFrame();
-                ChangeFrameKey();
-            }
+            SetFrame(0, 0);
+        }
+        public static GameFramework.GameManager GetGameManager<T>()
+            where T: GameFramework.GameManager {
+            return (T)gameManagers.Where(ch => ch is T).FirstOrDefault();
         }
         public static T GetFrameElementOnSceneByID<T>(string id)
         where T : FrameElement {
@@ -119,8 +137,14 @@ namespace FrameCore {
         public static void RemoveElement(string id) {
             for (int i = 0; i < frameElements.Count; i++) {
                 if (frameElements[i].id == id) {
-                    DestroyImmediate(frameElements[i].gameObject);
-                    frameElements.RemoveAt(i);
+                    if (!Application.isPlaying) {
+                        DestroyImmediate(frameElements[i].gameObject);
+                        frameElements.RemoveAt(i);
+                    }
+                    else {
+                        Destroy(frameElements[i].gameObject);
+                        frameElements.RemoveAt(i);
+                    }
                 }
             }
         }
@@ -175,18 +199,28 @@ namespace FrameCore {
 #endif
         public void OnBeforeSerialize() {
             serializedFrameElementsList.Clear();
+            _gameManagers.Clear();
             foreach (var element in frameElements) {
                 if (element != null)
                     serializedFrameElementsList.Add(element);
             }
+            foreach(var manager in gameManagers) {
+                if (manager != null)
+                    _gameManagers.Add(manager);
+            }
         }
         public void OnAfterDeserialize() {
             frameElements.Clear();
+            gameManagers.Clear();
             foreach (var element in serializedFrameElementsList) {
 
                 if (element != null)
                     frameElements.Add(element);
 
+            }
+            foreach(var manager in _gameManagers) {
+                if (manager != null)
+                    gameManagers.Add(manager);
             }
             UICanvas = _UICanvas;
             assetDatabase = _assetDatabase;

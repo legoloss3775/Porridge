@@ -4,9 +4,9 @@ using UnityEngine;
 
 namespace FrameCore {
     namespace FrameEffects {
-        [ExecuteInEditMode]
+        //[ExecuteInEditMode]
         public class BlackScreenFadeout : MonoBehaviour {
-            public float speed { get { return GetComponent<FrameEffect>().animationSpeed; } }
+            public float speed { get { if (GetComponent<FrameEffect>() != null) return GetComponent<FrameEffect>().animationSpeed; else return 0.5f; } }
             public bool toBlack;
             public bool end = false;
             private void OnEnable() {

@@ -49,6 +49,21 @@ namespace FrameCore {
     public class FrameEffect : FrameElement {
         public float animationSpeed = 1f;
 
+        public override void OnKeyChanged() {
+
+            if (GetComponent<FrameEffects.BlackScreenFadeout>() != null && activeStatus != false) {
+                var blackoutScreenFadeout = GetComponent<FrameEffects.BlackScreenFadeout>();
+                Color objectColor = blackoutScreenFadeout.GetComponent<SpriteRenderer>().color;
+                if (blackoutScreenFadeout.toBlack)
+                    blackoutScreenFadeout.GetComponent<SpriteRenderer>().color = new Color(objectColor.r, objectColor.g, objectColor.b, 0f);
+                else
+                    blackoutScreenFadeout.GetComponent<SpriteRenderer>().color = new Color(objectColor.r, objectColor.g, objectColor.b, 1f);
+
+                FrameController.AddAnimationToQueue(blackoutScreenFadeout.name, true);
+                blackoutScreenFadeout.StartCoroutine(blackoutScreenFadeout.FadeBlackOut(blackoutScreenFadeout.toBlack, blackoutScreenFadeout.speed));
+            }
+        }
+
         #region VALUES_SETTINGS
         public override Values GetFrameKeyValuesType() {
             return new Serialization.FrameEffectValues(this);

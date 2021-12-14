@@ -39,7 +39,7 @@ namespace FrameCore {
                 if (characterKeyValues == null) return;
                 switch (characterKeyValues.characterData.type) {
                     case Character.CharacterType.Standalone: {
-                        T elementClone = Instantiate(pair.elementObject.prefab).AddComponent<T>();
+                        T elementClone = Instantiate(pair.elementObject.prefab, FrameManager.frameContainer.transform).AddComponent<T>();
                         elementClone.frameElementObject = pair.elementObject;
                         elementClone.id = id;
                         foreach (var key in FrameManager.frame.frameKeys)
@@ -55,7 +55,7 @@ namespace FrameCore {
                         var dialogueValues = (DialogueValues)FrameManager.frame.currentKey.frameKeyValues[characterKeyValues.characterData.dialogueID];
                         foreach (var character in dialogueValues.dialogueTextData.conversationCharacters)
                             if (character.Key == pair.elementObject.id) {
-                                T elementClone = Instantiate(pair.elementObject.prefab).AddComponent<T>();
+                                T elementClone = Instantiate(pair.elementObject.prefab, FrameManager.frameContainer.transform).AddComponent<T>();
                                 elementClone.frameElementObject = pair.elementObject;
                                 elementClone.id = id;
 #if UNITY_EDITOR

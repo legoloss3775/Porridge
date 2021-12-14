@@ -8,6 +8,7 @@ using FrameCore;
 using FrameCore.Serialization;
 using FrameCore.ScriptableObjects;
 using FrameCore.UI;
+using System;
 
 #if UNITY_EDITOR
 namespace FrameEditor{
@@ -116,14 +117,23 @@ namespace FrameEditor{
 
             GUILayout.BeginHorizontal();
             GUILayout.FlexibleSpace();
-            if(connected) GUILayout.Label("Перед изменением игрового режима нужно убрать все связи ключа", EditorStyles.largeLabel);
-            else keyT.gameType = (GameType)EditorGUILayout.EnumPopup(keyT.gameType);
+            if (connected) GUILayout.Label("Перед изменением игрового режима нужно убрать все связи ключа", EditorStyles.largeLabel);
+            else { 
+                keyT.gameType = (GameType)EditorGUILayout.EnumPopup(keyT.gameType);
+                if(keyT.gameType != GameType.FrameInteraction)
+                    CreateInteractableTransitionNode(keyT.gameType, keyT);
+                else
+                    foreach(var transitionNode in keyT.frameKeyTransitionKnobs.Keys.ToList()) {
+                        Type enumType = keyT.gameType.GetType();
+                        try { DeleteInteractableTransitionNode((GameType)Enum.Parse(enumType, transitionNode), keyT); } catch (System.Exception) { }
+                    }
+            }
             GUILayout.FlexibleSpace();
             GUILayout.EndHorizontal();
 
             GUILayout.BeginHorizontal();
             GUILayout.FlexibleSpace();
-            if(keyT.gameType == GameType.FrameInteraction) GUILayout.Label("Режим перехода");
+            if (keyT.gameType == GameType.FrameInteraction) GUILayout.Label("Режим перехода");
             GUILayout.FlexibleSpace();
             GUILayout.EndHorizontal();
 

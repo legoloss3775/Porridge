@@ -123,8 +123,25 @@ namespace FrameCore {
         /**private void Update() {
 
         }**/
+        public virtual void OnEnable() {
+            if(GetComponent<Animator>() != null) {
+                GetComponent<Animator>().SetInteger("state", 1);
+            }
+        }
+        public virtual void Update() {
+            if (GetComponent<Animator>() != null) {
+                GetComponent<Animator>().SetInteger("state", 0);
+            }
+        }
+        public virtual void OnKeyChanged() {
+
+        }
+        public virtual void OnFrameChanged() {
+
+        }
 
         #region ELEMENT_SETUP
+
         public T GetFrameKeyValues<T>() where T : Values => (T)FrameManager.frame.currentKey.GetFrameKeyValuesOfElement(id);
         public static T GetFrameKeyValues<T>(string id)
             where T : Values {

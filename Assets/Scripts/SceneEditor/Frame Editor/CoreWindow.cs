@@ -9,6 +9,8 @@ using UnityEngine.UI;
 using FrameCore;
 using FrameCore.ScriptableObjects;
 using FrameCore.Serialization;
+using GameFramework;
+using GameFramework.InnerFire;
 
 #if UNITY_EDITOR
 namespace FrameEditor {
@@ -19,7 +21,8 @@ namespace FrameEditor {
         public static CoreWindow core { get { return (CoreWindow)EditorWindow.GetWindow(typeof(CoreWindow)); } }
 
         public FrameEditorSO frameEditorSO;
-        public FrameManager manager { get; set; } 
+        public FrameManager manager { get; set; }
+        public GameManager fastSessionManager { get; set; }
 
         public bool isEditing { get; set; }
         public Vector2 scroll;
@@ -58,6 +61,10 @@ namespace FrameEditor {
                 AssetManager.UpdateAssets();
                 UpdateDirty();
 
+                if (FrameManager.frame == null || FrameManager.frame.currentKey == null) return;
+
+                UpdateFrameContainerChilds();
+
                 GUILayout.BeginHorizontal();
                 GUILayout.FlexibleSpace();
 
@@ -84,6 +91,25 @@ namespace FrameEditor {
 
                         break;
                     case GameType.InnerFireFastSession:
+                        if(FrameManager.GetGameManager<FastSessionManager>() != null )
+                            fastSessionManager = FrameManager.GetGameManager<FastSessionManager>();
+                        GUILayout.FlexibleSpace();
+                        GUILayout.BeginHorizontal();
+                        GUILayout.FlexibleSpace();
+                        GUILayout.Label("Игровой менеджер:", FrameGUIUtility.GetLabelStyle(Color.cyan, 25));
+                        GUILayout.FlexibleSpace();
+                        GUILayout.EndHorizontal();
+                        GUILayout.BeginHorizontal();
+                        GUILayout.FlexibleSpace();
+                        fastSessionManager = (FastSessionManager)EditorGUILayout.ObjectField(fastSessionManager, typeof(FastSessionManager), true, GUILayout.MaxWidth(300));
+
+                        if (fastSessionManager != null)
+                            FrameManager.frame.currentKey.gameManagerID = fastSessionManager.id;
+                        if (!manager._gameManagers.Contains(fastSessionManager)) manager._gameManagers.Add(fastSessionManager);
+                        if (!FrameManager.gameManagers.Contains(fastSessionManager)) FrameManager.gameManagers.Add(fastSessionManager);
+                        GUILayout.FlexibleSpace();
+                        GUILayout.EndHorizontal();
+                        GUILayout.FlexibleSpace();
                         break;
                     case GameType.InnerFireLongSession:
                         break;
@@ -187,11 +213,30 @@ namespace FrameEditor {
                     FrameManager.UICanvas = GameObject.Find(
                         "UI Canvas"
                         )
-                        .GetComponent<Canvas>();
+                        .GetComponentInChildren<Canvas>();
                 else
                     SetUICanvas();
             }
-            FrameManager.UICanvas.worldCamera = Camera.main;
+            if(FrameManager.UICanvasContainer == null) {
+                FrameManager.UICanvasContainer = GameObject.Find("UI");
+            }
+            FrameManager.UICanvas.GetComponentInChildren<Canvas>().worldCamera = Camera.main;
+            if (FrameManager.frameContainer == null) {
+                if (GameObject.Find("Frame") == null)
+                    FrameManager.frameContainer = new GameObject("Frame");
+                else FrameManager.frameContainer = GameObject.Find("Frame");
+            }
+        }
+        private void UpdateFrameContainerChilds() {
+            if (FrameManager.UICanvasContainer != null && FrameManager.UICanvasContainer.transform.parent != FrameManager.frameContainer.transform) {
+                FrameManager.UICanvasContainer.transform.SetParent(FrameManager.frameContainer.transform);
+            }
+            foreach (var element in FrameManager.frameElements) {
+                if (element != null && element.gameObject != null && element.gameObject.transform.parent != FrameManager.frameContainer.transform) {
+                    if (element is FrameCore.UI.Window) continue;
+                    element.gameObject.transform.SetParent(FrameManager.frameContainer.transform);
+                }
+            }
         }
         private void SetFrameManager() {
             manager = new GameObject(
@@ -203,6 +248,7 @@ namespace FrameEditor {
         }
         private void SetUICanvas() {
             FrameManager.UICanvas = Instantiate(AssetManager.GetAtPath<FrameEditorSO>("Scripts/SceneEditor/").FirstOrDefault().UI_CanvasPrefab).GetComponentInChildren<Canvas>();
+            FrameManager.UICanvas.gameObject.transform.parent.name = "UI";
         }
         #endregion
 

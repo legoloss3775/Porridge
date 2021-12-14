@@ -20,7 +20,7 @@ MonoBehaviour:
     nodeIndex: 0
     frameKeyTransitionKnobs:
       keys:
-      - Inner_Fire_Line1_8DA80
+      - Inner_Fire_Line1_574FC
       values: 00000000
     keySequence:
       previousKey:
@@ -56,8 +56,10 @@ MonoBehaviour:
                         nodeIndex: 0
                         transitionType: 0
                         gameType: 0
+                        gameManagerID: 
                     transitionType: 0
                     gameType: 0
+                    gameManagerID: 
                     frameKeyValues:
                       keys: []
                       serializedElementValues: []
@@ -67,6 +69,7 @@ MonoBehaviour:
                       serializedFrameEffectValues: []
                 transitionType: 0
                 gameType: 0
+                gameManagerID: 
                 frameKeyValues:
                   keys: []
                   serializedElementValues: []
@@ -76,6 +79,7 @@ MonoBehaviour:
                   serializedFrameEffectValues: []
             transitionType: 0
             gameType: 0
+            gameManagerID: 
             frameKeyValues:
               keys: []
               serializedElementValues: []
@@ -85,6 +89,7 @@ MonoBehaviour:
               serializedFrameEffectValues: []
         transitionType: 0
         gameType: 0
+        gameManagerID: 
         frameKeyValues:
           keys: []
           serializedElementValues: []
@@ -94,16 +99,17 @@ MonoBehaviour:
           serializedFrameEffectValues: []
     transitionType: 0
     gameType: 0
+    gameManagerID: 
     frameKeyValues:
       keys:
-      - Background_DB16A
-      - Inner_Fire_Line1_8DA80
-      - Inner_Fire_Answer_F5043
-      - Inner_Fire_Answer_24DA5
-      - Noran_220C9
-      - Logan_B4ADA
-      - Blackout Screen (from black)_15907
-      - Blackout Screen (to black)_92ED1
+      - Background_51B71
+      - Inner_Fire_Line1_574FC
+      - Inner_Fire_Answer_61EC8
+      - Inner_Fire_Answer_29FA9
+      - Inner_Fire_Answer_7BE4B
+      - Noran_9CB39
+      - Blackout Screen (from black)_BF013
+      - Blackout Screen (to black)_5FB34
       serializedElementValues:
       - transformData:
           position: {x: 0, y: 0}
@@ -111,27 +117,35 @@ MonoBehaviour:
           activeStatus: 1
       serializedDialogueValues:
       - transformData:
-          position: {x: 0, y: 303}
+          position: {x: -0.000061035, y: 133}
           size: {x: 1404.4652, y: 425.62552}
           activeStatus: 1
         keySequenceData:
           nextKeyID: 1
           previousKeyID: 0
         dialogueTextData:
-          text: "\u0422\u0435\u043A\u0441\u0442 \u0434\u0438\u0430\u043B\u043E\u0433\u0430"
+          text: "\u041F\u0440\u0438\u0432\u0435\u0442! \u041D\u0435 \u043E\u0436\u0438\u0434\u0430\u043B\u0430
+            \u0443\u0432\u0438\u0434\u0435\u0442\u044C \u0442\u0435\u0431\u044F \u0437\u0434\u0435\u0441\u044C"
           speakingCharacterIndex: 0
-          conversationCharacterID: Noran_220C9
+          conversationCharacterID: Noran_9CB39
           conversationCharacters:
             keys:
             - Noran
-            - Logan
             values:
-            - Noran_220C9
-            - Logan_B4ADA
+            - Noran_9CB39
           type: 0
-          textAnimationTime: 0.065
-          autoContinue: 1
+          textAnimationTime: 0.0165
+          autoContinue: 0
       serializedDialogueAnswerValues:
+      - transformData:
+          position: {x: 0, y: 540}
+          size: {x: 1404.4652, y: 131.91014}
+          activeStatus: 0
+        keySequenceData:
+          nextKeyID: 0
+          previousKeyID: 0
+        dialogueAnswerTextData:
+          text: "\u041E\u0442\u0432\u0435\u0442"
       - transformData:
           position: {x: 0, y: 540}
           size: {x: 1404.4652, y: 131.91014}
@@ -156,16 +170,7 @@ MonoBehaviour:
           size: {x: 1, y: 1}
           activeStatus: 1
         characterData:
-          dialogueID: Inner_Fire_Line1_8DA80
-          type: 1
-          emotionState: 0
-          selectedPartIndex: 0
-      - transformData:
-          position: {x: 0, y: 0}
-          size: {x: 1, y: 1}
-          activeStatus: 1
-        characterData:
-          dialogueID: Inner_Fire_Line1_8DA80
+          dialogueID: Inner_Fire_Line1_574FC
           type: 1
           emotionState: 0
           selectedPartIndex: 0
@@ -175,7 +180,7 @@ MonoBehaviour:
           size: {x: 10000, y: 10000}
           activeStatus: 1
         frameEffectData:
-          animationSpeed: 0.5
+          animationSpeed: 1
       - transformData:
           position: {x: 0, y: 0}
           size: {x: 10000, y: 10000}
@@ -187,7 +192,7 @@ MonoBehaviour:
     nodeIndex: 0
     frameKeyTransitionKnobs:
       keys:
-      - Inner_Fire_Line1_8DA80
+      - Inner_Fire_Line1_574FC
       values: 00000000
     keySequence:
       previousKey:
@@ -223,8 +228,10 @@ MonoBehaviour:
                         nodeIndex: 0
                         transitionType: 0
                         gameType: 0
+                        gameManagerID: 
                     transitionType: 0
                     gameType: 0
+                    gameManagerID: 
                     frameKeyValues:
                       keys: []
                       serializedElementValues: []
@@ -234,6 +241,7 @@ MonoBehaviour:
                       serializedFrameEffectValues: []
                 transitionType: 0
                 gameType: 0
+                gameManagerID: 
                 frameKeyValues:
                   keys: []
                   serializedElementValues: []
@@ -243,6 +251,7 @@ MonoBehaviour:
                   serializedFrameEffectValues: []
             transitionType: 0
             gameType: 0
+            gameManagerID: 
             frameKeyValues:
               keys: []
               serializedElementValues: []
@@ -252,6 +261,7 @@ MonoBehaviour:
               serializedFrameEffectValues: []
         transitionType: 0
         gameType: 0
+        gameManagerID: 
         frameKeyValues:
           keys: []
           serializedElementValues: []
@@ -261,16 +271,17 @@ MonoBehaviour:
           serializedFrameEffectValues: []
     transitionType: 0
     gameType: 0
+    gameManagerID: 
     frameKeyValues:
       keys:
-      - Background_DB16A
-      - Inner_Fire_Line1_8DA80
-      - Inner_Fire_Answer_F5043
-      - Inner_Fire_Answer_24DA5
-      - Noran_220C9
-      - Logan_B4ADA
-      - Blackout Screen (from black)_15907
-      - Blackout Screen (to black)_92ED1
+      - Background_51B71
+      - Inner_Fire_Line1_574FC
+      - Inner_Fire_Answer_61EC8
+      - Inner_Fire_Answer_29FA9
+      - Inner_Fire_Answer_7BE4B
+      - Noran_9CB39
+      - Blackout Screen (from black)_BF013
+      - Blackout Screen (to black)_5FB34
       serializedElementValues:
       - transformData:
           position: {x: 0, y: 0}
@@ -278,27 +289,35 @@ MonoBehaviour:
           activeStatus: 1
       serializedDialogueValues:
       - transformData:
-          position: {x: 0, y: 303}
+          position: {x: -0.000061035, y: 133}
           size: {x: 1404.4652, y: 425.62552}
           activeStatus: 1
         keySequenceData:
           nextKeyID: 1
           previousKeyID: 0
         dialogueTextData:
-          text: "\u0422\u0435\u043A\u0441\u0442 \u0434\u0438\u0430\u043B\u043E\u0433\u0430"
+          text: "\u041F\u0440\u0438\u0432\u0435\u0442! \u041D\u0435 \u043E\u0436\u0438\u0434\u0430\u043B\u0430
+            \u0443\u0432\u0438\u0434\u0435\u0442\u044C \u0442\u0435\u0431\u044F \u0437\u0434\u0435\u0441\u044C"
           speakingCharacterIndex: 0
-          conversationCharacterID: Noran_220C9
+          conversationCharacterID: Noran_9CB39
           conversationCharacters:
             keys:
             - Noran
-            - Logan
             values:
-            - Noran_220C9
-            - Logan_B4ADA
+            - Noran_9CB39
           type: 0
-          textAnimationTime: 0.065
-          autoContinue: 1
+          textAnimationTime: 0.0165
+          autoContinue: 0
       serializedDialogueAnswerValues:
+      - transformData:
+          position: {x: 0, y: 540}
+          size: {x: 1404.4652, y: 131.91014}
+          activeStatus: 0
+        keySequenceData:
+          nextKeyID: 0
+          previousKeyID: 0
+        dialogueAnswerTextData:
+          text: "\u041E\u0442\u0432\u0435\u0442"
       - transformData:
           position: {x: 0, y: 540}
           size: {x: 1404.4652, y: 131.91014}
@@ -323,16 +342,7 @@ MonoBehaviour:
           size: {x: 1, y: 1}
           activeStatus: 1
         characterData:
-          dialogueID: Inner_Fire_Line1_8DA80
-          type: 1
-          emotionState: 0
-          selectedPartIndex: 0
-      - transformData:
-          position: {x: 0, y: 0}
-          size: {x: 1, y: 1}
-          activeStatus: 1
-        characterData:
-          dialogueID: Inner_Fire_Line1_8DA80
+          dialogueID: Inner_Fire_Line1_574FC
           type: 1
           emotionState: 0
           selectedPartIndex: 0
@@ -342,7 +352,7 @@ MonoBehaviour:
           size: {x: 10000, y: 10000}
           activeStatus: 1
         frameEffectData:
-          animationSpeed: 0.5
+          animationSpeed: 1
       - transformData:
           position: {x: 0, y: 0}
           size: {x: 10000, y: 10000}
@@ -353,7 +363,7 @@ MonoBehaviour:
     nodeIndex: 1
     frameKeyTransitionKnobs:
       keys:
-      - Inner_Fire_Line1_8DA80
+      - Inner_Fire_Line1_574FC
       values: 00000000
     keySequence:
       previousKey:
@@ -361,7 +371,7 @@ MonoBehaviour:
         nodeIndex: 0
         frameKeyTransitionKnobs:
           keys:
-          - Inner_Fire_Line1_8DA80
+          - Inner_Fire_Line1_574FC
           values: 00000000
         keySequence:
           previousKey:
@@ -390,8 +400,10 @@ MonoBehaviour:
                         nodeIndex: 0
                         transitionType: 0
                         gameType: 0
+                        gameManagerID: 
                     transitionType: 0
                     gameType: 0
+                    gameManagerID: 
                     frameKeyValues:
                       keys: []
                       serializedElementValues: []
@@ -401,6 +413,7 @@ MonoBehaviour:
                       serializedFrameEffectValues: []
                 transitionType: 0
                 gameType: 0
+                gameManagerID: 
                 frameKeyValues:
                   keys: []
                   serializedElementValues: []
@@ -410,6 +423,7 @@ MonoBehaviour:
                   serializedFrameEffectValues: []
             transitionType: 0
             gameType: 0
+            gameManagerID: 
             frameKeyValues:
               keys: []
               serializedElementValues: []
@@ -419,16 +433,17 @@ MonoBehaviour:
               serializedFrameEffectValues: []
         transitionType: 0
         gameType: 0
+        gameManagerID: 
         frameKeyValues:
           keys:
-          - Background_DB16A
-          - Inner_Fire_Line1_8DA80
-          - Inner_Fire_Answer_F5043
-          - Inner_Fire_Answer_24DA5
-          - Noran_220C9
-          - Logan_B4ADA
-          - Blackout Screen (from black)_15907
-          - Blackout Screen (to black)_92ED1
+          - Background_51B71
+          - Inner_Fire_Line1_574FC
+          - Inner_Fire_Answer_61EC8
+          - Inner_Fire_Answer_29FA9
+          - Inner_Fire_Answer_7BE4B
+          - Noran_9CB39
+          - Blackout Screen (from black)_BF013
+          - Blackout Screen (to black)_5FB34
           serializedElementValues:
           - transformData:
               position: {x: 0, y: 0}
@@ -436,27 +451,36 @@ MonoBehaviour:
               activeStatus: 1
           serializedDialogueValues:
           - transformData:
-              position: {x: 0, y: 303}
+              position: {x: -0.000061035, y: 133}
               size: {x: 1404.4652, y: 425.62552}
               activeStatus: 1
             keySequenceData:
               nextKeyID: 1
               previousKeyID: 0
             dialogueTextData:
-              text: "\u0422\u0435\u043A\u0441\u0442 \u0434\u0438\u0430\u043B\u043E\u0433\u0430"
+              text: "\u041F\u0440\u0438\u0432\u0435\u0442! \u041D\u0435 \u043E\u0436\u0438\u0434\u0430\u043B\u0430
+                \u0443\u0432\u0438\u0434\u0435\u0442\u044C \u0442\u0435\u0431\u044F
+                \u0437\u0434\u0435\u0441\u044C"
               speakingCharacterIndex: 0
-              conversationCharacterID: Noran_220C9
+              conversationCharacterID: Noran_9CB39
               conversationCharacters:
                 keys:
                 - Noran
-                - Logan
                 values:
-                - Noran_220C9
-                - Logan_B4ADA
+                - Noran_9CB39
               type: 0
-              textAnimationTime: 0.065
-              autoContinue: 1
+              textAnimationTime: 0.0165
+              autoContinue: 0
           serializedDialogueAnswerValues:
+          - transformData:
+              position: {x: 0, y: 540}
+              size: {x: 1404.4652, y: 131.91014}
+              activeStatus: 0
+            keySequenceData:
+              nextKeyID: 0
+              previousKeyID: 0
+            dialogueAnswerTextData:
+              text: "\u041E\u0442\u0432\u0435\u0442"
           - transformData:
               position: {x: 0, y: 540}
               size: {x: 1404.4652, y: 131.91014}
@@ -481,16 +505,7 @@ MonoBehaviour:
               size: {x: 1, y: 1}
               activeStatus: 1
             characterData:
-              dialogueID: Inner_Fire_Line1_8DA80
-              type: 1
-              emotionState: 0
-              selectedPartIndex: 0
-          - transformData:
-              position: {x: 0, y: 0}
-              size: {x: 1, y: 1}
-              activeStatus: 1
-            characterData:
-              dialogueID: Inner_Fire_Line1_8DA80
+              dialogueID: Inner_Fire_Line1_574FC
               type: 1
               emotionState: 0
               selectedPartIndex: 0
@@ -500,7 +515,7 @@ MonoBehaviour:
               size: {x: 10000, y: 10000}
               activeStatus: 1
             frameEffectData:
-              animationSpeed: 0.5
+              animationSpeed: 1
           - transformData:
               position: {x: 0, y: 0}
               size: {x: 10000, y: 10000}
@@ -509,16 +524,17 @@ MonoBehaviour:
               animationSpeed: 1
     transitionType: 0
     gameType: 0
+    gameManagerID: 
     frameKeyValues:
       keys:
-      - Background_DB16A
-      - Inner_Fire_Line1_8DA80
-      - Inner_Fire_Answer_F5043
-      - Inner_Fire_Answer_24DA5
-      - Noran_220C9
-      - Logan_B4ADA
-      - Blackout Screen (from black)_15907
-      - Blackout Screen (to black)_92ED1
+      - Background_51B71
+      - Inner_Fire_Line1_574FC
+      - Inner_Fire_Answer_61EC8
+      - Inner_Fire_Answer_29FA9
+      - Inner_Fire_Answer_7BE4B
+      - Noran_9CB39
+      - Blackout Screen (from black)_BF013
+      - Blackout Screen (to black)_5FB34
       serializedElementValues:
       - transformData:
           position: {x: 0, y: 0}
@@ -526,26 +542,46 @@ MonoBehaviour:
           activeStatus: 1
       serializedDialogueValues:
       - transformData:
-          position: {x: 0, y: 303}
+          position: {x: -0.000061035, y: 133}
           size: {x: 1404.4652, y: 425.62552}
           activeStatus: 1
         keySequenceData:
           nextKeyID: 2
           previousKeyID: 0
         dialogueTextData:
-          text: "\u0435\u0449\u0435 \u043E\u0434\u0438\u043D \u0422\u0435\u043A\u0441\u0442
-            \u0434\u0438\u0430\u043B\u043E\u0433\u0430"
+          text: 'I''m personally of the opinion that Bladewolf''s DLC was a huge
+
+            wasted
+            opportunity. Instead of showing his VR Training, we
+
+            could
+            have seen him go on a rampage with Sam, or maybe
+
+            shown him
+            clearing out enemies that were ahead of Raiden
+
+            during the
+            Mexico or Denver sections.'
           speakingCharacterIndex: 0
-          conversationCharacterID: Noran_220C9
+          conversationCharacterID: Noran_9CB39
           conversationCharacters:
             keys:
             - Noran
             values:
-            - Noran_220C9
+            - Noran_9CB39
           type: 0
-          textAnimationTime: 0.065
-          autoContinue: 1
+          textAnimationTime: 0.0165
+          autoContinue: 0
       serializedDialogueAnswerValues:
+      - transformData:
+          position: {x: 0, y: 540}
+          size: {x: 1404.4652, y: 131.91014}
+          activeStatus: 0
+        keySequenceData:
+          nextKeyID: 0
+          previousKeyID: 0
+        dialogueAnswerTextData:
+          text: "\u041E\u0442\u0432\u0435\u0442"
       - transformData:
           position: {x: 0, y: 540}
           size: {x: 1404.4652, y: 131.91014}
@@ -570,16 +606,7 @@ MonoBehaviour:
           size: {x: 1, y: 1}
           activeStatus: 1
         characterData:
-          dialogueID: Inner_Fire_Line1_8DA80
-          type: 1
-          emotionState: 0
-          selectedPartIndex: 0
-      - transformData:
-          position: {x: 0, y: 0}
-          size: {x: 1, y: 1}
-          activeStatus: 1
-        characterData:
-          dialogueID: Inner_Fire_Line1_8DA80
+          dialogueID: Inner_Fire_Line1_574FC
           type: 1
           emotionState: 0
           selectedPartIndex: 0
@@ -600,8 +627,8 @@ MonoBehaviour:
     nodeIndex: 2
     frameKeyTransitionKnobs:
       keys:
-      - Inner_Fire_Answer_F5043
-      - Inner_Fire_Answer_24DA5
+      - Inner_Fire_Answer_61EC8
+      - Inner_Fire_Answer_29FA9
       values: 0000000001000000
     keySequence:
       previousKey:
@@ -609,7 +636,7 @@ MonoBehaviour:
         nodeIndex: 1
         frameKeyTransitionKnobs:
           keys:
-          - Inner_Fire_Line1_8DA80
+          - Inner_Fire_Line1_574FC
           values: 00000000
         keySequence:
           previousKey:
@@ -617,7 +644,7 @@ MonoBehaviour:
             nodeIndex: 0
             frameKeyTransitionKnobs:
               keys:
-              - Inner_Fire_Line1_8DA80
+              - Inner_Fire_Line1_574FC
               values: 00000000
             keySequence:
               previousKey:
@@ -639,8 +666,10 @@ MonoBehaviour:
                         nodeIndex: 0
                         transitionType: 0
                         gameType: 0
+                        gameManagerID: 
                     transitionType: 0
                     gameType: 0
+                    gameManagerID: 
                     frameKeyValues:
                       keys: []
                       serializedElementValues: []
@@ -650,6 +679,7 @@ MonoBehaviour:
                       serializedFrameEffectValues: []
                 transitionType: 0
                 gameType: 0
+                gameManagerID: 
                 frameKeyValues:
                   keys: []
                   serializedElementValues: []
@@ -659,16 +689,17 @@ MonoBehaviour:
                   serializedFrameEffectValues: []
             transitionType: 0
             gameType: 0
+            gameManagerID: 
             frameKeyValues:
               keys:
-              - Background_DB16A
-              - Inner_Fire_Line1_8DA80
-              - Inner_Fire_Answer_F5043
-              - Inner_Fire_Answer_24DA5
-              - Noran_220C9
-              - Logan_B4ADA
-              - Blackout Screen (from black)_15907
-              - Blackout Screen (to black)_92ED1
+              - Background_51B71
+              - Inner_Fire_Line1_574FC
+              - Inner_Fire_Answer_61EC8
+              - Inner_Fire_Answer_29FA9
+              - Inner_Fire_Answer_7BE4B
+              - Noran_9CB39
+              - Blackout Screen (from black)_BF013
+              - Blackout Screen (to black)_5FB34
               serializedElementValues:
               - transformData:
                   position: {x: 0, y: 0}
@@ -676,27 +707,36 @@ MonoBehaviour:
                   activeStatus: 1
               serializedDialogueValues:
               - transformData:
-                  position: {x: 0, y: 303}
+                  position: {x: -0.000061035, y: 133}
                   size: {x: 1404.4652, y: 425.62552}
                   activeStatus: 1
                 keySequenceData:
                   nextKeyID: 1
                   previousKeyID: 0
                 dialogueTextData:
-                  text: "\u0422\u0435\u043A\u0441\u0442 \u0434\u0438\u0430\u043B\u043E\u0433\u0430"
+                  text: "\u041F\u0440\u0438\u0432\u0435\u0442! \u041D\u0435 \u043E\u0436\u0438\u0434\u0430\u043B\u0430
+                    \u0443\u0432\u0438\u0434\u0435\u0442\u044C \u0442\u0435\u0431\u044F
+                    \u0437\u0434\u0435\u0441\u044C"
                   speakingCharacterIndex: 0
-                  conversationCharacterID: Noran_220C9
+                  conversationCharacterID: Noran_9CB39
                   conversationCharacters:
                     keys:
                     - Noran
-                    - Logan
                     values:
-                    - Noran_220C9
-                    - Logan_B4ADA
+                    - Noran_9CB39
                   type: 0
-                  textAnimationTime: 0.065
-                  autoContinue: 1
+                  textAnimationTime: 0.0165
+                  autoContinue: 0
               serializedDialogueAnswerValues:
+              - transformData:
+                  position: {x: 0, y: 540}
+                  size: {x: 1404.4652, y: 131.91014}
+                  activeStatus: 0
+                keySequenceData:
+                  nextKeyID: 0
+                  previousKeyID: 0
+                dialogueAnswerTextData:
+                  text: "\u041E\u0442\u0432\u0435\u0442"
               - transformData:
                   position: {x: 0, y: 540}
                   size: {x: 1404.4652, y: 131.91014}
@@ -721,16 +761,7 @@ MonoBehaviour:
                   size: {x: 1, y: 1}
                   activeStatus: 1
                 characterData:
-                  dialogueID: Inner_Fire_Line1_8DA80
-                  type: 1
-                  emotionState: 0
-                  selectedPartIndex: 0
-              - transformData:
-                  position: {x: 0, y: 0}
-                  size: {x: 1, y: 1}
-                  activeStatus: 1
-                characterData:
-                  dialogueID: Inner_Fire_Line1_8DA80
+                  dialogueID: Inner_Fire_Line1_574FC
                   type: 1
                   emotionState: 0
                   selectedPartIndex: 0
@@ -740,7 +771,7 @@ MonoBehaviour:
                   size: {x: 10000, y: 10000}
                   activeStatus: 1
                 frameEffectData:
-                  animationSpeed: 0.5
+                  animationSpeed: 1
               - transformData:
                   position: {x: 0, y: 0}
                   size: {x: 10000, y: 10000}
@@ -749,16 +780,17 @@ MonoBehaviour:
                   animationSpeed: 1
         transitionType: 0
         gameType: 0
+        gameManagerID: 
         frameKeyValues:
           keys:
-          - Background_DB16A
-          - Inner_Fire_Line1_8DA80
-          - Inner_Fire_Answer_F5043
-          - Inner_Fire_Answer_24DA5
-          - Noran_220C9
-          - Logan_B4ADA
-          - Blackout Screen (from black)_15907
-          - Blackout Screen (to black)_92ED1
+          - Background_51B71
+          - Inner_Fire_Line1_574FC
+          - Inner_Fire_Answer_61EC8
+          - Inner_Fire_Answer_29FA9
+          - Inner_Fire_Answer_7BE4B
+          - Noran_9CB39
+          - Blackout Screen (from black)_BF013
+          - Blackout Screen (to black)_5FB34
           serializedElementValues:
           - transformData:
               position: {x: 0, y: 0}
@@ -766,26 +798,46 @@ MonoBehaviour:
               activeStatus: 1
           serializedDialogueValues:
           - transformData:
-              position: {x: 0, y: 303}
+              position: {x: -0.000061035, y: 133}
               size: {x: 1404.4652, y: 425.62552}
               activeStatus: 1
             keySequenceData:
               nextKeyID: 2
               previousKeyID: 0
             dialogueTextData:
-              text: "\u0435\u0449\u0435 \u043E\u0434\u0438\u043D \u0422\u0435\u043A\u0441\u0442
-                \u0434\u0438\u0430\u043B\u043E\u0433\u0430"
+              text: 'I''m personally of the opinion that Bladewolf''s DLC was a huge
+
+                wasted
+                opportunity. Instead of showing his VR Training, we
+
+                could
+                have seen him go on a rampage with Sam, or maybe
+
+                shown
+                him clearing out enemies that were ahead of Raiden
+
+                during
+                the Mexico or Denver sections.'
               speakingCharacterIndex: 0
-              conversationCharacterID: Noran_220C9
+              conversationCharacterID: Noran_9CB39
               conversationCharacters:
                 keys:
                 - Noran
                 values:
-                - Noran_220C9
+                - Noran_9CB39
               type: 0
-              textAnimationTime: 0.065
-              autoContinue: 1
+              textAnimationTime: 0.0165
+              autoContinue: 0
           serializedDialogueAnswerValues:
+          - transformData:
+              position: {x: 0, y: 540}
+              size: {x: 1404.4652, y: 131.91014}
+              activeStatus: 0
+            keySequenceData:
+              nextKeyID: 0
+              previousKeyID: 0
+            dialogueAnswerTextData:
+              text: "\u041E\u0442\u0432\u0435\u0442"
           - transformData:
               position: {x: 0, y: 540}
               size: {x: 1404.4652, y: 131.91014}
@@ -810,16 +862,7 @@ MonoBehaviour:
               size: {x: 1, y: 1}
               activeStatus: 1
             characterData:
-              dialogueID: Inner_Fire_Line1_8DA80
-              type: 1
-              emotionState: 0
-              selectedPartIndex: 0
-          - transformData:
-              position: {x: 0, y: 0}
-              size: {x: 1, y: 1}
-              activeStatus: 1
-            characterData:
-              dialogueID: Inner_Fire_Line1_8DA80
+              dialogueID: Inner_Fire_Line1_574FC
               type: 1
               emotionState: 0
               selectedPartIndex: 0
@@ -838,16 +881,17 @@ MonoBehaviour:
               animationSpeed: 1
     transitionType: 1
     gameType: 0
+    gameManagerID: 
     frameKeyValues:
       keys:
-      - Background_DB16A
-      - Inner_Fire_Line1_8DA80
-      - Inner_Fire_Answer_F5043
-      - Inner_Fire_Answer_24DA5
-      - Noran_220C9
-      - Logan_B4ADA
-      - Blackout Screen (from black)_15907
-      - Blackout Screen (to black)_92ED1
+      - Background_51B71
+      - Inner_Fire_Line1_574FC
+      - Inner_Fire_Answer_61EC8
+      - Inner_Fire_Answer_29FA9
+      - Inner_Fire_Answer_7BE4B
+      - Noran_9CB39
+      - Blackout Screen (from black)_BF013
+      - Blackout Screen (to black)_5FB34
       serializedElementValues:
       - transformData:
           position: {x: 0, y: 0}
@@ -855,24 +899,25 @@ MonoBehaviour:
           activeStatus: 1
       serializedDialogueValues:
       - transformData:
-          position: {x: 0, y: 303}
+          position: {x: -0.000061035, y: 133}
           size: {x: 1404.4652, y: 425.62552}
           activeStatus: 0
         keySequenceData:
           nextKeyID: 0
           previousKeyID: 0
         dialogueTextData:
-          text: "\u0422\u0435\u043A\u0441\u0442 \u0434\u0438\u0430\u043B\u043E\u0433\u0430"
+          text: "\u041F\u0440\u0438\u0432\u0435\u0442! \u041D\u0435 \u043E\u0436\u0438\u0434\u0430\u043B\u0430
+            \u0443\u0432\u0438\u0434\u0435\u0442\u044C \u0442\u0435\u0431\u044F \u0437\u0434\u0435\u0441\u044C"
           speakingCharacterIndex: 0
-          conversationCharacterID: Noran_220C9
+          conversationCharacterID: Noran_9CB39
           conversationCharacters:
             keys:
             - Noran
             values:
-            - Noran_220C9
+            - Noran_9CB39
           type: 0
-          textAnimationTime: 0.065
-          autoContinue: 1
+          textAnimationTime: 0.01
+          autoContinue: 0
       serializedDialogueAnswerValues:
       - transformData:
           position: {x: 0, y: 540}
@@ -882,32 +927,32 @@ MonoBehaviour:
           nextKeyID: 3
           previousKeyID: 0
         dialogueAnswerTextData:
-          text: "\u0414\u0430"
+          text: "\u041E\u0442\u0432\u0435\u0442"
       - transformData:
-          position: {x: 0, y: 333}
+          position: {x: -0.000061035, y: 332}
           size: {x: 1404.4652, y: 131.91014}
           activeStatus: 1
         keySequenceData:
-          nextKeyID: 4
+          nextKeyID: 3
           previousKeyID: 0
         dialogueAnswerTextData:
-          text: "\u041D\u0435\u0442"
+          text: "\u041E\u0442\u0432\u0435\u0442"
+      - transformData:
+          position: {x: 0, y: 540}
+          size: {x: 1404.4652, y: 131.91014}
+          activeStatus: 0
+        keySequenceData:
+          nextKeyID: 0
+          previousKeyID: 0
+        dialogueAnswerTextData:
+          text: "\u041E\u0442\u0432\u0435\u0442"
       serializedFrameCharacterValues:
       - transformData:
           position: {x: 0, y: -5.03}
           size: {x: 1, y: 1}
           activeStatus: 1
         characterData:
-          dialogueID: Inner_Fire_Line1_8DA80
-          type: 1
-          emotionState: 0
-          selectedPartIndex: 0
-      - transformData:
-          position: {x: 0, y: 0}
-          size: {x: 1, y: 1}
-          activeStatus: 1
-        characterData:
-          dialogueID: Inner_Fire_Line1_8DA80
+          dialogueID: Inner_Fire_Line1_574FC
           type: 1
           emotionState: 0
           selectedPartIndex: 0
@@ -928,7 +973,7 @@ MonoBehaviour:
     nodeIndex: 3
     frameKeyTransitionKnobs:
       keys:
-      - Inner_Fire_Line1_8DA80
+      - Inner_Fire_Line1_574FC
       values: 00000000
     keySequence:
       previousKey:
@@ -936,8 +981,8 @@ MonoBehaviour:
         nodeIndex: 2
         frameKeyTransitionKnobs:
           keys:
-          - Inner_Fire_Answer_F5043
-          - Inner_Fire_Answer_24DA5
+          - Inner_Fire_Answer_61EC8
+          - Inner_Fire_Answer_29FA9
           values: 0000000001000000
         keySequence:
           previousKey:
@@ -945,7 +990,7 @@ MonoBehaviour:
             nodeIndex: 1
             frameKeyTransitionKnobs:
               keys:
-              - Inner_Fire_Line1_8DA80
+              - Inner_Fire_Line1_574FC
               values: 00000000
             keySequence:
               previousKey:
@@ -953,7 +998,7 @@ MonoBehaviour:
                 nodeIndex: 0
                 frameKeyTransitionKnobs:
                   keys:
-                  - Inner_Fire_Line1_8DA80
+                  - Inner_Fire_Line1_574FC
                   values: 00000000
                 keySequence:
                   previousKey:
@@ -968,8 +1013,10 @@ MonoBehaviour:
                         nodeIndex: 0
                         transitionType: 0
                         gameType: 0
+                        gameManagerID: 
                     transitionType: 0
                     gameType: 0
+                    gameManagerID: 
                     frameKeyValues:
                       keys: []
                       serializedElementValues: []
@@ -979,16 +1026,17 @@ MonoBehaviour:
                       serializedFrameEffectValues: []
                 transitionType: 0
                 gameType: 0
+                gameManagerID: 
                 frameKeyValues:
                   keys:
-                  - Background_DB16A
-                  - Inner_Fire_Line1_8DA80
-                  - Inner_Fire_Answer_F5043
-                  - Inner_Fire_Answer_24DA5
-                  - Noran_220C9
-                  - Logan_B4ADA
-                  - Blackout Screen (from black)_15907
-                  - Blackout Screen (to black)_92ED1
+                  - Background_51B71
+                  - Inner_Fire_Line1_574FC
+                  - Inner_Fire_Answer_61EC8
+                  - Inner_Fire_Answer_29FA9
+                  - Inner_Fire_Answer_7BE4B
+                  - Noran_9CB39
+                  - Blackout Screen (from black)_BF013
+                  - Blackout Screen (to black)_5FB34
                   serializedElementValues:
                   - transformData:
                       position: {x: 0, y: 0}
@@ -996,20 +1044,31 @@ MonoBehaviour:
                       activeStatus: 1
                   serializedDialogueValues:
                   - transformData:
-                      position: {x: 0, y: 303}
+                      position: {x: -0.000061035, y: 133}
                       size: {x: 1404.4652, y: 425.62552}
                       activeStatus: 1
                     keySequenceData:
                       nextKeyID: 1
                       previousKeyID: 0
                     dialogueTextData:
-                      text: "\u0422\u0435\u043A\u0441\u0442 \u0434\u0438\u0430\u043B\u043E\u0433\u0430"
+                      text: "\u041F\u0440\u0438\u0432\u0435\u0442! \u041D\u0435 \u043E\u0436\u0438\u0434\u0430\u043B\u0430
+                        \u0443\u0432\u0438\u0434\u0435\u0442\u044C \u0442\u0435\u0431\u044F
+                        \u0437\u0434\u0435\u0441\u044C"
                       speakingCharacterIndex: 0
-                      conversationCharacterID: Noran_220C9
+                      conversationCharacterID: Noran_9CB39
                       type: 0
-                      textAnimationTime: 0.065
-                      autoContinue: 1
+                      textAnimationTime: 0.0165
+                      autoContinue: 0
                   serializedDialogueAnswerValues:
+                  - transformData:
+                      position: {x: 0, y: 540}
+                      size: {x: 1404.4652, y: 131.91014}
+                      activeStatus: 0
+                    keySequenceData:
+                      nextKeyID: 0
+                      previousKeyID: 0
+                    dialogueAnswerTextData:
+                      text: "\u041E\u0442\u0432\u0435\u0442"
                   - transformData:
                       position: {x: 0, y: 540}
                       size: {x: 1404.4652, y: 131.91014}
@@ -1034,16 +1093,7 @@ MonoBehaviour:
                       size: {x: 1, y: 1}
                       activeStatus: 1
                     characterData:
-                      dialogueID: Inner_Fire_Line1_8DA80
-                      type: 1
-                      emotionState: 0
-                      selectedPartIndex: 0
-                  - transformData:
-                      position: {x: 0, y: 0}
-                      size: {x: 1, y: 1}
-                      activeStatus: 1
-                    characterData:
-                      dialogueID: Inner_Fire_Line1_8DA80
+                      dialogueID: Inner_Fire_Line1_574FC
                       type: 1
                       emotionState: 0
                       selectedPartIndex: 0
@@ -1053,7 +1103,7 @@ MonoBehaviour:
                       size: {x: 10000, y: 10000}
                       activeStatus: 1
                     frameEffectData:
-                      animationSpeed: 0.5
+                      animationSpeed: 1
                   - transformData:
                       position: {x: 0, y: 0}
                       size: {x: 10000, y: 10000}
@@ -1062,16 +1112,17 @@ MonoBehaviour:
                       animationSpeed: 1
             transitionType: 0
             gameType: 0
+            gameManagerID: 
             frameKeyValues:
               keys:
-              - Background_DB16A
-              - Inner_Fire_Line1_8DA80
-              - Inner_Fire_Answer_F5043
-              - Inner_Fire_Answer_24DA5
-              - Noran_220C9
-              - Logan_B4ADA
-              - Blackout Screen (from black)_15907
-              - Blackout Screen (to black)_92ED1
+              - Background_51B71
+              - Inner_Fire_Line1_574FC
+              - Inner_Fire_Answer_61EC8
+              - Inner_Fire_Answer_29FA9
+              - Inner_Fire_Answer_7BE4B
+              - Noran_9CB39
+              - Blackout Screen (from black)_BF013
+              - Blackout Screen (to black)_5FB34
               serializedElementValues:
               - transformData:
                   position: {x: 0, y: 0}
@@ -1079,26 +1130,47 @@ MonoBehaviour:
                   activeStatus: 1
               serializedDialogueValues:
               - transformData:
-                  position: {x: 0, y: 303}
+                  position: {x: -0.000061035, y: 133}
                   size: {x: 1404.4652, y: 425.62552}
                   activeStatus: 1
                 keySequenceData:
                   nextKeyID: 2
                   previousKeyID: 0
                 dialogueTextData:
-                  text: "\u0435\u0449\u0435 \u043E\u0434\u0438\u043D \u0422\u0435\u043A\u0441\u0442
-                    \u0434\u0438\u0430\u043B\u043E\u0433\u0430"
+                  text: 'I''m personally of the opinion that Bladewolf''s DLC was
+                    a huge
+
+                    wasted opportunity. Instead of showing
+                    his VR Training, we
+
+                    could have seen him
+                    go on a rampage with Sam, or maybe
+
+                    shown
+                    him clearing out enemies that were ahead of Raiden
+
+                    during
+                    the Mexico or Denver sections.'
                   speakingCharacterIndex: 0
-                  conversationCharacterID: Noran_220C9
+                  conversationCharacterID: Noran_9CB39
                   conversationCharacters:
                     keys:
                     - Noran
                     values:
-                    - Noran_220C9
+                    - Noran_9CB39
                   type: 0
-                  textAnimationTime: 0.065
-                  autoContinue: 1
+                  textAnimationTime: 0.0165
+                  autoContinue: 0
               serializedDialogueAnswerValues:
+              - transformData:
+                  position: {x: 0, y: 540}
+                  size: {x: 1404.4652, y: 131.91014}
+                  activeStatus: 0
+                keySequenceData:
+                  nextKeyID: 0
+                  previousKeyID: 0
+                dialogueAnswerTextData:
+                  text: "\u041E\u0442\u0432\u0435\u0442"
               - transformData:
                   position: {x: 0, y: 540}
                   size: {x: 1404.4652, y: 131.91014}
@@ -1123,16 +1195,7 @@ MonoBehaviour:
                   size: {x: 1, y: 1}
                   activeStatus: 1
                 characterData:
-                  dialogueID: Inner_Fire_Line1_8DA80
-                  type: 1
-                  emotionState: 0
-                  selectedPartIndex: 0
-              - transformData:
-                  position: {x: 0, y: 0}
-                  size: {x: 1, y: 1}
-                  activeStatus: 1
-                characterData:
-                  dialogueID: Inner_Fire_Line1_8DA80
+                  dialogueID: Inner_Fire_Line1_574FC
                   type: 1
                   emotionState: 0
                   selectedPartIndex: 0
@@ -1151,16 +1214,17 @@ MonoBehaviour:
                   animationSpeed: 1
         transitionType: 1
         gameType: 0
+        gameManagerID: 
         frameKeyValues:
           keys:
-          - Background_DB16A
-          - Inner_Fire_Line1_8DA80
-          - Inner_Fire_Answer_F5043
-          - Inner_Fire_Answer_24DA5
-          - Noran_220C9
-          - Logan_B4ADA
-          - Blackout Screen (from black)_15907
-          - Blackout Screen (to black)_92ED1
+          - Background_51B71
+          - Inner_Fire_Line1_574FC
+          - Inner_Fire_Answer_61EC8
+          - Inner_Fire_Answer_29FA9
+          - Inner_Fire_Answer_7BE4B
+          - Noran_9CB39
+          - Blackout Screen (from black)_BF013
+          - Blackout Screen (to black)_5FB34
           serializedElementValues:
           - transformData:
               position: {x: 0, y: 0}
@@ -1168,24 +1232,26 @@ MonoBehaviour:
               activeStatus: 1
           serializedDialogueValues:
           - transformData:
-              position: {x: 0, y: 303}
+              position: {x: -0.000061035, y: 133}
               size: {x: 1404.4652, y: 425.62552}
               activeStatus: 0
             keySequenceData:
               nextKeyID: 0
               previousKeyID: 0
             dialogueTextData:
-              text: "\u0422\u0435\u043A\u0441\u0442 \u0434\u0438\u0430\u043B\u043E\u0433\u0430"
+              text: "\u041F\u0440\u0438\u0432\u0435\u0442! \u041D\u0435 \u043E\u0436\u0438\u0434\u0430\u043B\u0430
+                \u0443\u0432\u0438\u0434\u0435\u0442\u044C \u0442\u0435\u0431\u044F
+                \u0437\u0434\u0435\u0441\u044C"
               speakingCharacterIndex: 0
-              conversationCharacterID: Noran_220C9
+              conversationCharacterID: Noran_9CB39
               conversationCharacters:
                 keys:
                 - Noran
                 values:
-                - Noran_220C9
+                - Noran_9CB39
               type: 0
-              textAnimationTime: 0.065
-              autoContinue: 1
+              textAnimationTime: 0.01
+              autoContinue: 0
           serializedDialogueAnswerValues:
           - transformData:
               position: {x: 0, y: 540}
@@ -1195,32 +1261,32 @@ MonoBehaviour:
               nextKeyID: 3
               previousKeyID: 0
             dialogueAnswerTextData:
-              text: "\u0414\u0430"
+              text: "\u041E\u0442\u0432\u0435\u0442"
           - transformData:
-              position: {x: 0, y: 333}
+              position: {x: -0.000061035, y: 332}
               size: {x: 1404.4652, y: 131.91014}
               activeStatus: 1
             keySequenceData:
-              nextKeyID: 4
+              nextKeyID: 3
               previousKeyID: 0
             dialogueAnswerTextData:
-              text: "\u041D\u0435\u0442"
+              text: "\u041E\u0442\u0432\u0435\u0442"
+          - transformData:
+              position: {x: 0, y: 540}
+              size: {x: 1404.4652, y: 131.91014}
+              activeStatus: 0
+            keySequenceData:
+              nextKeyID: 0
+              previousKeyID: 0
+            dialogueAnswerTextData:
+              text: "\u041E\u0442\u0432\u0435\u0442"
           serializedFrameCharacterValues:
           - transformData:
               position: {x: 0, y: -5.03}
               size: {x: 1, y: 1}
               activeStatus: 1
             characterData:
-              dialogueID: Inner_Fire_Line1_8DA80
-              type: 1
-              emotionState: 0
-              selectedPartIndex: 0
-          - transformData:
-              position: {x: 0, y: 0}
-              size: {x: 1, y: 1}
-              activeStatus: 1
-            characterData:
-              dialogueID: Inner_Fire_Line1_8DA80
+              dialogueID: Inner_Fire_Line1_574FC
               type: 1
               emotionState: 0
               selectedPartIndex: 0
@@ -1239,16 +1305,17 @@ MonoBehaviour:
               animationSpeed: 1
     transitionType: 0
     gameType: 0
+    gameManagerID: 
     frameKeyValues:
       keys:
-      - Background_DB16A
-      - Inner_Fire_Line1_8DA80
-      - Inner_Fire_Answer_F5043
-      - Inner_Fire_Answer_24DA5
-      - Noran_220C9
-      - Logan_B4ADA
-      - Blackout Screen (from black)_15907
-      - Blackout Screen (to black)_92ED1
+      - Background_51B71
+      - Inner_Fire_Line1_574FC
+      - Inner_Fire_Answer_61EC8
+      - Inner_Fire_Answer_29FA9
+      - Inner_Fire_Answer_7BE4B
+      - Noran_9CB39
+      - Blackout Screen (from black)_BF013
+      - Blackout Screen (to black)_5FB34
       serializedElementValues:
       - transformData:
           position: {x: 0, y: 0}
@@ -1256,32 +1323,38 @@ MonoBehaviour:
           activeStatus: 1
       serializedDialogueValues:
       - transformData:
-          position: {x: 0, y: 303}
+          position: {x: -0.000061035, y: 133}
           size: {x: 1404.4652, y: 425.62552}
           activeStatus: 1
         keySequenceData:
-          nextKeyID: 1
+          nextKeyID: 4
           previousKeyID: 0
         dialogueTextData:
-          text: "\u041F\u043E\u043C\u043E\u0433\u0438\u0442\u0435 \u041F\u043E\u043C\u043E\u0433\u0438\u0442\u0435
-            \u041F\u043E\u043C\u043E\u0433\u0438\u0442\u0435 \u041F\u043E\u043C\u043E\u0433\u0438\u0442\u0435
-            \u041F\u043E\u043C\u043E\u0433\u0438\u0442\u0435 \u041F\u043E\u043C\u043E\u0433\u0438\u0442\u0435
-            \u041F\u043E\u043C\u043E\u0433\u0438\u0442\u0435 \u041F\u043E\u043C\u043E\u0433\u0438\u0442\u0435 "
-          speakingCharacterIndex: 1
-          conversationCharacterID: Logan_B4ADA
+          text: "I'm personally of the opinion that Bladewolf's DLC was a huge\nwasted
+            opportunity. \nInstead of showing his VR Training, we could have seen
+            him "
+          speakingCharacterIndex: 0
+          conversationCharacterID: Noran_9CB39
           conversationCharacters:
             keys:
             - Noran
-            - Logan
             values:
-            - Noran_220C9
-            - Logan_B4ADA
+            - Noran_9CB39
           type: 0
-          textAnimationTime: 0.065
-          autoContinue: 1
+          textAnimationTime: 0.0165
+          autoContinue: 0
       serializedDialogueAnswerValues:
       - transformData:
           position: {x: 0, y: 540}
+          size: {x: 1404.4652, y: 131.91014}
+          activeStatus: 0
+        keySequenceData:
+          nextKeyID: 0
+          previousKeyID: 0
+        dialogueAnswerTextData:
+          text: "\u041E\u0442\u0432\u0435\u0442"
+      - transformData:
+          position: {x: -0.000061035, y: 332}
           size: {x: 1404.4652, y: 131.91014}
           activeStatus: 0
         keySequenceData:
@@ -1304,26 +1377,17 @@ MonoBehaviour:
           size: {x: 1, y: 1}
           activeStatus: 1
         characterData:
-          dialogueID: Inner_Fire_Line1_8DA80
+          dialogueID: Inner_Fire_Line1_574FC
           type: 1
           emotionState: 0
           selectedPartIndex: 0
-      - transformData:
-          position: {x: 0, y: 0}
-          size: {x: 1, y: 1}
-          activeStatus: 1
-        characterData:
-          dialogueID: Inner_Fire_Line1_8DA80
-          type: 1
-          emotionState: 0
-          selectedPartIndex: 1
       serializedFrameEffectValues:
       - transformData:
           position: {x: 0, y: 0}
           size: {x: 10000, y: 10000}
           activeStatus: 0
         frameEffectData:
-          animationSpeed: 0.5
+          animationSpeed: 1
       - transformData:
           position: {x: 0, y: 0}
           size: {x: 10000, y: 10000}
@@ -1334,67 +1398,147 @@ MonoBehaviour:
     nodeIndex: 4
     frameKeyTransitionKnobs:
       keys:
-      - Inner_Fire_Line1_8DA80
+      - InnerFireFastSession
       values: 00000000
     keySequence:
       previousKey:
-        id: 2
-        nodeIndex: 2
+        id: 3
+        nodeIndex: 3
         frameKeyTransitionKnobs:
           keys:
-          - Inner_Fire_Answer_F5043
-          - Inner_Fire_Answer_24DA5
-          values: 0000000001000000
+          - Inner_Fire_Line1_574FC
+          values: 00000000
         keySequence:
           previousKey:
-            id: 1
-            nodeIndex: 1
+            id: 2
+            nodeIndex: 2
             frameKeyTransitionKnobs:
               keys:
-              - Inner_Fire_Line1_8DA80
-              values: 00000000
+              - Inner_Fire_Answer_61EC8
+              - Inner_Fire_Answer_29FA9
+              values: 0000000001000000
             keySequence:
               previousKey:
-                id: 0
-                nodeIndex: 0
+                id: 1
+                nodeIndex: 1
                 frameKeyTransitionKnobs:
                   keys:
-                  - Inner_Fire_Line1_8DA80
+                  - Inner_Fire_Line1_574FC
                   values: 00000000
                 keySequence:
                   previousKey:
                     id: 0
                     nodeIndex: 0
                     frameKeyTransitionKnobs:
-                      keys: []
-                      values: 
+                      keys:
+                      - Inner_Fire_Line1_574FC
+                      values: 00000000
                     keySequence:
                       previousKey:
                         id: 0
                         nodeIndex: 0
                         transitionType: 0
                         gameType: 0
+                        gameManagerID: 
                     transitionType: 0
                     gameType: 0
+                    gameManagerID: 
                     frameKeyValues:
-                      keys: []
-                      serializedElementValues: []
-                      serializedDialogueValues: []
-                      serializedDialogueAnswerValues: []
-                      serializedFrameCharacterValues: []
-                      serializedFrameEffectValues: []
+                      keys:
+                      - Background_51B71
+                      - Inner_Fire_Line1_574FC
+                      - Inner_Fire_Answer_61EC8
+                      - Inner_Fire_Answer_29FA9
+                      - Inner_Fire_Answer_7BE4B
+                      - Noran_9CB39
+                      - Blackout Screen (from black)_BF013
+                      - Blackout Screen (to black)_5FB34
+                      serializedElementValues:
+                      - transformData:
+                          position: {x: 0, y: 0}
+                          size: {x: 1, y: 1}
+                          activeStatus: 1
+                      serializedDialogueValues:
+                      - transformData:
+                          position: {x: -0.000061035, y: 133}
+                          size: {x: 1404.4652, y: 425.62552}
+                          activeStatus: 1
+                        keySequenceData:
+                          nextKeyID: 1
+                          previousKeyID: 0
+                        dialogueTextData:
+                          text: "\u041F\u0440\u0438\u0432\u0435\u0442! \u041D\u0435
+                            \u043E\u0436\u0438\u0434\u0430\u043B\u0430 \u0443\u0432\u0438\u0434\u0435\u0442\u044C
+                            \u0442\u0435\u0431\u044F \u0437\u0434\u0435\u0441\u044C"
+                          speakingCharacterIndex: 0
+                          conversationCharacterID: Noran_9CB39
+                          type: 0
+                          textAnimationTime: 0.0165
+                          autoContinue: 0
+                      serializedDialogueAnswerValues:
+                      - transformData:
+                          position: {x: 0, y: 540}
+                          size: {x: 1404.4652, y: 131.91014}
+                          activeStatus: 0
+                        keySequenceData:
+                          nextKeyID: 0
+                          previousKeyID: 0
+                        dialogueAnswerTextData:
+                          text: "\u041E\u0442\u0432\u0435\u0442"
+                      - transformData:
+                          position: {x: 0, y: 540}
+                          size: {x: 1404.4652, y: 131.91014}
+                          activeStatus: 0
+                        keySequenceData:
+                          nextKeyID: 0
+                          previousKeyID: 0
+                        dialogueAnswerTextData:
+                          text: "\u041E\u0442\u0432\u0435\u0442"
+                      - transformData:
+                          position: {x: 0, y: 540}
+                          size: {x: 1404.4652, y: 131.91014}
+                          activeStatus: 0
+                        keySequenceData:
+                          nextKeyID: 0
+                          previousKeyID: 0
+                        dialogueAnswerTextData:
+                          text: "\u041E\u0442\u0432\u0435\u0442"
+                      serializedFrameCharacterValues:
+                      - transformData:
+                          position: {x: 0, y: -5.03}
+                          size: {x: 1, y: 1}
+                          activeStatus: 1
+                        characterData:
+                          dialogueID: Inner_Fire_Line1_574FC
+                          type: 1
+                          emotionState: 0
+                          selectedPartIndex: 0
+                      serializedFrameEffectValues:
+                      - transformData:
+                          position: {x: 0, y: 0}
+                          size: {x: 10000, y: 10000}
+                          activeStatus: 1
+                        frameEffectData:
+                          animationSpeed: 1
+                      - transformData:
+                          position: {x: 0, y: 0}
+                          size: {x: 10000, y: 10000}
+                          activeStatus: 0
+                        frameEffectData:
+                          animationSpeed: 1
                 transitionType: 0
                 gameType: 0
+                gameManagerID: 
                 frameKeyValues:
                   keys:
-                  - Background_DB16A
-                  - Inner_Fire_Line1_8DA80
-                  - Inner_Fire_Answer_F5043
-                  - Inner_Fire_Answer_24DA5
-                  - Noran_220C9
-                  - Logan_B4ADA
-                  - Blackout Screen (from black)_15907
-                  - Blackout Screen (to black)_92ED1
+                  - Background_51B71
+                  - Inner_Fire_Line1_574FC
+                  - Inner_Fire_Answer_61EC8
+                  - Inner_Fire_Answer_29FA9
+                  - Inner_Fire_Answer_7BE4B
+                  - Noran_9CB39
+                  - Blackout Screen (from black)_BF013
+                  - Blackout Screen (to black)_5FB34
                   serializedElementValues:
                   - transformData:
                       position: {x: 0, y: 0}
@@ -1402,20 +1546,42 @@ MonoBehaviour:
                       activeStatus: 1
                   serializedDialogueValues:
                   - transformData:
-                      position: {x: 0, y: 303}
+                      position: {x: -0.000061035, y: 133}
                       size: {x: 1404.4652, y: 425.62552}
                       activeStatus: 1
                     keySequenceData:
-                      nextKeyID: 1
+                      nextKeyID: 2
                       previousKeyID: 0
                     dialogueTextData:
-                      text: "\u0422\u0435\u043A\u0441\u0442 \u0434\u0438\u0430\u043B\u043E\u0433\u0430"
+                      text: 'I''m personally of the opinion that Bladewolf''s DLC
+                        was a huge
+
+                        wasted opportunity. Instead
+                        of showing his VR Training, we
+
+                        could
+                        have seen him go on a rampage with Sam, or maybe
+
+                        shown
+                        him clearing out enemies that were ahead of Raiden
+
+                        during
+                        the Mexico or Denver sections.'
                       speakingCharacterIndex: 0
-                      conversationCharacterID: Noran_220C9
+                      conversationCharacterID: Noran_9CB39
                       type: 0
-                      textAnimationTime: 0.065
-                      autoContinue: 1
+                      textAnimationTime: 0.0165
+                      autoContinue: 0
                   serializedDialogueAnswerValues:
+                  - transformData:
+                      position: {x: 0, y: 540}
+                      size: {x: 1404.4652, y: 131.91014}
+                      activeStatus: 0
+                    keySequenceData:
+                      nextKeyID: 0
+                      previousKeyID: 0
+                    dialogueAnswerTextData:
+                      text: "\u041E\u0442\u0432\u0435\u0442"
                   - transformData:
                       position: {x: 0, y: 540}
                       size: {x: 1404.4652, y: 131.91014}
@@ -1440,16 +1606,7 @@ MonoBehaviour:
                       size: {x: 1, y: 1}
                       activeStatus: 1
                     characterData:
-                      dialogueID: Inner_Fire_Line1_8DA80
-                      type: 1
-                      emotionState: 0
-                      selectedPartIndex: 0
-                  - transformData:
-                      position: {x: 0, y: 0}
-                      size: {x: 1, y: 1}
-                      activeStatus: 1
-                    characterData:
-                      dialogueID: Inner_Fire_Line1_8DA80
+                      dialogueID: Inner_Fire_Line1_574FC
                       type: 1
                       emotionState: 0
                       selectedPartIndex: 0
@@ -1457,9 +1614,511 @@ MonoBehaviour:
                   - transformData:
                       position: {x: 0, y: 0}
                       size: {x: 10000, y: 10000}
-                      activeStatus: 1
+                      activeStatus: 0
                     frameEffectData:
-                      animationSpeed: 0.5
+                      animationSpeed: 1
+                  - transformData:
+                      position: {x: 0, y: 0}
+                      size: {x: 10000, y: 10000}
+                      activeStatus: 0
+                    frameEffectData:
+                      animationSpeed: 1
+            transitionType: 1
+            gameType: 0
+            gameManagerID: 
+            frameKeyValues:
+              keys:
+              - Background_51B71
+              - Inner_Fire_Line1_574FC
+              - Inner_Fire_Answer_61EC8
+              - Inner_Fire_Answer_29FA9
+              - Inner_Fire_Answer_7BE4B
+              - Noran_9CB39
+              - Blackout Screen (from black)_BF013
+              - Blackout Screen (to black)_5FB34
+              serializedElementValues:
+              - transformData:
+                  position: {x: 0, y: 0}
+                  size: {x: 1, y: 1}
+                  activeStatus: 1
+              serializedDialogueValues:
+              - transformData:
+                  position: {x: -0.000061035, y: 133}
+                  size: {x: 1404.4652, y: 425.62552}
+                  activeStatus: 0
+                keySequenceData:
+                  nextKeyID: 0
+                  previousKeyID: 0
+                dialogueTextData:
+                  text: "\u041F\u0440\u0438\u0432\u0435\u0442! \u041D\u0435 \u043E\u0436\u0438\u0434\u0430\u043B\u0430
+                    \u0443\u0432\u0438\u0434\u0435\u0442\u044C \u0442\u0435\u0431\u044F
+                    \u0437\u0434\u0435\u0441\u044C"
+                  speakingCharacterIndex: 0
+                  conversationCharacterID: Noran_9CB39
+                  conversationCharacters:
+                    keys:
+                    - Noran
+                    values:
+                    - Noran_9CB39
+                  type: 0
+                  textAnimationTime: 0.01
+                  autoContinue: 0
+              serializedDialogueAnswerValues:
+              - transformData:
+                  position: {x: 0, y: 540}
+                  size: {x: 1404.4652, y: 131.91014}
+                  activeStatus: 1
+                keySequenceData:
+                  nextKeyID: 3
+                  previousKeyID: 0
+                dialogueAnswerTextData:
+                  text: "\u041E\u0442\u0432\u0435\u0442"
+              - transformData:
+                  position: {x: -0.000061035, y: 332}
+                  size: {x: 1404.4652, y: 131.91014}
+                  activeStatus: 1
+                keySequenceData:
+                  nextKeyID: 3
+                  previousKeyID: 0
+                dialogueAnswerTextData:
+                  text: "\u041E\u0442\u0432\u0435\u0442"
+              - transformData:
+                  position: {x: 0, y: 540}
+                  size: {x: 1404.4652, y: 131.91014}
+                  activeStatus: 0
+                keySequenceData:
+                  nextKeyID: 0
+                  previousKeyID: 0
+                dialogueAnswerTextData:
+                  text: "\u041E\u0442\u0432\u0435\u0442"
+              serializedFrameCharacterValues:
+              - transformData:
+                  position: {x: 0, y: -5.03}
+                  size: {x: 1, y: 1}
+                  activeStatus: 1
+                characterData:
+                  dialogueID: Inner_Fire_Line1_574FC
+                  type: 1
+                  emotionState: 0
+                  selectedPartIndex: 0
+              serializedFrameEffectValues:
+              - transformData:
+                  position: {x: 0, y: 0}
+                  size: {x: 10000, y: 10000}
+                  activeStatus: 0
+                frameEffectData:
+                  animationSpeed: 1
+              - transformData:
+                  position: {x: 0, y: 0}
+                  size: {x: 10000, y: 10000}
+                  activeStatus: 0
+                frameEffectData:
+                  animationSpeed: 1
+        transitionType: 0
+        gameType: 0
+        gameManagerID: 
+        frameKeyValues:
+          keys:
+          - Background_51B71
+          - Inner_Fire_Line1_574FC
+          - Inner_Fire_Answer_61EC8
+          - Inner_Fire_Answer_29FA9
+          - Inner_Fire_Answer_7BE4B
+          - Noran_9CB39
+          - Blackout Screen (from black)_BF013
+          - Blackout Screen (to black)_5FB34
+          serializedElementValues:
+          - transformData:
+              position: {x: 0, y: 0}
+              size: {x: 1, y: 1}
+              activeStatus: 1
+          serializedDialogueValues:
+          - transformData:
+              position: {x: -0.000061035, y: 133}
+              size: {x: 1404.4652, y: 425.62552}
+              activeStatus: 1
+            keySequenceData:
+              nextKeyID: 4
+              previousKeyID: 0
+            dialogueTextData:
+              text: "I'm personally of the opinion that Bladewolf's DLC was a huge\nwasted
+                opportunity. \nInstead of showing his VR Training, we could have
+                seen him "
+              speakingCharacterIndex: 0
+              conversationCharacterID: Noran_9CB39
+              conversationCharacters:
+                keys:
+                - Noran
+                values:
+                - Noran_9CB39
+              type: 0
+              textAnimationTime: 0.0165
+              autoContinue: 0
+          serializedDialogueAnswerValues:
+          - transformData:
+              position: {x: 0, y: 540}
+              size: {x: 1404.4652, y: 131.91014}
+              activeStatus: 0
+            keySequenceData:
+              nextKeyID: 0
+              previousKeyID: 0
+            dialogueAnswerTextData:
+              text: "\u041E\u0442\u0432\u0435\u0442"
+          - transformData:
+              position: {x: -0.000061035, y: 332}
+              size: {x: 1404.4652, y: 131.91014}
+              activeStatus: 0
+            keySequenceData:
+              nextKeyID: 0
+              previousKeyID: 0
+            dialogueAnswerTextData:
+              text: "\u041E\u0442\u0432\u0435\u0442"
+          - transformData:
+              position: {x: 0, y: 540}
+              size: {x: 1404.4652, y: 131.91014}
+              activeStatus: 0
+            keySequenceData:
+              nextKeyID: 0
+              previousKeyID: 0
+            dialogueAnswerTextData:
+              text: "\u041E\u0442\u0432\u0435\u0442"
+          serializedFrameCharacterValues:
+          - transformData:
+              position: {x: 0, y: -5.03}
+              size: {x: 1, y: 1}
+              activeStatus: 1
+            characterData:
+              dialogueID: Inner_Fire_Line1_574FC
+              type: 1
+              emotionState: 0
+              selectedPartIndex: 0
+          serializedFrameEffectValues:
+          - transformData:
+              position: {x: 0, y: 0}
+              size: {x: 10000, y: 10000}
+              activeStatus: 0
+            frameEffectData:
+              animationSpeed: 1
+          - transformData:
+              position: {x: 0, y: 0}
+              size: {x: 10000, y: 10000}
+              activeStatus: 0
+            frameEffectData:
+              animationSpeed: 1
+    transitionType: 0
+    gameType: 1
+    gameManagerID: InnerFire_FastSession_1
+    frameKeyValues:
+      keys:
+      - Background_51B71
+      - Inner_Fire_Line1_574FC
+      - Inner_Fire_Answer_61EC8
+      - Inner_Fire_Answer_29FA9
+      - Inner_Fire_Answer_7BE4B
+      - Noran_9CB39
+      - Blackout Screen (from black)_BF013
+      - Blackout Screen (to black)_5FB34
+      serializedElementValues:
+      - transformData:
+          position: {x: 0, y: 0}
+          size: {x: 1, y: 1}
+          activeStatus: 0
+      serializedDialogueValues:
+      - transformData:
+          position: {x: -0.000061035, y: 133}
+          size: {x: 1404.4652, y: 425.62552}
+          activeStatus: 0
+        keySequenceData:
+          nextKeyID: 0
+          previousKeyID: 0
+        dialogueTextData:
+          text: 'I''m personally of the opinion that Bladewolf''s DLC was a huge
+            wasted opportunity. Instead of showing his VR Training, we could have
+            seen him '
+          speakingCharacterIndex: 0
+          conversationCharacterID: Noran_9CB39
+          conversationCharacters:
+            keys:
+            - Noran
+            values:
+            - Noran_9CB39
+          type: 0
+          textAnimationTime: 0.0165
+          autoContinue: 0
+      serializedDialogueAnswerValues:
+      - transformData:
+          position: {x: 0, y: 540}
+          size: {x: 1404.4652, y: 131.91014}
+          activeStatus: 0
+        keySequenceData:
+          nextKeyID: 0
+          previousKeyID: 0
+        dialogueAnswerTextData:
+          text: "\u041E\u0442\u0432\u0435\u0442"
+      - transformData:
+          position: {x: -0.000061035, y: 332}
+          size: {x: 1404.4652, y: 131.91014}
+          activeStatus: 0
+        keySequenceData:
+          nextKeyID: 0
+          previousKeyID: 0
+        dialogueAnswerTextData:
+          text: "\u041E\u0442\u0432\u0435\u0442"
+      - transformData:
+          position: {x: 0, y: 540}
+          size: {x: 1404.4652, y: 131.91014}
+          activeStatus: 0
+        keySequenceData:
+          nextKeyID: 0
+          previousKeyID: 0
+        dialogueAnswerTextData:
+          text: "\u041E\u0442\u0432\u0435\u0442"
+      serializedFrameCharacterValues:
+      - transformData:
+          position: {x: 0, y: -5.03}
+          size: {x: 1, y: 1}
+          activeStatus: 0
+        characterData:
+          dialogueID: Inner_Fire_Line1_574FC
+          type: 1
+          emotionState: 0
+          selectedPartIndex: 0
+      serializedFrameEffectValues:
+      - transformData:
+          position: {x: 0, y: 0}
+          size: {x: 10000, y: 10000}
+          activeStatus: 0
+        frameEffectData:
+          animationSpeed: 1
+      - transformData:
+          position: {x: 0, y: 0}
+          size: {x: 10000, y: 10000}
+          activeStatus: 0
+        frameEffectData:
+          animationSpeed: 1
+  - id: 5
+    nodeIndex: 5
+    frameKeyTransitionKnobs:
+      keys:
+      - Inner_Fire_Line1_574FC
+      values: 00000000
+    keySequence:
+      previousKey:
+        id: 4
+        nodeIndex: 4
+        frameKeyTransitionKnobs:
+          keys:
+          - InnerFireFastSession
+          values: 00000000
+        keySequence:
+          previousKey:
+            id: 3
+            nodeIndex: 3
+            frameKeyTransitionKnobs:
+              keys:
+              - Inner_Fire_Line1_574FC
+              values: 00000000
+            keySequence:
+              previousKey:
+                id: 2
+                nodeIndex: 2
+                frameKeyTransitionKnobs:
+                  keys:
+                  - Inner_Fire_Answer_61EC8
+                  - Inner_Fire_Answer_29FA9
+                  values: 0000000001000000
+                keySequence:
+                  previousKey:
+                    id: 1
+                    nodeIndex: 1
+                    frameKeyTransitionKnobs:
+                      keys:
+                      - Inner_Fire_Line1_574FC
+                      values: 00000000
+                    keySequence:
+                      previousKey:
+                        id: 0
+                        nodeIndex: 0
+                        transitionType: 0
+                        gameType: 0
+                        gameManagerID: 
+                    transitionType: 0
+                    gameType: 0
+                    gameManagerID: 
+                    frameKeyValues:
+                      keys:
+                      - Background_51B71
+                      - Inner_Fire_Line1_574FC
+                      - Inner_Fire_Answer_61EC8
+                      - Inner_Fire_Answer_29FA9
+                      - Inner_Fire_Answer_7BE4B
+                      - Noran_9CB39
+                      - Blackout Screen (from black)_BF013
+                      - Blackout Screen (to black)_5FB34
+                      serializedElementValues:
+                      - transformData:
+                          position: {x: 0, y: 0}
+                          size: {x: 1, y: 1}
+                          activeStatus: 1
+                      serializedDialogueValues:
+                      - transformData:
+                          position: {x: -0.000061035, y: 133}
+                          size: {x: 1404.4652, y: 425.62552}
+                          activeStatus: 1
+                        keySequenceData:
+                          nextKeyID: 2
+                          previousKeyID: 0
+                        dialogueTextData:
+                          text: 'I''m personally of the opinion that Bladewolf''s
+                            DLC was a huge
+
+                            wasted opportunity.
+                            Instead of showing his VR Training, we
+
+                            could
+                            have seen him go on a rampage with Sam, or maybe
+
+                            shown
+                            him clearing out enemies that were ahead of Raiden
+
+                            during
+                            the Mexico or Denver sections.'
+                          speakingCharacterIndex: 0
+                          conversationCharacterID: Noran_9CB39
+                          type: 0
+                          textAnimationTime: 0.0165
+                          autoContinue: 0
+                      serializedDialogueAnswerValues:
+                      - transformData:
+                          position: {x: 0, y: 540}
+                          size: {x: 1404.4652, y: 131.91014}
+                          activeStatus: 0
+                        keySequenceData:
+                          nextKeyID: 0
+                          previousKeyID: 0
+                        dialogueAnswerTextData:
+                          text: "\u041E\u0442\u0432\u0435\u0442"
+                      - transformData:
+                          position: {x: 0, y: 540}
+                          size: {x: 1404.4652, y: 131.91014}
+                          activeStatus: 0
+                        keySequenceData:
+                          nextKeyID: 0
+                          previousKeyID: 0
+                        dialogueAnswerTextData:
+                          text: "\u041E\u0442\u0432\u0435\u0442"
+                      - transformData:
+                          position: {x: 0, y: 540}
+                          size: {x: 1404.4652, y: 131.91014}
+                          activeStatus: 0
+                        keySequenceData:
+                          nextKeyID: 0
+                          previousKeyID: 0
+                        dialogueAnswerTextData:
+                          text: "\u041E\u0442\u0432\u0435\u0442"
+                      serializedFrameCharacterValues:
+                      - transformData:
+                          position: {x: 0, y: -5.03}
+                          size: {x: 1, y: 1}
+                          activeStatus: 1
+                        characterData:
+                          dialogueID: Inner_Fire_Line1_574FC
+                          type: 1
+                          emotionState: 0
+                          selectedPartIndex: 0
+                      serializedFrameEffectValues:
+                      - transformData:
+                          position: {x: 0, y: 0}
+                          size: {x: 10000, y: 10000}
+                          activeStatus: 0
+                        frameEffectData:
+                          animationSpeed: 1
+                      - transformData:
+                          position: {x: 0, y: 0}
+                          size: {x: 10000, y: 10000}
+                          activeStatus: 0
+                        frameEffectData:
+                          animationSpeed: 1
+                transitionType: 1
+                gameType: 0
+                gameManagerID: 
+                frameKeyValues:
+                  keys:
+                  - Background_51B71
+                  - Inner_Fire_Line1_574FC
+                  - Inner_Fire_Answer_61EC8
+                  - Inner_Fire_Answer_29FA9
+                  - Inner_Fire_Answer_7BE4B
+                  - Noran_9CB39
+                  - Blackout Screen (from black)_BF013
+                  - Blackout Screen (to black)_5FB34
+                  serializedElementValues:
+                  - transformData:
+                      position: {x: 0, y: 0}
+                      size: {x: 1, y: 1}
+                      activeStatus: 1
+                  serializedDialogueValues:
+                  - transformData:
+                      position: {x: -0.000061035, y: 133}
+                      size: {x: 1404.4652, y: 425.62552}
+                      activeStatus: 0
+                    keySequenceData:
+                      nextKeyID: 0
+                      previousKeyID: 0
+                    dialogueTextData:
+                      text: "\u041F\u0440\u0438\u0432\u0435\u0442! \u041D\u0435 \u043E\u0436\u0438\u0434\u0430\u043B\u0430
+                        \u0443\u0432\u0438\u0434\u0435\u0442\u044C \u0442\u0435\u0431\u044F
+                        \u0437\u0434\u0435\u0441\u044C"
+                      speakingCharacterIndex: 0
+                      conversationCharacterID: Noran_9CB39
+                      type: 0
+                      textAnimationTime: 0.01
+                      autoContinue: 0
+                  serializedDialogueAnswerValues:
+                  - transformData:
+                      position: {x: 0, y: 540}
+                      size: {x: 1404.4652, y: 131.91014}
+                      activeStatus: 1
+                    keySequenceData:
+                      nextKeyID: 3
+                      previousKeyID: 0
+                    dialogueAnswerTextData:
+                      text: "\u041E\u0442\u0432\u0435\u0442"
+                  - transformData:
+                      position: {x: -0.000061035, y: 332}
+                      size: {x: 1404.4652, y: 131.91014}
+                      activeStatus: 1
+                    keySequenceData:
+                      nextKeyID: 3
+                      previousKeyID: 0
+                    dialogueAnswerTextData:
+                      text: "\u041E\u0442\u0432\u0435\u0442"
+                  - transformData:
+                      position: {x: 0, y: 540}
+                      size: {x: 1404.4652, y: 131.91014}
+                      activeStatus: 0
+                    keySequenceData:
+                      nextKeyID: 0
+                      previousKeyID: 0
+                    dialogueAnswerTextData:
+                      text: "\u041E\u0442\u0432\u0435\u0442"
+                  serializedFrameCharacterValues:
+                  - transformData:
+                      position: {x: 0, y: -5.03}
+                      size: {x: 1, y: 1}
+                      activeStatus: 1
+                    characterData:
+                      dialogueID: Inner_Fire_Line1_574FC
+                      type: 1
+                      emotionState: 0
+                      selectedPartIndex: 0
+                  serializedFrameEffectValues:
+                  - transformData:
+                      position: {x: 0, y: 0}
+                      size: {x: 10000, y: 10000}
+                      activeStatus: 0
+                    frameEffectData:
+                      animationSpeed: 1
                   - transformData:
                       position: {x: 0, y: 0}
                       size: {x: 10000, y: 10000}
@@ -1468,16 +2127,17 @@ MonoBehaviour:
                       animationSpeed: 1
             transitionType: 0
             gameType: 0
+            gameManagerID: 
             frameKeyValues:
               keys:
-              - Background_DB16A
-              - Inner_Fire_Line1_8DA80
-              - Inner_Fire_Answer_F5043
-              - Inner_Fire_Answer_24DA5
-              - Noran_220C9
-              - Logan_B4ADA
-              - Blackout Screen (from black)_15907
-              - Blackout Screen (to black)_92ED1
+              - Background_51B71
+              - Inner_Fire_Line1_574FC
+              - Inner_Fire_Answer_61EC8
+              - Inner_Fire_Answer_29FA9
+              - Inner_Fire_Answer_7BE4B
+              - Noran_9CB39
+              - Blackout Screen (from black)_BF013
+              - Blackout Screen (to black)_5FB34
               serializedElementValues:
               - transformData:
                   position: {x: 0, y: 0}
@@ -1485,28 +2145,38 @@ MonoBehaviour:
                   activeStatus: 1
               serializedDialogueValues:
               - transformData:
-                  position: {x: 0, y: 303}
+                  position: {x: -0.000061035, y: 133}
                   size: {x: 1404.4652, y: 425.62552}
                   activeStatus: 1
                 keySequenceData:
-                  nextKeyID: 2
+                  nextKeyID: 4
                   previousKeyID: 0
                 dialogueTextData:
-                  text: "\u0435\u0449\u0435 \u043E\u0434\u0438\u043D \u0422\u0435\u043A\u0441\u0442
-                    \u0434\u0438\u0430\u043B\u043E\u0433\u0430"
+                  text: "I'm personally of the opinion that Bladewolf's DLC was a
+                    huge\nwasted opportunity. \nInstead of showing his VR Training,
+                    we could have seen him "
                   speakingCharacterIndex: 0
-                  conversationCharacterID: Noran_220C9
+                  conversationCharacterID: Noran_9CB39
                   conversationCharacters:
                     keys:
                     - Noran
                     values:
-                    - Noran_220C9
+                    - Noran_9CB39
                   type: 0
-                  textAnimationTime: 0.065
-                  autoContinue: 1
+                  textAnimationTime: 0.0165
+                  autoContinue: 0
               serializedDialogueAnswerValues:
               - transformData:
                   position: {x: 0, y: 540}
+                  size: {x: 1404.4652, y: 131.91014}
+                  activeStatus: 0
+                keySequenceData:
+                  nextKeyID: 0
+                  previousKeyID: 0
+                dialogueAnswerTextData:
+                  text: "\u041E\u0442\u0432\u0435\u0442"
+              - transformData:
+                  position: {x: -0.000061035, y: 332}
                   size: {x: 1404.4652, y: 131.91014}
                   activeStatus: 0
                 keySequenceData:
@@ -1529,16 +2199,7 @@ MonoBehaviour:
                   size: {x: 1, y: 1}
                   activeStatus: 1
                 characterData:
-                  dialogueID: Inner_Fire_Line1_8DA80
-                  type: 1
-                  emotionState: 0
-                  selectedPartIndex: 0
-              - transformData:
-                  position: {x: 0, y: 0}
-                  size: {x: 1, y: 1}
-                  activeStatus: 1
-                characterData:
-                  dialogueID: Inner_Fire_Line1_8DA80
+                  dialogueID: Inner_Fire_Line1_574FC
                   type: 1
                   emotionState: 0
                   selectedPartIndex: 0
@@ -1555,78 +2216,81 @@ MonoBehaviour:
                   activeStatus: 0
                 frameEffectData:
                   animationSpeed: 1
-        transitionType: 1
-        gameType: 0
+        transitionType: 0
+        gameType: 1
+        gameManagerID: InnerFire_FastSession_1
         frameKeyValues:
           keys:
-          - Background_DB16A
-          - Inner_Fire_Line1_8DA80
-          - Inner_Fire_Answer_F5043
-          - Inner_Fire_Answer_24DA5
-          - Noran_220C9
-          - Logan_B4ADA
-          - Blackout Screen (from black)_15907
-          - Blackout Screen (to black)_92ED1
+          - Background_51B71
+          - Inner_Fire_Line1_574FC
+          - Inner_Fire_Answer_61EC8
+          - Inner_Fire_Answer_29FA9
+          - Inner_Fire_Answer_7BE4B
+          - Noran_9CB39
+          - Blackout Screen (from black)_BF013
+          - Blackout Screen (to black)_5FB34
           serializedElementValues:
           - transformData:
               position: {x: 0, y: 0}
               size: {x: 1, y: 1}
-              activeStatus: 1
+              activeStatus: 0
           serializedDialogueValues:
           - transformData:
-              position: {x: 0, y: 303}
+              position: {x: -0.000061035, y: 133}
               size: {x: 1404.4652, y: 425.62552}
               activeStatus: 0
             keySequenceData:
               nextKeyID: 0
               previousKeyID: 0
             dialogueTextData:
-              text: "\u0422\u0435\u043A\u0441\u0442 \u0434\u0438\u0430\u043B\u043E\u0433\u0430"
+              text: 'I''m personally of the opinion that Bladewolf''s DLC was a huge
+                wasted opportunity. Instead of showing his VR Training, we could
+                have seen him '
               speakingCharacterIndex: 0
-              conversationCharacterID: Noran_220C9
+              conversationCharacterID: Noran_9CB39
               conversationCharacters:
                 keys:
                 - Noran
                 values:
-                - Noran_220C9
+                - Noran_9CB39
               type: 0
-              textAnimationTime: 0.065
-              autoContinue: 1
+              textAnimationTime: 0.0165
+              autoContinue: 0
           serializedDialogueAnswerValues:
           - transformData:
               position: {x: 0, y: 540}
               size: {x: 1404.4652, y: 131.91014}
-              activeStatus: 1
+              activeStatus: 0
             keySequenceData:
-              nextKeyID: 3
+              nextKeyID: 0
               previousKeyID: 0
             dialogueAnswerTextData:
-              text: "\u0414\u0430"
+              text: "\u041E\u0442\u0432\u0435\u0442"
           - transformData:
-              position: {x: 0, y: 333}
+              position: {x: -0.000061035, y: 332}
               size: {x: 1404.4652, y: 131.91014}
-              activeStatus: 1
+              activeStatus: 0
             keySequenceData:
-              nextKeyID: 4
+              nextKeyID: 0
               previousKeyID: 0
             dialogueAnswerTextData:
-              text: "\u041D\u0435\u0442"
+              text: "\u041E\u0442\u0432\u0435\u0442"
+          - transformData:
+              position: {x: 0, y: 540}
+              size: {x: 1404.4652, y: 131.91014}
+              activeStatus: 0
+            keySequenceData:
+              nextKeyID: 0
+              previousKeyID: 0
+            dialogueAnswerTextData:
+              text: "\u041E\u0442\u0432\u0435\u0442"
           serializedFrameCharacterValues:
           - transformData:
               position: {x: 0, y: -5.03}
               size: {x: 1, y: 1}
-              activeStatus: 1
+              activeStatus: 0
             characterData:
-              dialogueID: Inner_Fire_Line1_8DA80
-              type: 1
-              emotionState: 0
-              selectedPartIndex: 0
-          - transformData:
-              position: {x: 0, y: 0}
-              size: {x: 1, y: 1}
-              activeStatus: 1
-            characterData:
-              dialogueID: Inner_Fire_Line1_8DA80
+              dialogueID: Inner_Fire_Line1_574FC
               type: 1
               emotionState: 0
               selectedPartIndex: 0
@@ -1645,16 +2309,17 @@ MonoBehaviour:
               animationSpeed: 1
     transitionType: 0
     gameType: 0
+    gameManagerID: 
     frameKeyValues:
       keys:
-      - Background_DB16A
-      - Inner_Fire_Line1_8DA80
-      - Inner_Fire_Answer_F5043
-      - Inner_Fire_Answer_24DA5
-      - Noran_220C9
-      - Logan_B4ADA
-      - Blackout Screen (from black)_15907
-      - Blackout Screen (to black)_92ED1
+      - Background_51B71
+      - Inner_Fire_Line1_574FC
+      - Inner_Fire_Answer_61EC8
+      - Inner_Fire_Answer_29FA9
+      - Inner_Fire_Answer_7BE4B
+      - Noran_9CB39
+      - Blackout Screen (from black)_BF013
+      - Blackout Screen (to black)_5FB34
       serializedElementValues:
       - transformData:
           position: {x: 0, y: 0}
@@ -1662,29 +2327,38 @@ MonoBehaviour:
           activeStatus: 1
       serializedDialogueValues:
       - transformData:
-          position: {x: 0, y: 303}
+          position: {x: -0.000061035, y: 133}
           size: {x: 1404.4652, y: 425.62552}
           activeStatus: 1
         keySequenceData:
-          nextKeyID: 1
+          nextKeyID: 4
           previousKeyID: 0
         dialogueTextData:
-          text: "\u042F \u043D\u0438\u0447\u0435\u0433\u043E \u043D\u0435 \u043F\u043E\u043D\u0438\u043C\u0430\u044E"
+          text: "I'm personally of the opinion that Bladewolf's DLC was a huge\nwasted
+            opportunity. \nInstead of showing his VR Training, we could have seen
+            him "
           speakingCharacterIndex: 0
-          conversationCharacterID: Noran_220C9
+          conversationCharacterID: Noran_9CB39
           conversationCharacters:
             keys:
             - Noran
-            - Logan
             values:
-            - Noran_220C9
-            - Logan_B4ADA
+            - Noran_9CB39
           type: 0
-          textAnimationTime: 0.065
-          autoContinue: 1
+          textAnimationTime: 0.0165
+          autoContinue: 0
       serializedDialogueAnswerValues:
       - transformData:
           position: {x: 0, y: 540}
+          size: {x: 1404.4652, y: 131.91014}
+          activeStatus: 0
+        keySequenceData:
+          nextKeyID: 0
+          previousKeyID: 0
+        dialogueAnswerTextData:
+          text: "\u041E\u0442\u0432\u0435\u0442"
+      - transformData:
+          position: {x: -0.000061035, y: 332}
           size: {x: 1404.4652, y: 131.91014}
           activeStatus: 0
         keySequenceData:
@@ -1707,16 +2381,7 @@ MonoBehaviour:
           size: {x: 1, y: 1}
           activeStatus: 1
         characterData:
-          dialogueID: Inner_Fire_Line1_8DA80
-          type: 1
-          emotionState: 0
-          selectedPartIndex: 0
-      - transformData:
-          position: {x: 0, y: 0}
-          size: {x: 1, y: 1}
-          activeStatus: 1
-        characterData:
-          dialogueID: Inner_Fire_Line1_8DA80
+          dialogueID: Inner_Fire_Line1_574FC
           type: 1
           emotionState: 0
           selectedPartIndex: 0
@@ -1724,36 +2389,34 @@ MonoBehaviour:
       - transformData:
           position: {x: 0, y: 0}
           size: {x: 10000, y: 10000}
-          activeStatus: 0
+          activeStatus: 1
         frameEffectData:
-          animationSpeed: 0.5
+          animationSpeed: 1
       - transformData:
           position: {x: 0, y: 0}
           size: {x: 10000, y: 10000}
           activeStatus: 0
         frameEffectData:
           animationSpeed: 1
-  nodeCanvas: {fileID: 11400000, guid: 263e9a18864f9f742ba326c408bc8eef, type: 2}
+  nodeCanvas: {fileID: 11400000, guid: 0beedb32edb3db44e9d79b3a4690c814, type: 2}
   usedElementsObjects:
-  - elementObject: {fileID: 11400000, guid: f09224e30d17c1f4f97ea80d60f36783, type: 2}
-    ids:
-    - Inner_Fire_Line1_8DA80
-  - elementObject: {fileID: 11400000, guid: f6619c14e28441644b37a6f8bbd6a453, type: 2}
-    ids:
-    - Noran_220C9
   - elementObject: {fileID: 11400000, guid: 89324d524bbece344823b4c96ff5f9b5, type: 2}
     ids:
-    - Blackout Screen (from black)_15907
-  - elementObject: {fileID: 11400000, guid: a63eb35c20d864e418a017f4beff8991, type: 2}
-    ids:
-    - Background_DB16A
+    - Blackout Screen (from black)_BF013
   - elementObject: {fileID: 11400000, guid: 72ecbab83c8dae64cbf0d01855520f48, type: 2}
     ids:
-    - Blackout Screen (to black)_92ED1
+    - Blackout Screen (to black)_5FB34
+  - elementObject: {fileID: 11400000, guid: a63eb35c20d864e418a017f4beff8991, type: 2}
+    ids:
+    - Background_51B71
+  - elementObject: {fileID: 11400000, guid: f09224e30d17c1f4f97ea80d60f36783, type: 2}
+    ids:
+    - Inner_Fire_Line1_574FC
   - elementObject: {fileID: 11400000, guid: 5799dc34a5e8a0648ade55bbe2fed1e4, type: 2}
     ids:
-    - Inner_Fire_Answer_F5043
-    - Inner_Fire_Answer_24DA5
-  - elementObject: {fileID: 11400000, guid: 65f8bc0e74d17f24bbb3be9b556ed71d, type: 2}
+    - Inner_Fire_Answer_61EC8
+    - Inner_Fire_Answer_29FA9
+    - Inner_Fire_Answer_7BE4B
+  - elementObject: {fileID: 11400000, guid: f6619c14e28441644b37a6f8bbd6a453, type: 2}
     ids:
-    - Logan_B4ADA
+    - Noran_9CB39

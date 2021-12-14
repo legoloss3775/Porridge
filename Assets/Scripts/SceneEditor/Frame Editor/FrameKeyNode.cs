@@ -11,7 +11,7 @@ using FrameCore.Serialization;
 using FrameCore.ScriptableObjects;
 using FrameCore.UI;
 
-[Node(false, "FrameKey/Test"), System.Serializable]
+[Node(false, "DEV/DEBUG/BUG/!DO NOT PRESS THIS BUTTON!"), System.Serializable]
 public class FrameKeyNode : Node
 {
     public FrameKey frameKey;
@@ -59,29 +59,55 @@ public class FrameKeyNode : Node
         }
     }
     public static FrameKeyNode CreateKeyNode(string keyNodeID, Vector2 pos, FrameKey key, FrameSO frame) {
+        Vector2 oldPos = Vector2.zero;
+        if (NodeEditor.curNodeCanvas.nodes.Count > 0)
+            oldPos = NodeEditor.curNodeCanvas.nodes.Last().position;
+
         FrameKeyNode node = (FrameKeyNode)Node.Create(keyNodeID, pos);
         node.frameKey = key;
         node.frameKeyPair.frameID = frame.id;
         node.frameKeyPair.frameKeyID = key.id;
         node.input1Knob.maxConnectionCount = NodeEditorFramework.ConnectionCount.Multi;
+        if(oldPos != Vector2.zero)
+            node.position = oldPos + new Vector2(350, 0);
         return node;
     }
     /// <summary>
     /// </summary>
     public override void NodeGUI() {
 
+        /**try {
+            frameKey = frameEditorSO.frames.Where(ch => ch.id == frameKeyPair.frameID).FirstOrDefault().frameKeys[frameKeyPair.frameKeyID];
+        }
+        catch (Exception) {
+            var key = new FrameKey();
+            FrameManager.frame.frameKeys.Add(key);
+            key.id = FrameManager.frame.frameKeys.IndexOf(key);
+
+            this.frameKeyPair.frameID = FrameManager.frame.id;
+            this.frameKeyPair.frameKeyID = key.id;
+            this.frameKey = frameEditorSO.frames.Where(ch => ch.id == frameKeyPair.frameID).FirstOrDefault().frameKeys[frameKeyPair.frameKeyID];
+            this.frameKey.nodeIndex = NodeEditor.curNodeCanvas.nodes.IndexOf(this);
+            this.frameKey.frameKeyValues = frameEditorSO.frames.Where(ch => ch.id == frameKeyPair.frameID).FirstOrDefault().frameKeys[frameKeyPair.frameKeyID - 1].frameKeyValues;
+
+            FrameManager.frame.currentKey = key;
+            FrameManager.ChangeFrameKey();
+
+            foreach (var element in FrameManager.frameElements.Where(ch => ch is IKeyTransition)) {
+                if (element.activeStatus) FrameEditor.Core.ChangeActiveState(FrameManager.frame.currentKey, element, true);
+            }
+
+            FrameEditor.CoreWindow.core.Repaint();
+        }**/
         frameKey = frameEditorSO.frames.Where(ch => ch.id == frameKeyPair.frameID).FirstOrDefault().frameKeys[frameKeyPair.frameKeyID];
-
         input1Knob.maxConnectionCount = NodeEditorFramework.ConnectionCount.Multi;
-
-        if(FrameManager.frame?.currentKey?.id == frameKeyPair.frameKeyID) {
+        
+        if (FrameManager.frame != null && FrameManager.frame.currentKey != null && FrameManager.frame.currentKey.id == frameKeyPair.frameKeyID && FrameManager.frame.id == frameKeyPair.frameID) {
             if (FrameManager.frame.currentKey != frameKey)
                 FrameManager.frame.currentKey = frameKey;
         }
-
         if (!updated && FrameManager.frame != null) {
             foreach (var value in frameKey.frameKeyValues) {
-
                 UpdateKeyNodeValues(this, value.Value, value.Key);
             }
             updated = true;
@@ -223,22 +249,22 @@ public class FrameKeyNode : Node
         }
         else {
             input1Knob.SetPosition(125);
+            if(outputKnobs.Count > 0)
+                outputKnobs[0].SetPosition(125);
             //Задает nextKeyID, если outpuKnob присоеденен к другому KeyNode
             //Работает кривовато, нужно каждый раз указывать тип значений в ключе
             foreach (var FrameKeyTransitionKnob in frameKey.frameKeyTransitionKnobs)
                 if (outputKnobs.Count > FrameKeyTransitionKnob.Value) {
                     ValueConnectionKnob valueKnob = (ValueConnectionKnob)outputKnobs[FrameKeyTransitionKnob.Value];
+                    //valueKnob.SetValue(frameKey);
+                    valueKnob.maxConnectionCount = ConnectionCount.Single;
                     if (valueKnob.connected()) {
-                        var elementValues = frameKey.GetFrameKeyValuesOfElement(FrameKeyTransitionKnob.Key);
+                        var gameManager = FrameManager.gameManagers.Where(ch => ch.id == frameKey.gameManagerID).FirstOrDefault();
+                        if (gameManager == null) continue;
                         var body = (FrameKeyNode)valueKnob.connection(0).body;
-                        if (elementValues is DialogueValues dValues) {
-                            dValues.keySequenceData.nextKeyID = body.frameKey.id;
-                            body.frameKey.keySequence.previousKey = frameKey;
-                        }
-                        else if (elementValues is DialogueAnswerValues daValues) {
-                            daValues.keySequenceData.nextKeyID = body.frameKey.id;
-                            body.frameKey.keySequence.previousKey = frameKey;
-                        }
+                        if (body == null || body.frameKey == null) continue;
+                        gameManager.nextKeyID = body.frameKey.id;
+                        body.frameKey.keySequence.previousKey = frameKey;
                     }
                 }
             GUILayout.FlexibleSpace();
@@ -259,8 +285,6 @@ public class FrameKeyNode : Node
             GUILayout.EndHorizontal();
         }
 
-        UpdateFrameKeys();
-
         if(Selection.activeObject != null && Selection.activeObject == this &&
             FrameManager.frame.selectedKeyIndex != this.frameKeyPair.frameKeyID) {
             FrameManager.frame.selectedKeyIndex = this.frameKeyPair.frameKeyID;
@@ -272,13 +296,13 @@ public class FrameKeyNode : Node
                         frameEditorSO.selectedKeyIndex = FrameManager.frame.frameKeys.IndexOf(key);
                         FrameManager.ChangeFrameKey();
                         FrameEditor.CoreWindow.core.Repaint();
+                        //NodeEditorFramework.Standard.NodeEditorWindow.editor.Repaint();
                     }
                 }
             }
         }
 
-        if (GUI.changed)
-            NodeEditor.curNodeCanvas.OnNodeChange(this);
+        UpdateFrameKeys();
     }
     public static void UpdateFrameKeys() {
         if (FrameManager.frame == null || FrameManager.frame.frameKeys == null) return;
@@ -300,5 +324,6 @@ public class FrameKeyNode : Node
             }
         }
     }
+    
 #endif
 }

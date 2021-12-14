@@ -110,12 +110,12 @@ namespace FrameCore {
             public string characterNameField {
                 get {
                     if (this != null)
-                        return this.gameObject.transform.GetChild(0).GetComponent<TMPro.TextMeshProUGUI>().text;
-                    else return frameElementObject.prefab.transform.GetChild(0).GetComponent<TMPro.TextMeshProUGUI>().text;
+                        return this.gameObject.transform.GetChild(4).GetComponent<TMPro.TextMeshProUGUI>().text;
+                    else return frameElementObject.prefab.transform.GetChild(4).GetComponent<TMPro.TextMeshProUGUI>().text;
                 }
                 set {
                     if (conversationCharacterID != null)
-                        this.gameObject.transform.GetChild(0).GetComponent<TMPro.TextMeshProUGUI>().text = conversationCharacters.Values.ToList()[speakingCharacterIndex].Split('_')[0];
+                        this.gameObject.transform.GetChild(4).GetComponent<TMPro.TextMeshProUGUI>().text = conversationCharacters.Values.ToList()[speakingCharacterIndex].Split('_')[0];
                 }
             }
             public string conversationCharacterID { get; set; }
@@ -124,7 +124,7 @@ namespace FrameCore {
             public FrameDialogueElementType type { get; set; }
             public Character currentConversationCharacter { get; set; }
             public CharacterSO currentConversationCharacterSO { get; set; }
-            public float textAnimationTime = 0.065f;
+            public float textAnimationTime = 0.0165f;
             public bool autoContinue { get; set; }
 
             float autoContinueWait = 0;
@@ -142,20 +142,12 @@ namespace FrameCore {
             private void Update() {
                 KeyTransitionInput();
 
-                if (text != GetFrameKeyValues<DialogueValues>(id).dialogueTextData.text) {
-                    FrameController.INPUT_BLOCK = true;
-                }
-                else FrameController.RemoveAnimationFromQueue(id);
-
-                if(FrameController.animations.Count == 0 && autoContinue) {
-                    if(nextKeyID != 0) {
-                        autoContinueWait += Time.deltaTime;
-
-                        if(autoContinueWait >= 1f) {
-                            FrameManager.SetKey(this.nextKeyID);
-                            autoContinueWait = 0;
-                        }
-                    }
+                UpdateText();
+            }
+            public override void OnKeyChanged() {
+                if (activeStatus != false) {
+                    FrameController.AddAnimationToQueue(id, true);
+                    StartCoroutine(TypeDialogue(text));
                 }
             }
             public void KeyTransitionInput() {
@@ -164,6 +156,23 @@ namespace FrameCore {
                 if (Input.GetKeyDown(KeyCode.D)) {
                     if (nextKeyID != 0) {
                         FrameManager.SetKey(this.nextKeyID);
+                    }
+                }
+            }
+            public void UpdateText() {
+                if (text != GetFrameKeyValues<DialogueValues>(id).dialogueTextData.text) {
+                    FrameController.INPUT_BLOCK = true;
+                }
+                else FrameController.RemoveAnimationFromQueue(id);
+
+                if (FrameController.animations.Count == 0 && autoContinue) {
+                    if (nextKeyID != 0) {
+                        autoContinueWait += Time.deltaTime;
+
+                        if (autoContinueWait >= 1f) {
+                            FrameManager.SetKey(this.nextKeyID);
+                            autoContinueWait = 0;
+                        }
                     }
                 }
             }
@@ -200,7 +209,7 @@ namespace FrameCore {
             }
             public void LoadConversationCharacter(string characterID, FrameDialogueElementType type) {
                 //if (characterID == null)
-                if (currentConversationCharacter != null && type == FrameDialogueElementType.Одинᅠперсонаж) RemovePreviousCharacterOnScene();
+                if (currentConversationCharacter != null && type == FrameDialogueElementType.Одинᅠперсонаж && conversationCharacterID != characterID) RemovePreviousCharacterOnScene();
 
                 var characterKeyValues = FrameElement.GetFrameKeyValues<Serialization.CharacterValues>(characterID);
 
@@ -258,7 +267,7 @@ namespace FrameCore {
             public void RemoveAllConversationCharactersFromScene() {
                 var keyValues = GetFrameKeyValues<DialogueValues>();
                 foreach (var character in keyValues.dialogueTextData.conversationCharacters) {
-                    if (FrameManager.GetFrameElementOnSceneByID<Character>(character.Value))
+                    if (FrameManager.GetFrameElementOnSceneByID<Character>(character.Value) && keyValues.dialogueTextData.conversationCharacterID != character.Value)
                         FrameManager.RemoveElement(character.Value);
                 }
             }
@@ -268,8 +277,8 @@ namespace FrameCore {
             #region VALUES_SETTINGS
             public TextMeshProUGUI GetTextComponent() {
                 if (this != null)
-                    return this.gameObject.transform.GetChild(1).GetComponent<TMPro.TextMeshProUGUI>();
-                else return frameElementObject.prefab.transform.GetChild(1).GetComponent<TMPro.TextMeshProUGUI>();
+                    return this.gameObject.transform.GetChild(5).GetComponent<TMPro.TextMeshProUGUI>();
+                else return frameElementObject.prefab.transform.GetChild(5).GetComponent<TMPro.TextMeshProUGUI>();
             }
             public override Values GetFrameKeyValuesType() {
                 return new DialogueValues(this);

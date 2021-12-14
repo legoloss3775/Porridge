@@ -408,6 +408,33 @@ namespace FrameEditor {
             element.SetKeyValuesWhileNotInPlayMode();
 
         }
+        public static void DeleteInteractableTransitionNode(GameType type, FrameKey key) {
+            if (NodeEditor.curNodeCanvas == null) return;
+            foreach (FrameKeyNode node in NodeEditor.curNodeCanvas.nodes) {
+                if (node.frameKey == null || node.frameKeyPair.frameKeyID != key.id) continue;
+
+                foreach (var n in node.outputKnobs.ToList()) {
+                    if (key.frameKeyTransitionKnobs.ContainsKey(type.ToString())) {
+                        //Удаление outputKnob из KeyNode
+                        var removeIndex = key.frameKeyTransitionKnobs[type.ToString()];
+
+                        key.frameKeyTransitionKnobs.Remove(type.ToString());
+                        DestroyImmediate(n, true);
+
+                        //смещение индекса outputKnobs в словаре outputKnobs, привязанном к элементу, из-за которого
+                        //они и удаляются
+                        ///<see cref="FrameKey.frameKeyTransitionKnobs">
+                        ///
+                        foreach (var killme in key.frameKeyTransitionKnobs.Keys.ToList()) {
+                            if (key.frameKeyTransitionKnobs[killme] >= removeIndex) {
+                                key.frameKeyTransitionKnobs[killme] -= 1;
+                            }
+                        }
+                        NodeEditorFramework.ConnectionPortManager.UpdatePortLists(node);
+                    }
+                }
+            }
+        }
         public static void DeleteInteractableTransitionNode(FrameElement element, FrameKey key) {
             if (NodeEditor.curNodeCanvas == null) return;
             foreach (FrameKeyNode node in NodeEditor.curNodeCanvas.nodes) {
@@ -433,6 +460,18 @@ namespace FrameEditor {
                         NodeEditorFramework.ConnectionPortManager.UpdatePortLists(node);
                     }
                 }
+            }
+        }
+        public static void CreateInteractableTransitionNode(GameType type, FrameKey key) {
+            foreach (FrameKeyNode node in NodeEditor.curNodeCanvas.nodes) {
+                if (node.frameKey == null || node.frameKeyPair.frameKeyID != key.id) continue;
+                if (key.frameKeyTransitionKnobs.ContainsKey(type.ToString())) continue;
+
+                var knob = node.CreateValueConnectionKnob(new ValueConnectionKnobAttribute("Output", Direction.Out, "FrameKey"));
+                knob.SetValue<FrameKey>(node.frameKey);
+                
+                key.frameKeyTransitionKnobs.Add(type.ToString(), node.connectionKnobs.IndexOf(knob) - 1);
+                NodeEditorFramework.ConnectionPortManager.UpdatePortLists(node);
             }
         }
         public static void CreateInteractableTransitionNode(FrameElement element, FrameKey key) {
@@ -588,6 +627,9 @@ namespace FrameEditor {
                     }
 
                     FrameManager.frame = frames[i];
+
+                    frameEditorSO.selectedKeyIndex = 0;
+                    FrameManager.frame.selectedKeyIndex = 0;
 
                     FrameManager.ChangeFrame();
                     FrameManager.ChangeFrameKey();

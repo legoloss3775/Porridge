@@ -282,10 +282,13 @@ namespace FrameEditor {
 
             foreach(var characterID in dialogue.conversationCharacters) {
                 if (!FrameManager.frame.currentKey.ContainsID(characterID.Value)) {
-                    FrameManager.frame.currentKey.AddFrameKeyValues(
-                        characterID.Value,
-                        FrameManager.GetFrameElementOnSceneByID<FrameCore.Character>(characterID.Value).GetFrameKeyValuesType()
-                        );
+                    try {
+                        FrameManager.frame.currentKey.AddFrameKeyValues(
+                            characterID.Value,
+                            FrameManager.GetFrameElementOnSceneByID<FrameCore.Character>(characterID.Value).GetFrameKeyValuesType()
+                            );
+                    }
+                    catch (System.Exception) { }
                 }
             }
 
