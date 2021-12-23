@@ -48,9 +48,8 @@ namespace FrameEditor {
             GUILayout.BeginHorizontal();
             ElementSelection(character); //кнопка выбора элемента
             ElementActiveStateChange(character); //кнопка изменения статуса активности элемента
-            if (character.type != FrameCore.Character.CharacterType.Conversation)
-                ElementDeletion(character); //кнопка удаления элемента, если персонаж не привязан к диалогу
-                                            //чтобы удалить такого персонажа, нужно удалить сам диалог
+            ElementDeletion(character);
+
             GUILayout.EndHorizontal();
             GUILayout.EndVertical();
             GUILayout.BeginHorizontal();//
@@ -77,8 +76,11 @@ namespace FrameEditor {
             GUILayout.EndHorizontal();
 
             var characterParts = new SerializableDictionary<int, CharacterPart>();
-            foreach (var part in characterSO.characterParts.Where(ch => ch.state == keyValues.characterData.emotionState))
-                characterParts.Add(characterSO.characterParts.IndexOf(part), part);
+            for(int i = 0; i < characterSO.characterParts.Count; i++) {
+                if(characterSO.characterParts[i].state == keyValues.characterData.emotionState) {
+                    characterParts.Add(i, characterSO.characterParts[i]);
+                }
+            }
 
             if (characterParts.Count > 0)
                 CharacterPartPrefabSelection(characterParts);
@@ -96,12 +98,24 @@ namespace FrameEditor {
                 var icons = new SerializableDictionary<int, Texture>();
                 foreach (var part in parts) {
                     var icon = UnityEditor.AssetPreview.GetAssetPreview(part.Value.statePrefab);
-                    icons.Add(part.Key, icon);
+                    if(!icons.ContainsValue(icon))
+                        icons.Add(part.Key, icon);
+                }
+                int index = 0;
+                for(int i = 0; i < parts.Count; i++) {
+                    if(parts.Keys.ToArray()[i] == keyValues.characterData.selectedPartIndex) {
+                        index = i;
+                        break;
+                    }
                 }
 
-                keyValues.characterData.selectedPartIndex = GUILayout.SelectionGrid(keyValues.characterData.selectedPartIndex, icons.Values.ToArray(), 4, GUILayout.MaxWidth(450));
+                index = GUILayout.SelectionGrid(index, icons.Values.ToArray(), 4, GUILayout.MaxWidth(450));
+
+                keyValues.characterData.selectedPartIndex = parts.Keys.ToArray()[index];
+
                 if (!icons.ContainsKey(keyValues.characterData.selectedPartIndex))
                     keyValues.characterData.selectedPartIndex = icons.Keys.First();
+
                 var selectedPart = parts[keyValues.characterData.selectedPartIndex];
                 if (character.emotionState != keyValues.characterData.emotionState || character.selectedPartIndex != keyValues.characterData.selectedPartIndex) {
                     character.selectedPartIndex = keyValues.characterData.selectedPartIndex;

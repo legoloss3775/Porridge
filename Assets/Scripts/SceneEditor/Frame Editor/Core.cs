@@ -15,6 +15,17 @@ namespace FrameEditor {
     /// Дополнительные инструменты для отрисовки GUI
     /// </summary>
     public static class FrameGUIUtility {
+        public static GUIStyle GetKeyNodeStyle() {
+            GUIStyle TextFieldStyles = new GUIStyle(EditorStyles.helpBox);
+            GUI.contentColor = Color.white;
+            GUI.color = Color.white;
+
+            //Value Color
+            TextFieldStyles.normal.background = MakeTex(2, 2, new Color32(32, 32, 32, 100));
+            //TextFieldStyles.fontSize = fontSize;
+
+            return TextFieldStyles;
+        }
         public static GUIStyle GetToggleStyle(Color color) {
             GUIStyle TextFieldStyles = new GUIStyle(EditorStyles.toggle);
             GUI.contentColor = Color.white;
@@ -45,13 +56,14 @@ namespace FrameEditor {
 
             return TextFieldStyles;
         }
-        public static GUIStyle SetLabelIconColor(Color imageColor) {
+        public static GUIStyle SetLabelIconColor(Color32 imageColor) {
             GUIStyle labelStyles = new GUIStyle(EditorStyles.label);
             GUI.contentColor = Color.white;
             GUI.color = Color.white;
 
             //Value Color
-            labelStyles.normal.background = MakeTex(2, 2, imageColor);
+            Color32 col = new Color32(imageColor.r, imageColor.g, imageColor.b, 200);
+            labelStyles.normal.background = MakeTex(2, 2, col);
 
             //Label Color
             //EditorStyles.label.normal.textColor = imageColor;
@@ -87,7 +99,7 @@ namespace FrameEditor {
 
             //Value Color
             TextFieldStyles.normal.textColor = textColor;
-
+            TextFieldStyles.normal.background = MakeTex(2, 2, new Color32(27,27,27,255));
             //Label Color
             //EditorStyles.label.normal.textColor = textColor;
 
@@ -121,6 +133,8 @@ namespace FrameEditor {
             CharacterEditor,    ///<see cref="FrameEditor.Character">
             BackgroundEditor,   ///<see cref="FrameEditor.Background">
             FrameEffectEditor,  ///<see cref="FrameEditor.FrameEffect">
+            FrameCameraEditor,  ///<see cref="FrameEditor.FrameCamera">
+            FrameLightEditor,   ///<see cref="FrameEditor.FrameLight">
         }
         //Список для позиций ползунка для каждого из редакторов
         public static SerializableDictionary<EditorType, Vector2> scrollPositions = new SerializableDictionary<EditorType, Vector2> {
@@ -128,6 +142,8 @@ namespace FrameEditor {
         { EditorType.CharacterEditor, new Vector2()},
         { EditorType.BackgroundEditor, new Vector2()},
         { EditorType.FrameEffectEditor, new Vector2()},
+        { EditorType.FrameCameraEditor, new Vector2()},
+        { EditorType.FrameLightEditor, new Vector2()},
     };
         //Список для поля поиска для каждого из редакторов
         public static SerializableDictionary<EditorType, string> searchTexts = new SerializableDictionary<EditorType, string> {
@@ -135,13 +151,17 @@ namespace FrameEditor {
         { EditorType.CharacterEditor, ""},
         { EditorType.BackgroundEditor, ""},
         { EditorType.FrameEffectEditor, ""},
+        { EditorType.FrameCameraEditor, ""},
+        { EditorType.FrameLightEditor, ""},
     };
         //Список для опции сворачивания для каждого из редакторов
         public static SerializableDictionary<EditorType, bool> foldouts = new SerializableDictionary<EditorType, bool> {
         { EditorType.DialogueEditor, true},
         { EditorType.CharacterEditor, true},
-        { EditorType.BackgroundEditor, true},
+        { EditorType.BackgroundEditor, false},
         { EditorType.FrameEffectEditor, true},
+        { EditorType.FrameCameraEditor, true},
+        { EditorType.FrameLightEditor, true},
     };
         //Типы расположений элементов при их отрисовке в ElementEditing
         public enum PositioningType {
@@ -364,6 +384,16 @@ namespace FrameEditor {
                             FrameManager.frame.RemoveElementFromCurrentKey(dialogueCharacter.id);
                     }
                 }
+                if(element is FrameCore.Character character && character.type == FrameCore.Character.CharacterType.Conversation) {
+                    foreach(var key in FrameManager.frame.frameKeys) {
+                        if (key.ContainsID(character.dialogueID)) {
+                            var values = (FrameCore.Serialization.DialogueValues)key.GetFrameKeyValuesOfElement(character.dialogueID);
+
+                            values.dialogueTextData.conversationCharacters.Remove(character.frameElementObject.id);
+                        }
+                    }
+                    FrameManager.frame.RemoveElementFromCurrentKey(character.id);
+                }
                 if (element is IKeyTransition) {
                     foreach (var key in FrameManager.frame.frameKeys)
                         DeleteInteractableTransitionNode(element, key);
@@ -476,11 +506,12 @@ namespace FrameEditor {
         }
         public static void CreateInteractableTransitionNode(FrameElement element, FrameKey key) {
             foreach (FrameKeyNode node in NodeEditor.curNodeCanvas.nodes) {
-                if (node.frameKey == null || node.frameKeyPair.frameKeyID != key.id) continue;
-                if (key.frameKeyTransitionKnobs.ContainsKey(element.id)) continue;
+                if (node.frameKey == null || node.frameKeyPair.frameKeyID != key.id) {continue; }
+                if (key.frameKeyTransitionKnobs.ContainsKey(element.id)) { continue; }
 
                 var knob = node.CreateValueConnectionKnob(new ValueConnectionKnobAttribute("Output", Direction.Out, "FrameKey"));
                 knob.SetValue<FrameKey>(node.frameKey);
+
 
                 if (element is FrameCore.UI.Dialogue || element is DialogueAnswer)
                     key.frameKeyTransitionKnobs.Add(element.id, node.connectionKnobs.IndexOf(knob) - 1);
@@ -502,6 +533,8 @@ namespace FrameEditor {
             FrameDialogueAnswer,
             FrameBackground,
             FrameEffect,
+            FrameCamera,
+            FrameLight,
         }
         public CreationType type;
         //ID создаваемого элемента записывается в эту статическую переменную, чтобы
@@ -528,6 +561,12 @@ namespace FrameEditor {
                     break;
                 case CreationType.FrameEffect:
                     FrameElementCreationSelection<FrameEffectSO, FrameCore.FrameEffect>();
+                    break;
+                case CreationType.FrameCamera:
+                    FrameElementCreationSelection<FrameCameraSO, FrameCore.FrameCamera>();
+                    break;
+                case CreationType.FrameLight:
+                    FrameElementCreationSelection<FrameLightSO, FrameCore.FrameLight>();
                     break;
                 case CreationType.Frame: //для фрейма создана отдельная функция, потому что класс фрейма не относится к FrameElement
                     FrameSelection();
@@ -619,13 +658,12 @@ namespace FrameEditor {
             foreach (var frame in frames) {
                 frameNames.Add(frame.name);
             }
-            frameEditorSO.selectedFrameIndex = GUILayout.SelectionGrid(frameEditorSO.selectedFrameIndex, frameNames.ToArray(), 3);
+            frameEditorSO.selectedFrameIndex = GUILayout.SelectionGrid(frameEditorSO.selectedFrameIndex, frameNames.ToArray(), 1);
             for (int i = 0; i < frames.Count; i++) {
                 if (i == frameEditorSO.selectedFrameIndex && FrameManager.frame != frames[i]) {
                     if (FrameManager.frame.nodeCanvas != null) {
                         NodeEditorFramework.Standard.NodeEditorWindow.editor.canvasCache.SaveNodeCanvas("Assets/Frames/NodeCanvases/Canvas_" + FrameManager.frame.id + ".asset");
                     }
-
                     FrameManager.frame = frames[i];
 
                     frameEditorSO.selectedKeyIndex = 0;
@@ -649,11 +687,11 @@ namespace FrameEditor {
             FrameSO frame = ScriptableObject.CreateInstance<FrameSO>();
             frame.selectedKeyIndex = 0;
             AssetDatabase.CreateAsset(frame, path);
-            frame.id = "Frame_" + count;
+            frame.id = frame.name;
             FrameManager.frame = frame;
             frameEditorSO.selectedFrameIndex = AssetManager.GetFrameAssets().Length - 1;
             frame.CreateNodeCanvas();
-            frame.AddKey(new FrameKey());
+            //frame.AddKey(new FrameKey());
 
             FrameManager.ChangeFrame();
             FrameManager.ChangeFrameKey();

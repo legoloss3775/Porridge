@@ -16,6 +16,7 @@ namespace FrameCore {
 
         private void Update() {
             if (animations.Count == 0) INPUT_BLOCK = false;
+            else INPUT_BLOCK = true;
         }
         public static void AddAnimationToQueue(string key, bool value) {
             if (key == null) return;

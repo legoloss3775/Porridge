@@ -46,16 +46,17 @@ namespace FrameCore {
                 nodeCanvas = NodeEditorFramework.NodeCanvas.CreateCanvas<NodeEditorFramework.Standard.CalculationCanvasType>();
 
                 NodeEditorFramework.NodeEditorSaveManager.SaveNodeCanvas("Assets/Frames/NodeCanvases/Canvas_" + id + ".asset", ref nodeCanvas, false);
+                NodeEditor.curNodeCanvas = nodeCanvas;
             }
             public void AddKey(FrameKey key) {
                 frameKeys.Add(key);
                 key.id = frameKeys.IndexOf(key);
 
-#if UNITY_EDITOR
-                FrameKeyNode node = FrameKeyNode.CreateKeyNode(FrameKeyNode.ID, Vector2.zero, key, this);
+/**#if UNITY_EDITOR
+                FrameKeyNode node = (FrameKeyNode)Node.Create(key.id.ToString(), Vector2.zero);
 
                 key.nodeIndex = NodeEditorFramework.NodeEditor.curNodeCanvas.nodes.IndexOf(node);
-#endif
+#endif**/
             }
             public List<string> GetAllIDsOfType<T>()
                 where T : FrameElementSO {

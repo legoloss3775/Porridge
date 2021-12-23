@@ -1,0 +1,66 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using FrameCore;
+using FrameCore.ScriptableObjects;
+using FrameCore.Serialization;
+using System;
+using UnityEditor;
+
+#if UNITY_EDITOR
+namespace FrameEditor {
+    /// <summary>
+    /// Класс редактора камеры
+    /// </summary>
+    public class FrameCamera : Core {
+        /// <see cref="Core.ElementEditing{TElementSO, TElement}(PositioningType, EditorType, bool, bool, Action{TElement}[])"/>
+        /// Принцип работы описан по ссылке выше.
+        public static void FrameCameraEditing() {
+            Action<FrameCore.FrameCamera> frameCameraEditing = CameraEditing;
+
+            GUILayout.BeginVertical();
+
+            GUILayout.BeginHorizontal();
+            foldouts[EditorType.FrameCameraEditor] = EditorGUILayout.Foldout(foldouts[EditorType.FrameCameraEditor], "Камера", EditorStyles.foldoutHeader);
+            GUILayout.FlexibleSpace();
+            ElementCreation(CreationWindow.CreationType.FrameCamera);
+            GUILayout.EndHorizontal();
+
+            if (foldouts[EditorType.FrameCameraEditor]) {
+                GUILayout.BeginVertical("HelpBox");
+                ElementEditing<FrameCameraSO, FrameCore.FrameCamera>(PositioningType.Vertical, EditorType.FrameCameraEditor, false, false, frameCameraEditing);
+                GUILayout.EndVertical();
+            }
+            GUILayout.EndVertical();
+        }
+        public static void CameraEditing(FrameCore.FrameCamera camera) {
+            //var icon = UnityEditor.AssetPreview.GetAssetPreview(camera.frameElementObject.prefab);
+            GUILayout.BeginHorizontal();
+            GUILayout.BeginVertical();
+            GUILayout.BeginHorizontal();
+            ElementSelection(camera);
+            ElementActiveStateChange(camera);
+            ElementDeletion(camera);
+            GUILayout.EndHorizontal();
+            GUILayout.EndVertical();
+
+            if (camera.activeStatus == false) {
+                GUILayout.Label(camera.id, EditorStyles.largeLabel);
+                GUILayout.FlexibleSpace();
+                GUILayout.Label("Inactive", EditorStyles.largeLabel);
+                GUILayout.EndHorizontal();
+                return;
+            }
+
+            GUILayout.BeginVertical();
+            GUILayout.BeginHorizontal();
+            GUILayout.Label(camera.id, EditorStyles.largeLabel);
+            GUILayout.EndHorizontal();
+            GUILayout.EndVertical();
+            GUILayout.FlexibleSpace();
+
+            GUILayout.EndHorizontal();
+        }
+    }
+}
+#endif

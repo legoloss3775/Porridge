@@ -1,4 +1,4 @@
-﻿using GameFramework;
+﻿
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
@@ -8,20 +8,18 @@ namespace FrameCore {
     [Serializable]
     public class FrameKey {
         public int id;
-        public int nodeIndex;
+        public int nodeIndex { get; set; }
 
         public SerializableDictionary<string, int> frameKeyTransitionKnobs = new SerializableDictionary<string, int>();
 
-        public KeySequence keySequence;
+        public delegate void KeyListner();
+        public event KeyListner onFrameKeyUpdate;
+
         public TransitionType transitionType;
         public GameType gameType;
         public string gameManagerID;
         public FrameKeyDictionary frameKeyValues = new FrameKeyDictionary();
 
-        [Serializable]
-        public struct KeySequence {
-            public FrameKey previousKey;
-        }
         public enum TransitionType {
             DialogueLineContinue,
             DialogueAnswerSelection,
@@ -43,13 +41,15 @@ namespace FrameCore {
         public void UpdateFrameKeyValues(string id, Values values) {
             if (ContainsID(id)) frameKeyValues[id] = values;
             else AddFrameKeyValues(id, values);
-#if UNITY_EDITOR
+
+            onFrameKeyUpdate?.Invoke();
+/**#if UNITY_EDITOR
             if (NodeEditorFramework.NodeEditor.curNodeCanvas != null && NodeEditorFramework.NodeEditor.curNodeCanvas.nodes.Count > this.nodeIndex) {
                 FrameKeyNode node = (FrameKeyNode)NodeEditorFramework.NodeEditor.curNodeCanvas.nodes[this.nodeIndex];
                 FrameKeyNode.UpdateKeyNodeValues(node, values, id);
                 NodeEditorFramework.Standard.NodeEditorWindow.editor.Repaint();
             }
-#endif
+#endif**/
         }
         public void AddFrameKeyValues(string id, Values values) {
             if(!frameKeyValues.ContainsKey(id))

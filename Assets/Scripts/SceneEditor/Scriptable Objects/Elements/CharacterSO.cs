@@ -22,6 +22,7 @@ namespace FrameCore {
 
             [HideInInspector]
             public CharacterEmotionState state;
+           // [OneLine.OneLine]
             public List<CharacterPart> characterParts;
 
             public override void OnAfterDeserialize() {
@@ -42,8 +43,8 @@ namespace FrameCore {
                         T elementClone = Instantiate(pair.elementObject.prefab, FrameManager.frameContainer.transform).AddComponent<T>();
                         elementClone.frameElementObject = pair.elementObject;
                         elementClone.id = id;
-                        foreach (var key in FrameManager.frame.frameKeys)
-                            key.UpdateFrameKeyValues(elementClone.id, elementClone.GetFrameKeyValuesType());
+                        //foreach (var key in FrameManager.frame.frameKeys)
+                            //key.UpdateFrameKeyValues(elementClone.id, elementClone.GetFrameKeyValues<CharacterValues>());
 #if UNITY_EDITOR
                         EditorUtility.SetDirty(elementClone);
 #endif
@@ -64,6 +65,7 @@ namespace FrameCore {
                                 FrameManager.AddElement(elementClone);
 
                                 SetCharacterInDialogue(dialogue);
+                                if (dialogueValues.dialogueTextData.type == Dialogue.FrameDialogueElementType.Одинᅠперсонаж) return;
                             }
                         break;
                     }
@@ -73,7 +75,7 @@ namespace FrameCore {
                     var dialogueKeyValues = (DialogueValues)FrameManager.frame.currentKey.frameKeyValues[dialogue.id];
                     switch (dialogue.type) {
                         case Dialogue.FrameDialogueElementType.Одинᅠперсонаж: {
-                            if (dialogue != null && dialogue.currentConversationCharacter != null) dialogue.RemovePreviousCharacterOnScene();
+                            //if (dialogue != null && dialogue.currentConversationCharacter != null);
 
                             dialogue.currentConversationCharacter = FrameManager.GetFrameElementOnSceneByID<Character>(id);
                             dialogue.conversationCharacterID = id;

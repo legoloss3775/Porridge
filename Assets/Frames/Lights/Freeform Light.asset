@@ -1,0 +1,15 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30df3f6ef1f4caf4292ecf4b638b7ca7, type: 3}
+  m_Name: Freeform Light
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 1489234534071500069, guid: 543a558957be6314ea8732c5baf2c933, type: 3}

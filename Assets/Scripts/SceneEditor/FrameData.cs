@@ -15,8 +15,9 @@ namespace FrameCore.Serialization {
     }
     [System.Serializable]
     public struct TransformData {
-        public Vector2 position;
+        public Vector3 position;
         public Vector2 size;
+        public Vector3 rotation;
         public bool activeStatus;
     }
     [System.Serializable]
@@ -35,6 +36,8 @@ namespace FrameCore.Serialization {
         public FrameCore.UI.Dialogue.FrameDialogueElementType type;
         public float textAnimationTime;
         public bool autoContinue;
+        public float transitionDelay;
+        public float textAnimationDelay;
     }
     [System.Serializable]
     public struct DialogueAnswerTextData {
@@ -43,5 +46,21 @@ namespace FrameCore.Serialization {
     [System.Serializable]
     public struct FrameEffectData {
         public float animationSpeed;
+        public float animationDelay;
+    }
+    [System.Serializable]
+    public struct CameraTurnAnimationData {
+        public float degreesX;
+        public float degreesY;
+        public Vector3 moveTo;
+    }
+    [System.Serializable]
+    public struct LightData {
+        public float intensity;
+        public float outerRange;
+        public float innerRange;
+        public Color color;
+        public float outerAngle;
+        public float innerAngle;
     }
 }

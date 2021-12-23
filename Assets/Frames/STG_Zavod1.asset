@@ -1,0 +1,2122 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9fb188184a63ff42b050cfef419b0c6, type: 3}
+  m_Name: STG_Zavod1
+  m_EditorClassIdentifier: 
+  type: 0
+  id: Frame 2
+  selectedKeyIndex: 0
+  currentKey:
+    id: 0
+    frameKeyTransitionKnobs:
+      keys:
+      - Inner_Fire_Line1_69880
+      values: 00000000
+    transitionType: 0
+    gameType: 0
+    gameManagerID: 
+    frameKeyValues:
+      keys:
+      - Main Camera_AF208
+      - STG_Zavod_0_437F4
+      - Inner_Fire_Line1_69880
+      - Inner_Fire_Answer_63998
+      - Inner_Fire_Answer_FA15A
+      - Inner_Fire_Answer_2F798
+      - Inner_Fire_AnswerSmall_A087C
+      - Inner_Fire_AnswerSmall_CA7CB
+      - Inner_Fire_AnswerSmall_8E215
+      - Inner_Fire_AnswerSmall_8827F
+      - Noran_2EED0
+      - "\u0421\u0430\u043D\u044F_7FAD7"
+      - Logan_F9AAD
+      - Blackout Screen (from black)_DFBEC
+      - Blackout Screen (to black)_D9590
+      - Camera Turn_D9C5F
+      - Camera Move_BD70E
+      - Global Light_B175D
+      - Point Light_85081
+      - Point Light_91487
+      serializedElementValues:
+      - transformData:
+          position: {x: -1.38, y: -0.79, z: -6.5}
+          size: {x: 1, y: 1}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 1
+      - transformData:
+          position: {x: 0, y: 0, z: 0}
+          size: {x: 1.25, y: 1.25}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 1
+      serializedDialogueValues:
+      - transformData:
+          position: {x: 0, y: 213, z: 0}
+          size: {x: 1920, y: 1080}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 1
+        keySequenceData:
+          nextKeyID: 1
+          previousKeyID: 0
+        dialogueTextData:
+          text: ...
+          speakingCharacterIndex: 2
+          conversationCharacterID: "\u0421\u0430\u043D\u044F_7FAD7"
+          conversationCharacters:
+            keys:
+            - Noran
+            - "\u0421\u0430\u043D\u044F"
+            - Logan
+            values:
+            - Noran_2EED0
+            - "\u0421\u0430\u043D\u044F_7FAD7"
+            - Logan_F9AAD
+          type: 0
+          textAnimationTime: 0.5
+          autoContinue: 1
+          transitionDelay: 0
+          textAnimationDelay: 0
+      serializedDialogueAnswerValues:
+      - transformData:
+          position: {x: -720.33594, y: 0, z: 0}
+          size: {x: 800, y: 80}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 0
+        keySequenceData:
+          nextKeyID: 0
+          previousKeyID: 0
+        dialogueAnswerTextData:
+          text: "\u041E\u0442\u0432\u0435\u0442"
+      - transformData:
+          position: {x: -720.33594, y: 0, z: 0}
+          size: {x: 800, y: 80}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 0
+        keySequenceData:
+          nextKeyID: 0
+          previousKeyID: 0
+        dialogueAnswerTextData:
+          text: "\u041E\u0442\u0432\u0435\u0442"
+      - transformData:
+          position: {x: -720.33594, y: 0, z: 0}
+          size: {x: 800, y: 80}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 0
+        keySequenceData:
+          nextKeyID: 0
+          previousKeyID: 0
+        dialogueAnswerTextData:
+          text: "\u041E\u0442\u0432\u0435\u0442"
+      - transformData:
+          position: {x: -720.33594, y: 0, z: 0}
+          size: {x: 1000, y: 100}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 0
+        keySequenceData:
+          nextKeyID: 0
+          previousKeyID: 0
+        dialogueAnswerTextData:
+          text: "\u041E\u0442\u0432\u0435\u0442"
+      - transformData:
+          position: {x: -720.33594, y: 0, z: 0}
+          size: {x: 1000, y: 100}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 0
+        keySequenceData:
+          nextKeyID: 0
+          previousKeyID: 0
+        dialogueAnswerTextData:
+          text: "\u041E\u0442\u0432\u0435\u0442"
+      - transformData:
+          position: {x: -720.33594, y: 0, z: 0}
+          size: {x: 1000, y: 100}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 0
+        keySequenceData:
+          nextKeyID: 0
+          previousKeyID: 0
+        dialogueAnswerTextData:
+          text: "\u041E\u0442\u0432\u0435\u0442"
+      - transformData:
+          position: {x: -720.33594, y: 0, z: 0}
+          size: {x: 1000, y: 100}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 0
+        keySequenceData:
+          nextKeyID: 0
+          previousKeyID: 0
+        dialogueAnswerTextData:
+          text: "\u041E\u0442\u0432\u0435\u0442"
+      serializedFrameCharacterValues:
+      - transformData:
+          position: {x: 0, y: -5.03, z: 0}
+          size: {x: 1, y: 1}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 1
+        characterData:
+          dialogueID: Inner_Fire_Line1_69880
+          type: 1
+          emotionState: 0
+          selectedPartIndex: 0
+      - transformData:
+          position: {x: -0.76, y: -2.06, z: -6}
+          size: {x: 1, y: 1}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 1
+        characterData:
+          dialogueID: Inner_Fire_Line1_69880
+          type: 1
+          emotionState: 1
+          selectedPartIndex: 1
+      - transformData:
+          position: {x: 0, y: 0, z: 0}
+          size: {x: 1, y: 1}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 1
+        characterData:
+          dialogueID: Inner_Fire_Line1_69880
+          type: 1
+          emotionState: 0
+          selectedPartIndex: 0
+      serializedFrameEffectValues:
+      - transformData:
+          position: {x: 0, y: 0, z: 0}
+          size: {x: 10000, y: 10000}
+          rotation: {x: 0, y: 0, z: 0}
+          activeStatus: 1
+        frameEffectData:
+          animationSpeed: 1
+          animationDelay: 0
+        cameraTurnAnimationData:
+          degreesX: 0
+          degreesY: 0
+          moveTo: {x: 0, y: 0, z: 0}
+      - transformData:
+          position: {x: 0, y: 0, z: 0}
+          size: {x: 10000, y: 10000}
+          rotation: {x: 0, y: 0, z: 0}
+          activeStatus: 1
+        frameEffectData:
+          animationSpeed: 1
+          animationDelay: 2
+        cameraTurnAnimationData:
+          degreesX: 0
+          degreesY: 0
+          moveTo: {x: 0, y: 0, z: 0}
+      - transformData:
+          position: {x: 0, y: 0, z: 0}
+          size: {x: 1, y: 1}
+          rotation: {x: 0, y: 0, z: 0}
+          activeStatus: 0
+        frameEffectData:
+          animationSpeed: 1
+          animationDelay: 0
+        cameraTurnAnimationData:
+          degreesX: 0
+          degreesY: 0
+          moveTo: {x: 0, y: 0, z: 0}
+      - transformData:
+          position: {x: 0, y: 0, z: 0}
+          size: {x: 1, y: 1}
+          rotation: {x: 0, y: 0, z: 0}
+          activeStatus: 1
+        frameEffectData:
+          animationSpeed: 1
+          animationDelay: 0
+        cameraTurnAnimationData:
+          degreesX: 0
+          degreesY: 0
+          moveTo: {x: 0.96, y: -0.67, z: -7.03}
+      serializedFrameLightValues:
+      - transformData:
+          position: {x: 0, y: 0, z: 0}
+          size: {x: 1, y: 1}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 1
+        lightData:
+          intensity: 0.6
+          outerRange: 1
+          innerRange: 0
+          color: {r: 1, g: 1, b: 1, a: 1}
+          outerAngle: 360
+          innerAngle: 360
+      - transformData:
+          position: {x: 9.09, y: 7.68, z: 0}
+          size: {x: 1, y: 1}
+          rotation: {x: -0, y: -0, z: 134.46732}
+          activeStatus: 1
+        lightData:
+          intensity: 2.06
+          outerRange: 22.715086
+          innerRange: 3.9752955
+          color: {r: 0.41037738, g: 0.89828146, b: 1, a: 1}
+          outerAngle: 51.48
+          innerAngle: 25.67
+      - transformData:
+          position: {x: 0, y: 0, z: 0}
+          size: {x: 1, y: 1}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 0
+        lightData:
+          intensity: 1
+          outerRange: 1
+          innerRange: 0
+          color: {r: 1, g: 1, b: 1, a: 1}
+          outerAngle: 360
+          innerAngle: 360
+  frameKeys:
+  - id: 0
+    frameKeyTransitionKnobs:
+      keys:
+      - Inner_Fire_Line1_69880
+      values: 00000000
+    transitionType: 0
+    gameType: 0
+    gameManagerID: 
+    frameKeyValues:
+      keys:
+      - Main Camera_AF208
+      - STG_Zavod_0_437F4
+      - Inner_Fire_Line1_69880
+      - Inner_Fire_Answer_63998
+      - Inner_Fire_Answer_FA15A
+      - Inner_Fire_Answer_2F798
+      - Inner_Fire_AnswerSmall_A087C
+      - Inner_Fire_AnswerSmall_CA7CB
+      - Inner_Fire_AnswerSmall_8E215
+      - Inner_Fire_AnswerSmall_8827F
+      - Noran_2EED0
+      - "\u0421\u0430\u043D\u044F_7FAD7"
+      - Logan_F9AAD
+      - Blackout Screen (from black)_DFBEC
+      - Blackout Screen (to black)_D9590
+      - Camera Turn_D9C5F
+      - Camera Move_BD70E
+      - Global Light_B175D
+      - Point Light_85081
+      - Point Light_91487
+      serializedElementValues:
+      - transformData:
+          position: {x: -1.38, y: -0.79, z: -6.5}
+          size: {x: 1, y: 1}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 1
+      - transformData:
+          position: {x: 0, y: 0, z: 0}
+          size: {x: 1.25, y: 1.25}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 1
+      serializedDialogueValues:
+      - transformData:
+          position: {x: 0, y: 213, z: 0}
+          size: {x: 1920, y: 1080}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 1
+        keySequenceData:
+          nextKeyID: 1
+          previousKeyID: 0
+        dialogueTextData:
+          text: ...
+          speakingCharacterIndex: 2
+          conversationCharacterID: "\u0421\u0430\u043D\u044F_7FAD7"
+          conversationCharacters:
+            keys:
+            - Noran
+            - "\u0421\u0430\u043D\u044F"
+            - Logan
+            values:
+            - Noran_2EED0
+            - "\u0421\u0430\u043D\u044F_7FAD7"
+            - Logan_F9AAD
+          type: 0
+          textAnimationTime: 0.5
+          autoContinue: 1
+          transitionDelay: 0
+          textAnimationDelay: 0
+      serializedDialogueAnswerValues:
+      - transformData:
+          position: {x: -720.33594, y: 0, z: 0}
+          size: {x: 800, y: 80}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 0
+        keySequenceData:
+          nextKeyID: 0
+          previousKeyID: 0
+        dialogueAnswerTextData:
+          text: "\u041E\u0442\u0432\u0435\u0442"
+      - transformData:
+          position: {x: -720.33594, y: 0, z: 0}
+          size: {x: 800, y: 80}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 0
+        keySequenceData:
+          nextKeyID: 0
+          previousKeyID: 0
+        dialogueAnswerTextData:
+          text: "\u041E\u0442\u0432\u0435\u0442"
+      - transformData:
+          position: {x: -720.33594, y: 0, z: 0}
+          size: {x: 800, y: 80}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 0
+        keySequenceData:
+          nextKeyID: 0
+          previousKeyID: 0
+        dialogueAnswerTextData:
+          text: "\u041E\u0442\u0432\u0435\u0442"
+      - transformData:
+          position: {x: -720.33594, y: 0, z: 0}
+          size: {x: 1000, y: 100}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 0
+        keySequenceData:
+          nextKeyID: 0
+          previousKeyID: 0
+        dialogueAnswerTextData:
+          text: "\u041E\u0442\u0432\u0435\u0442"
+      - transformData:
+          position: {x: -720.33594, y: 0, z: 0}
+          size: {x: 1000, y: 100}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 0
+        keySequenceData:
+          nextKeyID: 0
+          previousKeyID: 0
+        dialogueAnswerTextData:
+          text: "\u041E\u0442\u0432\u0435\u0442"
+      - transformData:
+          position: {x: -720.33594, y: 0, z: 0}
+          size: {x: 1000, y: 100}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 0
+        keySequenceData:
+          nextKeyID: 0
+          previousKeyID: 0
+        dialogueAnswerTextData:
+          text: "\u041E\u0442\u0432\u0435\u0442"
+      - transformData:
+          position: {x: -720.33594, y: 0, z: 0}
+          size: {x: 1000, y: 100}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 0
+        keySequenceData:
+          nextKeyID: 0
+          previousKeyID: 0
+        dialogueAnswerTextData:
+          text: "\u041E\u0442\u0432\u0435\u0442"
+      serializedFrameCharacterValues:
+      - transformData:
+          position: {x: 0, y: -5.03, z: 0}
+          size: {x: 1, y: 1}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 1
+        characterData:
+          dialogueID: Inner_Fire_Line1_69880
+          type: 1
+          emotionState: 0
+          selectedPartIndex: 0
+      - transformData:
+          position: {x: -0.76, y: -2.06, z: -6}
+          size: {x: 1, y: 1}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 1
+        characterData:
+          dialogueID: Inner_Fire_Line1_69880
+          type: 1
+          emotionState: 1
+          selectedPartIndex: 1
+      - transformData:
+          position: {x: 0, y: 0, z: 0}
+          size: {x: 1, y: 1}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 1
+        characterData:
+          dialogueID: Inner_Fire_Line1_69880
+          type: 1
+          emotionState: 0
+          selectedPartIndex: 0
+      serializedFrameEffectValues:
+      - transformData:
+          position: {x: 0, y: 0, z: 0}
+          size: {x: 10000, y: 10000}
+          rotation: {x: 0, y: 0, z: 0}
+          activeStatus: 1
+        frameEffectData:
+          animationSpeed: 1
+          animationDelay: 0
+        cameraTurnAnimationData:
+          degreesX: 0
+          degreesY: 0
+          moveTo: {x: 0, y: 0, z: 0}
+      - transformData:
+          position: {x: 0, y: 0, z: 0}
+          size: {x: 10000, y: 10000}
+          rotation: {x: 0, y: 0, z: 0}
+          activeStatus: 1
+        frameEffectData:
+          animationSpeed: 1
+          animationDelay: 2
+        cameraTurnAnimationData:
+          degreesX: 0
+          degreesY: 0
+          moveTo: {x: 0, y: 0, z: 0}
+      - transformData:
+          position: {x: 0, y: 0, z: 0}
+          size: {x: 1, y: 1}
+          rotation: {x: 0, y: 0, z: 0}
+          activeStatus: 0
+        frameEffectData:
+          animationSpeed: 1
+          animationDelay: 0
+        cameraTurnAnimationData:
+          degreesX: 0
+          degreesY: 0
+          moveTo: {x: 0, y: 0, z: 0}
+      - transformData:
+          position: {x: 0, y: 0, z: 0}
+          size: {x: 1, y: 1}
+          rotation: {x: 0, y: 0, z: 0}
+          activeStatus: 1
+        frameEffectData:
+          animationSpeed: 1
+          animationDelay: 0
+        cameraTurnAnimationData:
+          degreesX: 0
+          degreesY: 0
+          moveTo: {x: 0.96, y: -0.67, z: -7.03}
+      serializedFrameLightValues:
+      - transformData:
+          position: {x: 0, y: 0, z: 0}
+          size: {x: 1, y: 1}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 1
+        lightData:
+          intensity: 0.6
+          outerRange: 1
+          innerRange: 0
+          color: {r: 1, g: 1, b: 1, a: 1}
+          outerAngle: 360
+          innerAngle: 360
+      - transformData:
+          position: {x: 9.09, y: 7.68, z: 0}
+          size: {x: 1, y: 1}
+          rotation: {x: -0, y: -0, z: 134.46732}
+          activeStatus: 1
+        lightData:
+          intensity: 2.06
+          outerRange: 22.715086
+          innerRange: 3.9752955
+          color: {r: 0.41037738, g: 0.89828146, b: 1, a: 1}
+          outerAngle: 51.48
+          innerAngle: 25.67
+      - transformData:
+          position: {x: 0, y: 0, z: 0}
+          size: {x: 1, y: 1}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 0
+        lightData:
+          intensity: 1
+          outerRange: 1
+          innerRange: 0
+          color: {r: 1, g: 1, b: 1, a: 1}
+          outerAngle: 360
+          innerAngle: 360
+  - id: 1
+    frameKeyTransitionKnobs:
+      keys:
+      - Inner_Fire_Line1_69880
+      values: 00000000
+    transitionType: 0
+    gameType: 0
+    gameManagerID: 
+    frameKeyValues:
+      keys:
+      - Main Camera_AF208
+      - STG_Zavod_0_437F4
+      - Inner_Fire_Line1_69880
+      - Inner_Fire_Answer_63998
+      - Inner_Fire_Answer_FA15A
+      - Inner_Fire_Answer_2F798
+      - Inner_Fire_AnswerSmall_A087C
+      - Inner_Fire_AnswerSmall_CA7CB
+      - Inner_Fire_AnswerSmall_8E215
+      - Inner_Fire_AnswerSmall_8827F
+      - "\u0421\u0430\u043D\u044F_7FAD7"
+      - Logan_F9AAD
+      - Noran_2EED0
+      - Blackout Screen (from black)_DFBEC
+      - Blackout Screen (to black)_D9590
+      - Camera Turn_D9C5F
+      - Camera Move_BD70E
+      - Global Light_B175D
+      - Point Light_85081
+      - Point Light_91487
+      serializedElementValues:
+      - transformData:
+          position: {x: 3.76, y: -0.34, z: -7.69}
+          size: {x: 1, y: 1}
+          rotation: {x: -0, y: -0, z: 23.589998}
+          activeStatus: 1
+      - transformData:
+          position: {x: 0, y: 0, z: 0}
+          size: {x: 1.25, y: 1.25}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 1
+      serializedDialogueValues:
+      - transformData:
+          position: {x: 0, y: 213, z: 0}
+          size: {x: 1920, y: 1080}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 1
+        keySequenceData:
+          nextKeyID: 2
+          previousKeyID: 0
+        dialogueTextData:
+          text: ....
+          speakingCharacterIndex: 2
+          conversationCharacterID: "\u0421\u0430\u043D\u044F_7FAD7"
+          conversationCharacters:
+            keys:
+            - Noran
+            - "\u0421\u0430\u043D\u044F"
+            - Logan
+            values:
+            - Noran_2EED0
+            - "\u0421\u0430\u043D\u044F_7FAD7"
+            - Logan_F9AAD
+          type: 0
+          textAnimationTime: 0.2
+          autoContinue: 1
+          transitionDelay: 0
+          textAnimationDelay: 0
+      serializedDialogueAnswerValues:
+      - transformData:
+          position: {x: -720.33594, y: 0, z: 0}
+          size: {x: 800, y: 80}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 0
+        keySequenceData:
+          nextKeyID: 0
+          previousKeyID: 0
+        dialogueAnswerTextData:
+          text: "\u041E\u0442\u0432\u0435\u0442"
+      - transformData:
+          position: {x: -720.33594, y: 0, z: 0}
+          size: {x: 800, y: 80}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 0
+        keySequenceData:
+          nextKeyID: 0
+          previousKeyID: 0
+        dialogueAnswerTextData:
+          text: "\u041E\u0442\u0432\u0435\u0442"
+      - transformData:
+          position: {x: -720.33594, y: 0, z: 0}
+          size: {x: 800, y: 80}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 0
+        keySequenceData:
+          nextKeyID: 0
+          previousKeyID: 0
+        dialogueAnswerTextData:
+          text: "\u041E\u0442\u0432\u0435\u0442"
+      - transformData:
+          position: {x: -720.33594, y: 0, z: 0}
+          size: {x: 1000, y: 100}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 0
+        keySequenceData:
+          nextKeyID: 0
+          previousKeyID: 0
+        dialogueAnswerTextData:
+          text: "\u041E\u0442\u0432\u0435\u0442"
+      - transformData:
+          position: {x: -720.33594, y: 0, z: 0}
+          size: {x: 1000, y: 100}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 0
+        keySequenceData:
+          nextKeyID: 0
+          previousKeyID: 0
+        dialogueAnswerTextData:
+          text: "\u041E\u0442\u0432\u0435\u0442"
+      - transformData:
+          position: {x: -720.33594, y: 0, z: 0}
+          size: {x: 1000, y: 100}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 0
+        keySequenceData:
+          nextKeyID: 0
+          previousKeyID: 0
+        dialogueAnswerTextData:
+          text: "\u041E\u0442\u0432\u0435\u0442"
+      - transformData:
+          position: {x: -720.33594, y: 0, z: 0}
+          size: {x: 1000, y: 100}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 0
+        keySequenceData:
+          nextKeyID: 0
+          previousKeyID: 0
+        dialogueAnswerTextData:
+          text: "\u041E\u0442\u0432\u0435\u0442"
+      serializedFrameCharacterValues:
+      - transformData:
+          position: {x: -0.76, y: -2.06, z: -6}
+          size: {x: 1, y: 1}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 1
+        characterData:
+          dialogueID: Inner_Fire_Line1_69880
+          type: 1
+          emotionState: 1
+          selectedPartIndex: 2
+      - transformData:
+          position: {x: 0, y: 0, z: 0}
+          size: {x: 1, y: 1}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 1
+        characterData:
+          dialogueID: Inner_Fire_Line1_69880
+          type: 1
+          emotionState: 0
+          selectedPartIndex: 0
+      - transformData:
+          position: {x: 0, y: -5.03, z: 0}
+          size: {x: 1, y: 1}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 1
+        characterData:
+          dialogueID: Inner_Fire_Line1_69880
+          type: 1
+          emotionState: 0
+          selectedPartIndex: 0
+      serializedFrameEffectValues:
+      - transformData:
+          position: {x: 0, y: 0, z: 0}
+          size: {x: 10000, y: 10000}
+          rotation: {x: 0, y: 0, z: 0}
+          activeStatus: 1
+        frameEffectData:
+          animationSpeed: 1
+          animationDelay: 0
+        cameraTurnAnimationData:
+          degreesX: 0
+          degreesY: 0
+          moveTo: {x: 0, y: 0, z: 0}
+      - transformData:
+          position: {x: 0, y: 0, z: 0}
+          size: {x: 10000, y: 10000}
+          rotation: {x: 0, y: 0, z: 0}
+          activeStatus: 0
+        frameEffectData:
+          animationSpeed: 1
+          animationDelay: 2
+        cameraTurnAnimationData:
+          degreesX: 0
+          degreesY: 0
+          moveTo: {x: 0, y: 0, z: 0}
+      - transformData:
+          position: {x: 0, y: 0, z: 0}
+          size: {x: 1, y: 1}
+          rotation: {x: 0, y: 0, z: 0}
+          activeStatus: 0
+        frameEffectData:
+          animationSpeed: 1
+          animationDelay: 0
+        cameraTurnAnimationData:
+          degreesX: 0
+          degreesY: 0
+          moveTo: {x: 0, y: 0, z: 0}
+      - transformData:
+          position: {x: 0, y: 0, z: 0}
+          size: {x: 1, y: 1}
+          rotation: {x: 0, y: 0, z: 0}
+          activeStatus: 1
+        frameEffectData:
+          animationSpeed: 1
+          animationDelay: 0
+        cameraTurnAnimationData:
+          degreesX: 0
+          degreesY: 0
+          moveTo: {x: -2.79, y: -0.18, z: -7.6}
+      serializedFrameLightValues:
+      - transformData:
+          position: {x: 0, y: 0, z: 0}
+          size: {x: 1, y: 1}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 1
+        lightData:
+          intensity: 0.6
+          outerRange: 1
+          innerRange: 0
+          color: {r: 1, g: 1, b: 1, a: 1}
+          outerAngle: 360
+          innerAngle: 360
+      - transformData:
+          position: {x: 7.09, y: 6.5, z: 0}
+          size: {x: 1, y: 1}
+          rotation: {x: -0, y: -0, z: 137.21786}
+          activeStatus: 1
+        lightData:
+          intensity: 2
+          outerRange: 12.955701
+          innerRange: 3.2963843
+          color: {r: 0.4117647, g: 0.8980392, b: 1, a: 1}
+          outerAngle: 85.02
+          innerAngle: 47.94
+      - transformData:
+          position: {x: 0, y: 0, z: 0}
+          size: {x: 1, y: 1}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 0
+        lightData:
+          intensity: 1
+          outerRange: 1
+          innerRange: 0
+          color: {r: 1, g: 1, b: 1, a: 1}
+          outerAngle: 360
+          innerAngle: 360
+  - id: 2
+    frameKeyTransitionKnobs:
+      keys:
+      - Inner_Fire_Line1_69880
+      values: 00000000
+    transitionType: 0
+    gameType: 0
+    gameManagerID: 
+    frameKeyValues:
+      keys:
+      - Main Camera_AF208
+      - STG_Zavod_0_437F4
+      - Inner_Fire_Line1_69880
+      - Inner_Fire_Answer_63998
+      - Inner_Fire_Answer_FA15A
+      - Inner_Fire_Answer_2F798
+      - Inner_Fire_AnswerSmall_A087C
+      - Inner_Fire_AnswerSmall_CA7CB
+      - Inner_Fire_AnswerSmall_8E215
+      - Inner_Fire_AnswerSmall_8827F
+      - "\u0421\u0430\u043D\u044F_7FAD7"
+      - Logan_F9AAD
+      - Noran_2EED0
+      - Blackout Screen (from black)_DFBEC
+      - Blackout Screen (to black)_D9590
+      - Camera Turn_D9C5F
+      - Camera Move_BD70E
+      - Global Light_B175D
+      - Point Light_85081
+      - Point Light_91487
+      serializedElementValues:
+      - transformData:
+          position: {x: -4.56, y: -0.41, z: -7.48}
+          size: {x: 1, y: 1}
+          rotation: {x: -0, y: -0, z: 4.2199945}
+          activeStatus: 1
+      - transformData:
+          position: {x: 0, y: 0, z: 0}
+          size: {x: 1.25, y: 1.25}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 1
+      serializedDialogueValues:
+      - transformData:
+          position: {x: 0, y: 213, z: 0}
+          size: {x: 1920, y: 1080}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 1
+        keySequenceData:
+          nextKeyID: 3
+          previousKeyID: 0
+        dialogueTextData:
+          text: ....
+          speakingCharacterIndex: 2
+          conversationCharacterID: "\u0421\u0430\u043D\u044F_7FAD7"
+          conversationCharacters:
+            keys:
+            - Noran
+            - "\u0421\u0430\u043D\u044F"
+            - Logan
+            values:
+            - Noran_2EED0
+            - "\u0421\u0430\u043D\u044F_7FAD7"
+            - Logan_F9AAD
+          type: 0
+          textAnimationTime: 0.5
+          autoContinue: 0
+          transitionDelay: 0
+          textAnimationDelay: 0
+      serializedDialogueAnswerValues:
+      - transformData:
+          position: {x: -720.33594, y: 0, z: 0}
+          size: {x: 800, y: 80}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 0
+        keySequenceData:
+          nextKeyID: 0
+          previousKeyID: 0
+        dialogueAnswerTextData:
+          text: "\u041E\u0442\u0432\u0435\u0442"
+      - transformData:
+          position: {x: -720.33594, y: 0, z: 0}
+          size: {x: 800, y: 80}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 0
+        keySequenceData:
+          nextKeyID: 0
+          previousKeyID: 0
+        dialogueAnswerTextData:
+          text: "\u041E\u0442\u0432\u0435\u0442"
+      - transformData:
+          position: {x: -720.33594, y: 0, z: 0}
+          size: {x: 800, y: 80}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 0
+        keySequenceData:
+          nextKeyID: 0
+          previousKeyID: 0
+        dialogueAnswerTextData:
+          text: "\u041E\u0442\u0432\u0435\u0442"
+      - transformData:
+          position: {x: -720.33594, y: 0, z: 0}
+          size: {x: 1000, y: 100}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 0
+        keySequenceData:
+          nextKeyID: 0
+          previousKeyID: 0
+        dialogueAnswerTextData:
+          text: "\u041E\u0442\u0432\u0435\u0442"
+      - transformData:
+          position: {x: -720.33594, y: 0, z: 0}
+          size: {x: 1000, y: 100}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 0
+        keySequenceData:
+          nextKeyID: 0
+          previousKeyID: 0
+        dialogueAnswerTextData:
+          text: "\u041E\u0442\u0432\u0435\u0442"
+      - transformData:
+          position: {x: -720.33594, y: 0, z: 0}
+          size: {x: 1000, y: 100}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 0
+        keySequenceData:
+          nextKeyID: 0
+          previousKeyID: 0
+        dialogueAnswerTextData:
+          text: "\u041E\u0442\u0432\u0435\u0442"
+      - transformData:
+          position: {x: -720.33594, y: 0, z: 0}
+          size: {x: 1000, y: 100}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 0
+        keySequenceData:
+          nextKeyID: 0
+          previousKeyID: 0
+        dialogueAnswerTextData:
+          text: "\u041E\u0442\u0432\u0435\u0442"
+      serializedFrameCharacterValues:
+      - transformData:
+          position: {x: -0.76, y: -2.06, z: -6}
+          size: {x: 1, y: 1}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 1
+        characterData:
+          dialogueID: Inner_Fire_Line1_69880
+          type: 1
+          emotionState: 1
+          selectedPartIndex: 3
+      - transformData:
+          position: {x: 0, y: 0, z: 0}
+          size: {x: 1, y: 1}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 1
+        characterData:
+          dialogueID: Inner_Fire_Line1_69880
+          type: 1
+          emotionState: 0
+          selectedPartIndex: 0
+      - transformData:
+          position: {x: 0, y: -5.03, z: 0}
+          size: {x: 1, y: 1}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 1
+        characterData:
+          dialogueID: Inner_Fire_Line1_69880
+          type: 1
+          emotionState: 0
+          selectedPartIndex: 0
+      serializedFrameEffectValues:
+      - transformData:
+          position: {x: 0, y: 0, z: 0}
+          size: {x: 10000, y: 10000}
+          rotation: {x: 0, y: 0, z: 0}
+          activeStatus: 1
+        frameEffectData:
+          animationSpeed: 1
+          animationDelay: 0
+        cameraTurnAnimationData:
+          degreesX: 0
+          degreesY: 0
+          moveTo: {x: 0, y: 0, z: 0}
+      - transformData:
+          position: {x: 0, y: 0, z: 0}
+          size: {x: 10000, y: 10000}
+          rotation: {x: 0, y: 0, z: 0}
+          activeStatus: 0
+        frameEffectData:
+          animationSpeed: 1
+          animationDelay: 0
+        cameraTurnAnimationData:
+          degreesX: 0
+          degreesY: 0
+          moveTo: {x: 0, y: 0, z: 0}
+      - transformData:
+          position: {x: 0, y: 0, z: 0}
+          size: {x: 1, y: 1}
+          rotation: {x: 0, y: 0, z: 0}
+          activeStatus: 0
+        frameEffectData:
+          animationSpeed: 1
+          animationDelay: 0
+        cameraTurnAnimationData:
+          degreesX: 0
+          degreesY: 0
+          moveTo: {x: 0, y: 0, z: 0}
+      - transformData:
+          position: {x: 0, y: 0, z: 0}
+          size: {x: 1, y: 1}
+          rotation: {x: 0, y: 0, z: 0}
+          activeStatus: 1
+        frameEffectData:
+          animationSpeed: 1
+          animationDelay: 0
+        cameraTurnAnimationData:
+          degreesX: 0
+          degreesY: 0
+          moveTo: {x: 0.5, y: -0.41, z: -7.48}
+      serializedFrameLightValues:
+      - transformData:
+          position: {x: 0, y: 0, z: 0}
+          size: {x: 1, y: 1}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 1
+        lightData:
+          intensity: 0.6
+          outerRange: 1
+          innerRange: 0
+          color: {r: 1, g: 1, b: 1, a: 1}
+          outerAngle: 360
+          innerAngle: 360
+      - transformData:
+          position: {x: 8.24, y: 6.87, z: 0}
+          size: {x: 1, y: 1}
+          rotation: {x: -0, y: -0, z: 140.90862}
+          activeStatus: 1
+        lightData:
+          intensity: 2
+          outerRange: 18.352266
+          innerRange: 0
+          color: {r: 0.4117647, g: 0.8980392, b: 1, a: 1}
+          outerAngle: 72.68
+          innerAngle: 39.5
+      - transformData:
+          position: {x: 0, y: 0, z: 0}
+          size: {x: 1, y: 1}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 0
+        lightData:
+          intensity: 1
+          outerRange: 1
+          innerRange: 0
+          color: {r: 1, g: 1, b: 1, a: 1}
+          outerAngle: 360
+          innerAngle: 360
+  - id: 3
+    frameKeyTransitionKnobs:
+      keys:
+      - Inner_Fire_Line1_69880
+      values: 00000000
+    transitionType: 0
+    gameType: 0
+    gameManagerID: 
+    frameKeyValues:
+      keys:
+      - Main Camera_AF208
+      - STG_Zavod_0_437F4
+      - Inner_Fire_Line1_69880
+      - Inner_Fire_Answer_63998
+      - Inner_Fire_Answer_FA15A
+      - Inner_Fire_Answer_2F798
+      - Inner_Fire_AnswerSmall_A087C
+      - Inner_Fire_AnswerSmall_CA7CB
+      - Inner_Fire_AnswerSmall_8E215
+      - Inner_Fire_AnswerSmall_8827F
+      - "\u0421\u0430\u043D\u044F_7FAD7"
+      - Logan_F9AAD
+      - Noran_2EED0
+      - Blackout Screen (from black)_DFBEC
+      - Blackout Screen (to black)_D9590
+      - Camera Turn_D9C5F
+      - Camera Move_BD70E
+      - Global Light_B175D
+      - Point Light_85081
+      - Point Light_91487
+      serializedElementValues:
+      - transformData:
+          position: {x: 0.3, y: -0.4, z: -7.99}
+          size: {x: 1, y: 1}
+          rotation: {x: -0, y: -0, z: 4.2199945}
+          activeStatus: 1
+      - transformData:
+          position: {x: 0, y: 0, z: 0}
+          size: {x: 1.25, y: 1.25}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 1
+      serializedDialogueValues:
+      - transformData:
+          position: {x: 0, y: 213, z: 0}
+          size: {x: 1920, y: 1080}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 1
+        keySequenceData:
+          nextKeyID: 4
+          previousKeyID: 0
+        dialogueTextData:
+          text: "<color=#FF0000>\u0420\u0420\u0420\u0420\u0420\u0420\u0420\u0420\u0420\u0410\u0410\u0410\u0410\u0410\u0410\u0410\u0410\u0420\u0420\u0420\u0420\u0420\u0420\u0420\u0420\u0420</color>"
+          speakingCharacterIndex: 2
+          conversationCharacterID: "\u0421\u0430\u043D\u044F_7FAD7"
+          conversationCharacters:
+            keys:
+            - Noran
+            - "\u0421\u0430\u043D\u044F"
+            - Logan
+            values:
+            - Noran_2EED0
+            - "\u0421\u0430\u043D\u044F_7FAD7"
+            - Logan_F9AAD
+          type: 0
+          textAnimationTime: 0.0165
+          autoContinue: 1
+          transitionDelay: 0
+          textAnimationDelay: 0
+      serializedDialogueAnswerValues:
+      - transformData:
+          position: {x: -720.33594, y: 0, z: 0}
+          size: {x: 800, y: 80}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 0
+        keySequenceData:
+          nextKeyID: 0
+          previousKeyID: 0
+        dialogueAnswerTextData:
+          text: "\u041E\u0442\u0432\u0435\u0442"
+      - transformData:
+          position: {x: -720.33594, y: 0, z: 0}
+          size: {x: 800, y: 80}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 0
+        keySequenceData:
+          nextKeyID: 0
+          previousKeyID: 0
+        dialogueAnswerTextData:
+          text: "\u041E\u0442\u0432\u0435\u0442"
+      - transformData:
+          position: {x: -720.33594, y: 0, z: 0}
+          size: {x: 800, y: 80}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 0
+        keySequenceData:
+          nextKeyID: 0
+          previousKeyID: 0
+        dialogueAnswerTextData:
+          text: "\u041E\u0442\u0432\u0435\u0442"
+      - transformData:
+          position: {x: -720.33594, y: 0, z: 0}
+          size: {x: 1000, y: 100}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 0
+        keySequenceData:
+          nextKeyID: 0
+          previousKeyID: 0
+        dialogueAnswerTextData:
+          text: "\u041E\u0442\u0432\u0435\u0442"
+      - transformData:
+          position: {x: -720.33594, y: 0, z: 0}
+          size: {x: 1000, y: 100}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 0
+        keySequenceData:
+          nextKeyID: 0
+          previousKeyID: 0
+        dialogueAnswerTextData:
+          text: "\u041E\u0442\u0432\u0435\u0442"
+      - transformData:
+          position: {x: -720.33594, y: 0, z: 0}
+          size: {x: 1000, y: 100}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 0
+        keySequenceData:
+          nextKeyID: 0
+          previousKeyID: 0
+        dialogueAnswerTextData:
+          text: "\u041E\u0442\u0432\u0435\u0442"
+      - transformData:
+          position: {x: -720.33594, y: 0, z: 0}
+          size: {x: 1000, y: 100}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 0
+        keySequenceData:
+          nextKeyID: 0
+          previousKeyID: 0
+        dialogueAnswerTextData:
+          text: "\u041E\u0442\u0432\u0435\u0442"
+      serializedFrameCharacterValues:
+      - transformData:
+          position: {x: -0.76, y: -2.5, z: -6}
+          size: {x: 1, y: 1}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 1
+        characterData:
+          dialogueID: Inner_Fire_Line1_69880
+          type: 1
+          emotionState: 1
+          selectedPartIndex: 5
+      - transformData:
+          position: {x: 0, y: 0, z: 0}
+          size: {x: 1, y: 1}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 1
+        characterData:
+          dialogueID: Inner_Fire_Line1_69880
+          type: 1
+          emotionState: 0
+          selectedPartIndex: 0
+      - transformData:
+          position: {x: 0, y: -5.03, z: 0}
+          size: {x: 1, y: 1}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 1
+        characterData:
+          dialogueID: Inner_Fire_Line1_69880
+          type: 1
+          emotionState: 0
+          selectedPartIndex: 0
+      serializedFrameEffectValues:
+      - transformData:
+          position: {x: 0, y: 0, z: 0}
+          size: {x: 10000, y: 10000}
+          rotation: {x: 0, y: 0, z: 0}
+          activeStatus: 1
+        frameEffectData:
+          animationSpeed: 1
+          animationDelay: 0
+        cameraTurnAnimationData:
+          degreesX: 0
+          degreesY: 0
+          moveTo: {x: 0, y: 0, z: 0}
+      - transformData:
+          position: {x: 0, y: 0, z: 0}
+          size: {x: 10000, y: 10000}
+          rotation: {x: 0, y: 0, z: 0}
+          activeStatus: 0
+        frameEffectData:
+          animationSpeed: 1
+          animationDelay: 0
+        cameraTurnAnimationData:
+          degreesX: 0
+          degreesY: 0
+          moveTo: {x: 0, y: 0, z: 0}
+      - transformData:
+          position: {x: 0, y: 0, z: 0}
+          size: {x: 1, y: 1}
+          rotation: {x: 0, y: 0, z: 0}
+          activeStatus: 0
+        frameEffectData:
+          animationSpeed: 1
+          animationDelay: 0
+        cameraTurnAnimationData:
+          degreesX: 0
+          degreesY: 0
+          moveTo: {x: 0, y: 0, z: 0}
+      - transformData:
+          position: {x: 0, y: 0, z: 0}
+          size: {x: 1, y: 1}
+          rotation: {x: 0, y: 0, z: 0}
+          activeStatus: 1
+        frameEffectData:
+          animationSpeed: 1
+          animationDelay: 0
+        cameraTurnAnimationData:
+          degreesX: 0
+          degreesY: 0
+          moveTo: {x: 0.3, y: -0.4, z: -6.32}
+      serializedFrameLightValues:
+      - transformData:
+          position: {x: 0, y: 0, z: 0}
+          size: {x: 1, y: 1}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 1
+        lightData:
+          intensity: 0.6
+          outerRange: 1
+          innerRange: 0
+          color: {r: 1, g: 1, b: 1, a: 1}
+          outerAngle: 360
+          innerAngle: 360
+      - transformData:
+          position: {x: 0, y: 0, z: 0}
+          size: {x: 1, y: 1}
+          rotation: {x: -0, y: 0, z: 354.39572}
+          activeStatus: 1
+        lightData:
+          intensity: 4.5
+          outerRange: 7.2472305
+          innerRange: 0
+          color: {r: 1, g: 0.41176474, b: 0.4285278, a: 1}
+          outerAngle: 360
+          innerAngle: 360
+      - transformData:
+          position: {x: 0, y: 0, z: 0}
+          size: {x: 1, y: 1}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 0
+        lightData:
+          intensity: 1
+          outerRange: 1
+          innerRange: 0
+          color: {r: 1, g: 1, b: 1, a: 1}
+          outerAngle: 360
+          innerAngle: 360
+  - id: 4
+    frameKeyTransitionKnobs:
+      keys:
+      - Inner_Fire_Line1_69880
+      values: 00000000
+    transitionType: 0
+    gameType: 0
+    gameManagerID: 
+    frameKeyValues:
+      keys:
+      - Main Camera_AF208
+      - STG_Zavod_0_437F4
+      - Inner_Fire_Line1_69880
+      - Inner_Fire_Answer_63998
+      - Inner_Fire_Answer_FA15A
+      - Inner_Fire_Answer_2F798
+      - Inner_Fire_AnswerSmall_A087C
+      - Inner_Fire_AnswerSmall_CA7CB
+      - Inner_Fire_AnswerSmall_8E215
+      - Inner_Fire_AnswerSmall_8827F
+      - "\u0421\u0430\u043D\u044F_7FAD7"
+      - Logan_F9AAD
+      - Noran_2EED0
+      - Blackout Screen (from black)_DFBEC
+      - Blackout Screen (to black)_D9590
+      - Camera Turn_D9C5F
+      - Camera Move_BD70E
+      - Global Light_B175D
+      - Point Light_85081
+      - Point Light_91487
+      serializedElementValues:
+      - transformData:
+          position: {x: 0.14, y: -0.41, z: -7.48}
+          size: {x: 1, y: 1}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 1
+      - transformData:
+          position: {x: 0, y: 0, z: 0}
+          size: {x: 1.25, y: 1.25}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 1
+      serializedDialogueValues:
+      - transformData:
+          position: {x: 0, y: 213, z: 0}
+          size: {x: 1920, y: 1080}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 1
+        keySequenceData:
+          nextKeyID: 5
+          previousKeyID: 0
+        dialogueTextData:
+          text: "\u041E\u0445, \u0442\u044B  \u043D\u0430\u043A\u043E\u043D\u0435\u0446-\u0442\u043E
+            \u043E\u0447\u043D\u0443\u043B\u0441\u044F!"
+          speakingCharacterIndex: 2
+          conversationCharacterID: "\u0421\u0430\u043D\u044F_7FAD7"
+          conversationCharacters:
+            keys:
+            - Noran
+            - "\u0421\u0430\u043D\u044F"
+            - Logan
+            values:
+            - Noran_2EED0
+            - "\u0421\u0430\u043D\u044F_7FAD7"
+            - Logan_F9AAD
+          type: 0
+          textAnimationTime: 0.0165
+          autoContinue: 0
+          transitionDelay: 1
+          textAnimationDelay: 0
+      serializedDialogueAnswerValues:
+      - transformData:
+          position: {x: 0, y: 102.1, z: 0}
+          size: {x: 800, y: 80}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 0
+        keySequenceData:
+          nextKeyID: 0
+          previousKeyID: 0
+        dialogueAnswerTextData:
+          text: "\u041E\u0442\u0432\u0435\u0442"
+      - transformData:
+          position: {x: 0, y: 102.1, z: 0}
+          size: {x: 800, y: 80}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 0
+        keySequenceData:
+          nextKeyID: 0
+          previousKeyID: 0
+        dialogueAnswerTextData:
+          text: "\u041E\u0442\u0432\u0435\u0442"
+      - transformData:
+          position: {x: 0, y: 102.1, z: 0}
+          size: {x: 800, y: 80}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 0
+        keySequenceData:
+          nextKeyID: 0
+          previousKeyID: 0
+        dialogueAnswerTextData:
+          text: "\u041E\u0442\u0432\u0435\u0442"
+      - transformData:
+          position: {x: 0, y: 102.1, z: 0}
+          size: {x: 1000, y: 100}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 0
+        keySequenceData:
+          nextKeyID: 0
+          previousKeyID: 0
+        dialogueAnswerTextData:
+          text: "\u041E\u0442\u0432\u0435\u0442"
+      - transformData:
+          position: {x: 0, y: 102.1, z: 0}
+          size: {x: 1000, y: 100}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 0
+        keySequenceData:
+          nextKeyID: 0
+          previousKeyID: 0
+        dialogueAnswerTextData:
+          text: "\u041E\u0442\u0432\u0435\u0442"
+      - transformData:
+          position: {x: 0, y: 102.1, z: 0}
+          size: {x: 1000, y: 100}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 0
+        keySequenceData:
+          nextKeyID: 0
+          previousKeyID: 0
+        dialogueAnswerTextData:
+          text: "\u041E\u0442\u0432\u0435\u0442"
+      - transformData:
+          position: {x: 0, y: 102.1, z: 0}
+          size: {x: 1000, y: 100}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 0
+        keySequenceData:
+          nextKeyID: 0
+          previousKeyID: 0
+        dialogueAnswerTextData:
+          text: "\u041E\u0442\u0432\u0435\u0442"
+      serializedFrameCharacterValues:
+      - transformData:
+          position: {x: -0.76, y: -2.18, z: -6.75}
+          size: {x: 1, y: 1}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 1
+        characterData:
+          dialogueID: Inner_Fire_Line1_69880
+          type: 1
+          emotionState: 0
+          selectedPartIndex: 10
+      - transformData:
+          position: {x: 0, y: 0, z: 0}
+          size: {x: 1, y: 1}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 1
+        characterData:
+          dialogueID: Inner_Fire_Line1_69880
+          type: 1
+          emotionState: 0
+          selectedPartIndex: 0
+      - transformData:
+          position: {x: 0, y: -5.03, z: 0}
+          size: {x: 1, y: 1}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 1
+        characterData:
+          dialogueID: Inner_Fire_Line1_69880
+          type: 1
+          emotionState: 0
+          selectedPartIndex: 0
+      serializedFrameEffectValues:
+      - transformData:
+          position: {x: 0, y: 0, z: 0}
+          size: {x: 10000, y: 10000}
+          rotation: {x: 0, y: 0, z: 0}
+          activeStatus: 0
+        frameEffectData:
+          animationSpeed: 1
+          animationDelay: 0
+        cameraTurnAnimationData:
+          degreesX: 0
+          degreesY: 0
+          moveTo: {x: 0, y: 0, z: 0}
+      - transformData:
+          position: {x: 0, y: 0, z: 0}
+          size: {x: 10000, y: 10000}
+          rotation: {x: 0, y: 0, z: 0}
+          activeStatus: 0
+        frameEffectData:
+          animationSpeed: 1
+          animationDelay: 0
+        cameraTurnAnimationData:
+          degreesX: 0
+          degreesY: 0
+          moveTo: {x: 0, y: 0, z: 0}
+      - transformData:
+          position: {x: 0, y: 0, z: 0}
+          size: {x: 1, y: 1}
+          rotation: {x: 0, y: 0, z: 0}
+          activeStatus: 0
+        frameEffectData:
+          animationSpeed: 1
+          animationDelay: 0
+        cameraTurnAnimationData:
+          degreesX: 0
+          degreesY: 0
+          moveTo: {x: 0, y: 0, z: 0}
+      - transformData:
+          position: {x: 0, y: 0, z: 0}
+          size: {x: 1, y: 1}
+          rotation: {x: 0, y: 0, z: 0}
+          activeStatus: 1
+        frameEffectData:
+          animationSpeed: 1
+          animationDelay: 0
+        cameraTurnAnimationData:
+          degreesX: 0
+          degreesY: 0
+          moveTo: {x: 0, y: 0, z: -10}
+      serializedFrameLightValues:
+      - transformData:
+          position: {x: 0, y: 0, z: 0}
+          size: {x: 1, y: 1}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 1
+        lightData:
+          intensity: 0.25
+          outerRange: 1
+          innerRange: 0
+          color: {r: 1, g: 1, b: 1, a: 1}
+          outerAngle: 360
+          innerAngle: 360
+      - transformData:
+          position: {x: 7.59, y: 7.59, z: 0}
+          size: {x: 1, y: 1}
+          rotation: {x: -0, y: -0, z: 143.1486}
+          activeStatus: 1
+        lightData:
+          intensity: 2
+          outerRange: 20.654297
+          innerRange: 0
+          color: {r: 0.6650944, g: 0.81145686, b: 1, a: 1}
+          outerAngle: 59.13
+          innerAngle: 33.41
+      - transformData:
+          position: {x: 0, y: 0, z: 0}
+          size: {x: 1, y: 1}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 0
+        lightData:
+          intensity: 1
+          outerRange: 1
+          innerRange: 0
+          color: {r: 1, g: 1, b: 1, a: 1}
+          outerAngle: 360
+          innerAngle: 360
+  - id: 5
+    frameKeyTransitionKnobs:
+      keys:
+      - Inner_Fire_AnswerSmall_A087C
+      - Inner_Fire_AnswerSmall_CA7CB
+      - Inner_Fire_AnswerSmall_8E215
+      - Inner_Fire_AnswerSmall_8827F
+      values: 00000000010000000200000003000000
+    transitionType: 1
+    gameType: 0
+    gameManagerID: 
+    frameKeyValues:
+      keys:
+      - Main Camera_AF208
+      - STG_Zavod_0_437F4
+      - Inner_Fire_Line1_69880
+      - Inner_Fire_Answer_63998
+      - Inner_Fire_Answer_FA15A
+      - Inner_Fire_Answer_2F798
+      - Inner_Fire_AnswerSmall_A087C
+      - Inner_Fire_AnswerSmall_CA7CB
+      - Inner_Fire_AnswerSmall_8E215
+      - Inner_Fire_AnswerSmall_8827F
+      - "\u0421\u0430\u043D\u044F_7FAD7"
+      - Logan_F9AAD
+      - Noran_2EED0
+      - Blackout Screen (from black)_DFBEC
+      - Blackout Screen (to black)_D9590
+      - Camera Turn_D9C5F
+      - Camera Move_BD70E
+      - Global Light_B175D
+      - Point Light_85081
+      - Point Light_91487
+      serializedElementValues:
+      - transformData:
+          position: {x: 0, y: 0, z: -10}
+          size: {x: 1, y: 1}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 1
+      - transformData:
+          position: {x: 0, y: 0, z: 0}
+          size: {x: 1.25, y: 1.25}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 1
+      serializedDialogueValues:
+      - transformData:
+          position: {x: 0, y: 213, z: 0}
+          size: {x: 1920, y: 1080}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 0
+        keySequenceData:
+          nextKeyID: 5
+          previousKeyID: 0
+        dialogueTextData:
+          text: "\u041E\u0445, \u0442\u044B  \u043D\u0430\u043A\u043E\u043D\u0435\u0446-\u0442\u043E
+            \u043E\u0447\u043D\u0443\u043B\u0441\u044F!"
+          speakingCharacterIndex: 2
+          conversationCharacterID: "\u0421\u0430\u043D\u044F_7FAD7"
+          conversationCharacters:
+            keys:
+            - Noran
+            - "\u0421\u0430\u043D\u044F"
+            - Logan
+            values:
+            - Noran_2EED0
+            - "\u0421\u0430\u043D\u044F_7FAD7"
+            - Logan_F9AAD
+          type: 0
+          textAnimationTime: 0.0165
+          autoContinue: 0
+          transitionDelay: 1
+          textAnimationDelay: 0
+      serializedDialogueAnswerValues:
+      - transformData:
+          position: {x: -720.33594, y: 0, z: 0}
+          size: {x: 800, y: 80}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 0
+        keySequenceData:
+          nextKeyID: 0
+          previousKeyID: 0
+        dialogueAnswerTextData:
+          text: "\u041E\u0442\u0432\u0435\u0442"
+      - transformData:
+          position: {x: -720.33594, y: 0, z: 0}
+          size: {x: 800, y: 80}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 0
+        keySequenceData:
+          nextKeyID: 0
+          previousKeyID: 0
+        dialogueAnswerTextData:
+          text: "\u041E\u0442\u0432\u0435\u0442"
+      - transformData:
+          position: {x: -720.33594, y: 0, z: 0}
+          size: {x: 800, y: 80}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 0
+        keySequenceData:
+          nextKeyID: 0
+          previousKeyID: 0
+        dialogueAnswerTextData:
+          text: "\u041E\u0442\u0432\u0435\u0442"
+      - transformData:
+          position: {x: 400, y: 250, z: 0}
+          size: {x: 150, y: 150}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 1
+        keySequenceData:
+          nextKeyID: 0
+          previousKeyID: 0
+        dialogueAnswerTextData:
+          text: "\u0422\u044B...?"
+      - transformData:
+          position: {x: -400, y: 250, z: 0}
+          size: {x: 150, y: 150}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 1
+        keySequenceData:
+          nextKeyID: 0
+          previousKeyID: 0
+        dialogueAnswerTextData:
+          text: "\u0413\u0434\u0435 \u043C\u044B?"
+      - transformData:
+          position: {x: -400, y: 750, z: 0}
+          size: {x: 150, y: 150}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 1
+        keySequenceData:
+          nextKeyID: 0
+          previousKeyID: 0
+        dialogueAnswerTextData:
+          text: "\u041A\u0442\u043E \u044F?"
+      - transformData:
+          position: {x: 400, y: 750, z: 0}
+          size: {x: 150, y: 150}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 1
+        keySequenceData:
+          nextKeyID: 0
+          previousKeyID: 0
+        dialogueAnswerTextData:
+          text: "\u041A\u0430\u043A\u043E\u0433\u043E \u0447\u0435\u0440\u0442\u0430?"
+      serializedFrameCharacterValues:
+      - transformData:
+          position: {x: -0.76, y: -2.18, z: -6.75}
+          size: {x: 1, y: 1}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 1
+        characterData:
+          dialogueID: Inner_Fire_Line1_69880
+          type: 1
+          emotionState: 0
+          selectedPartIndex: 10
+      - transformData:
+          position: {x: 0, y: 0, z: 0}
+          size: {x: 1, y: 1}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 1
+        characterData:
+          dialogueID: Inner_Fire_Line1_69880
+          type: 1
+          emotionState: 0
+          selectedPartIndex: 0
+      - transformData:
+          position: {x: 0, y: -5.03, z: 0}
+          size: {x: 1, y: 1}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 1
+        characterData:
+          dialogueID: Inner_Fire_Line1_69880
+          type: 1
+          emotionState: 0
+          selectedPartIndex: 0
+      serializedFrameEffectValues:
+      - transformData:
+          position: {x: 0, y: 0, z: 0}
+          size: {x: 10000, y: 10000}
+          rotation: {x: 0, y: 0, z: 0}
+          activeStatus: 0
+        frameEffectData:
+          animationSpeed: 1
+          animationDelay: 0
+        cameraTurnAnimationData:
+          degreesX: 0
+          degreesY: 0
+          moveTo: {x: 0, y: 0, z: 0}
+      - transformData:
+          position: {x: 0, y: 0, z: 0}
+          size: {x: 10000, y: 10000}
+          rotation: {x: 0, y: 0, z: 0}
+          activeStatus: 0
+        frameEffectData:
+          animationSpeed: 1
+          animationDelay: 0
+        cameraTurnAnimationData:
+          degreesX: 0
+          degreesY: 0
+          moveTo: {x: 0, y: 0, z: 0}
+      - transformData:
+          position: {x: 0, y: 0, z: 0}
+          size: {x: 1, y: 1}
+          rotation: {x: 0, y: 0, z: 0}
+          activeStatus: 0
+        frameEffectData:
+          animationSpeed: 1
+          animationDelay: 0
+        cameraTurnAnimationData:
+          degreesX: 0
+          degreesY: 0
+          moveTo: {x: 0, y: 0, z: 0}
+      - transformData:
+          position: {x: 0, y: 0, z: 0}
+          size: {x: 1, y: 1}
+          rotation: {x: 0, y: 0, z: 0}
+          activeStatus: 1
+        frameEffectData:
+          animationSpeed: 1
+          animationDelay: 0
+        cameraTurnAnimationData:
+          degreesX: 0
+          degreesY: 0
+          moveTo: {x: 0, y: 0, z: -10}
+      serializedFrameLightValues:
+      - transformData:
+          position: {x: 0, y: 0, z: 0}
+          size: {x: 1, y: 1}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 1
+        lightData:
+          intensity: 0.25
+          outerRange: 1
+          innerRange: 0
+          color: {r: 1, g: 1, b: 1, a: 1}
+          outerAngle: 360
+          innerAngle: 360
+      - transformData:
+          position: {x: 7.59, y: 7.59, z: 0}
+          size: {x: 1, y: 1}
+          rotation: {x: -0, y: -0, z: 143.1486}
+          activeStatus: 1
+        lightData:
+          intensity: 2
+          outerRange: 20.654297
+          innerRange: 0
+          color: {r: 0.6650944, g: 0.81145686, b: 1, a: 1}
+          outerAngle: 59.13
+          innerAngle: 33.41
+      - transformData:
+          position: {x: 0, y: 0, z: 0}
+          size: {x: 1, y: 1}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 0
+        lightData:
+          intensity: 1
+          outerRange: 1
+          innerRange: 0
+          color: {r: 1, g: 1, b: 1, a: 1}
+          outerAngle: 360
+          innerAngle: 360
+  - id: 6
+    frameKeyTransitionKnobs:
+      keys:
+      - Inner_Fire_Line1_69880
+      values: 00000000
+    transitionType: 0
+    gameType: 0
+    gameManagerID: 
+    frameKeyValues:
+      keys:
+      - Main Camera_AF208
+      - STG_Zavod_0_437F4
+      - Inner_Fire_Line1_69880
+      - Inner_Fire_Answer_63998
+      - Inner_Fire_Answer_FA15A
+      - Inner_Fire_Answer_2F798
+      - Inner_Fire_AnswerSmall_A087C
+      - Inner_Fire_AnswerSmall_CA7CB
+      - Inner_Fire_AnswerSmall_8E215
+      - Inner_Fire_AnswerSmall_8827F
+      - "\u0421\u0430\u043D\u044F_7FAD7"
+      - Logan_F9AAD
+      - Noran_2EED0
+      - Blackout Screen (from black)_DFBEC
+      - Blackout Screen (to black)_D9590
+      - Camera Turn_D9C5F
+      - Camera Move_BD70E
+      - Global Light_B175D
+      - Point Light_85081
+      - Point Light_91487
+      serializedElementValues:
+      - transformData:
+          position: {x: -2.79, y: 0.06, z: -8}
+          size: {x: 1, y: 1}
+          rotation: {x: -0, y: 0, z: 337.36002}
+          activeStatus: 1
+      - transformData:
+          position: {x: 0, y: 0, z: 0}
+          size: {x: 1.25, y: 1.25}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 1
+      serializedDialogueValues:
+      - transformData:
+          position: {x: 0, y: 213, z: 0}
+          size: {x: 1920, y: 1080}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 1
+        keySequenceData:
+          nextKeyID: 2
+          previousKeyID: 0
+        dialogueTextData:
+          text: ...
+          speakingCharacterIndex: 2
+          conversationCharacterID: "\u0421\u0430\u043D\u044F_7FAD7"
+          conversationCharacters:
+            keys:
+            - Noran
+            - "\u0421\u0430\u043D\u044F"
+            - Logan
+            values:
+            - Noran_2EED0
+            - "\u0421\u0430\u043D\u044F_7FAD7"
+            - Logan_F9AAD
+          type: 0
+          textAnimationTime: 0.2
+          autoContinue: 1
+          transitionDelay: 0
+          textAnimationDelay: 0
+      serializedDialogueAnswerValues:
+      - transformData:
+          position: {x: -720.33594, y: 0, z: 0}
+          size: {x: 800, y: 80}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 0
+        keySequenceData:
+          nextKeyID: 0
+          previousKeyID: 0
+        dialogueAnswerTextData:
+          text: "\u041E\u0442\u0432\u0435\u0442"
+      - transformData:
+          position: {x: -720.33594, y: 0, z: 0}
+          size: {x: 800, y: 80}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 0
+        keySequenceData:
+          nextKeyID: 0
+          previousKeyID: 0
+        dialogueAnswerTextData:
+          text: "\u041E\u0442\u0432\u0435\u0442"
+      - transformData:
+          position: {x: -720.33594, y: 0, z: 0}
+          size: {x: 800, y: 80}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 0
+        keySequenceData:
+          nextKeyID: 0
+          previousKeyID: 0
+        dialogueAnswerTextData:
+          text: "\u041E\u0442\u0432\u0435\u0442"
+      - transformData:
+          position: {x: -720.33594, y: 0, z: 0}
+          size: {x: 1000, y: 100}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 0
+        keySequenceData:
+          nextKeyID: 0
+          previousKeyID: 0
+        dialogueAnswerTextData:
+          text: "\u041E\u0442\u0432\u0435\u0442"
+      - transformData:
+          position: {x: -720.33594, y: 0, z: 0}
+          size: {x: 1000, y: 100}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 0
+        keySequenceData:
+          nextKeyID: 0
+          previousKeyID: 0
+        dialogueAnswerTextData:
+          text: "\u041E\u0442\u0432\u0435\u0442"
+      - transformData:
+          position: {x: -720.33594, y: 0, z: 0}
+          size: {x: 1000, y: 100}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 0
+        keySequenceData:
+          nextKeyID: 0
+          previousKeyID: 0
+        dialogueAnswerTextData:
+          text: "\u041E\u0442\u0432\u0435\u0442"
+      - transformData:
+          position: {x: -720.33594, y: 0, z: 0}
+          size: {x: 1000, y: 100}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 0
+        keySequenceData:
+          nextKeyID: 0
+          previousKeyID: 0
+        dialogueAnswerTextData:
+          text: "\u041E\u0442\u0432\u0435\u0442"
+      serializedFrameCharacterValues:
+      - transformData:
+          position: {x: -0.76, y: -2.06, z: -6}
+          size: {x: 1, y: 1}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 1
+        characterData:
+          dialogueID: Inner_Fire_Line1_69880
+          type: 1
+          emotionState: 1
+          selectedPartIndex: 4
+      - transformData:
+          position: {x: 0, y: 0, z: 0}
+          size: {x: 1, y: 1}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 1
+        characterData:
+          dialogueID: Inner_Fire_Line1_69880
+          type: 1
+          emotionState: 0
+          selectedPartIndex: 0
+      - transformData:
+          position: {x: 0, y: -5.03, z: 0}
+          size: {x: 1, y: 1}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 1
+        characterData:
+          dialogueID: Inner_Fire_Line1_69880
+          type: 1
+          emotionState: 0
+          selectedPartIndex: 0
+      serializedFrameEffectValues:
+      - transformData:
+          position: {x: 0, y: 0, z: 0}
+          size: {x: 10000, y: 10000}
+          rotation: {x: 0, y: 0, z: 0}
+          activeStatus: 1
+        frameEffectData:
+          animationSpeed: 1
+          animationDelay: 0
+        cameraTurnAnimationData:
+          degreesX: 0
+          degreesY: 0
+          moveTo: {x: 0, y: 0, z: 0}
+      - transformData:
+          position: {x: 0, y: 0, z: 0}
+          size: {x: 10000, y: 10000}
+          rotation: {x: 0, y: 0, z: 0}
+          activeStatus: 0
+        frameEffectData:
+          animationSpeed: 1
+          animationDelay: 2
+        cameraTurnAnimationData:
+          degreesX: 0
+          degreesY: 0
+          moveTo: {x: 0, y: 0, z: 0}
+      - transformData:
+          position: {x: 0, y: 0, z: 0}
+          size: {x: 1, y: 1}
+          rotation: {x: 0, y: 0, z: 0}
+          activeStatus: 0
+        frameEffectData:
+          animationSpeed: 1
+          animationDelay: 0
+        cameraTurnAnimationData:
+          degreesX: 0
+          degreesY: 0
+          moveTo: {x: 0, y: 0, z: 0}
+      - transformData:
+          position: {x: 0, y: 0, z: 0}
+          size: {x: 1, y: 1}
+          rotation: {x: 0, y: 0, z: 0}
+          activeStatus: 1
+        frameEffectData:
+          animationSpeed: 1
+          animationDelay: 0
+        cameraTurnAnimationData:
+          degreesX: 0
+          degreesY: 0
+          moveTo: {x: 2.63, y: -0.03, z: -6.76}
+      serializedFrameLightValues:
+      - transformData:
+          position: {x: 0, y: 0, z: 0}
+          size: {x: 1, y: 1}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 1
+        lightData:
+          intensity: 0.6
+          outerRange: 1
+          innerRange: 0
+          color: {r: 1, g: 1, b: 1, a: 1}
+          outerAngle: 360
+          innerAngle: 360
+      - transformData:
+          position: {x: 7.09, y: 6.5, z: 0}
+          size: {x: 1, y: 1}
+          rotation: {x: -0, y: -0, z: 137.21786}
+          activeStatus: 1
+        lightData:
+          intensity: 2
+          outerRange: 12.955701
+          innerRange: 3.2963843
+          color: {r: 0.4117647, g: 0.8980392, b: 1, a: 1}
+          outerAngle: 85.02
+          innerAngle: 47.94
+      - transformData:
+          position: {x: 0, y: 0, z: 0}
+          size: {x: 1, y: 1}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 0
+        lightData:
+          intensity: 1
+          outerRange: 1
+          innerRange: 0
+          color: {r: 1, g: 1, b: 1, a: 1}
+          outerAngle: 360
+          innerAngle: 360
+  nodeCanvas: {fileID: 11400000, guid: 88bc96412bf73e647849ee6056177b14, type: 2}
+  usedElementsObjects:
+  - elementObject: {fileID: 11400000, guid: 23fb5e77bac5f8d4381978894bd49edc, type: 2}
+    ids:
+    - Main Camera_AF208
+  - elementObject: {fileID: 11400000, guid: 89324d524bbece344823b4c96ff5f9b5, type: 2}
+    ids:
+    - Blackout Screen (from black)_DFBEC
+  - elementObject: {fileID: 11400000, guid: 72ecbab83c8dae64cbf0d01855520f48, type: 2}
+    ids:
+    - Blackout Screen (to black)_D9590
+  - elementObject: {fileID: 11400000, guid: 98bcf4d2568752e4092052bf01171a22, type: 2}
+    ids:
+    - Camera Turn_D9C5F
+  - elementObject: {fileID: 11400000, guid: d54297112fbef154a8b483df26349075, type: 2}
+    ids:
+    - Camera Move_BD70E
+  - elementObject: {fileID: 11400000, guid: 5304f1b519d795042ae8a3ed3500e09b, type: 2}
+    ids:
+    - Global Light_B175D
+  - elementObject: {fileID: 11400000, guid: e4a759d621f08a04092d983cd8d36dd3, type: 2}
+    ids:
+    - Point Light_85081
+    - Point Light_91487
+  - elementObject: {fileID: 11400000, guid: 89cb9f70764132542ad28f556ff057fc, type: 2}
+    ids:
+    - STG_Zavod_0_437F4
+  - elementObject: {fileID: 11400000, guid: f09224e30d17c1f4f97ea80d60f36783, type: 2}
+    ids:
+    - Inner_Fire_Line1_69880
+  - elementObject: {fileID: 11400000, guid: f6619c14e28441644b37a6f8bbd6a453, type: 2}
+    ids:
+    - Noran_2EED0
+  - elementObject: {fileID: 11400000, guid: 52d76848db82bca4fabbbd9f27f20d45, type: 2}
+    ids:
+    - "\u0421\u0430\u043D\u044F_7FAD7"
+  - elementObject: {fileID: 11400000, guid: 5799dc34a5e8a0648ade55bbe2fed1e4, type: 2}
+    ids:
+    - Inner_Fire_Answer_63998
+    - Inner_Fire_Answer_FA15A
+    - Inner_Fire_Answer_2F798
+  - elementObject: {fileID: 11400000, guid: 47f87220be549ec4db05ba07c276217f, type: 2}
+    ids:
+    - Inner_Fire_AnswerSmall_A087C
+    - Inner_Fire_AnswerSmall_CA7CB
+    - Inner_Fire_AnswerSmall_8E215
+    - Inner_Fire_AnswerSmall_8827F
+  - elementObject: {fileID: 11400000, guid: 65f8bc0e74d17f24bbb3be9b556ed71d, type: 2}
+    ids:
+    - Logan_F9AAD

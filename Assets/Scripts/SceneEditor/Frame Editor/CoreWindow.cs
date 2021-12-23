@@ -9,8 +9,6 @@ using UnityEngine.UI;
 using FrameCore;
 using FrameCore.ScriptableObjects;
 using FrameCore.Serialization;
-using GameFramework;
-using GameFramework.InnerFire;
 
 #if UNITY_EDITOR
 namespace FrameEditor {
@@ -22,7 +20,8 @@ namespace FrameEditor {
 
         public FrameEditorSO frameEditorSO;
         public FrameManager manager { get; set; }
-        public GameManager fastSessionManager { get; set; }
+
+        public SerializableDictionary<string, Editor> lightEditor = new SerializableDictionary<string, Editor>();
 
         public bool isEditing { get; set; }
         public Vector2 scroll;
@@ -35,18 +34,39 @@ namespace FrameEditor {
         private void OnDisable() {
             NodeEditorFramework.Standard.NodeEditorWindow.editor.canvasCache.AssureCanvas();
             SaveFrameEditorNodeCanvas();
+
+            foreach(var editor in lightEditor) {
+                if (editor.Value != null)
+                    DestroyImmediate(editor.Value);
+            }
+        }
+        private void OnEnable() {
+            foreach (var editor in lightEditor) {
+                if (editor.Value != null)
+                    DestroyImmediate(editor.Value);
+            }
         }
 
         private void OnGUI() {
-
+            if (EditorApplication.isCompiling) return;
             if (Application.isPlaying) {
                 return;
             }
-            else if (focusedWindow == this) NodeEditorWindow.editor.ShowTab();
+            else {
+                if (focusedWindow == this) NodeEditorWindow.editor.ShowTab(); 
+            }
+            if (GameObject.Find("Frame Manager") == null && !EditorApplication.isCompiling) {
+                //if (!EditorUtility.DisplayDialog("Редактор фрейма", "Начать редактирование фрейма на этой сцене?", "Да", "Отмена")) {
+                    //Close();
+                    //NodeEditorWindow.editor.Close();
+                    //return;
+                //}
+            }
 
             if (!isEditingAllowed()) {
                 UpdateFrameEditorSO();
                 UpdateFrameManager();
+                AssetManager.UpdateAssets();
                 SetFrame();
             }
             if (manager._assetDatabase == null || FrameManager.assetDatabase == null) {
@@ -58,12 +78,14 @@ namespace FrameEditor {
                 controller.manager = manager;
             }
             if (isEditingAllowed()) {
-                AssetManager.UpdateAssets();
                 UpdateDirty();
 
                 if (FrameManager.frame == null || FrameManager.frame.currentKey == null) return;
 
                 UpdateFrameContainerChilds();
+
+                //if(FrameManager.frame.nodeCanvas == null || FrameManager.frame.nodeCanvas.name != FrameManager.frame.id)
+                  //  FrameManager.frame.nodeCanvas = AssetManager.GetAtPath<NodeCanvas>("Frames/NodeCanvases/").Where(ch => ch.canvasName == "Canvas_" + FrameManager.frame.id).FirstOrDefault();
 
                 GUILayout.BeginHorizontal();
                 GUILayout.FlexibleSpace();
@@ -81,7 +103,11 @@ namespace FrameEditor {
                 switch (FrameManager.GAME_TYPE) {
                     case GameType.FrameInteraction:
 
+                        FrameCamera.FrameCameraEditing();
+
                         FrameEffect.FrameEffectEditing();
+
+                        FrameLight.FrameLightEditing();
 
                         Background.FrameBackgroundEditing();
 
@@ -90,7 +116,7 @@ namespace FrameEditor {
                         Character.FrameCharacterEditing();
 
                         break;
-                    case GameType.InnerFireFastSession:
+                    /**case GameType.InnerFireFastSession:
                         if(FrameManager.GetGameManager<FastSessionManager>() != null )
                             fastSessionManager = FrameManager.GetGameManager<FastSessionManager>();
                         GUILayout.FlexibleSpace();
@@ -114,7 +140,7 @@ namespace FrameEditor {
                     case GameType.InnerFireLongSession:
                         break;
                     case GameType.InnerFireFreeRoam:
-                        break;
+                        break;**/
                 }
 
                 GUILayout.FlexibleSpace();

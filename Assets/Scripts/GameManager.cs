@@ -5,12 +5,12 @@ using FrameCore;
 
 namespace GameFramework {
     public class GameManager : MonoBehaviour, IKeyTransition {
-        public string id { get {
+        /**public string id { get {
                 if (this != null)
                     return name + "_" + FrameManager.gameManagers.Count;
                 else return null;
             } 
-        }
+        }**/
         [SerializeField]
         private int _nextKeyID;
         [SerializeField]

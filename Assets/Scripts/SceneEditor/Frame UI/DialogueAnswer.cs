@@ -31,6 +31,7 @@ namespace FrameCore {
                     position = dialogue.position,
                     activeStatus = dialogue.activeStatus,
                     size = dialogue.size,
+                    rotation = dialogue.rotation.eulerAngles,
                 };
                 dialogueAnswerTextData = new DialogueAnswerTextData {
                     text = dialogue.text,
@@ -67,7 +68,7 @@ namespace FrameCore {
     }
     namespace UI {
         public class DialogueAnswer : Window, IKeyTransition {
-            public override Vector2 position {
+            public override Vector3 position {
                 get {
                     try {
                         return this.GetComponent<RectTransform>().anchoredPosition;
@@ -98,6 +99,22 @@ namespace FrameCore {
                 set {
                     RectTransformExtensions.SetWidth(this.GetComponent<RectTransform>(), value.x);
                     RectTransformExtensions.SetHeight(this.GetComponent<RectTransform>(), value.y);
+                }
+            }
+            public override Quaternion rotation {
+                get {
+                    try {
+                        return this.GetComponent<RectTransform>().localRotation;
+                    }
+                    catch (System.Exception) {
+                        if (this != null)
+                            return this.GetComponent<RectTransform>().localRotation;
+                        else
+                            return frameElementObject.prefab.GetComponent<RectTransform>().localRotation;
+                    }
+                }
+                set {
+                    this.GetComponent<RectTransform>().localRotation = value;
                 }
             }
             public int nextKeyID { get; set; }
@@ -139,6 +156,7 @@ namespace FrameCore {
                 previousKeyID = keyValues.keySequenceData.previousKeyID;
                 activeStatus = keyValues.transformData.activeStatus;
                 position = keyValues.transformData.position;
+                rotation = Quaternion.Euler(keyValues.transformData.rotation);
                 size = keyValues.transformData.size;
                 text = keyValues.dialogueAnswerTextData.text;
             }
@@ -155,13 +173,15 @@ namespace FrameCore {
 
                     answer.position = answer.GetComponent<RectTransform>().anchoredPosition;
                     answer.size = answer.GetComponent<RectTransform>().sizeDelta;
+                    answer.rotation = answer.GetComponent<RectTransform>().localRotation;
 
                     answer.SetKeyValuesWhileNotInPlayMode();    
                     if (targets.Length > 1) {
                         foreach (var target in targets) {
-                            FrameElement mTarget = (FrameElement)target;
-                            answer.position = mTarget.GetComponent<RectTransform>().anchoredPosition;
-                            answer.size = answer.GetComponent<RectTransform>().sizeDelta;
+                            FrameElement mTarget = (DialogueAnswer)target;
+                            mTarget.position = mTarget.GetComponent<RectTransform>().anchoredPosition;
+                            mTarget.size = mTarget.GetComponent<RectTransform>().sizeDelta;
+                            mTarget.rotation = mTarget.GetComponent<RectTransform>().localRotation;
                             mTarget.SetKeyValuesWhileNotInPlayMode();
                         }
                     }

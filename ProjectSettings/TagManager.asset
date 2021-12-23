@@ -13,7 +13,7 @@ TagManager:
   - UI
   - 
   - 
-  - 
+  - MotionBlur
   - 
   - 
   - 
@@ -38,6 +38,12 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Background Effects
+    uniqueID: 2827720833
+    locked: 0
+  - name: Background
+    uniqueID: 4199646509
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0

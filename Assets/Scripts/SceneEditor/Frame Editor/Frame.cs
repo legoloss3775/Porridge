@@ -82,7 +82,7 @@ namespace FrameEditor{
 
             GUILayout.FlexibleSpace();
 
-            FrameKeySelection();
+            //FrameKeySelection();
 
             GUILayout.FlexibleSpace();
 

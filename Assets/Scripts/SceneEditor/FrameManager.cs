@@ -42,8 +42,8 @@ namespace FrameCore {
         public static event FrameListner onFrameChanged;
 
 
-        public static List<GameFramework.GameManager> gameManagers = new List<GameFramework.GameManager>();
-        public List<GameFramework.GameManager> _gameManagers = new List<GameFramework.GameManager>();
+        /**public static List<GameFramework.GameManager> gameManagers = new List<GameFramework.GameManager>();
+        public List<GameFramework.GameManager> _gameManagers = new List<GameFramework.GameManager>();**/
 
         private void Awake() {
 
@@ -59,21 +59,23 @@ namespace FrameCore {
             frameContainer = GameObject.Find("Frame");
             UICanvasContainer = GameObject.Find("UI");
 
+            UICanvas.worldCamera = Camera.main;
+
+           // SetFrame(0, 0);
             SetFrame(assetDatabase.selectedFrameIndex, assetDatabase.selectedKeyIndex);
         } 
+        private void Update() {
+            if(UICanvas.worldCamera != Camera.main)
+                UICanvas.worldCamera = Camera.main; 
+        }
         public static void SetKey(int keyIndex) {
             if (frame.frameKeys.Count > keyIndex &&
                 keyIndex >= 0) {
                 frame.currentKey = frame.frameKeys[keyIndex];
 
-                onFrameKeyChanged = null;
-                foreach (var element in frameElements) {
-                    onFrameKeyChanged += element.OnKeyChanged;
-                }
-
                 ChangeFrameKey();
 
-                switch (frame.currentKey.gameType) {
+                /**switch (frame.currentKey.gameType) {
                     case GameType.FrameInteraction:
                         foreach(var gameManager in gameManagers) {
                             gameManager.gameObject.SetActive(false);
@@ -89,15 +91,21 @@ namespace FrameCore {
                         break;
                     case GameType.Custom:
                         break;
-                }
-
-                onFrameKeyChanged?.Invoke();
+                }**/
             }
         }
         public static void SetFrame(int frameIndex, int keyIndex) {
+
+            UICanvas = GameObject.Find("UI Canvas").GetComponent<Canvas>();
+            UICanvas.worldCamera = Camera.main;
+
             if (assetDatabase.frames.Count > frameIndex &&
                 frameIndex >= 0) {
-                frame = assetDatabase.frames[frameIndex];
+                var sortedFrames = from frame in assetDatabase.frames
+                                   orderby frame.name
+                                   select frame;
+
+                frame = sortedFrames.ToArray()[frameIndex];
 
                 if (keyIndex > frame.frameKeys.Count)
                     frame.selectedKeyIndex = keyIndex;
@@ -112,10 +120,11 @@ namespace FrameCore {
         public void SetDefaultFrame() {
             SetFrame(0, 0);
         }
-        public static GameFramework.GameManager GetGameManager<T>()
+        /**public static GameFramework.GameManager GetGameManager<T>()
             where T: GameFramework.GameManager {
+
             return (T)gameManagers.Where(ch => ch is T).FirstOrDefault();
-        }
+        }**/
         public static T GetFrameElementOnSceneByID<T>(string id)
         where T : FrameElement {
             foreach (var element in FrameManager.frameElements)
@@ -164,17 +173,26 @@ namespace FrameCore {
                 }
                 else frame.currentKey.AddFrameKeyValues(element.id, element.GetFrameKeyValuesType());
             }
+            onFrameKeyChanged = null;
+            foreach (var element in frameElements) {
+                onFrameKeyChanged += element.OnKeyChanged;
+            }
+
+            onFrameKeyChanged?.Invoke();
         }
         //TODO: switch gametype?
         public static void ChangeFrame() {
             ClearElements();
+            FrameSO.LoadElementsOnScene<FrameCameraSO, FrameCamera>(frame.usedElementsObjects);
             FrameSO.LoadElementsOnScene<FrameEffectSO, FrameEffect>(frame.usedElementsObjects);
             FrameSO.LoadElementsOnScene<BackgroundSO, Background>(frame.usedElementsObjects);
             FrameSO.LoadElementsOnScene<DialogueSO, Dialogue>(frame.usedElementsObjects);
             FrameSO.LoadElementsOnScene<DialogueAnswerSO, DialogueAnswer>(frame.usedElementsObjects);
             FrameSO.LoadElementsOnScene<CharacterSO, Character>(frame.usedElementsObjects);
+            FrameSO.LoadElementsOnScene<FrameLightSO, FrameLight>(frame.usedElementsObjects);
 
 #if UNITY_EDITOR
+            if (Application.isPlaying) return;
             NodeEditorFramework.Standard.NodeEditorWindow.editor.canvasCache.AssureCanvas();
             NodeEditorFramework.Standard.NodeEditorWindow.editor.canvasCache.LoadNodeCanvas("Assets/Frames/NodeCanvases/Canvas_" + frame.id + ".asset");
             EditorUtility.SetDirty(frame.nodeCanvas);
@@ -196,32 +214,33 @@ namespace FrameCore {
                 if (EditorUtility.IsDirty(element))
                     EditorUtility.ClearDirty(element);
         }
-#endif
+#endif//
+        //
         public void OnBeforeSerialize() {
             serializedFrameElementsList.Clear();
-            _gameManagers.Clear();
+            //_gameManagers.Clear();
             foreach (var element in frameElements) {
                 if (element != null)
                     serializedFrameElementsList.Add(element);
             }
-            foreach(var manager in gameManagers) {
+           /** foreach(var manager in gameManagers) {
                 if (manager != null)
                     _gameManagers.Add(manager);
-            }
+            }**/
         }
         public void OnAfterDeserialize() {
             frameElements.Clear();
-            gameManagers.Clear();
+          //  gameManagers.Clear();
             foreach (var element in serializedFrameElementsList) {
 
                 if (element != null)
                     frameElements.Add(element);
 
             }
-            foreach(var manager in _gameManagers) {
+            /**foreach(var manager in _gameManagers) {
                 if (manager != null)
                     gameManagers.Add(manager);
-            }
+            }**/
             UICanvas = _UICanvas;
             assetDatabase = _assetDatabase;
         }

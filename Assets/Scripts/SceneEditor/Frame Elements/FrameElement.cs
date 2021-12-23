@@ -50,6 +50,7 @@ namespace FrameCore {
                     position = element.position,
                     activeStatus = element.activeStatus,
                     size = element.size,
+                    rotation = element.rotation.eulerAngles,
                 };
             }
             public FrameElementValues() { }
@@ -78,7 +79,7 @@ namespace FrameCore {
     }
     [System.Serializable]
     public abstract class FrameElement : MonoBehaviour {
-        public virtual Vector2 position {
+        public virtual Vector3 position {
             get {
                 if (this != null)
                     return this.gameObject.transform.position;
@@ -107,6 +108,16 @@ namespace FrameCore {
             }
             set {
                 this.gameObject.transform.localScale = value;
+            }
+        }
+        public virtual Quaternion rotation {
+            get {
+                if (this != null)
+                    return this.gameObject.transform.rotation;
+                else return frameElementObject.prefab.transform.rotation;
+            }
+            set {
+                this.gameObject.transform.rotation = value;
             }
         }
         public string id { get; set; }
@@ -181,6 +192,7 @@ namespace FrameCore {
             activeStatus = values.transformData.activeStatus;
             position = values.transformData.position;
             size = values.transformData.size;
+            rotation = Quaternion.Euler(values.transformData.rotation);
         }
 
         public void SetKeyValuesWhileNotInPlayMode() {
@@ -202,17 +214,18 @@ namespace FrameCore {
                 FrameElement element = (FrameElement)target;
                 var keyValues = GetFrameKeyValues<FrameElementValues>(element.id);
 
-                Debug.Log(element.id);
                 if (keyValues != null) {
                     keyValues.transformData.position = element.gameObject.transform.position;
                     keyValues.transformData.size = element.gameObject.transform.localScale;
+                    element.rotation = element.gameObject.transform.rotation;
                     element.SetKeyValuesWhileNotInPlayMode();
 
                     if (targets.Length > 1) {
                         foreach (var target in targets) {
                             FrameElement mTarget = (FrameElement)target;
-                            element.position = element.gameObject.transform.position;
-                            element.size = element.gameObject.transform.localScale;
+                            mTarget.position = mTarget.gameObject.transform.position;
+                            mTarget.size = mTarget.gameObject.transform.localScale;
+                            mTarget.rotation = mTarget.gameObject.transform.rotation;
                             mTarget.SetKeyValuesWhileNotInPlayMode();
                         }
                     }

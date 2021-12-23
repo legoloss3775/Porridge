@@ -24,6 +24,8 @@ namespace FrameCore {
             UpdateFrameAssetsOfType<DialogueSO>("UI/Dialogue Windows");
             UpdateFrameAssetsOfType<DialogueAnswerSO>("UI/Dialogue Windows");
             UpdateFrameAssetsOfType<FrameEffectSO>("Effects");
+            UpdateFrameAssetsOfType<FrameCameraSO>("Cameras");
+            UpdateFrameAssetsOfType<FrameLightSO>("Lights");
             UpdateFrames();
         }
         public static void UpdateFrames() {
@@ -125,6 +127,9 @@ public class FrameKeyDictionary : Dictionary<string, Values>, ISerializationCall
     [SerializeField]
     private List<FrameEffectValues.SerializedFrameEffectValues> serializedFrameEffectValues =
         new List<FrameEffectValues.SerializedFrameEffectValues>();
+    [SerializeField]
+    private List<FrameLightValues.SerializedFrameLightValues> serializedFrameLightValues =
+    new List<FrameLightValues.SerializedFrameLightValues>();
     public virtual void OnBeforeSerialize() {
         keys.Clear();
         values.Clear();
@@ -133,32 +138,44 @@ public class FrameKeyDictionary : Dictionary<string, Values>, ISerializationCall
         serializedDialogueAnswerValues.Clear();
         serializedFrameCharacterValues.Clear();
         serializedFrameEffectValues.Clear();
+        serializedFrameLightValues.Clear();
 
-        foreach (var pair in this.Where(ch => ch.Value is FrameElementValues)) {
-            FrameElementValues values = (FrameElementValues)pair.Value;
-            keys.Add(pair.Key);
-            serializedElementValues.Add(values.serializedElementValues);
+        try {
+            foreach (var pair in this.Where(ch => ch.Value is FrameElementValues)) {
+                FrameElementValues values = (FrameElementValues)pair.Value;
+                keys.Add(pair.Key);
+                serializedElementValues.Add(values.serializedElementValues);
+            }
+            foreach (var pair in this.Where(ch => ch.Value is DialogueValues)) {
+                DialogueValues values = (DialogueValues)pair.Value;
+                keys.Add(pair.Key);
+                serializedDialogueValues.Add(values.serializedDialogueValues);
+            }
+            foreach (var pair in this.Where(ch => ch.Value is DialogueAnswerValues)) {
+                DialogueAnswerValues values = (DialogueAnswerValues)pair.Value;
+                keys.Add(pair.Key);
+                serializedDialogueAnswerValues.Add(values.serializedDialogueAnswerValues);
+            }
+            foreach (var pair in this.Where(ch => ch.Value is CharacterValues)) {
+                CharacterValues values = (CharacterValues)pair.Value;
+                keys.Add(pair.Key);
+                serializedFrameCharacterValues.Add(values.serializedFrameCharacterValues);
+            }
+            foreach (var pair in this.Where(ch => ch.Value is FrameEffectValues)) {
+                FrameEffectValues values = (FrameEffectValues)pair.Value;
+                keys.Add(pair.Key);
+                serializedFrameEffectValues.Add(values.serializedFrameEffectValues);
+            }
+            foreach (var pair in this.Where(ch => ch.Value is FrameLightValues)) {
+                FrameLightValues values = (FrameLightValues)pair.Value;
+                keys.Add(pair.Key);
+                serializedFrameLightValues.Add(values.serializedFrameLightValues);
+            }
         }
-        foreach (var pair in this.Where(ch => ch.Value is DialogueValues)) {
-            DialogueValues values = (DialogueValues)pair.Value;
-            keys.Add(pair.Key);
-            serializedDialogueValues.Add(values.serializedDialogueValues);
+        catch (System.Exception ex) {
+            Debug.LogError(ex.Message);
         }
-        foreach (var pair in this.Where(ch => ch.Value is DialogueAnswerValues)) {
-            DialogueAnswerValues values = (DialogueAnswerValues)pair.Value;
-            keys.Add(pair.Key);
-            serializedDialogueAnswerValues.Add(values.serializedDialogueAnswerValues);
-        }
-        foreach (var pair in this.Where(ch => ch.Value is CharacterValues)) {
-            CharacterValues values = (CharacterValues)pair.Value;
-            keys.Add(pair.Key);
-            serializedFrameCharacterValues.Add(values.serializedFrameCharacterValues);
-        }
-        foreach(var pair in this.Where(ch => ch.Value is FrameEffectValues)) {
-            FrameEffectValues values = (FrameEffectValues)pair.Value;
-            keys.Add(pair.Key);
-            serializedFrameEffectValues.Add(values.serializedFrameEffectValues);
-        }
+
     }
 
     public virtual void OnAfterDeserialize() {
@@ -172,6 +189,7 @@ public class FrameKeyDictionary : Dictionary<string, Values>, ISerializationCall
         CharacterValues
             .LoadSerialzedFrameKeyCharacterElementValues(serializedFrameCharacterValues, values);
         FrameEffectValues.LoadSerializedFrameEffectValues(serializedFrameEffectValues, values);
+        FrameLightValues.LoadSerializedFrameLightValues(serializedFrameLightValues, values);
 
 
         for (int i = 0; i < keys.Count; i++) {

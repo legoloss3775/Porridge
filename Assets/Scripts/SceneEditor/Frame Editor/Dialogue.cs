@@ -42,12 +42,16 @@ namespace FrameEditor {
             GUILayout.EndHorizontal();
 
             if (foldouts[EditorType.DialogueEditor]) {
-                GUILayout.BeginVertical("HelpBox");
-                ElementEditing<DialogueSO, FrameCore.UI.Dialogue>(PositioningType.Vertical, EditorType.DialogueEditor, false, false, dialogueCharacterSelection, textEditing);
-                GUILayout.EndVertical();
-                GUILayout.BeginVertical("HelpBox");
-                ElementEditing<DialogueAnswerSO, DialogueAnswer>(PositioningType.Vertical, EditorType.DialogueEditor, false, false, answerEditing);
-                GUILayout.EndVertical();
+                if(FrameManager.frame.currentKey.transitionType == FrameKey.TransitionType.DialogueLineContinue) {
+                    GUILayout.BeginVertical("HelpBox");
+                    ElementEditing<DialogueSO, FrameCore.UI.Dialogue>(PositioningType.Vertical, EditorType.DialogueEditor, false, false, dialogueCharacterSelection, textEditing);
+                    GUILayout.EndVertical();
+                }
+                else {
+                    GUILayout.BeginVertical("HelpBox");
+                    ElementEditing<DialogueAnswerSO, DialogueAnswer>(PositioningType.Vertical, EditorType.DialogueEditor, false, false, answerEditing);
+                    GUILayout.EndVertical();
+                }
             }
 
             GUILayout.EndVertical();
@@ -103,9 +107,9 @@ namespace FrameEditor {
             GUILayout.EndVertical();
             GUILayout.EndHorizontal();
 
-            keyValues.dialogueTextData.text = GUILayout.TextArea(keyValues.dialogueTextData.text, FrameGUIUtility.GetTextAreaStyle(Color.white, 15), GUILayout.MaxWidth(450), GUILayout.MaxHeight(150));
+            keyValues.dialogueTextData.text = GUILayout.TextArea(keyValues.dialogueTextData.text, FrameGUIUtility.GetTextAreaStyle(Color.white, 15), GUILayout.MaxWidth(450));
             if (dialogue.text != keyValues.dialogueTextData.text) dialogue.text = keyValues.dialogueTextData.text;
-
+            GUILayout.FlexibleSpace();
             GUILayout.BeginVertical("HelpBox");
             GUILayout.BeginHorizontal();
             GUILayout.Label("Параметры:", EditorStyles.boldLabel, GUILayout.MaxWidth(80));
@@ -120,9 +124,22 @@ namespace FrameEditor {
             if (dialogue.autoContinue != keyValues.dialogueTextData.autoContinue) dialogue.autoContinue = keyValues.dialogueTextData.autoContinue;
             GUILayout.FlexibleSpace();
             GUILayout.EndHorizontal();
+
             GUILayout.BeginHorizontal();
             keyValues.dialogueTextData.textAnimationTime = EditorGUILayout.FloatField("Время анимации текста: ",keyValues.dialogueTextData.textAnimationTime);
             if (dialogue.textAnimationTime != keyValues.dialogueTextData.textAnimationTime) dialogue.textAnimationTime = keyValues.dialogueTextData.textAnimationTime;
+            GUILayout.FlexibleSpace();
+            GUILayout.EndHorizontal();
+
+            GUILayout.BeginHorizontal();
+            keyValues.dialogueTextData.textAnimationDelay = EditorGUILayout.FloatField("Задержка анимации текста: ", keyValues.dialogueTextData.textAnimationDelay);
+            if (dialogue.textAnimationDelay != keyValues.dialogueTextData.textAnimationDelay) dialogue.textAnimationDelay = keyValues.dialogueTextData.textAnimationDelay;
+            GUILayout.FlexibleSpace();
+            GUILayout.EndHorizontal();
+
+            GUILayout.BeginHorizontal();
+            keyValues.dialogueTextData.transitionDelay = EditorGUILayout.FloatField("Задержка перехода: ", keyValues.dialogueTextData.transitionDelay);
+            if (dialogue.transitionDelay != keyValues.dialogueTextData.transitionDelay) dialogue.transitionDelay = keyValues.dialogueTextData.transitionDelay;
             GUILayout.FlexibleSpace();
             GUILayout.EndHorizontal();
             FrameGUIUtility.GuiLine();
@@ -216,9 +233,15 @@ namespace FrameEditor {
             }
             void MuiltibleSpeakingCharactersSelection() {
                 var names = new List<string>();
-                foreach (var character in keyValues.dialogueTextData.conversationCharacters)
+                foreach (var character in keyValues.dialogueTextData.conversationCharacters) {
                     names.Add(character.Value.Split('_')[0]);
+                }
+                if(keyValues.dialogueTextData.speakingCharacterIndex >= keyValues.dialogueTextData.conversationCharacters.Count) {
+                    keyValues.dialogueTextData.speakingCharacterIndex = 0;
+                    dialogue.speakingCharacterIndex = 0;
+                }
                 GUILayout.Label("Выбор говорящего:");
+               
                 keyValues.dialogueTextData.speakingCharacterIndex = GUILayout.SelectionGrid(
                     keyValues.dialogueTextData.speakingCharacterIndex,
                     names.ToArray(),
@@ -327,6 +350,7 @@ namespace FrameEditor {
                         if (characterWasCreatedPreviously)
                             foreach (var character in keyValues.dialogueTextData.conversationCharacters) {
                                 if (character.Key == dialogue.currentConversationCharacterSO.id) {
+                                    dialogue.RemoveAllConversationCharactersFromScene();
                                     dialogue.LoadConversationCharacter(character.Value, dialogue.type);
                                     SetPreviousCharacterValues();
                                     break;
@@ -354,11 +378,10 @@ namespace FrameEditor {
                                         },
                                     };
                                     FrameManager.frame.currentKey.AddFrameKeyValues(character.Value, newValues);
-                                    
+                                    dialogue.LoadConversationCharacter(character.Value, dialogue.type);
+                                    SetPreviousCharacterValues();
+                                    break;
                                 }
-                                dialogue.LoadConversationCharacter(character.Value, dialogue.type);
-                                SetPreviousCharacterValues();
-                                break;
                             }
                         }
                     }

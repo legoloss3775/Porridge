@@ -8,7 +8,7 @@ using static FrameCore.ScriptableObjects.FrameSO;
 namespace FrameCore {
     namespace ScriptableObjects {
         public abstract class FrameElementSO : ScriptableObject, ISerializationCallbackReceiver {
-            public string id { get; set; }
+            public string id { get { return name; } }
 
             [Header("Основной префаб")]
             public GameObject prefab;
@@ -21,7 +21,7 @@ namespace FrameCore {
 
             }
             public virtual void OnEnable() {
-                id = name;
+                //id = name;
 #if UNITY_EDITOR
                 FrameEditorSO frameEditorSO = AssetManager.GetAtPath<FrameEditorSO>("Scripts/SceneEditor/").FirstOrDefault();
                 if (frameEditorSO != null && !frameEditorSO.frameElementsObjects.Contains(this))

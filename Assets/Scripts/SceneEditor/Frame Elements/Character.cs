@@ -21,6 +21,7 @@ namespace FrameCore {
                 transformData = new TransformData {
                     position = character.position,
                     size = character.size,
+                    rotation = character.rotation.eulerAngles,
                     activeStatus = character.activeStatus,
                 };
                 characterData = new CharacterData {
@@ -107,6 +108,7 @@ namespace FrameCore {
             activeStatus = values.transformData.activeStatus;
             position = values.transformData.position;
             size = values.transformData.size;
+            rotation = Quaternion.Euler(values.transformData.rotation);
             dialogueID = values.characterData.dialogueID;
             type = values.characterData.type;
 

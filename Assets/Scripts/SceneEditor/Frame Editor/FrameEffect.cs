@@ -5,6 +5,7 @@ using FrameCore;
 using FrameCore.ScriptableObjects;
 using System;
 using UnityEditor;
+using FrameCore.FrameEffects;
 
 #if UNITY_EDITOR
 namespace FrameEditor {
@@ -77,6 +78,42 @@ namespace FrameEditor {
             if (frameEffect.animationSpeed != keyValues.frameEffectData.animationSpeed) keyValues.frameEffectData.animationSpeed = frameEffect.animationSpeed;
             GUILayout.FlexibleSpace();
             GUILayout.EndHorizontal();
+
+            GUILayout.BeginHorizontal();
+            frameEffect.animationDelay = EditorGUILayout.FloatField("Задержка анимации:", frameEffect.animationDelay);
+            if (frameEffect.animationDelay != keyValues.frameEffectData.animationDelay) keyValues.frameEffectData.animationDelay = frameEffect.animationDelay;
+            GUILayout.FlexibleSpace();
+            GUILayout.EndHorizontal();
+
+            if (frameEffect.GetComponent<CameraTurn>() != null) {
+                GUILayout.BeginHorizontal();
+                frameEffect.cameraTurnAnimationData.degreesX = EditorGUILayout.FloatField("Поворот по горизонтали :", frameEffect.cameraTurnAnimationData.degreesX);
+                if (frameEffect.cameraTurnAnimationData.degreesX != keyValues.cameraTurnAnimationData.degreesX) keyValues.cameraTurnAnimationData.degreesX = frameEffect.cameraTurnAnimationData.degreesX;
+                GUILayout.FlexibleSpace();
+                GUILayout.EndHorizontal();
+
+                GUILayout.BeginHorizontal();
+                frameEffect.cameraTurnAnimationData.degreesY = EditorGUILayout.FloatField("Поворот по вертикали :", frameEffect.cameraTurnAnimationData.degreesY);
+                if (frameEffect.cameraTurnAnimationData.degreesY != keyValues.cameraTurnAnimationData.degreesY) keyValues.cameraTurnAnimationData.degreesY = frameEffect.cameraTurnAnimationData.degreesY;
+                GUILayout.FlexibleSpace();
+                GUILayout.EndHorizontal();
+            }
+            if (frameEffect.GetComponent<CameraMove>() != null) {
+                GUILayout.BeginHorizontal();
+                frameEffect.cameraTurnAnimationData.moveTo = EditorGUILayout.Vector3Field("Конечная позиция :", frameEffect.cameraTurnAnimationData.moveTo);
+                if (frameEffect.cameraTurnAnimationData.moveTo != keyValues.cameraTurnAnimationData.moveTo) keyValues.cameraTurnAnimationData.moveTo = frameEffect.cameraTurnAnimationData.moveTo;
+                GUILayout.BeginVertical();
+                GUILayout.Space(20);
+                if(GUILayout.Button("Скопировать позицию")) {
+                    Selection.activeObject = Camera.main;
+                    frameEffect.cameraTurnAnimationData.moveTo = Camera.main.transform.position;
+                    keyValues.cameraTurnAnimationData.moveTo = Camera.main.transform.position;
+                }
+                GUILayout.EndVertical();
+                GUILayout.FlexibleSpace();
+                GUILayout.EndHorizontal();
+            }
+
             GUILayout.EndVertical();
         }
     }
