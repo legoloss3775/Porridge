@@ -1,8 +1,6 @@
 ﻿using FrameCore.Serialization;
 using FrameCore.UI;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEditor;
 using UnityEngine;
 using static FrameCore.ScriptableObjects.FrameSO;
@@ -11,7 +9,7 @@ namespace FrameCore {
     namespace ScriptableObjects {
         [CreateAssetMenu(fileName = "Character", menuName = "Редактор Сцен/Персонаж")]
         public class CharacterSO : FrameElementSO {
-            [Serializable]
+            [System.Serializable]
             public enum CharacterEmotionState {
                 Обычный = 0,
                 Злой = 1,
@@ -22,7 +20,7 @@ namespace FrameCore {
 
             [HideInInspector]
             public CharacterEmotionState state;
-           // [OneLine.OneLine]
+            // [OneLine.OneLine]
             public List<CharacterPart> characterParts;
 
             public override void OnAfterDeserialize() {
@@ -44,7 +42,7 @@ namespace FrameCore {
                         elementClone.frameElementObject = pair.elementObject;
                         elementClone.id = id;
                         //foreach (var key in FrameManager.frame.frameKeys)
-                            //key.UpdateFrameKeyValues(elementClone.id, elementClone.GetFrameKeyValues<CharacterValues>());
+                        //key.UpdateFrameKeyValues(elementClone.id, elementClone.GetFrameKeyValues<CharacterValues>());
 #if UNITY_EDITOR
                         EditorUtility.SetDirty(elementClone);
 #endif

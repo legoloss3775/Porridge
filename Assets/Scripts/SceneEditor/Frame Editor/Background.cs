@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using FrameCore.ScriptableObjects;
+using System;
 using UnityEditor;
 using UnityEngine;
-using FrameCore;
-using FrameCore.ScriptableObjects;
-using FrameCore.Serialization;
 
 #if UNITY_EDITOR
 namespace FrameEditor {
@@ -46,9 +42,9 @@ namespace FrameEditor {
             GUILayout.EndVertical();
 
             if (background.activeStatus == false) {
-                GUILayout.Label(background.id, EditorStyles.largeLabel);
+                GUILayout.Label(background.id);
                 GUILayout.FlexibleSpace();
-                GUILayout.Label("Inactive", EditorStyles.largeLabel);
+                GUILayout.Label("Inactive");
                 GUILayout.EndHorizontal();
                 return;
             }

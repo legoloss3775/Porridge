@@ -35,7 +35,7 @@ namespace FrameEditor {
             TextFieldStyles.normal.textColor = color;
             TextFieldStyles.hover.textColor = color;
             TextFieldStyles.active.textColor = color;
-            TextFieldStyles.fontSize = 15;
+            TextFieldStyles.fontSize = 50;
 
             //TextFieldStyles.fontSize = fontSize;
 
@@ -99,7 +99,7 @@ namespace FrameEditor {
 
             //Value Color
             TextFieldStyles.normal.textColor = textColor;
-            TextFieldStyles.normal.background = MakeTex(2, 2, new Color32(27,27,27,255));
+            TextFieldStyles.normal.background = MakeTex(2, 2, new Color32(27, 27, 27, 255));
             //Label Color
             //EditorStyles.label.normal.textColor = textColor;
 
@@ -384,8 +384,8 @@ namespace FrameEditor {
                             FrameManager.frame.RemoveElementFromCurrentKey(dialogueCharacter.id);
                     }
                 }
-                if(element is FrameCore.Character character && character.type == FrameCore.Character.CharacterType.Conversation) {
-                    foreach(var key in FrameManager.frame.frameKeys) {
+                if (element is FrameCore.Character character && character.type == FrameCore.Character.CharacterType.Conversation) {
+                    foreach (var key in FrameManager.frame.frameKeys) {
                         if (key.ContainsID(character.dialogueID)) {
                             var values = (FrameCore.Serialization.DialogueValues)key.GetFrameKeyValuesOfElement(character.dialogueID);
 
@@ -418,7 +418,11 @@ namespace FrameEditor {
         public static void ChangeActiveState<TElement>(FrameKey key, TElement element, bool state)
             where TElement : FrameElement {
 
-            var elementValues = key.GetFrameKeyValuesOfElement(element.id);
+            if (key == null || element == null) return;
+
+            Values elementValues = key.GetFrameKeyValuesOfElement(element.id);
+
+            if (elementValues == null) return;
 
             if (state == false) {
                 element.activeStatus = false;
@@ -438,6 +442,74 @@ namespace FrameEditor {
             element.SetKeyValuesWhileNotInPlayMode();
 
         }
+        #region GLOBALFLAGS_KNOBS
+        public static void DeleteGlobalFlagNode(string globalFlagID, FrameKey key) {
+            if (NodeEditor.curNodeCanvas == null) return;
+            foreach (FlagCheckNode node in NodeEditor.curNodeCanvas.nodes.Where(ch => ch is FlagCheckNode)) {
+                if (node.frameKey == null || node.frameKeyPair.frameKeyID != key.id) continue;
+
+                foreach (var n in node.outputKnobs.ToList()) {
+                    if (key.frameKeyTransitionKnobs.ContainsKey(globalFlagID + "_true")) {
+                        //Удаление outputKnob из KeyNode
+                        var removeIndex = key.frameKeyGlobalFlagKnobs[globalFlagID + "_true"];
+
+                        key.frameKeyGlobalFlagKnobs.Remove(globalFlagID + "_true");
+                        DestroyImmediate(n, true);
+
+                        //смещение индекса outputKnobs в словаре outputKnobs, привязанном к элементу, из-за которого
+                        //они и удаляются
+                        ///<see cref="FrameKey.frameKeyTransitionKnobs">
+                        ///
+                        foreach (var killme in key.frameKeyGlobalFlagKnobs.Keys.ToList()) {
+                            if (key.frameKeyGlobalFlagKnobs[killme] >= removeIndex) {
+                                key.frameKeyGlobalFlagKnobs[killme] -= 1;
+                            }
+                        }
+                        NodeEditorFramework.ConnectionPortManager.UpdatePortLists(node);
+                    }
+                    else if(key.frameKeyTransitionKnobs.ContainsKey(globalFlagID + "_false")) {
+                        //Удаление outputKnob из KeyNode
+                        var removeIndex = key.frameKeyGlobalFlagKnobs[globalFlagID + "_false"];
+
+                        key.frameKeyGlobalFlagKnobs.Remove(globalFlagID + "_false");
+                        DestroyImmediate(n, true);
+
+                        //смещение индекса outputKnobs в словаре outputKnobs, привязанном к элементу, из-за которого
+                        //они и удаляются
+                        ///<see cref="FrameKey.frameKeyTransitionKnobs">
+                        ///
+                        foreach (var killme in key.frameKeyGlobalFlagKnobs.Keys.ToList()) {
+                            if (key.frameKeyGlobalFlagKnobs[killme] >= removeIndex) {
+                                key.frameKeyGlobalFlagKnobs[killme] -= 1;
+                            }
+                        }
+                        NodeEditorFramework.ConnectionPortManager.UpdatePortLists(node);
+                    }
+                }
+            }
+        }
+        public static void CreateGlobalFlagNode(string globalFlagID, FrameKey key) {
+            foreach (FlagCheckNode node in NodeEditor.curNodeCanvas.nodes.Where(ch => ch is FlagCheckNode)) {
+                if (node.frameKey == null || node.frameKeyPair.frameKeyID != key.id) { continue; }
+                if (key.frameKeyGlobalFlagKnobs.ContainsKey(globalFlagID)) { continue; }
+
+                var knob = node.CreateValueConnectionKnob(new ValueConnectionKnobAttribute("Output", Direction.Out, "FrameKey"));
+                knob.SetValue<FrameKey>(node.frameKey);
+
+
+                key.frameKeyGlobalFlagKnobs.Add(globalFlagID + "_true", node.connectionKnobs.IndexOf(knob) - 1);
+                NodeEditorFramework.ConnectionPortManager.UpdatePortLists(node);
+
+                knob = node.CreateValueConnectionKnob(new ValueConnectionKnobAttribute("Output", Direction.Out, "FrameKey"));
+                knob.SetValue<FrameKey>(node.frameKey);
+
+
+                key.frameKeyGlobalFlagKnobs.Add(globalFlagID + "_false", node.connectionKnobs.IndexOf(knob) - 1);
+                NodeEditorFramework.ConnectionPortManager.UpdatePortLists(node);
+            }
+        }
+        #endregion
+        #region TRANSITION_KNOBS
         public static void DeleteInteractableTransitionNode(GameType type, FrameKey key) {
             if (NodeEditor.curNodeCanvas == null) return;
             foreach (FrameKeyNode node in NodeEditor.curNodeCanvas.nodes) {
@@ -451,7 +523,7 @@ namespace FrameEditor {
                         key.frameKeyTransitionKnobs.Remove(type.ToString());
                         DestroyImmediate(n, true);
 
-                        //смещение индекса outputKnobs в словаре outputKnobs, привязанном к элементу, из-за которого
+                        //смещение индекса outputKnobs в словаре outputKnobs, привязанном к элементу, из которого
                         //они и удаляются
                         ///<see cref="FrameKey.frameKeyTransitionKnobs">
                         ///
@@ -467,7 +539,7 @@ namespace FrameEditor {
         }
         public static void DeleteInteractableTransitionNode(FrameElement element, FrameKey key) {
             if (NodeEditor.curNodeCanvas == null) return;
-            foreach (FrameKeyNode node in NodeEditor.curNodeCanvas.nodes) {
+            foreach (FrameKeyNode node in NodeEditor.curNodeCanvas.nodes.Where(ch => ch is FrameKeyNode)) {
                 if (node.frameKey == null || node.frameKeyPair.frameKeyID != key.id) continue;
 
                 foreach (var n in node.outputKnobs.ToList()) {
@@ -493,20 +565,20 @@ namespace FrameEditor {
             }
         }
         public static void CreateInteractableTransitionNode(GameType type, FrameKey key) {
-            foreach (FrameKeyNode node in NodeEditor.curNodeCanvas.nodes) {
+            foreach (FrameKeyNode node in NodeEditor.curNodeCanvas.nodes.Where(ch => ch is FrameKeyNode)) {
                 if (node.frameKey == null || node.frameKeyPair.frameKeyID != key.id) continue;
                 if (key.frameKeyTransitionKnobs.ContainsKey(type.ToString())) continue;
 
                 var knob = node.CreateValueConnectionKnob(new ValueConnectionKnobAttribute("Output", Direction.Out, "FrameKey"));
                 knob.SetValue<FrameKey>(node.frameKey);
-                
+
                 key.frameKeyTransitionKnobs.Add(type.ToString(), node.connectionKnobs.IndexOf(knob) - 1);
                 NodeEditorFramework.ConnectionPortManager.UpdatePortLists(node);
             }
         }
         public static void CreateInteractableTransitionNode(FrameElement element, FrameKey key) {
-            foreach (FrameKeyNode node in NodeEditor.curNodeCanvas.nodes) {
-                if (node.frameKey == null || node.frameKeyPair.frameKeyID != key.id) {continue; }
+            foreach (FrameKeyNode node in NodeEditor.curNodeCanvas.nodes.Where(ch => ch is FrameKeyNode)) {
+                if (node.frameKey == null || node.frameKeyPair.frameKeyID != key.id) { continue; }
                 if (key.frameKeyTransitionKnobs.ContainsKey(element.id)) { continue; }
 
                 var knob = node.CreateValueConnectionKnob(new ValueConnectionKnobAttribute("Output", Direction.Out, "FrameKey"));
@@ -518,6 +590,7 @@ namespace FrameEditor {
                 NodeEditorFramework.ConnectionPortManager.UpdatePortLists(node);
             }
         }
+        #endregion
     }
     /// <summary>
     /// Окно создания элементов
@@ -620,11 +693,19 @@ namespace FrameEditor {
                         }
                     }**/
 
-                    foreach(var key in FrameManager.frame.frameKeys) {
+                    foreach (var key in FrameManager.frame.frameKeys) {
                         Core.ChangeActiveState(key, createdElement, false);
                     }
 
                     FrameManager.ChangeFrameKey();
+
+                    FrameKeyNode frameKeyNode = null;
+                    foreach (FrameKeyNode node in NodeEditor.curNodeCanvas.nodes) {
+                        if (node.frameKeyPair.frameKeyID == FrameManager.frame.currentKey.id)
+                            frameKeyNode = node;
+                    }
+                    FrameManager.frame.currentKey.onFrameKeyUpdate += () => FrameKeyNode.UpdateKeyNodeValues(frameKeyNode, createdElement.id);
+
                     Close();
                 }
                 GUILayout.FlexibleSpace();

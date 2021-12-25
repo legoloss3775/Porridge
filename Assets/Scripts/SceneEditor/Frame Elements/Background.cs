@@ -1,8 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using FrameCore.ScriptableObjects;
 using UnityEditor;
-using FrameCore.ScriptableObjects;
 
 namespace FrameCore {
     /// <summary>

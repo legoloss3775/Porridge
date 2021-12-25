@@ -1,11 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using FrameCore;
-using FrameCore.ScriptableObjects;
-using FrameCore.Serialization;
+﻿using FrameCore.ScriptableObjects;
 using System;
 using UnityEditor;
+using UnityEngine;
 
 #if UNITY_EDITOR
 namespace FrameEditor {

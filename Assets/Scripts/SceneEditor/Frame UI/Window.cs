@@ -1,6 +1,4 @@
-﻿using FrameCore.ScriptableObjects;
-using FrameCore.ScriptableObjects.UI;
-using System.Collections.Generic;
+﻿using FrameCore.ScriptableObjects.UI;
 using UnityEditor;
 using UnityEngine;
 

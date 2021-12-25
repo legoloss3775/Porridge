@@ -1,17 +1,14 @@
-﻿using NodeEditorFramework;
-using System.Collections;
-using System.Collections.Generic;
+﻿using FrameCore;
+using FrameCore.ScriptableObjects;
+using FrameCore.UI;
+using NodeEditorFramework;
+using System;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
-using FrameCore;
-using FrameCore.Serialization;
-using FrameCore.ScriptableObjects;
-using FrameCore.UI;
-using System;
 
 #if UNITY_EDITOR
-namespace FrameEditor{
+namespace FrameEditor {
     /// <summary>
     /// Класс редактора фреймов и ключей фреймов
     /// </summary>
@@ -91,9 +88,61 @@ namespace FrameEditor{
             GUILayout.Space(5);
             FrameGUIUtility.GuiLine();
 
-            FrameKeyTransitionSelection();
+            switch (FrameManager.frame.currentKey.keyType) {
+                case FrameKey.KeyType.Default:
+                    FrameKeyTransitionSelection();
+                    break;
+                case FrameKey.KeyType.FlagChange:
+                    FrameKeyFlagSetup(GlobalFlagsKeyEditorType.FlagSet);
+                    break;
+                case FrameKey.KeyType.FlagCheck:
+                    FrameKeyFlagSetup(GlobalFlagsKeyEditorType.FlagCheck);
+                    break;
+            }
 
             GUILayout.EndVertical();
+        }
+        public static void FrameKeyFlagSetup(GlobalFlagsKeyEditorType type) {
+            if (FrameKey.frameCoreFlags.keys == null || FrameKey.frameCoreFlags.values == null) {
+                FrameKey.frameCoreFlags.keys = new System.Collections.Generic.List<string>();
+                FrameKey.frameCoreFlags.values = new System.Collections.Generic.List<bool>();
+            }
+            if(FrameManager.frame.currentKey.flagData.keys == null || FrameManager.frame.currentKey.flagData.values == null) {
+                FrameManager.frame.currentKey.flagData.keys = new System.Collections.Generic.List<string>();
+                FrameManager.frame.currentKey.flagData.values = new System.Collections.Generic.List<bool>();
+            }
+            GUILayout.BeginHorizontal();
+            if (GUILayout.Button("Создать новый флаг")) {
+                TextFieldPopup editor = EditorWindow.GetWindow<TextFieldPopup>();
+                editor.type = type;
+                editor.ShowPopup();
+            }
+            if (GUILayout.Button("Добавить существующий")) {
+                GlobalFlagsEditor editor = EditorWindow.GetWindow<GlobalFlagsEditor>();
+                editor.type = type;
+                editor.ShowPopup();
+            }
+            GUILayout.EndHorizontal();
+            foreach(var id in FrameManager.frame.currentKey.flagData.keys.ToList()) {
+                if (!FrameKey.frameCoreFlags.ContainsKey(id)) {
+                    FrameKey.frameCoreFlags.Add(id, false);
+                }
+                GUILayout.BeginHorizontal();
+                if (type == GlobalFlagsKeyEditorType.FlagSet)
+                    FrameManager.frame.currentKey.flagData.SetValue(id, EditorGUILayout.Toggle(id, FrameManager.frame.currentKey.flagData.GetValue(id)));
+                else
+                    GUILayout.Label(id, FrameGUIUtility.GetLabelStyle(new Color32(255, 140, 0, 255), 15));
+                GUILayout.FlexibleSpace();
+                if (GUILayout.Button("Убрать")) {
+                    if (EditorUtility.DisplayDialog("Удаление флага", "Вы точно хотите убрать флаг из текущего ключа?", "Да", "Нет")) {
+                        FrameManager.frame.currentKey.flagData.Remove(id);
+                        if(type == GlobalFlagsKeyEditorType.FlagCheck) {
+                            DeleteGlobalFlagNode(id, FrameManager.frame.currentKey);
+                        }
+                    }
+                }
+                GUILayout.EndHorizontal();
+            }
         }
         public static void FrameKeyTransitionSelection() {
             var keyT = FrameManager.frame.currentKey;
@@ -101,7 +150,7 @@ namespace FrameEditor{
 
             bool connected = false;
             if (NodeEditor.curNodeCanvas == null) return;
-            foreach (FrameKeyNode node in NodeEditor.curNodeCanvas.nodes) {
+            foreach (FrameKeyNode node in NodeEditor.curNodeCanvas.nodes.Where(ch => ch is FrameKeyNode)) {
                 if (node.frameKeyPair.frameKeyID == FrameManager.frame.currentKey.id) {
                     foreach (var con in node.connectionKnobs) {
                         if (con.connected())
@@ -118,12 +167,12 @@ namespace FrameEditor{
             GUILayout.BeginHorizontal();
             GUILayout.FlexibleSpace();
             if (connected) GUILayout.Label("Перед изменением игрового режима нужно убрать все связи ключа", EditorStyles.largeLabel);
-            else { 
+            else {
                 keyT.gameType = (GameType)EditorGUILayout.EnumPopup(keyT.gameType);
-                if(keyT.gameType != GameType.FrameInteraction)
+                if (keyT.gameType != GameType.FrameInteraction)
                     CreateInteractableTransitionNode(keyT.gameType, keyT);
                 else
-                    foreach(var transitionNode in keyT.frameKeyTransitionKnobs.Keys.ToList()) {
+                    foreach (var transitionNode in keyT.frameKeyTransitionKnobs.Keys.ToList()) {
                         Type enumType = keyT.gameType.GetType();
                         try { DeleteInteractableTransitionNode((GameType)Enum.Parse(enumType, transitionNode), keyT); } catch (System.Exception) { }
                     }
@@ -140,12 +189,12 @@ namespace FrameEditor{
             GUILayout.BeginHorizontal();
             GUILayout.FlexibleSpace();
             if (connected) GUILayout.Label("Перед изменением типа перехода нужно убрать все связи ключа", EditorStyles.largeLabel);
-            else if(keyT.gameType == GameType.FrameInteraction) keyT.transitionType = (FrameKey.TransitionType)EditorGUILayout.EnumPopup(keyT.transitionType);
+            else if (keyT.gameType == GameType.FrameInteraction) keyT.transitionType = (FrameKey.TransitionType)EditorGUILayout.EnumPopup(keyT.transitionType);
             GUILayout.FlexibleSpace();
             GUILayout.EndHorizontal();
 
-            if(keyT.gameType != GameType.FrameInteraction) {
-                foreach(var element in FrameManager.frameElements) {
+            if (keyT.gameType != GameType.FrameInteraction) {
+                foreach (var element in FrameManager.frameElements) {
                     ChangeActiveState(keyT, element, false);
                 }
             }
@@ -186,9 +235,9 @@ namespace FrameEditor{
                         if (key != null) {
                             FrameManager.frame.currentKey = key;
                             frameEditorSO.selectedKeyIndex = FrameManager.frame.frameKeys.IndexOf(key);
-                            FrameManager.ChangeFrameKey(); 
+                            FrameManager.ChangeFrameKey();
 
-                            foreach(var element in FrameManager.frameElements.Where(ch => ch is IKeyTransition)) {
+                            foreach (var element in FrameManager.frameElements.Where(ch => ch is IKeyTransition)) {
                                 if (element.activeStatus) ChangeActiveState(FrameManager.frame.currentKey, element, true);
                             }
                         }
@@ -211,6 +260,87 @@ namespace FrameEditor{
                 }
             }**/
             GUILayout.EndHorizontal();
+        }
+    }
+}
+public enum GlobalFlagsKeyEditorType {
+    FlagSet,
+    FlagCheck,
+}
+public class TextFieldPopup : EditorWindow {
+    public string text;
+    public GlobalFlagsKeyEditorType type;
+    public void Awake() {
+        text = "";
+    }
+    public void OnGUI() {
+        switch (type) {
+            case GlobalFlagsKeyEditorType.FlagSet:
+                text = GUILayout.TextArea(text);
+                if (GUILayout.Button("Создать")) {
+                    FrameKey.frameCoreFlags.Add(text, false);
+                    FrameManager.frame.currentKey.flagData.Add(text, false);
+                    SaveManager.SaveFlagsFile();
+                    Close();
+                }
+                break;
+            case GlobalFlagsKeyEditorType.FlagCheck:
+                text = GUILayout.TextArea(text);
+                if (GUILayout.Button("Создать")) {
+                    FrameKey.frameCoreFlags.Add(text, false);
+                    FrameManager.frame.currentKey.flagData.Add(text, false);
+                    FrameEditor.Core.CreateGlobalFlagNode(text, FrameManager.frame.currentKey);
+                    SaveManager.SaveFlagsFile();
+                    Close();
+                }
+                break;
+        }
+    }
+}
+public class GlobalFlagsEditor : EditorWindow {
+    public GlobalFlagsKeyEditorType type;
+    public void OnGUI() {
+        switch (type) {
+            case GlobalFlagsKeyEditorType.FlagSet:
+                foreach (var key in FrameKey.frameCoreFlags.keys.ToList()) {
+                    GUILayout.BeginHorizontal();
+                    if (GUILayout.Button(key, GUILayout.Width(275))) {
+                        FrameManager.frame.currentKey.flagData.Add(key, false);
+                        Close();
+                    }
+                    GUILayout.FlexibleSpace();
+                    if (GUILayout.Button("X")) {
+                        if (EditorUtility.DisplayDialog("Удаление флага", "Вы точно хотите удалить флаг? (удаление затронет все флаги во всех фреймах)", "Да", "Нет")) {
+                            FrameKey.frameCoreFlags.Remove(key);
+                            FrameManager.frame.currentKey.flagData.Remove(key);
+                            SaveManager.SaveFlagsFile();
+                            Close();
+                        }
+                    }
+                    GUILayout.EndHorizontal();
+                }
+                break;
+            case GlobalFlagsKeyEditorType.FlagCheck:
+                foreach (var key in FrameKey.frameCoreFlags.keys.ToList()) {
+                    GUILayout.BeginHorizontal();
+                    if (GUILayout.Button(key, GUILayout.Width(275))) {
+                        FrameManager.frame.currentKey.flagData.Add(key, false);
+                        FrameEditor.Core.CreateGlobalFlagNode(key, FrameManager.frame.currentKey);
+                        Close();
+                    }
+                    GUILayout.FlexibleSpace();
+                    if (GUILayout.Button("X")) {
+                        if (EditorUtility.DisplayDialog("Удаление флага", "Вы точно хотите удалить флаг? (удаление затронет все флаги во всех фреймах)", "Да", "Нет")) {
+                            FrameKey.frameCoreFlags.Remove(key);
+                            FrameManager.frame.currentKey.flagData.Remove(key);
+                            FrameEditor.Core.DeleteGlobalFlagNode(key, FrameManager.frame.currentKey);
+                            SaveManager.SaveFlagsFile();
+                            Close();
+                        }
+                    }
+                    GUILayout.EndHorizontal();
+                }
+                break;
         }
     }
 }

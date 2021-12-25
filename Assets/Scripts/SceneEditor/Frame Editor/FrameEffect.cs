@@ -1,11 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using FrameCore;
+﻿using FrameCore.FrameEffects;
 using FrameCore.ScriptableObjects;
 using System;
 using UnityEditor;
-using FrameCore.FrameEffects;
+using UnityEngine;
 
 #if UNITY_EDITOR
 namespace FrameEditor {
@@ -48,9 +45,9 @@ namespace FrameEditor {
             GUILayout.EndVertical();
 
             if (frameEffect.activeStatus == false) {
-                GUILayout.Label(frameEffect.GetName(), EditorStyles.largeLabel);
+                GUILayout.Label(frameEffect.GetName());
                 GUILayout.FlexibleSpace();
-                GUILayout.Label("Inactive", EditorStyles.largeLabel);
+                GUILayout.Label("Inactive");
                 GUILayout.EndHorizontal();
                 return;
             }
@@ -104,7 +101,7 @@ namespace FrameEditor {
                 if (frameEffect.cameraTurnAnimationData.moveTo != keyValues.cameraTurnAnimationData.moveTo) keyValues.cameraTurnAnimationData.moveTo = frameEffect.cameraTurnAnimationData.moveTo;
                 GUILayout.BeginVertical();
                 GUILayout.Space(20);
-                if(GUILayout.Button("Скопировать позицию")) {
+                if (GUILayout.Button("Скопировать позицию")) {
                     Selection.activeObject = Camera.main;
                     frameEffect.cameraTurnAnimationData.moveTo = Camera.main.transform.position;
                     keyValues.cameraTurnAnimationData.moveTo = Camera.main.transform.position;

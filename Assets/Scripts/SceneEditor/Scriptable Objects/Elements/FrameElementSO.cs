@@ -1,4 +1,4 @@
-﻿using System;
+﻿
 using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
@@ -94,7 +94,7 @@ namespace FrameCore {
                 elementClone = Instantiate(obj.prefab, position, new Quaternion(), FrameManager.frameContainer.transform).AddComponent<T>();
                 elementClone.size = size;
                 elementClone.frameElementObject = obj;
-                elementClone.id = obj.id + "_" + Guid.NewGuid().ToString().Substring(0, 5).ToUpper();
+                elementClone.id = obj.id + "_" + System.Guid.NewGuid().ToString().Substring(0, 5).ToUpper();
                 foreach (var key in FrameManager.frame.frameKeys)
                     key.AddFrameKeyValues(elementClone.id, elementClone.GetFrameKeyValuesType());
 #if UNITY_EDITOR

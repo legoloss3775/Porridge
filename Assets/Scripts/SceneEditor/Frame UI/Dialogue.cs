@@ -2,7 +2,6 @@
 using FrameCore.ScriptableObjects.UI;
 using FrameCore.Serialization;
 using FrameCore.UI;
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +17,7 @@ namespace FrameCore {
     /// </summary>
     namespace Serialization {
         #region SERIALIZATION
-        [Serializable]
+        [System.Serializable]
         public class DialogueValues : Values {
             public KeySequenceData keySequenceData;
             public DialogueTextData dialogueTextData;
@@ -46,7 +45,7 @@ namespace FrameCore {
                 };
             }
             public DialogueValues() { }
-            [Serializable]
+            [System.Serializable]
             public struct SerializedDialogueValues {
                 public TransformData transformData;
                 public KeySequenceData keySequenceData;
@@ -75,7 +74,7 @@ namespace FrameCore {
         #endregion
     }
     namespace UI {
-        [ExecuteInEditMode]
+        //[ExecuteInEditMode]
         public class Dialogue : Window, IKeyTransition {
             public override Vector3 position {
                 get {
@@ -210,25 +209,25 @@ namespace FrameCore {
                 }
             }
             //
-           /** public void InsureHiddenText() {
-                var TMProText = GetTextComponent();
-                for (int i = 0; i < TMProText.textInfo.characterCount; i++) {
+            /** public void InsureHiddenText() {
+                 var TMProText = GetTextComponent();
+                 for (int i = 0; i < TMProText.textInfo.characterCount; i++) {
 
-                    try {
-                        int meshIndex = TMProText.textInfo.characterInfo[i].materialReferenceIndex;
-                        int vertexIndex = TMProText.textInfo.characterInfo[i].vertexIndex;
-                        Color32[] vertexColors = TMProText.textInfo.meshInfo[meshIndex].colors32;
-                        if (!vertexColors[vertexIndex + 0].CompareRGB(new Color32(0, 255, 255, 50)) ||
-                        vertexColors[vertexIndex + 1] != Color.clear ||
-                        vertexColors[vertexIndex + 2] != Color.clear ||
-                        vertexColors[vertexIndex + 3] != Color.clear) {
-                            StartCoroutine(HideText());
-                        }
-                        TMProText.UpdateVertexData();
-                    }
-                    catch (System.Exception) { }
-                }
-            }**/
+                     try {
+                         int meshIndex = TMProText.textInfo.characterInfo[i].materialReferenceIndex;
+                         int vertexIndex = TMProText.textInfo.characterInfo[i].vertexIndex;
+                         Color32[] vertexColors = TMProText.textInfo.meshInfo[meshIndex].colors32;
+                         if (!vertexColors[vertexIndex + 0].CompareRGB(new Color32(0, 255, 255, 50)) ||
+                         vertexColors[vertexIndex + 1] != Color.clear ||
+                         vertexColors[vertexIndex + 2] != Color.clear ||
+                         vertexColors[vertexIndex + 3] != Color.clear) {
+                             StartCoroutine(HideText());
+                         }
+                         TMProText.UpdateVertexData();
+                     }
+                     catch (System.Exception) { }
+                 }
+             }**/
             public void HideText(TMPro.TMP_TextInfo textInfo) {
                 Color32 blank = new Color32(0, 0, 0, 0);
 
@@ -239,10 +238,10 @@ namespace FrameCore {
                     try {
                         int meshIndex = textInfo.characterInfo[i].materialReferenceIndex;
                         int vertexIndex = textInfo.characterInfo[i].vertexIndex;
-                        if(textInfo.characterInfo[i].color != Color.clear)
+                        if (textInfo.characterInfo[i].color != Color.clear)
                             colors[i] = textInfo.characterInfo[i].color;
                         Color32[] vertexColors = textInfo.meshInfo[meshIndex].colors32;
-                        vertexColors[vertexIndex + 0] = new Color32(0,255,255, 50);
+                        vertexColors[vertexIndex + 0] = new Color32(0, 255, 255, 50);
                         vertexColors[vertexIndex + 1] = Color.clear;
                         vertexColors[vertexIndex + 2] = Color.clear;
                         vertexColors[vertexIndex + 3] = Color.clear;
@@ -250,15 +249,15 @@ namespace FrameCore {
                     catch (System.Exception) { }
                 }
             }
-            public IEnumerator TypeDialogue(string dialogueText){
+            public IEnumerator TypeDialogue(string dialogueText) {
 
-                
+
                 //text = "";
                 characterNameField = "";
                 /**StartCoroutine(HideText());**/
 
                 var TMProText = GetTextComponent();
-               //+ Color32[] colors = new Color32[TMProText.textInfo.characterCount];
+                //+ Color32[] colors = new Color32[TMProText.textInfo.characterCount];
                 Color32 blank = new Color32(0, 0, 0, 0);
 
                 yield return new WaitForSeconds(textAnimationDelay);
@@ -290,7 +289,7 @@ namespace FrameCore {
                     int meshIndex = TMProText.textInfo.characterInfo[i].materialReferenceIndex;
                     int vertexIndex = TMProText.textInfo.characterInfo[i].vertexIndex;
                     try {
-                       // Debug.Log(colors[i]);
+                        // Debug.Log(colors[i]);
                         Color32[] vertexColors = TMProText.textInfo.meshInfo[meshIndex].colors32;
                         vertexColors[vertexIndex + 0] = colors[i];
                         vertexColors[vertexIndex + 1] = colors[i];
@@ -384,7 +383,7 @@ namespace FrameCore {
                     if (!values.dialogueTextData.conversationCharacters.ContainsKey(currentConversationCharacterSO.id)) {
                         values.dialogueTextData.conversationCharacters.Add(currentConversationCharacterSO.id, conversationCharacterID);
                     }
-                   // key.UpdateFrameKeyValues(this.id, this.GetFrameKeyValues<Serialization.DialogueValues>());
+                    // key.UpdateFrameKeyValues(this.id, this.GetFrameKeyValues<Serialization.DialogueValues>());
                 }
             }
             public void SetConversationCharacterSO() {

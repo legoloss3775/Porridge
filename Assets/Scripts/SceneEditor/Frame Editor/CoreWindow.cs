@@ -1,14 +1,12 @@
-﻿using NodeEditorFramework;
+﻿using FrameCore;
+using FrameCore.ScriptableObjects;
+using GameFramework;
+using NodeEditorFramework;
 using NodeEditorFramework.Standard;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.UI;
-using FrameCore;
-using FrameCore.ScriptableObjects;
-using FrameCore.Serialization;
 
 #if UNITY_EDITOR
 namespace FrameEditor {
@@ -19,7 +17,8 @@ namespace FrameEditor {
         public static CoreWindow core { get { return (CoreWindow)EditorWindow.GetWindow(typeof(CoreWindow)); } }
 
         public FrameEditorSO frameEditorSO;
-        public FrameManager manager { get; set; }
+        public FrameManager frameManager { get; set; }
+        public GameManager gameManager { get; set; }
 
         public SerializableDictionary<string, Editor> lightEditor = new SerializableDictionary<string, Editor>();
 
@@ -35,7 +34,7 @@ namespace FrameEditor {
             NodeEditorFramework.Standard.NodeEditorWindow.editor.canvasCache.AssureCanvas();
             SaveFrameEditorNodeCanvas();
 
-            foreach(var editor in lightEditor) {
+            foreach (var editor in lightEditor) {
                 if (editor.Value != null)
                     DestroyImmediate(editor.Value);
             }
@@ -53,29 +52,33 @@ namespace FrameEditor {
                 return;
             }
             else {
-                if (focusedWindow == this) NodeEditorWindow.editor.ShowTab(); 
+                if (focusedWindow == this) NodeEditorWindow.editor.ShowTab();
             }
             if (GameObject.Find("Frame Manager") == null && !EditorApplication.isCompiling) {
                 //if (!EditorUtility.DisplayDialog("Редактор фрейма", "Начать редактирование фрейма на этой сцене?", "Да", "Отмена")) {
-                    //Close();
-                    //NodeEditorWindow.editor.Close();
-                    //return;
+                //Close();
+                //NodeEditorWindow.editor.Close();
+                //return;
                 //}
             }
 
             if (!isEditingAllowed()) {
                 UpdateFrameEditorSO();
                 UpdateFrameManager();
+                UpdateGameManager();
                 AssetManager.UpdateAssets();
                 SetFrame();
             }
-            if (manager._assetDatabase == null || FrameManager.assetDatabase == null) {
-                manager._assetDatabase = AssetManager.GetAtPath<FrameEditorSO>("Scripts/SceneEditor/").FirstOrDefault();
-                FrameManager.assetDatabase = manager._assetDatabase;
+            if(FrameKey.frameCoreFlags.keys == null || FrameKey.frameCoreFlags.values == null) {
+                SaveManager.LoadFlagsFile();
             }
-            if (manager.GetComponent<FrameController>() == null) {
-                FrameController controller = manager.gameObject.AddComponent<FrameController>();
-                controller.manager = manager;
+            if (frameManager._assetDatabase == null || FrameManager.assetDatabase == null) {
+                frameManager._assetDatabase = AssetManager.GetAtPath<FrameEditorSO>("Scripts/SceneEditor/").FirstOrDefault();
+                FrameManager.assetDatabase = frameManager._assetDatabase;
+            }
+            if (frameManager.GetComponent<FrameController>() == null) {
+                FrameController controller = frameManager.gameObject.AddComponent<FrameController>();
+                controller.manager = frameManager;
             }
             if (isEditingAllowed()) {
                 UpdateDirty();
@@ -85,7 +88,7 @@ namespace FrameEditor {
                 UpdateFrameContainerChilds();
 
                 //if(FrameManager.frame.nodeCanvas == null || FrameManager.frame.nodeCanvas.name != FrameManager.frame.id)
-                  //  FrameManager.frame.nodeCanvas = AssetManager.GetAtPath<NodeCanvas>("Frames/NodeCanvases/").Where(ch => ch.canvasName == "Canvas_" + FrameManager.frame.id).FirstOrDefault();
+                //  FrameManager.frame.nodeCanvas = AssetManager.GetAtPath<NodeCanvas>("Frames/NodeCanvases/").Where(ch => ch.canvasName == "Canvas_" + FrameManager.frame.id).FirstOrDefault();
 
                 GUILayout.BeginHorizontal();
                 GUILayout.FlexibleSpace();
@@ -100,8 +103,8 @@ namespace FrameEditor {
                 GUILayout.FlexibleSpace();
                 GUILayout.EndHorizontal();
 
-                switch (FrameManager.GAME_TYPE) {
-                    case GameType.FrameInteraction:
+                switch (FrameManager.frame.currentKey.keyType) {
+                    case FrameKey.KeyType.Default:
 
                         FrameCamera.FrameCameraEditing();
 
@@ -116,31 +119,35 @@ namespace FrameEditor {
                         Character.FrameCharacterEditing();
 
                         break;
-                    /**case GameType.InnerFireFastSession:
-                        if(FrameManager.GetGameManager<FastSessionManager>() != null )
-                            fastSessionManager = FrameManager.GetGameManager<FastSessionManager>();
-                        GUILayout.FlexibleSpace();
-                        GUILayout.BeginHorizontal();
-                        GUILayout.FlexibleSpace();
-                        GUILayout.Label("Игровой менеджер:", FrameGUIUtility.GetLabelStyle(Color.cyan, 25));
-                        GUILayout.FlexibleSpace();
-                        GUILayout.EndHorizontal();
-                        GUILayout.BeginHorizontal();
-                        GUILayout.FlexibleSpace();
-                        fastSessionManager = (FastSessionManager)EditorGUILayout.ObjectField(fastSessionManager, typeof(FastSessionManager), true, GUILayout.MaxWidth(300));
+                    case FrameKey.KeyType.FlagChange:
+                        break;
+                    case FrameKey.KeyType.FlagCheck:
+                        break;
+                        /**case GameType.InnerFireFastSession:
+if(FrameManager.GetGameManager<FastSessionManager>() != null )
+  fastSessionManager = FrameManager.GetGameManager<FastSessionManager>();
+GUILayout.FlexibleSpace();
+GUILayout.BeginHorizontal();
+GUILayout.FlexibleSpace();
+GUILayout.Label("Игровой менеджер:", FrameGUIUtility.GetLabelStyle(Color.cyan, 25));
+GUILayout.FlexibleSpace();
+GUILayout.EndHorizontal();
+GUILayout.BeginHorizontal();
+GUILayout.FlexibleSpace();
+fastSessionManager = (FastSessionManager)EditorGUILayout.ObjectField(fastSessionManager, typeof(FastSessionManager), true, GUILayout.MaxWidth(300));
 
-                        if (fastSessionManager != null)
-                            FrameManager.frame.currentKey.gameManagerID = fastSessionManager.id;
-                        if (!manager._gameManagers.Contains(fastSessionManager)) manager._gameManagers.Add(fastSessionManager);
-                        if (!FrameManager.gameManagers.Contains(fastSessionManager)) FrameManager.gameManagers.Add(fastSessionManager);
-                        GUILayout.FlexibleSpace();
-                        GUILayout.EndHorizontal();
-                        GUILayout.FlexibleSpace();
-                        break;
-                    case GameType.InnerFireLongSession:
-                        break;
-                    case GameType.InnerFireFreeRoam:
-                        break;**/
+if (fastSessionManager != null)
+  FrameManager.frame.currentKey.gameManagerID = fastSessionManager.id;
+if (!manager._gameManagers.Contains(fastSessionManager)) manager._gameManagers.Add(fastSessionManager);
+if (!FrameManager.gameManagers.Contains(fastSessionManager)) FrameManager.gameManagers.Add(fastSessionManager);
+GUILayout.FlexibleSpace();
+GUILayout.EndHorizontal();
+GUILayout.FlexibleSpace();
+break;
+case GameType.InnerFireLongSession:
+break;
+case GameType.InnerFireFreeRoam:
+break;**/
                 }
 
                 GUILayout.FlexibleSpace();
@@ -156,8 +163,8 @@ namespace FrameEditor {
             }
         }
         public void DisableEffectsInEditor() {
-            foreach(var effect in FrameManager.frameElements.Where(ch => ch is FrameCore.FrameEffect)) {
-                foreach(var child in effect.GetComponentsInChildren<SpriteRenderer>()) {
+            foreach (var effect in FrameManager.frameElements.Where(ch => ch is FrameCore.FrameEffect)) {
+                foreach (var child in effect.GetComponentsInChildren<SpriteRenderer>()) {
                     child.enabled = false;
                 }
             }
@@ -186,7 +193,7 @@ namespace FrameEditor {
         }
         public bool isEditingAllowed() {
             if (
-                manager == null
+                frameManager == null
                 || FrameManager.UICanvas == null
                 || frameEditorSO == null
                 )
@@ -224,9 +231,9 @@ namespace FrameEditor {
             }
         }
         private void UpdateFrameManager() {
-            if (manager == null) {
+            if (frameManager == null) {
                 if (GameObject.Find("Frame Manager") != null) {
-                    manager = GameObject.Find(
+                    frameManager = GameObject.Find(
                         "Frame Manager"
                         )
                         .GetComponent<FrameManager>();
@@ -243,7 +250,7 @@ namespace FrameEditor {
                 else
                     SetUICanvas();
             }
-            if(FrameManager.UICanvasContainer == null) {
+            if (FrameManager.UICanvasContainer == null) {
                 FrameManager.UICanvasContainer = GameObject.Find("UI");
             }
             FrameManager.UICanvas.GetComponentInChildren<Canvas>().worldCamera = Camera.main;
@@ -264,8 +271,28 @@ namespace FrameEditor {
                 }
             }
         }
+        private void UpdateGameManager() {
+            if (gameManager == null) {
+                if (GameObject.Find("Game Manager") != null) {
+                    gameManager = GameObject.Find(
+                        "Game Manager"
+                        )
+                        .GetComponent<GameManager>();
+                }
+                else
+                    SetGameManager();
+            }
+        }
+        private void SetGameManager() {
+            gameManager = new GameObject(
+                "Game Manager",
+                typeof(GameManager)
+                )
+                .GetComponent<GameManager>();
+            gameManager.frameManager = frameManager;
+        }
         private void SetFrameManager() {
-            manager = new GameObject(
+            frameManager = new GameObject(
                 "Frame Manager",
                 typeof(FrameManager)
                 )

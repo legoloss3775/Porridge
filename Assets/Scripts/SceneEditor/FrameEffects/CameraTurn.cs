@@ -1,6 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 namespace FrameCore.FrameEffects {
@@ -9,7 +7,7 @@ namespace FrameCore.FrameEffects {
         public float animationDelay { get { if (GetComponent<FrameEffect>() != null) return GetComponent<FrameEffect>().animationDelay; else return 0f; } }
         public float degreesX { get { if (GetComponent<FrameEffect>() != null) return GetComponent<FrameEffect>().cameraTurnAnimationData.degreesX; else return 90f; } }
         public float degreesY { get { if (GetComponent<FrameEffect>() != null) return GetComponent<FrameEffect>().cameraTurnAnimationData.degreesY; else return 0f; } }
-       // Vector3 finalRot { get { return new Vector3(degreesY, degreesX, Camera.main.transform.rotation.eulerAngles.z); } }
+        // Vector3 finalRot { get { return new Vector3(degreesY, degreesX, Camera.main.transform.rotation.eulerAngles.z); } }
         public Vector3 rotation;
 
         void Start() {
@@ -37,7 +35,7 @@ namespace FrameCore.FrameEffects {
                     FrameController.RemoveAnimationFromQueue(gameObject.name);
                 }
             }**/
-           // Debug.Log(Camera.main.transform.rotation.eulerAngles.y);
+            // Debug.Log(Camera.main.transform.rotation.eulerAngles.y);
         }
         public IEnumerator TurnCamera(float degreesX, float degreesY, float speed) {
 

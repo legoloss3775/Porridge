@@ -1,13 +1,11 @@
-﻿using System.Collections;
+﻿
 using System.Collections.Generic;
 using UnityEngine;
-using FrameCore;
-using System;
 
 namespace FrameCore {
-    
+
     namespace Serialization {
-        [Serializable]
+        [System.Serializable]
         public class FrameEffectValues : Values {
             public FrameEffectData frameEffectData;
             public CameraTurnAnimationData cameraTurnAnimationData;
@@ -28,7 +26,7 @@ namespace FrameCore {
                 };
             }
             public FrameEffectValues() { }
-            [Serializable]
+            [System.Serializable]
             public struct SerializedFrameEffectValues {
                 public TransformData transformData;
                 public FrameEffectData frameEffectData;
@@ -44,7 +42,7 @@ namespace FrameCore {
                     };
                 }
             }
-            public static void LoadSerializedFrameEffectValues (List<SerializedFrameEffectValues> serializedElementValues, List<Values> values) {
+            public static void LoadSerializedFrameEffectValues(List<SerializedFrameEffectValues> serializedElementValues, List<Values> values) {
                 foreach (var svalue in serializedElementValues) {
                     values.Add(new FrameEffectValues {
                         transformData = svalue.transformData,
@@ -82,7 +80,7 @@ namespace FrameCore {
                 cameraTurn.StartCoroutine(cameraTurn.TurnCamera(cameraTurn.degreesX, cameraTurn.degreesY, cameraTurn.speed));
 
             }
-            if(GetComponent<FrameEffects.CameraMove>() != null && activeStatus != false) {
+            if (GetComponent<FrameEffects.CameraMove>() != null && activeStatus != false) {
                 var cameraMove = GetComponent<FrameEffects.CameraMove>();
 
                 //cameraMove.moveToPosition = Camera.main.transform.position;

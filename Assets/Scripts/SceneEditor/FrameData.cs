@@ -9,6 +9,54 @@ namespace FrameCore.Serialization {
 
     }
     [System.Serializable]
+    public struct FrameCoreFlags {
+        public List<string> keys;
+        public List<bool> values;
+
+        #region FLAG_METHODS
+        public bool ContainsKey(string key) {
+            for(int i = 0; i < keys.Count; i++) {
+                if (keys[i] == key) {
+                    return true;
+                }
+            }
+            return false;
+        }
+        public bool GetValue(string key) {
+            for (int i = 0; i < keys.Count; i++) {
+                if (keys[i] == key) {
+                    return values[i];
+                }
+            }
+            throw new System.Exception("Значение не найдено");
+        }
+        public void SetValue(string key, bool value) {
+            for (int i = 0; i < keys.Count; i++) {
+                if (keys[i] == key) {
+                    values[i] = value;
+                }
+            }
+        }
+        public void Add(string key, bool value) {
+            for (int i = 0; i < keys.Count; i++) {
+                if (keys[i] == key) {
+                    throw new System.Exception("Ключ уже был добавлен в словарь");
+                }
+            }
+            keys.Add(key);
+            values.Add(value);
+        }
+        public void Remove(string key) {
+            for (int i = 0; i < keys.Count; i++) {
+                if (keys[i] == key) {
+                    keys.Remove(keys[i]);
+                    values.Add(values[i]);
+                }
+            }
+        }
+        #endregion
+    }
+    [System.Serializable]
     public struct KeySequenceData {
         public int nextKeyID;
         public int previousKeyID;

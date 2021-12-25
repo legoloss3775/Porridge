@@ -1,10 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.VFX;
 
-public class DialogueSkip : MonoBehaviour
-{
+public class DialogueSkip : MonoBehaviour {
     public VisualEffect particleEffect;
     public float speed = 1000;
     public float spawnRate;
@@ -24,7 +21,7 @@ public class DialogueSkip : MonoBehaviour
     }
 
     private void Update() {
-        if (FrameCore.FrameController.INPUT_BLOCK == false && 
+        if (FrameCore.FrameController.INPUT_BLOCK == false &&
             gameObject.transform.parent.GetComponent<FrameCore.UI.Dialogue>().autoContinue != true) {
             if (particleEffect.GetFloat("spawnRate") <= 60000) {
                 value = 60000;

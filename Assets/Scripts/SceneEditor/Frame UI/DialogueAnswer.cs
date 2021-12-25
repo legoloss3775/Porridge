@@ -1,9 +1,6 @@
-﻿using FrameCore.ScriptableObjects;
-using FrameCore.ScriptableObjects.UI;
+﻿using FrameCore.ScriptableObjects.UI;
 using FrameCore.Serialization;
 using FrameCore.UI;
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEditor;
@@ -18,7 +15,7 @@ namespace FrameCore {
     namespace Serialization {
         #region SERIALIZATION
 
-        [Serializable]
+        [System.Serializable]
         public class DialogueAnswerValues : Values {
             public KeySequenceData keySequenceData;
             public DialogueAnswerTextData dialogueAnswerTextData;
@@ -38,7 +35,7 @@ namespace FrameCore {
                 };
             }
             public DialogueAnswerValues() { }
-            [Serializable]
+            [System.Serializable]
             public struct SerializedDialogueAnswerValues {
                 public TransformData transformData;
                 public KeySequenceData keySequenceData;
@@ -175,7 +172,7 @@ namespace FrameCore {
                     answer.size = answer.GetComponent<RectTransform>().sizeDelta;
                     answer.rotation = answer.GetComponent<RectTransform>().localRotation;
 
-                    answer.SetKeyValuesWhileNotInPlayMode();    
+                    answer.SetKeyValuesWhileNotInPlayMode();
                     if (targets.Length > 1) {
                         foreach (var target in targets) {
                             FrameElement mTarget = (DialogueAnswer)target;

@@ -17,11 +17,14 @@ MonoBehaviour:
   selectedKeyIndex: 0
   currentKey:
     id: 0
-    nodeIndex: 0
     frameKeyTransitionKnobs:
       keys: []
       values: 
+    frameKeyGlobalFlagKnobs:
+      keys: []
+      values: 
     transitionType: 0
+    keyType: 0
     gameType: 0
     gameManagerID: 
     frameKeyValues:
@@ -32,6 +35,12 @@ MonoBehaviour:
       serializedFrameCharacterValues: []
       serializedFrameEffectValues: []
       serializedFrameLightValues: []
+    flagData:
+      keys: []
+      values: 
+    flagSequenceData:
+      nextKeyID: 0
+      previousKeyID: 0
   frameKeys: []
   nodeCanvas: {fileID: 11400000, guid: 922c585fe95d8424fb527f16cff86530, type: 2}
   usedElementsObjects: []

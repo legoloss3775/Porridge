@@ -7,6 +7,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2454107521743766780, guid: aeb25c73ab277c94787697927732273a, type: 3}
+      propertyPath: m_Color.a
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2454107521743766780, guid: aeb25c73ab277c94787697927732273a, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2454107521743766780, guid: aeb25c73ab277c94787697927732273a, type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2454107521743766780, guid: aeb25c73ab277c94787697927732273a, type: 3}
+      propertyPath: m_Color.r
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8691258698662488234, guid: aeb25c73ab277c94787697927732273a, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -53,7 +69,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8691258698662488235, guid: aeb25c73ab277c94787697927732273a, type: 3}
       propertyPath: m_Name
-      value: Blackout Screen (to black)
+      value: Blackout Screen (to black) Variant
       objectReference: {fileID: 0}
     - target: {fileID: 8691258698662488237, guid: aeb25c73ab277c94787697927732273a, type: 3}
       propertyPath: toBlack

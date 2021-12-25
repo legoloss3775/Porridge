@@ -1,10 +1,8 @@
 ﻿using FrameCore.ScriptableObjects.UI;
 using FrameCore.Serialization;
 using NodeEditorFramework;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEditor;
 using UnityEngine;
 
 namespace FrameCore {
@@ -23,7 +21,7 @@ namespace FrameCore {
             public FrameKey currentKey;
             public List<FrameKey> frameKeys = new List<FrameKey>();
             public NodeCanvas nodeCanvas;
-            [Serializable]
+            [System.Serializable]
             public struct FrameElementIDPair {
                 public FrameElementSO elementObject;
                 public List<string> ids;
@@ -52,10 +50,10 @@ namespace FrameCore {
                 frameKeys.Add(key);
                 key.id = frameKeys.IndexOf(key);
 
-/**#if UNITY_EDITOR
-                FrameKeyNode node = (FrameKeyNode)Node.Create(key.id.ToString(), Vector2.zero);
+                /**#if UNITY_EDITOR
+                                FrameKeyNode node = (FrameKeyNode)Node.Create(key.id.ToString(), Vector2.zero);
 
-                key.nodeIndex = NodeEditorFramework.NodeEditor.curNodeCanvas.nodes.IndexOf(node);
+                                key.nodeIndex = NodeEditorFramework.NodeEditor.curNodeCanvas.nodes.IndexOf(node);
 #endif**/
             }
             public List<string> GetAllIDsOfType<T>()
@@ -137,7 +135,7 @@ namespace FrameCore {
             }
             public static void LoadElementsOnScene<TKey, TValue>(List<FrameElementIDPair> pairs)
             where TValue : FrameElement
-            where TKey : FrameCore.ScriptableObjects.FrameElementSO{
+            where TKey : FrameCore.ScriptableObjects.FrameElementSO {
                 foreach (var pair in pairs) {
                     if (pair.elementObject.GetType() == typeof(TKey)) {
                         foreach (var id in pair.ids) {

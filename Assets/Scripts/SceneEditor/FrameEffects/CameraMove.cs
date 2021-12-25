@@ -1,6 +1,4 @@
-﻿using FrameCore;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections;
 using UnityEngine;
 
 namespace FrameCore.FrameEffects {

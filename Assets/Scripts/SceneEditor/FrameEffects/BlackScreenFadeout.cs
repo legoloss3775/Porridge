@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace FrameCore {
@@ -12,7 +11,9 @@ namespace FrameCore {
             public bool toBlack;
             public bool end = false;
             private void OnEnable() {
-               // FrameController.INPUT_BLOCK = true;
+                var color = GetComponent<SpriteRenderer>().color;
+                color.a = 255;
+                // FrameController.INPUT_BLOCK = true;
             }
             void Start() {
                 /**Color objectColor = GetComponent<SpriteRenderer>().color;
@@ -26,7 +27,7 @@ namespace FrameCore {
             }
 
             void Update() {
-                if(Camera.main != null) {
+                if (Camera.main != null) {
                     this.transform.position = Camera.main.transform.position - new Vector3(0, 0, -10);
                     this.transform.rotation = Camera.main.transform.rotation;
                 }
@@ -52,7 +53,7 @@ namespace FrameCore {
                 float fadeAmount;
 
                 if (fadeToBlack) {
-                    while(GetComponent<SpriteRenderer>().color.a < 1) {
+                    while (GetComponent<SpriteRenderer>().color.a < 1) {
                         fadeAmount = objectColor.a + (fadeSpeed * Time.deltaTime);
 
                         objectColor = new Color(objectColor.r, objectColor.g, objectColor.b, fadeAmount);
@@ -61,7 +62,7 @@ namespace FrameCore {
                     }
                 }
                 else {
-                    while(GetComponent<SpriteRenderer>().color.a > 0) {
+                    while (GetComponent<SpriteRenderer>().color.a > 0) {
                         fadeAmount = objectColor.a - (fadeSpeed * Time.deltaTime);
 
                         objectColor = new Color(objectColor.r, objectColor.g, objectColor.b, fadeAmount);

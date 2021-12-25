@@ -1,12 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
-using UnityEngine;
+﻿using FrameCore.ScriptableObjects;
+using FrameCore.Serialization;
 using System;
 using System.Linq;
-using FrameCore;
-using FrameCore.ScriptableObjects;
-using FrameCore.Serialization;
+using UnityEditor;
+using UnityEngine;
 
 #if UNITY_EDITOR
 namespace FrameEditor {
@@ -52,8 +49,8 @@ namespace FrameEditor {
 
             GUILayout.EndHorizontal();
             GUILayout.EndVertical();
-            GUILayout.BeginHorizontal();//
-            GUILayout.Label(character.id, EditorStyles.largeLabel);
+            GUILayout.BeginHorizontal();
+            GUILayout.Label(character.id);
             GUILayout.FlexibleSpace();
             GUILayout.EndHorizontal();
 
@@ -63,7 +60,7 @@ namespace FrameEditor {
             }
             if (character.activeStatus == false) {
                 GUILayout.FlexibleSpace();
-                GUILayout.Label("Inactive", EditorStyles.largeLabel);
+                GUILayout.Label("Inactive");
                 GUILayout.EndHorizontal();
                 return;
             }
@@ -76,8 +73,8 @@ namespace FrameEditor {
             GUILayout.EndHorizontal();
 
             var characterParts = new SerializableDictionary<int, CharacterPart>();
-            for(int i = 0; i < characterSO.characterParts.Count; i++) {
-                if(characterSO.characterParts[i].state == keyValues.characterData.emotionState) {
+            for (int i = 0; i < characterSO.characterParts.Count; i++) {
+                if (characterSO.characterParts[i].state == keyValues.characterData.emotionState) {
                     characterParts.Add(i, characterSO.characterParts[i]);
                 }
             }
@@ -98,12 +95,12 @@ namespace FrameEditor {
                 var icons = new SerializableDictionary<int, Texture>();
                 foreach (var part in parts) {
                     var icon = UnityEditor.AssetPreview.GetAssetPreview(part.Value.statePrefab);
-                    if(!icons.ContainsValue(icon))
+                    if (!icons.ContainsValue(icon))
                         icons.Add(part.Key, icon);
                 }
                 int index = 0;
-                for(int i = 0; i < parts.Count; i++) {
-                    if(parts.Keys.ToArray()[i] == keyValues.characterData.selectedPartIndex) {
+                for (int i = 0; i < parts.Count; i++) {
+                    if (parts.Keys.ToArray()[i] == keyValues.characterData.selectedPartIndex) {
                         index = i;
                         break;
                     }

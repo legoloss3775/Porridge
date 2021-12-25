@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
@@ -40,8 +39,8 @@ namespace FrameCore {
                     };
                 }
             }
-            public static void LoadSerializedFrameLightValues(List<SerializedFrameLightValues>serializedFrameLightValues, List<Values> values) {
-                foreach(var svalue in serializedFrameLightValues) {
+            public static void LoadSerializedFrameLightValues(List<SerializedFrameLightValues> serializedFrameLightValues, List<Values> values) {
+                foreach (var svalue in serializedFrameLightValues) {
                     values.Add(new FrameLightValues {
                         transformData = svalue.transformData,
                         lightData = svalue.lightData,

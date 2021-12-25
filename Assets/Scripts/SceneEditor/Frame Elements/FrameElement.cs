@@ -1,6 +1,5 @@
 ﻿using FrameCore.ScriptableObjects;
 using FrameCore.Serialization;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
@@ -43,7 +42,7 @@ namespace FrameCore {
     /// </summary>
     namespace Serialization {
         #region SERIALIZATION
-        [Serializable]
+        [System.Serializable]
         public class FrameElementValues : Values {
             public FrameElementValues(FrameElement element) {
                 transformData = new TransformData {
@@ -54,7 +53,7 @@ namespace FrameCore {
                 };
             }
             public FrameElementValues() { }
-            [Serializable]
+            [System.Serializable]
             public struct SerializedElementValues {
                 public TransformData transformData;
             }
@@ -135,7 +134,7 @@ namespace FrameCore {
 
         }**/
         public virtual void OnEnable() {
-            if(GetComponent<Animator>() != null) {
+            if (GetComponent<Animator>() != null) {
                 GetComponent<Animator>().SetInteger("state", 1);
             }
         }

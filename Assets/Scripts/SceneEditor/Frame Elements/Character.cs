@@ -1,20 +1,18 @@
-﻿using System;
+﻿using FrameCore.ScriptableObjects;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
-using FrameCore.ScriptableObjects;
-using FrameCore.Serialization;
 
 
 namespace FrameCore {
     /// <summary>
-    /// Для сериализации параметров
+    /// Для сериализации параметров.
     /// <see cref="FrameElement">
     /// </summary>
     namespace Serialization {
         #region SERIALIZATION
-        [Serializable]
+        [System.Serializable]
         public class CharacterValues : Values {
             public CharacterData characterData;
             public CharacterValues(Character character) {
@@ -32,7 +30,7 @@ namespace FrameCore {
                 };
             }
             public CharacterValues() { }
-            [Serializable]
+            [System.Serializable]
             public struct SerializedFrameCharacterValues {
                 public TransformData transformData;
                 public CharacterData characterData;

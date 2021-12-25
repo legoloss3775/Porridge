@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using FrameCore;
-using FrameCore.ScriptableObjects;
+﻿using UnityEngine;
 
 namespace FrameCore.ScriptableObjects {
     [CreateAssetMenu(fileName = "FrameEffect", menuName = "Редактор Сцен/Эффект")]

@@ -1,13 +1,13 @@
-﻿using System;
+﻿using FrameCore;
+using FrameCore.ScriptableObjects;
+using FrameCore.ScriptableObjects.UI;
+using FrameCore.Serialization;
+using FrameCore.UI;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
-using FrameCore;
-using FrameCore.ScriptableObjects;
-using FrameCore.Serialization;
-using FrameCore.UI;
-using FrameCore.ScriptableObjects.UI;
 
 #if UNITY_EDITOR
 namespace FrameEditor {
@@ -42,7 +42,7 @@ namespace FrameEditor {
             GUILayout.EndHorizontal();
 
             if (foldouts[EditorType.DialogueEditor]) {
-                if(FrameManager.frame.currentKey.transitionType == FrameKey.TransitionType.DialogueLineContinue) {
+                if (FrameManager.frame.currentKey.transitionType == FrameKey.TransitionType.DialogueLineContinue) {
                     GUILayout.BeginVertical("HelpBox");
                     ElementEditing<DialogueSO, FrameCore.UI.Dialogue>(PositioningType.Vertical, EditorType.DialogueEditor, false, false, dialogueCharacterSelection, textEditing);
                     GUILayout.EndVertical();
@@ -69,10 +69,10 @@ namespace FrameEditor {
             ElementDeletion(dialogueAnswer); //кнопка удаления элемента
             GUILayout.EndHorizontal();
             GUILayout.EndVertical();
-            GUILayout.Label(dialogueAnswer.id, EditorStyles.largeLabel);
+            GUILayout.Label(dialogueAnswer.id);
             if (dialogueAnswer.activeStatus == false) {
                 GUILayout.FlexibleSpace();
-                GUILayout.Label("Inactive", EditorStyles.largeLabel);
+                GUILayout.Label("Inactive");
                 GUILayout.EndHorizontal();
                 return;
             }
@@ -126,7 +126,7 @@ namespace FrameEditor {
             GUILayout.EndHorizontal();
 
             GUILayout.BeginHorizontal();
-            keyValues.dialogueTextData.textAnimationTime = EditorGUILayout.FloatField("Время анимации текста: ",keyValues.dialogueTextData.textAnimationTime);
+            keyValues.dialogueTextData.textAnimationTime = EditorGUILayout.FloatField("Время анимации текста: ", keyValues.dialogueTextData.textAnimationTime);
             if (dialogue.textAnimationTime != keyValues.dialogueTextData.textAnimationTime) dialogue.textAnimationTime = keyValues.dialogueTextData.textAnimationTime;
             GUILayout.FlexibleSpace();
             GUILayout.EndHorizontal();
@@ -168,10 +168,10 @@ namespace FrameEditor {
             ElementDeletion(dialogue); //кнопка удаления элемента
             GUILayout.EndHorizontal();
             GUILayout.EndVertical();
-            GUILayout.Label(dialogue.id, EditorStyles.largeLabel);
+            GUILayout.Label(dialogue.id);
             if (dialogue.activeStatus == false) {
                 GUILayout.FlexibleSpace();
-                GUILayout.Label("Inactive", EditorStyles.largeLabel);
+                GUILayout.Label("Inactive");
                 GUILayout.EndHorizontal();
                 return;
             }
@@ -236,12 +236,12 @@ namespace FrameEditor {
                 foreach (var character in keyValues.dialogueTextData.conversationCharacters) {
                     names.Add(character.Value.Split('_')[0]);
                 }
-                if(keyValues.dialogueTextData.speakingCharacterIndex >= keyValues.dialogueTextData.conversationCharacters.Count) {
+                if (keyValues.dialogueTextData.speakingCharacterIndex >= keyValues.dialogueTextData.conversationCharacters.Count) {
                     keyValues.dialogueTextData.speakingCharacterIndex = 0;
                     dialogue.speakingCharacterIndex = 0;
                 }
                 GUILayout.Label("Выбор говорящего:");
-               
+
                 keyValues.dialogueTextData.speakingCharacterIndex = GUILayout.SelectionGrid(
                     keyValues.dialogueTextData.speakingCharacterIndex,
                     names.ToArray(),
@@ -303,7 +303,7 @@ namespace FrameEditor {
 
             characterIDs = FrameManager.frame.GetFrameElementIDsByObject(dialogue.currentConversationCharacterSO) ?? new List<string>();
 
-            foreach(var characterID in dialogue.conversationCharacters) {
+            foreach (var characterID in dialogue.conversationCharacters) {
                 if (!FrameManager.frame.currentKey.ContainsID(characterID.Value)) {
                     try {
                         FrameManager.frame.currentKey.AddFrameKeyValues(
@@ -336,7 +336,7 @@ namespace FrameEditor {
                             characterWasCreatedPreviously = true;
 
                     FrameCore.Character dialogueCharacter = null;
-                    foreach(var characterID in dialogue.conversationCharacters) {
+                    foreach (var characterID in dialogue.conversationCharacters) {
                         if (FrameManager.GetFrameElementOnSceneByID<FrameCore.Character>(characterID.Value)?.id == dialogue.conversationCharacterID)
                             dialogueCharacter = FrameManager.GetFrameElementOnSceneByID<FrameCore.Character>(characterID.Value);
                     }
@@ -362,7 +362,7 @@ namespace FrameEditor {
                             SetPreviousCharacterValues();
                         }
                     }
-                    if(dialogueCharacter == null && dialogue.conversationCharacters.Count > 0) {
+                    if (dialogueCharacter == null && dialogue.conversationCharacters.Count > 0) {
                         foreach (var character in keyValues.dialogueTextData.conversationCharacters) {
                             if (character.Key == dialogue.currentConversationCharacterSO.id) {
                                 if (!FrameManager.frame.currentKey.ContainsID(character.Value)) {

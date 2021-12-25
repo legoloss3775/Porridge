@@ -1,9 +1,8 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using UnityEngine.VFX;
-using UnityEngine.EventSystems;
 
 namespace FrameCore.FrameEffects {
 
@@ -17,7 +16,7 @@ namespace FrameCore.FrameEffects {
         private void Awake() {
             particleEffect = GetComponentInChildren<VisualEffect>();
             button = GetComponent<Button>();
-            particleEffect.SetFloat("spawnRate", spawnRate/2f);
+            particleEffect.SetFloat("spawnRate", spawnRate / 2f);
             _spawnRate = particleEffect.GetFloat("spawnRate");
         }
         private void OnEnable() {
@@ -25,13 +24,13 @@ namespace FrameCore.FrameEffects {
         }
 
         private void Update() {
-            if (particleEffect.GetFloat("spawnRate") > spawnRate/2f) StopAllCoroutines();
-            if (hoverOver) particleEffect.SetFloat("spawnRate", _spawnRate/2f);
+            if (particleEffect.GetFloat("spawnRate") > spawnRate / 2f) StopAllCoroutines();
+            if (hoverOver) particleEffect.SetFloat("spawnRate", _spawnRate / 2f);
             else particleEffect.SetFloat("spawnRate", _spawnRate / 10);
         }
         public IEnumerator ParticlesOnEnableAnim(float speed) {
             float value = 0;
-            while(particleEffect.GetFloat("spawnRate") <= spawnRate/2) {
+            while (particleEffect.GetFloat("spawnRate") <= spawnRate / 2) {
                 particleEffect.SetFloat("spawnRate", value);
                 value += 250;
                 yield return null;

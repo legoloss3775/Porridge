@@ -1,28 +1,65 @@
 ﻿
-using System;
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using UnityEngine;
 
 namespace FrameCore {
-    [Serializable]
+    [System.Serializable]
     public class FrameKey {
         public int id;
         public int nodeIndex { get; set; }
 
         public SerializableDictionary<string, int> frameKeyTransitionKnobs = new SerializableDictionary<string, int>();
+        public SerializableDictionary<string, int> frameKeyGlobalFlagKnobs = new SerializableDictionary<string, int>();
 
         public delegate void KeyListner();
         public event KeyListner onFrameKeyUpdate;
 
         public TransitionType transitionType;
+        public KeyType keyType;
         public GameType gameType;
         public string gameManagerID;
         public FrameKeyDictionary frameKeyValues = new FrameKeyDictionary();
 
+        public int[] flagNextKeyID = new int[2];
+
+        public Serialization.FrameCoreFlags flagData;
+        public static Serialization.FrameCoreFlags frameCoreFlags;
+        //TODO: при игре в эдиторе запись в файле будет сохраняться даже после выхода из режима игры,
+        //из-за чего нужно сделать сброс флагов в эдиторе
+
+        public Serialization.KeySequenceData flagSequenceData;
+
         public enum TransitionType {
             DialogueLineContinue,
             DialogueAnswerSelection,
+        }
+        public enum KeyType {
+            Default,
+            FlagChange,
+            FlagCheck,
+        }
+        public static bool CheckGlobalFlags(Serialization.FrameCoreFlags flags) {
+            foreach (var id in flags.keys) {
+                foreach (var global_ID in FrameKey.frameCoreFlags.keys) {
+                    if (FrameKey.frameCoreFlags.GetValue(global_ID) == true) {
+                        return true;
+                    }
+                    else {
+                        return false;
+                    }
+                }
+            }
+            throw new System.Exception("Не найден флаг");
+        }
+        public static void UpdateGlobalFlags(Serialization.FrameCoreFlags flags) {
+            foreach(var id in flags.keys) {
+                foreach(var global_ID in FrameKey.frameCoreFlags.keys) {
+                    if(id == global_ID) {
+                        FrameKey.frameCoreFlags.SetValue(id, flags.GetValue(id));
+                    }
+                }
+            }
         }
         public FrameKeyDictionary GetFrameKeyValuesOfType<T>()
             where T : Values {
@@ -61,11 +98,11 @@ namespace FrameCore {
             else return false;
         }
     }
-    [Serializable]
+    [System.Serializable]
     public abstract class Values {
         public Serialization.TransformData transformData;
         public static T GetObject<T>(params object[] args) {
-            return (T)Activator.CreateInstance(typeof(T), args);
+            return (T)System.Activator.CreateInstance(typeof(T), args);
         }
     }
 }

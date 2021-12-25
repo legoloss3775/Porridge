@@ -1,14 +1,10 @@
 ﻿using FrameCore.ScriptableObjects;
 using FrameCore.ScriptableObjects.UI;
 using FrameCore.UI;
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.Events;
-using UnityEngine.UI;
 
 namespace FrameCore {
     public enum GameType {
@@ -41,19 +37,11 @@ namespace FrameCore {
         public static event FrameListner onFrameKeyChanged;
         public static event FrameListner onFrameChanged;
 
-
+        //
         /**public static List<GameFramework.GameManager> gameManagers = new List<GameFramework.GameManager>();
         public List<GameFramework.GameManager> _gameManagers = new List<GameFramework.GameManager>();**/
-
+            //
         private void Awake() {
-
-            /**foreach (var effect in frameElements.Where(ch => ch is FrameCore.FrameEffect)) {
-                foreach (var child in effect.GetComponentsInChildren<SpriteRenderer>()) {
-                    child.enabled = true;
-                }
-            }**/
-        }
-        private void Start() {
             assetDatabase = _assetDatabase;
             UICanvas = GameObject.Find("UI Canvas").GetComponent<Canvas>();
             frameContainer = GameObject.Find("Frame");
@@ -61,19 +49,60 @@ namespace FrameCore {
 
             UICanvas.worldCamera = Camera.main;
 
-           // SetFrame(0, 0);
-            SetFrame(assetDatabase.selectedFrameIndex, assetDatabase.selectedKeyIndex);
-        } 
+            // SetFrame(0, 0);
+            //SetFrame(assetDatabase.selectedFrameIndex, assetDatabase.selectedKeyIndex);
+            /**foreach (var effect in frameElements.Where(ch => ch is FrameCore.FrameEffect)) {
+                foreach (var child in effect.GetComponentsInChildren<SpriteRenderer>()) {
+                    child.enabled = true;
+                }
+            }**/
+        }
+        private void Start() {
+        }
+
         private void Update() {
-            if(UICanvas.worldCamera != Camera.main)
-                UICanvas.worldCamera = Camera.main; 
+            if (UICanvas.worldCamera != Camera.main)
+                UICanvas.worldCamera = Camera.main;
+
+            foreach(var flag in FrameKey.frameCoreFlags.keys) {
+                Debug.Log(flag + " " + FrameKey.frameCoreFlags.GetValue(flag).ToString());
+            }
         }
         public static void SetKey(int keyIndex) {
             if (frame.frameKeys.Count > keyIndex &&
                 keyIndex >= 0) {
                 frame.currentKey = frame.frameKeys[keyIndex];
 
-                ChangeFrameKey();
+                switch (frame.currentKey.keyType) {
+                    case FrameKey.KeyType.Default:
+
+                        ChangeFrameKey();
+
+                        break;
+                    case FrameKey.KeyType.FlagChange:
+
+                        FrameKey.UpdateGlobalFlags(frame.currentKey.flagData);
+
+                        frame.currentKey = frame.frameKeys[frame.currentKey.flagSequenceData.nextKeyID];
+
+                        ChangeFrameKey();
+
+                        break;
+                    case FrameKey.KeyType.FlagCheck:
+
+                        if (FrameKey.CheckGlobalFlags(frame.currentKey.flagData)) {
+                            frame.currentKey = frame.frameKeys[frame.currentKey.flagNextKeyID[0]];
+
+                            ChangeFrameKey();
+                        }
+                        else {
+                            frame.currentKey = frame.frameKeys[frame.currentKey.flagNextKeyID[1]];
+
+                            ChangeFrameKey();
+                        }
+
+                        break;
+                }
 
                 /**switch (frame.currentKey.gameType) {
                     case GameType.FrameInteraction:
@@ -178,9 +207,10 @@ namespace FrameCore {
                 onFrameKeyChanged += element.OnKeyChanged;
             }
 
-            onFrameKeyChanged?.Invoke();
+            if(Application.isPlaying)
+                onFrameKeyChanged?.Invoke();
         }
-        //TODO: switch gametype?
+        //TODO: switch gametype?/
         public static void ChangeFrame() {
             ClearElements();
             FrameSO.LoadElementsOnScene<FrameCameraSO, FrameCamera>(frame.usedElementsObjects);
@@ -223,14 +253,14 @@ namespace FrameCore {
                 if (element != null)
                     serializedFrameElementsList.Add(element);
             }
-           /** foreach(var manager in gameManagers) {
-                if (manager != null)
-                    _gameManagers.Add(manager);
-            }**/
+            /** foreach(var manager in gameManagers) {
+                 if (manager != null)
+                     _gameManagers.Add(manager);
+             }**/
         }
         public void OnAfterDeserialize() {
             frameElements.Clear();
-          //  gameManagers.Clear();
+            //  gameManagers.Clear();
             foreach (var element in serializedFrameElementsList) {
 
                 if (element != null)

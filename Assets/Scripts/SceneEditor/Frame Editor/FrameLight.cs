@@ -1,7 +1,5 @@
 using FrameCore.ScriptableObjects;
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
@@ -48,9 +46,9 @@ namespace FrameEditor {
             GUILayout.EndVertical();
 
             if (frameLight.activeStatus == false) {
-                GUILayout.Label(frameLight.GetName(), EditorStyles.largeLabel);
+                GUILayout.Label(frameLight.GetName());
                 GUILayout.FlexibleSpace();
-                GUILayout.Label("Inactive", EditorStyles.largeLabel);
+                GUILayout.Label("Inactive");
                 GUILayout.EndHorizontal();
                 return;
             }
@@ -64,14 +62,14 @@ namespace FrameEditor {
             GUILayout.FlexibleSpace();
             GUILayout.EndHorizontal();
 
-           /** GUILayout.BeginVertical("HelpBox");
-            GUILayout.BeginHorizontal();
-            GUILayout.Label("Параметры:", EditorStyles.boldLabel, GUILayout.MaxWidth(80));
-            GUILayout.BeginVertical();
-            GUILayout.Space(9);
-            FrameGUIUtility.GuiLine();
-            GUILayout.EndVertical();
-            GUILayout.EndHorizontal();**/
+            /** GUILayout.BeginVertical("HelpBox");
+             GUILayout.BeginHorizontal();
+             GUILayout.Label("Параметры:", EditorStyles.boldLabel, GUILayout.MaxWidth(80));
+             GUILayout.BeginVertical();
+             GUILayout.Space(9);
+             FrameGUIUtility.GuiLine();
+             GUILayout.EndVertical();
+             GUILayout.EndHorizontal();**/
 
             /**if (FrameCore.FrameManager.GetFrameElementOnSceneByID<FrameCore.FrameLight>(id) != null) {
                 if (!CoreWindow.core.lightEditor.ContainsKey(frameLight.id)) {

@@ -3,7 +3,6 @@ using FrameCore.ScriptableObjects;
 using FrameCore.ScriptableObjects.UI;
 using FrameCore.Serialization;
 using NodeEditorFramework;
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -104,7 +103,7 @@ namespace FrameCore {
     }
 }
 #endif
-[Serializable]
+[System.Serializable]
 public class FrameKeyDictionary : Dictionary<string, Values>, ISerializationCallbackReceiver {
     [SerializeField]
     private List<string> keys = new List<string>();
@@ -197,7 +196,7 @@ public class FrameKeyDictionary : Dictionary<string, Values>, ISerializationCall
         }
     }
 }
-[Serializable]
+[System.Serializable]
 public class SerializableDictionary<TKey, TValue> : Dictionary<TKey, TValue>, ISerializationCallbackReceiver {
     [SerializeField]
     private List<TKey> keys = new List<TKey>();
