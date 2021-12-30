@@ -9,6 +9,7 @@ using UnityEngine;
 namespace FrameCore {
     public enum GameType {
         FrameInteraction,
+        Cutscene,
         InnerFireFastSession,
         InnerFireLongSession,
         InnerFireFreeRoam,
@@ -73,34 +74,56 @@ namespace FrameCore {
                 keyIndex >= 0) {
                 frame.currentKey = frame.frameKeys[keyIndex];
 
-                switch (frame.currentKey.keyType) {
-                    case FrameKey.KeyType.Default:
+                switch (frame.currentKey.gameType) {
+                    case GameType.FrameInteraction:
+                        switch (frame.currentKey.keyType) {
+                            case FrameKey.KeyType.Default:
+                                if (frame.currentKey.cutscene != null) Destroy(frame.currentKey.cutscene);
+                                frameContainer.SetActive(true);
 
-                        ChangeFrameKey();
+                                ChangeFrameKey();
 
-                        break;
-                    case FrameKey.KeyType.FlagChange:
+                                break;
+                            case FrameKey.KeyType.FlagChange:
+                                if (frame.currentKey.cutscene != null) Destroy(frame.currentKey.cutscene);
+                                frameContainer.SetActive(true);
 
-                        FrameKey.UpdateGlobalFlags(frame.currentKey.flagData);
+                                FrameKey.UpdateGlobalFlags(frame.currentKey.flagData);
 
-                        frame.currentKey = frame.frameKeys[frame.currentKey.flagSequenceData.nextKeyID];
+                                frame.currentKey = frame.frameKeys[frame.currentKey.flagSequenceData.nextKeyID];
 
-                        ChangeFrameKey();
+                                ChangeFrameKey();
 
-                        break;
-                    case FrameKey.KeyType.FlagCheck:
+                                break;
+                            case FrameKey.KeyType.FlagCheck:
+                                if (frame.currentKey.cutscene != null) Destroy(frame.currentKey.cutscene);
+                                frameContainer.SetActive(true);
 
-                        if (FrameKey.CheckGlobalFlags(frame.currentKey.flagData)) {
-                            frame.currentKey = frame.frameKeys[frame.currentKey.flagNextKeyID[0]];
+                                if (FrameKey.CheckGlobalFlags(frame.currentKey.flagData)) {
+                                    frame.currentKey = frame.frameKeys[frame.currentKey.flagNextKeyID[0]];
 
-                            ChangeFrameKey();
+                                    ChangeFrameKey();
+                                }
+                                else {
+                                    frame.currentKey = frame.frameKeys[frame.currentKey.flagNextKeyID[1]];
+
+                                    ChangeFrameKey();
+                                }
+
+                                break;
                         }
-                        else {
-                            frame.currentKey = frame.frameKeys[frame.currentKey.flagNextKeyID[1]];
-
-                            ChangeFrameKey();
-                        }
-
+                        break;
+                    case GameType.Cutscene:
+                        frameContainer.SetActive(false);
+                        frame.currentKey.cutscene = Instantiate(frame.currentKey.cutscenePrefab);
+                        break;
+                    case GameType.InnerFireFastSession:
+                        break;
+                    case GameType.InnerFireLongSession:
+                        break;
+                    case GameType.InnerFireFreeRoam:
+                        break;
+                    case GameType.Custom:
                         break;
                 }
 
@@ -146,9 +169,7 @@ namespace FrameCore {
                 else SetKey(0);
             }
         }
-        public void SetDefaultFrame() {
-            SetFrame(0, 0);
-        }
+        public void SetDefaultFrame() => SetFrame(0, 0);
         /**public static GameFramework.GameManager GetGameManager<T>()
             where T: GameFramework.GameManager {
 

@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 0
   id: Frame 2
-  selectedKeyIndex: 6
+  selectedKeyIndex: 0
   currentKey:
-    id: 6
+    id: 0
     frameKeyTransitionKnobs:
       keys:
       - Inner_Fire_Line1_69880
@@ -41,6 +41,8 @@ MonoBehaviour:
       - Inner_Fire_AnswerSmall_8E215
       - Inner_Fire_AnswerSmall_8827F
       - "\u0421\u0430\u043D\u044F_7FAD7"
+      - Logan_F9AAD
+      - Noran_2EED0
       - Blackout Screen (from black)_DFBEC
       - Blackout Screen (to black)_D9590
       - Camera Turn_D9C5F
@@ -50,7 +52,7 @@ MonoBehaviour:
       - Point Light_91487
       serializedElementValues:
       - transformData:
-          position: {x: 0.14, y: -0.41, z: -7.48}
+          position: {x: 3.13, y: -1.6, z: -7.69}
           size: {x: 1, y: 1}
           rotation: {x: -0, y: 0, z: 0}
           activeStatus: 1
@@ -66,11 +68,10 @@ MonoBehaviour:
           rotation: {x: -0, y: 0, z: 0}
           activeStatus: 1
         keySequenceData:
-          nextKeyID: 3
+          nextKeyID: 5
           previousKeyID: 0
         dialogueTextData:
-          text: "\u041E\u0445, \u0442\u044B  \u043D\u0430\u043A\u043E\u043D\u0435\u0446-\u0442\u043E
-            \u043E\u0447\u043D\u0443\u043B\u0441\u044F!"
+          text: ....
           speakingCharacterIndex: 2
           conversationCharacterID: "\u0421\u0430\u043D\u044F_7FAD7"
           conversationCharacters:
@@ -83,13 +84,13 @@ MonoBehaviour:
             - "\u0421\u0430\u043D\u044F_7FAD7"
             - Logan_F9AAD
           type: 0
-          textAnimationTime: 0.0165
-          autoContinue: 0
-          transitionDelay: 1
+          textAnimationTime: 0.2
+          autoContinue: 1
+          transitionDelay: 0
           textAnimationDelay: 0
       serializedDialogueAnswerValues:
       - transformData:
-          position: {x: 0, y: 102.1, z: 0}
+          position: {x: -720.33594, y: 0, z: 0}
           size: {x: 800, y: 80}
           rotation: {x: -0, y: 0, z: 0}
           activeStatus: 0
@@ -99,7 +100,7 @@ MonoBehaviour:
         dialogueAnswerTextData:
           text: "\u041E\u0442\u0432\u0435\u0442"
       - transformData:
-          position: {x: 0, y: 102.1, z: 0}
+          position: {x: -720.33594, y: 0, z: 0}
           size: {x: 800, y: 80}
           rotation: {x: -0, y: 0, z: 0}
           activeStatus: 0
@@ -109,7 +110,7 @@ MonoBehaviour:
         dialogueAnswerTextData:
           text: "\u041E\u0442\u0432\u0435\u0442"
       - transformData:
-          position: {x: 0, y: 102.1, z: 0}
+          position: {x: -720.33594, y: 0, z: 0}
           size: {x: 800, y: 80}
           rotation: {x: -0, y: 0, z: 0}
           activeStatus: 0
@@ -119,7 +120,7 @@ MonoBehaviour:
         dialogueAnswerTextData:
           text: "\u041E\u0442\u0432\u0435\u0442"
       - transformData:
-          position: {x: 0, y: 102.1, z: 0}
+          position: {x: -720.33594, y: 0, z: 0}
           size: {x: 1000, y: 100}
           rotation: {x: -0, y: 0, z: 0}
           activeStatus: 0
@@ -129,7 +130,7 @@ MonoBehaviour:
         dialogueAnswerTextData:
           text: "\u041E\u0442\u0432\u0435\u0442"
       - transformData:
-          position: {x: 0, y: 102.1, z: 0}
+          position: {x: -720.33594, y: 0, z: 0}
           size: {x: 1000, y: 100}
           rotation: {x: -0, y: 0, z: 0}
           activeStatus: 0
@@ -139,7 +140,7 @@ MonoBehaviour:
         dialogueAnswerTextData:
           text: "\u041E\u0442\u0432\u0435\u0442"
       - transformData:
-          position: {x: 0, y: 102.1, z: 0}
+          position: {x: -720.33594, y: 0, z: 0}
           size: {x: 1000, y: 100}
           rotation: {x: -0, y: 0, z: 0}
           activeStatus: 0
@@ -147,9 +148,9 @@ MonoBehaviour:
           nextKeyID: 0
           previousKeyID: 0
         dialogueAnswerTextData:
-          text: sadasdasd
+          text: "\u041E\u0442\u0432\u0435\u0442"
       - transformData:
-          position: {x: 0, y: 102.1, z: 0}
+          position: {x: -720.33594, y: 0, z: 0}
           size: {x: 1000, y: 100}
           rotation: {x: -0, y: 0, z: 0}
           activeStatus: 0
@@ -157,10 +158,20 @@ MonoBehaviour:
           nextKeyID: 0
           previousKeyID: 0
         dialogueAnswerTextData:
-          text: 12312
+          text: "\u041E\u0442\u0432\u0435\u0442"
       serializedFrameCharacterValues:
       - transformData:
-          position: {x: -0.76, y: -2.18, z: -6.75}
+          position: {x: -0.76, y: -2.06, z: -6}
+          size: {x: 1, y: 1}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 1
+        characterData:
+          dialogueID: Inner_Fire_Line1_69880
+          type: 1
+          emotionState: 4
+          selectedPartIndex: 11
+      - transformData:
+          position: {x: 0, y: 0, z: 0}
           size: {x: 1, y: 1}
           rotation: {x: -0, y: 0, z: 0}
           activeStatus: 1
@@ -168,20 +179,33 @@ MonoBehaviour:
           dialogueID: Inner_Fire_Line1_69880
           type: 1
           emotionState: 0
-          selectedPartIndex: 10
+          selectedPartIndex: 0
+      - transformData:
+          position: {x: 0, y: -5.03, z: 0}
+          size: {x: 1, y: 1}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 1
+        characterData:
+          dialogueID: Inner_Fire_Line1_69880
+          type: 1
+          emotionState: 0
+          selectedPartIndex: 0
       serializedFrameEffectValues:
       - transformData:
           position: {x: 0, y: 0, z: 0}
           size: {x: 10000, y: 10000}
           rotation: {x: 0, y: 0, z: 0}
-          activeStatus: 0
+          activeStatus: 1
         frameEffectData:
-          animationSpeed: 1
+          animationSpeed: 0.5
           animationDelay: 0
         cameraTurnAnimationData:
           degreesX: 0
           degreesY: 0
           moveTo: {x: 0, y: 0, z: 0}
+        keySequenceData:
+          nextKeyID: 0
+          previousKeyID: 0
       - transformData:
           position: {x: 0, y: 0, z: 0}
           size: {x: 10000, y: 10000}
@@ -189,11 +213,14 @@ MonoBehaviour:
           activeStatus: 0
         frameEffectData:
           animationSpeed: 1
-          animationDelay: 0
+          animationDelay: 2
         cameraTurnAnimationData:
           degreesX: 0
           degreesY: 0
           moveTo: {x: 0, y: 0, z: 0}
+        keySequenceData:
+          nextKeyID: 0
+          previousKeyID: 0
       - transformData:
           position: {x: 0, y: 0, z: 0}
           size: {x: 1, y: 1}
@@ -206,18 +233,24 @@ MonoBehaviour:
           degreesX: 0
           degreesY: 0
           moveTo: {x: 0, y: 0, z: 0}
+        keySequenceData:
+          nextKeyID: 0
+          previousKeyID: 0
       - transformData:
           position: {x: 0, y: 0, z: 0}
           size: {x: 1, y: 1}
           rotation: {x: 0, y: 0, z: 0}
           activeStatus: 1
         frameEffectData:
-          animationSpeed: 1
+          animationSpeed: 0.5
           animationDelay: 0
         cameraTurnAnimationData:
           degreesX: 0
           degreesY: 0
-          moveTo: {x: 0, y: 0, z: -10}
+          moveTo: {x: -3.07, y: -1.6, z: -7.69}
+        keySequenceData:
+          nextKeyID: 0
+          previousKeyID: 0
       serializedFrameLightValues:
       - transformData:
           position: {x: 0, y: 0, z: 0}
@@ -225,24 +258,24 @@ MonoBehaviour:
           rotation: {x: -0, y: 0, z: 0}
           activeStatus: 1
         lightData:
-          intensity: 0.25
+          intensity: 0.6
           outerRange: 1
           innerRange: 0
           color: {r: 1, g: 1, b: 1, a: 1}
           outerAngle: 360
           innerAngle: 360
       - transformData:
-          position: {x: 7.59, y: 7.59, z: 0}
+          position: {x: 7.09, y: 6.5, z: 0}
           size: {x: 1, y: 1}
-          rotation: {x: -0, y: -0, z: 143.1486}
+          rotation: {x: -0, y: -0, z: 137.21786}
           activeStatus: 1
         lightData:
           intensity: 2
-          outerRange: 20.654297
-          innerRange: 0
-          color: {r: 0.6650944, g: 0.81145686, b: 1, a: 1}
-          outerAngle: 59.13
-          innerAngle: 33.41
+          outerRange: 12.955701
+          innerRange: 3.2963843
+          color: {r: 0.4117647, g: 0.8980392, b: 1, a: 1}
+          outerAngle: 85.02
+          innerAngle: 47.94
       - transformData:
           position: {x: 0, y: 0, z: 0}
           size: {x: 1, y: 1}
@@ -262,6 +295,8 @@ MonoBehaviour:
     flagSequenceData:
       nextKeyID: 0
       previousKeyID: 0
+    cutscenePrefab: {fileID: 0}
+    cutscene: {fileID: 0}
   frameKeys:
   - id: 0
     frameKeyTransitionKnobs:
@@ -450,6 +485,9 @@ MonoBehaviour:
           degreesX: 0
           degreesY: 0
           moveTo: {x: 0, y: 0, z: 0}
+        keySequenceData:
+          nextKeyID: 0
+          previousKeyID: 0
       - transformData:
           position: {x: 0, y: 0, z: 0}
           size: {x: 10000, y: 10000}
@@ -462,6 +500,9 @@ MonoBehaviour:
           degreesX: 0
           degreesY: 0
           moveTo: {x: 0, y: 0, z: 0}
+        keySequenceData:
+          nextKeyID: 0
+          previousKeyID: 0
       - transformData:
           position: {x: 0, y: 0, z: 0}
           size: {x: 1, y: 1}
@@ -474,6 +515,9 @@ MonoBehaviour:
           degreesX: 0
           degreesY: 0
           moveTo: {x: 0, y: 0, z: 0}
+        keySequenceData:
+          nextKeyID: 0
+          previousKeyID: 0
       - transformData:
           position: {x: 0, y: 0, z: 0}
           size: {x: 1, y: 1}
@@ -486,6 +530,9 @@ MonoBehaviour:
           degreesX: 0
           degreesY: 0
           moveTo: {x: -3.07, y: -1.6, z: -7.69}
+        keySequenceData:
+          nextKeyID: 0
+          previousKeyID: 0
       serializedFrameLightValues:
       - transformData:
           position: {x: 0, y: 0, z: 0}
@@ -530,6 +577,8 @@ MonoBehaviour:
     flagSequenceData:
       nextKeyID: 0
       previousKeyID: 0
+    cutscenePrefab: {fileID: 0}
+    cutscene: {fileID: 0}
   - id: 1
     frameKeyTransitionKnobs:
       keys:
@@ -717,6 +766,9 @@ MonoBehaviour:
           degreesX: 0
           degreesY: 0
           moveTo: {x: 0, y: 0, z: 0}
+        keySequenceData:
+          nextKeyID: 0
+          previousKeyID: 0
       - transformData:
           position: {x: 0, y: 0, z: 0}
           size: {x: 10000, y: 10000}
@@ -729,6 +781,9 @@ MonoBehaviour:
           degreesX: 0
           degreesY: 0
           moveTo: {x: 0, y: 0, z: 0}
+        keySequenceData:
+          nextKeyID: 0
+          previousKeyID: 0
       - transformData:
           position: {x: 0, y: 0, z: 0}
           size: {x: 1, y: 1}
@@ -741,6 +796,9 @@ MonoBehaviour:
           degreesX: 0
           degreesY: 0
           moveTo: {x: 0, y: 0, z: 0}
+        keySequenceData:
+          nextKeyID: 0
+          previousKeyID: 0
       - transformData:
           position: {x: 0, y: 0, z: 0}
           size: {x: 1, y: 1}
@@ -753,6 +811,9 @@ MonoBehaviour:
           degreesX: 0
           degreesY: 0
           moveTo: {x: 0.46, y: -0.65, z: -7.47}
+        keySequenceData:
+          nextKeyID: 0
+          previousKeyID: 0
       serializedFrameLightValues:
       - transformData:
           position: {x: 0, y: 0, z: 0}
@@ -797,6 +858,8 @@ MonoBehaviour:
     flagSequenceData:
       nextKeyID: 0
       previousKeyID: 0
+    cutscenePrefab: {fileID: 0}
+    cutscene: {fileID: 0}
   - id: 2
     frameKeyTransitionKnobs:
       keys:
@@ -984,6 +1047,9 @@ MonoBehaviour:
           degreesX: 0
           degreesY: 0
           moveTo: {x: 0, y: 0, z: 0}
+        keySequenceData:
+          nextKeyID: 0
+          previousKeyID: 0
       - transformData:
           position: {x: 0, y: 0, z: 0}
           size: {x: 10000, y: 10000}
@@ -996,6 +1062,9 @@ MonoBehaviour:
           degreesX: 0
           degreesY: 0
           moveTo: {x: 0, y: 0, z: 0}
+        keySequenceData:
+          nextKeyID: 0
+          previousKeyID: 0
       - transformData:
           position: {x: 0, y: 0, z: 0}
           size: {x: 1, y: 1}
@@ -1008,6 +1077,9 @@ MonoBehaviour:
           degreesX: 0
           degreesY: 0
           moveTo: {x: 0, y: 0, z: 0}
+        keySequenceData:
+          nextKeyID: 0
+          previousKeyID: 0
       - transformData:
           position: {x: 0, y: 0, z: 0}
           size: {x: 1, y: 1}
@@ -1020,6 +1092,9 @@ MonoBehaviour:
           degreesX: 0
           degreesY: 0
           moveTo: {x: 0.3, y: -0.4, z: -6.32}
+        keySequenceData:
+          nextKeyID: 0
+          previousKeyID: 0
       serializedFrameLightValues:
       - transformData:
           position: {x: 0, y: 0, z: 0}
@@ -1064,6 +1139,8 @@ MonoBehaviour:
     flagSequenceData:
       nextKeyID: 0
       previousKeyID: 0
+    cutscenePrefab: {fileID: 0}
+    cutscene: {fileID: 0}
   - id: 3
     frameKeyTransitionKnobs:
       keys:
@@ -1255,6 +1332,9 @@ MonoBehaviour:
           degreesX: 0
           degreesY: 0
           moveTo: {x: 0, y: 0, z: 0}
+        keySequenceData:
+          nextKeyID: 0
+          previousKeyID: 0
       - transformData:
           position: {x: 0, y: 0, z: 0}
           size: {x: 10000, y: 10000}
@@ -1267,6 +1347,9 @@ MonoBehaviour:
           degreesX: 0
           degreesY: 0
           moveTo: {x: 0, y: 0, z: 0}
+        keySequenceData:
+          nextKeyID: 0
+          previousKeyID: 0
       - transformData:
           position: {x: 0, y: 0, z: 0}
           size: {x: 1, y: 1}
@@ -1279,6 +1362,9 @@ MonoBehaviour:
           degreesX: 0
           degreesY: 0
           moveTo: {x: 0, y: 0, z: 0}
+        keySequenceData:
+          nextKeyID: 0
+          previousKeyID: 0
       - transformData:
           position: {x: 0, y: 0, z: 0}
           size: {x: 1, y: 1}
@@ -1291,6 +1377,9 @@ MonoBehaviour:
           degreesX: 0
           degreesY: 0
           moveTo: {x: 0, y: 0, z: -10}
+        keySequenceData:
+          nextKeyID: 0
+          previousKeyID: 0
       serializedFrameLightValues:
       - transformData:
           position: {x: 0, y: 0, z: 0}
@@ -1335,6 +1424,8 @@ MonoBehaviour:
     flagSequenceData:
       nextKeyID: 0
       previousKeyID: 0
+    cutscenePrefab: {fileID: 0}
+    cutscene: {fileID: 0}
   - id: 4
     frameKeyTransitionKnobs:
       keys:
@@ -1522,6 +1613,9 @@ MonoBehaviour:
           degreesX: 0
           degreesY: 0
           moveTo: {x: 0, y: 0, z: 0}
+        keySequenceData:
+          nextKeyID: 0
+          previousKeyID: 0
       - transformData:
           position: {x: 0, y: 0, z: 0}
           size: {x: 10000, y: 10000}
@@ -1534,6 +1628,9 @@ MonoBehaviour:
           degreesX: 0
           degreesY: 0
           moveTo: {x: 0, y: 0, z: 0}
+        keySequenceData:
+          nextKeyID: 0
+          previousKeyID: 0
       - transformData:
           position: {x: 0, y: 0, z: 0}
           size: {x: 1, y: 1}
@@ -1546,6 +1643,9 @@ MonoBehaviour:
           degreesX: 0
           degreesY: 0
           moveTo: {x: 0, y: 0, z: 0}
+        keySequenceData:
+          nextKeyID: 0
+          previousKeyID: 0
       - transformData:
           position: {x: 0, y: 0, z: 0}
           size: {x: 1, y: 1}
@@ -1558,6 +1658,9 @@ MonoBehaviour:
           degreesX: 0
           degreesY: 0
           moveTo: {x: 2.63, y: -0.03, z: -6.76}
+        keySequenceData:
+          nextKeyID: 0
+          previousKeyID: 0
       serializedFrameLightValues:
       - transformData:
           position: {x: 0, y: 0, z: 0}
@@ -1602,6 +1705,8 @@ MonoBehaviour:
     flagSequenceData:
       nextKeyID: 0
       previousKeyID: 0
+    cutscenePrefab: {fileID: 0}
+    cutscene: {fileID: 0}
   - id: 5
     frameKeyTransitionKnobs:
       keys:
@@ -1767,6 +1872,9 @@ MonoBehaviour:
           degreesX: 0
           degreesY: 0
           moveTo: {x: 0, y: 0, z: 0}
+        keySequenceData:
+          nextKeyID: 0
+          previousKeyID: 0
       - transformData:
           position: {x: 0, y: 0, z: 0}
           size: {x: 10000, y: 10000}
@@ -1779,6 +1887,9 @@ MonoBehaviour:
           degreesX: 0
           degreesY: 0
           moveTo: {x: 0, y: 0, z: 0}
+        keySequenceData:
+          nextKeyID: 0
+          previousKeyID: 0
       - transformData:
           position: {x: 0, y: 0, z: 0}
           size: {x: 1, y: 1}
@@ -1791,6 +1902,9 @@ MonoBehaviour:
           degreesX: 0
           degreesY: 0
           moveTo: {x: 0, y: 0, z: 0}
+        keySequenceData:
+          nextKeyID: 0
+          previousKeyID: 0
       - transformData:
           position: {x: 0, y: 0, z: 0}
           size: {x: 1, y: 1}
@@ -1803,6 +1917,9 @@ MonoBehaviour:
           degreesX: 0
           degreesY: 0
           moveTo: {x: 0.96, y: -0.67, z: -7.03}
+        keySequenceData:
+          nextKeyID: 0
+          previousKeyID: 0
       serializedFrameLightValues:
       - transformData:
           position: {x: 0, y: 0, z: 0}
@@ -1847,6 +1964,8 @@ MonoBehaviour:
     flagSequenceData:
       nextKeyID: 0
       previousKeyID: 0
+    cutscenePrefab: {fileID: 0}
+    cutscene: {fileID: 0}
   - id: 6
     frameKeyTransitionKnobs:
       keys:
@@ -2013,6 +2132,9 @@ MonoBehaviour:
           degreesX: 0
           degreesY: 0
           moveTo: {x: 0, y: 0, z: 0}
+        keySequenceData:
+          nextKeyID: 0
+          previousKeyID: 0
       - transformData:
           position: {x: 0, y: 0, z: 0}
           size: {x: 10000, y: 10000}
@@ -2025,6 +2147,9 @@ MonoBehaviour:
           degreesX: 0
           degreesY: 0
           moveTo: {x: 0, y: 0, z: 0}
+        keySequenceData:
+          nextKeyID: 0
+          previousKeyID: 0
       - transformData:
           position: {x: 0, y: 0, z: 0}
           size: {x: 1, y: 1}
@@ -2037,6 +2162,9 @@ MonoBehaviour:
           degreesX: 0
           degreesY: 0
           moveTo: {x: 0, y: 0, z: 0}
+        keySequenceData:
+          nextKeyID: 0
+          previousKeyID: 0
       - transformData:
           position: {x: 0, y: 0, z: 0}
           size: {x: 1, y: 1}
@@ -2049,6 +2177,9 @@ MonoBehaviour:
           degreesX: 0
           degreesY: 0
           moveTo: {x: 0, y: 0, z: -10}
+        keySequenceData:
+          nextKeyID: 0
+          previousKeyID: 0
       serializedFrameLightValues:
       - transformData:
           position: {x: 0, y: 0, z: 0}
@@ -2093,6 +2224,8 @@ MonoBehaviour:
     flagSequenceData:
       nextKeyID: 0
       previousKeyID: 0
+    cutscenePrefab: {fileID: 0}
+    cutscene: {fileID: 0}
   nodeCanvas: {fileID: 11400000, guid: 88bc96412bf73e647849ee6056177b14, type: 2}
   usedElementsObjects:
   - elementObject: {fileID: 11400000, guid: 23fb5e77bac5f8d4381978894bd49edc, type: 2}

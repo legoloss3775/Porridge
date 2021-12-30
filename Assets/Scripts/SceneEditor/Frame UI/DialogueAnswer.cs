@@ -16,13 +16,15 @@ namespace FrameCore {
         #region SERIALIZATION
 
         [System.Serializable]
-        public class DialogueAnswerValues : Values {
-            public KeySequenceData keySequenceData;
+        public class DialogueAnswerValues : Values, IKeyTransition {
+            public KeySequenceData keySequenceData { get { return _keySequenceData; } set { _keySequenceData = value; } }
+            [SerializeField]
+            private KeySequenceData _keySequenceData;
             public DialogueAnswerTextData dialogueAnswerTextData;
             public DialogueAnswerValues(DialogueAnswer dialogue) {
                 keySequenceData = new KeySequenceData {
-                    nextKeyID = dialogue.nextKeyID,
-                    previousKeyID = dialogue.previousKeyID,
+                    nextKeyID = dialogue.keySequenceData.nextKeyID,
+                    previousKeyID = dialogue.keySequenceData.previousKeyID,
                 };
                 transformData = new TransformData {
                     position = dialogue.position,
@@ -114,8 +116,9 @@ namespace FrameCore {
                     this.GetComponent<RectTransform>().localRotation = value;
                 }
             }
-            public int nextKeyID { get; set; }
-            public int previousKeyID { get; set; }
+            public KeySequenceData keySequenceData { get { return _keySequenceData; } set { _keySequenceData = value; } }
+            [SerializeField]
+            private KeySequenceData _keySequenceData;
             public string text {
                 get {
                     return GetTextComponent().text;
@@ -135,7 +138,7 @@ namespace FrameCore {
                 if (FrameController.INPUT_BLOCK) button.enabled = false;
                 else button.enabled = true;
             }
-            public void KeyTransitionInput() => button.onClick.AddListener(() => FrameManager.SetKey(nextKeyID));
+            public void KeyTransitionInput() => button.onClick.AddListener(() => FrameManager.SetKey(keySequenceData.nextKeyID));
 
             #region VALUES_SETTINGS
             public TextMeshProUGUI GetTextComponent() {
@@ -149,8 +152,7 @@ namespace FrameCore {
             public override void UpdateValuesFromKey(Values frameKeyValues) {
                 var keyValues = (DialogueAnswerValues)frameKeyValues;
 
-                nextKeyID = keyValues.keySequenceData.nextKeyID;
-                previousKeyID = keyValues.keySequenceData.previousKeyID;
+                keySequenceData = keyValues.keySequenceData;
                 activeStatus = keyValues.transformData.activeStatus;
                 position = keyValues.transformData.position;
                 rotation = Quaternion.Euler(keyValues.transformData.rotation);

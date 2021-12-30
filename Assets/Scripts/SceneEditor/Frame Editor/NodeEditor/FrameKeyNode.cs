@@ -38,8 +38,8 @@ public class FrameKeyNode : Node {
 
     bool updated = false;
 
-    public Color UNITY_SELECTION_COLOR = new Color32(70, 96, 124, 255);
-    public Color ORANGE = new Color32(255, 140, 0, 255);
+    public static Color UNITY_SELECTION_COLOR = new Color32(70, 96, 124, 255);
+    public static Color ORANGE = new Color32(255, 140, 0, 255);
 
 #if UNITY_EDITOR
 
@@ -65,6 +65,8 @@ public class FrameKeyNode : Node {
         return node;
     }**/
     public override void NodeGUI() {
+        //UpdateFrameKeys();
+        //return;
 
         /**try {
             frameKey = frameEditorSO.frames.Where(ch => ch.id == frameKeyPair.frameID).FirstOrDefault().frameKeys[frameKeyPair.frameKeyID];
@@ -129,6 +131,20 @@ public class FrameKeyNode : Node {
                 valueKnob.SetValue(frameKey);
                 valueKnob.maxConnectionCount = ConnectionCount.Single;
             }
+
+        }
+        switch (frameKey.gameType) {
+            case GameType.Cutscene:
+                DisplayCutsceneData();
+                break;
+            case GameType.InnerFireFastSession:
+                break;
+            case GameType.InnerFireLongSession:
+                break;
+            case GameType.InnerFireFreeRoam:
+                break;
+            case GameType.Custom:
+                break;
         }
 
         GUILayout.Space(5);
@@ -138,20 +154,24 @@ public class FrameKeyNode : Node {
         input1Knob.SetPosition(200);
         //Задает nextKeyID, если outpuKnob присоеденен к другому KeyNode
         //Работает кривовато, нужно каждый раз указывать тип значений в ключе
-        foreach (var FrameKeyTransitionKnob in frameKey.frameKeyTransitionKnobs)
-            if (outputKnobs.Count > FrameKeyTransitionKnob.Value) {
-                ValueConnectionKnob valueKnob = (ValueConnectionKnob)outputKnobs[FrameKeyTransitionKnob.Value];
-                if (valueKnob.connected()) {
-                    var elementValues = frameKey.GetFrameKeyValuesOfElement(FrameKeyTransitionKnob.Key);
-                    var body = (FrameKeyNode)valueKnob.connection(0).body;
-                    if (elementValues is DialogueValues dValues) {
-                        dValues.keySequenceData.nextKeyID = body.frameKey.id;
-                    }
-                    else if (elementValues is DialogueAnswerValues daValues) {
-                        daValues.keySequenceData.nextKeyID = body.frameKey.id;
-                    }
-                }
-            }
+        switch (frameKey.gameType) {
+            case GameType.FrameInteraction:
+                UpdateDialogueTransitionKnobs();
+                break;
+            case GameType.Cutscene:
+                UpdateCutsceneTransitionKnobs();
+                break;
+            case GameType.InnerFireFastSession:
+                break;
+            case GameType.InnerFireLongSession:
+                break;
+            case GameType.InnerFireFreeRoam:
+                break;
+            case GameType.Custom:
+                break;
+        }
+
+
 
         FrameKeySelection();
 
@@ -190,15 +210,55 @@ public class FrameKeyNode : Node {
     }
     protected override void OnDelete() {
         base.OnDelete();
-        var id = FrameManager.frame.frameKeys.IndexOf(FrameManager.frame.frameKeys[frameKeyPair.frameKeyID]);
-        FrameManager.frame.frameKeys.Remove(FrameManager.frame.frameKeys[frameKeyPair.frameKeyID]);
-        foreach (FrameKeyNode node in NodeEditor.curNodeCanvas.nodes) {
-            if (node.frameKeyPair.frameKeyID > id)
-                node.frameKeyPair.frameKeyID -= 1;
+        try {
+            var id = FrameManager.frame.frameKeys.IndexOf(FrameManager.frame.frameKeys[frameKeyPair.frameKeyID]);
+            FrameManager.frame.frameKeys.Remove(FrameManager.frame.frameKeys[frameKeyPair.frameKeyID]);
+            foreach (FrameKeyNode node in NodeEditor.curNodeCanvas.nodes) {
+                if (node.frameKeyPair.frameKeyID > id)
+                    node.frameKeyPair.frameKeyID -= 1;
+            }
+            foreach (var addkey in FrameManager.frame.frameKeys)
+                addkey.id = FrameManager.frame.frameKeys.IndexOf(addkey);
         }
-        foreach (var addkey in FrameManager.frame.frameKeys)
-            addkey.id = FrameManager.frame.frameKeys.IndexOf(addkey);
-
+        catch (System.Exception) { }
+    }
+    public void UpdateDialogueTransitionKnobs() {
+        foreach (var FrameKeyTransitionKnob in frameKey.frameKeyTransitionKnobs)
+            if (outputKnobs.Count > FrameKeyTransitionKnob.Value) {
+                ValueConnectionKnob valueKnob = (ValueConnectionKnob)outputKnobs[FrameKeyTransitionKnob.Value];
+                if (valueKnob.connected()) {
+                    var elementValues = frameKey.GetFrameKeyValuesOfElement(FrameKeyTransitionKnob.Key);
+                    var body = (FrameKeyNode)valueKnob.connection(0).body;
+                    if (elementValues is IKeyTransition dValues) {
+                        dValues.keySequenceData = new KeySequenceData { nextKeyID = body.frameKey.id };
+                    }
+                }
+            }
+    }
+    public void UpdateCutsceneTransitionKnobs() {
+        foreach (var FrameKeyTransitionKnob in frameKey.frameKeyTransitionKnobs)
+            if (outputKnobs.Count > FrameKeyTransitionKnob.Value) {
+                ValueConnectionKnob valueKnob = (ValueConnectionKnob)outputKnobs[FrameKeyTransitionKnob.Value];
+                valueKnob.SetPosition(200);
+                if (valueKnob.connected()) {
+                    var body = (FrameKeyNode)valueKnob.connection(0).body;
+                    var key = frameKey.cutscenePrefab.GetComponent<Cutscene>();
+                    key.keySequenceData = new KeySequenceData { nextKeyID = body.frameKey.id };
+                }
+            }
+    }
+    public void DisplayCutsceneData() {
+        GUILayout.BeginHorizontal();
+        GUILayout.FlexibleSpace();
+        GUILayout.Label("Cutscene", FrameEditor.FrameGUIUtility.GetLabelStyle(FrameKeyNode.ORANGE, 30));
+        GUILayout.FlexibleSpace();
+        GUILayout.EndHorizontal();
+        GUILayout.BeginHorizontal();
+        GUILayout.FlexibleSpace();
+        var icon = AssetPreview.GetAssetPreview(frameKey.cutscenePrefab);
+        GUILayout.Label(icon);
+        GUILayout.FlexibleSpace();
+        GUILayout.EndHorizontal();
     }
     public static void UpdateKeyNodeValues(FrameKeyNode node, string id) {
         if (node.frameKey.GetFrameKeyValuesOfElement(id) is DialogueValues) {
@@ -266,6 +326,7 @@ public class FrameKeyNode : Node {
 
                 GUILayout.BeginHorizontal();
                 GUILayout.FlexibleSpace();
+                if (element.Value.dialogueTextData.conversationCharacters.Count == 0) { GUILayout.EndHorizontal(); return; }
                 if (element.Value.dialogueTextData.type == Dialogue.FrameDialogueElementType.Одинᅠперсонаж && element.Value.dialogueTextData.conversationCharacterID != null && element.Value.dialogueTextData.conversationCharacterID != "") {
                     try {
                         if (UnityEditor.AssetPreview.GetAssetPreview(FrameManager.frame.usedElementsObjects.Where(ch => ch.ids.Contains(element.Value.dialogueTextData.conversationCharacterID)).FirstOrDefault().elementObject.prefab) == null) continue;
@@ -354,7 +415,7 @@ public class FrameKeyNode : Node {
             frameKey = frameEditorSO.frames.Where(ch => ch.id == frameKeyPair.frameID).FirstOrDefault().frameKeys[frameKeyPair.frameKeyID];
         }
     }
-    /**public static void UpdateFrameKeys() {
+    public static void UpdateFrameKeys() {
         if (FrameManager.frame == null || FrameManager.frame.frameKeys == null) return;
         foreach (var key in FrameManager.frame.frameKeys.ToList()) {
             bool hasKey = false;
@@ -373,7 +434,7 @@ public class FrameKeyNode : Node {
                     addkey.id = FrameManager.frame.frameKeys.IndexOf(addkey);
             }
         }
-    }**/
+    }
 
 #endif
 }

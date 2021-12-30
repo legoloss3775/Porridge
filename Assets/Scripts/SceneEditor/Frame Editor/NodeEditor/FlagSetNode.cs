@@ -43,6 +43,7 @@ public class FlagSetNode : FrameKeyNode
         this.backgroundColor = new Color32(135, 135, 135, 125);
 
         if (frameKey.flagData.keys != null) {
+            GUILayout.FlexibleSpace();
             foreach (var flag in frameKey.flagData.keys) {
                 if (frameKey.flagData.GetValue(flag).ToString() == "True") {
                     GUILayout.BeginHorizontal();
@@ -59,6 +60,7 @@ public class FlagSetNode : FrameKeyNode
                     GUILayout.EndHorizontal();
                 }
             }
+            GUILayout.FlexibleSpace();
         }
 
         if (output1Knob.connected()) {

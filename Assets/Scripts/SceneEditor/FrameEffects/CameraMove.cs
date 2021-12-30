@@ -2,15 +2,20 @@
 using UnityEngine;
 
 namespace FrameCore.FrameEffects {
-    public class CameraMove : MonoBehaviour {
-        public float speed { get { if (GetComponent<FrameEffect>() != null) return GetComponent<FrameEffect>().animationSpeed; else return 1f; } }
-        public float animationDelay { get { if (GetComponent<FrameEffect>() != null) return GetComponent<FrameEffect>().animationDelay; else return 0f; } }
+    public class CameraMove : EffectPrefab {
         public Vector3 moveToPosition { get { if (GetComponent<FrameEffect>() != null) return GetComponent<FrameEffect>().cameraTurnAnimationData.moveTo; else return Vector3.zero; } }
 
         private void OnEnable() {
 
         }
+        public override void OnFrameKeyChanged() {
 
+            var cameraMove = GetComponent<FrameEffects.CameraMove>();
+
+            //cameraMove.moveToPosition = Camera.main.transform.position;
+            FrameController.AddAnimationToQueue(cameraMove.gameObject.name, true);
+            cameraMove.StartCoroutine(cameraMove.MoveCamera(cameraMove.moveToPosition, cameraMove.speed));
+        }
         public IEnumerator MoveCamera(Vector3 moveToPositon, float speed) {
 
             yield return new WaitForSeconds(animationDelay);

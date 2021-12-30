@@ -110,6 +110,11 @@ namespace FrameEditor {
                 GUILayout.FlexibleSpace();
                 GUILayout.EndHorizontal();
             }
+            if(frameEffect.GetComponent<AutoContinue>() != null) {
+                if (!FrameCore.FrameManager.frame.currentKey.frameKeyTransitionKnobs.ContainsKey(frameEffect.id)) {
+                    CreateInteractableTransitionNode(frameEffect, FrameCore.FrameManager.frame.currentKey);
+                }
+            }
 
             GUILayout.EndVertical();
         }

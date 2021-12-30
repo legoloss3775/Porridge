@@ -1,0 +1,768 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9fb188184a63ff42b050cfef419b0c6, type: 3}
+  m_Name: Frame 4
+  m_EditorClassIdentifier: 
+  type: 0
+  id: Frame 4
+  selectedKeyIndex: 0
+  currentKey:
+    id: 3
+    frameKeyTransitionKnobs:
+      keys:
+      - Inner_Fire_AnswerSmall_91AB3
+      - Inner_Fire_AnswerSmall_74479
+      values: 0100000000000000
+    frameKeyGlobalFlagKnobs:
+      keys: []
+      values: 
+    transitionType: 1
+    keyType: 0
+    gameType: 0
+    gameManagerID: 
+    frameKeyValues:
+      keys:
+      - Main Camera_94A7F
+      - Inner_Fire_Line1_3502A
+      - Inner_Fire_AnswerSmall_74479
+      - Inner_Fire_AnswerSmall_91AB3
+      - Noran_73EF6
+      - "\u0421\u0430\u043D\u044F_F9D21"
+      serializedElementValues:
+      - transformData:
+          position: {x: 0, y: 0, z: -10}
+          size: {x: 1, y: 1}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 1
+      serializedDialogueValues:
+      - transformData:
+          position: {x: 18, y: 106, z: 0}
+          size: {x: 1920, y: 1080}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 0
+        keySequenceData:
+          nextKeyID: 1
+          previousKeyID: 0
+        dialogueTextData:
+          text: "\u0422\u0435\u043A\u0441\u0442 \u0434\u0438\u0430\u043B\u043E\u0433\u0430"
+          speakingCharacterIndex: 0
+          conversationCharacterID: Noran_73EF6
+          conversationCharacters:
+            keys:
+            - Noran
+            - "\u0421\u0430\u043D\u044F"
+            values:
+            - Noran_73EF6
+            - "\u0421\u0430\u043D\u044F_F9D21"
+          type: 0
+          textAnimationTime: 0.0165
+          autoContinue: 0
+          transitionDelay: 1
+          textAnimationDelay: 0
+      serializedDialogueAnswerValues:
+      - transformData:
+          position: {x: -499, y: 540, z: 0}
+          size: {x: 150, y: 150}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 1
+        keySequenceData:
+          nextKeyID: 4
+          previousKeyID: 0
+        dialogueAnswerTextData:
+          text: test 1
+      - transformData:
+          position: {x: 522, y: 540, z: 0}
+          size: {x: 150, y: 150}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 1
+        keySequenceData:
+          nextKeyID: 4
+          previousKeyID: 0
+        dialogueAnswerTextData:
+          text: test 2
+      serializedFrameCharacterValues:
+      - transformData:
+          position: {x: 0, y: -5.03, z: 0}
+          size: {x: 1, y: 1}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 0
+        characterData:
+          dialogueID: Inner_Fire_Line1_3502A
+          type: 1
+          emotionState: 0
+          selectedPartIndex: 0
+      - transformData:
+          position: {x: -0.854021, y: -0.33011782, z: 0}
+          size: {x: 1, y: 1}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 1
+        characterData:
+          dialogueID: Inner_Fire_Line1_3502A
+          type: 1
+          emotionState: 0
+          selectedPartIndex: 10
+      serializedFrameEffectValues: []
+      serializedFrameLightValues: []
+    flagNextKeyID: 0000000000000000
+    flagData:
+      keys: []
+      values: 
+    flagSequenceData:
+      nextKeyID: 0
+      previousKeyID: 0
+    cutscenePrefab: {fileID: 0}
+    cutscene: {fileID: 0}
+  frameKeys:
+  - id: 0
+    frameKeyTransitionKnobs:
+      keys:
+      - Inner_Fire_AnswerSmall_74479
+      - Inner_Fire_AnswerSmall_91AB3
+      values: 0000000001000000
+    frameKeyGlobalFlagKnobs:
+      keys: []
+      values: 
+    transitionType: 1
+    keyType: 0
+    gameType: 0
+    gameManagerID: 
+    frameKeyValues:
+      keys:
+      - Main Camera_94A7F
+      - Inner_Fire_Line1_3502A
+      - Inner_Fire_AnswerSmall_74479
+      - Inner_Fire_AnswerSmall_91AB3
+      - Noran_73EF6
+      - "\u0421\u0430\u043D\u044F_F9D21"
+      serializedElementValues:
+      - transformData:
+          position: {x: 0, y: 0, z: -10}
+          size: {x: 1, y: 1}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 1
+      serializedDialogueValues:
+      - transformData:
+          position: {x: 18, y: 106, z: 0}
+          size: {x: 1920, y: 1080}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 0
+        keySequenceData:
+          nextKeyID: 1
+          previousKeyID: 0
+        dialogueTextData:
+          text: "\u0422\u0435\u043A\u0441\u0442 \u0434\u0438\u0430\u043B\u043E\u0433\u0430"
+          speakingCharacterIndex: 0
+          conversationCharacterID: Noran_73EF6
+          conversationCharacters:
+            keys:
+            - Noran
+            - "\u0421\u0430\u043D\u044F"
+            values:
+            - Noran_73EF6
+            - "\u0421\u0430\u043D\u044F_F9D21"
+          type: 0
+          textAnimationTime: 0.0165
+          autoContinue: 0
+          transitionDelay: 1
+          textAnimationDelay: 0
+      serializedDialogueAnswerValues:
+      - transformData:
+          position: {x: -499, y: 540, z: 0}
+          size: {x: 150, y: 150}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 1
+        keySequenceData:
+          nextKeyID: 1
+          previousKeyID: 0
+        dialogueAnswerTextData:
+          text: test 1
+      - transformData:
+          position: {x: 522, y: 540, z: 0}
+          size: {x: 150, y: 150}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 1
+        keySequenceData:
+          nextKeyID: 2
+          previousKeyID: 0
+        dialogueAnswerTextData:
+          text: test 2
+      serializedFrameCharacterValues:
+      - transformData:
+          position: {x: 0, y: -5.03, z: 0}
+          size: {x: 1, y: 1}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 0
+        characterData:
+          dialogueID: Inner_Fire_Line1_3502A
+          type: 1
+          emotionState: 0
+          selectedPartIndex: 0
+      - transformData:
+          position: {x: -0.854021, y: -0.33011782, z: 0}
+          size: {x: 1, y: 1}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 1
+        characterData:
+          dialogueID: Inner_Fire_Line1_3502A
+          type: 1
+          emotionState: 0
+          selectedPartIndex: 10
+      serializedFrameEffectValues: []
+      serializedFrameLightValues: []
+    flagNextKeyID: 0000000000000000
+    flagData:
+      keys: []
+      values: 
+    flagSequenceData:
+      nextKeyID: 0
+      previousKeyID: 0
+    cutscenePrefab: {fileID: 0}
+    cutscene: {fileID: 0}
+  - id: 1
+    frameKeyTransitionKnobs:
+      keys:
+      - Cutscene
+      values: 00000000
+    frameKeyGlobalFlagKnobs:
+      keys: []
+      values: 
+    transitionType: 0
+    keyType: 0
+    gameType: 1
+    gameManagerID: 
+    frameKeyValues:
+      keys:
+      - Main Camera_94A7F
+      - Inner_Fire_Line1_3502A
+      - Inner_Fire_AnswerSmall_74479
+      - Inner_Fire_AnswerSmall_91AB3
+      - Noran_73EF6
+      - "\u0421\u0430\u043D\u044F_F9D21"
+      serializedElementValues:
+      - transformData:
+          position: {x: 0, y: 0, z: 0}
+          size: {x: 1, y: 1}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 0
+      serializedDialogueValues:
+      - transformData:
+          position: {x: -887.6394, y: 0, z: 0}
+          size: {x: 1920, y: 1080}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 0
+        keySequenceData:
+          nextKeyID: 0
+          previousKeyID: 0
+        dialogueTextData:
+          text: "\u0422\u0435\u043A\u0441\u0442 \u0434\u0438\u0430\u043B\u043E\u0433\u0430"
+          speakingCharacterIndex: 0
+          conversationCharacterID: Noran_73EF6
+          conversationCharacters:
+            keys:
+            - Noran
+            - "\u0421\u0430\u043D\u044F"
+            values:
+            - Noran_73EF6
+            - "\u0421\u0430\u043D\u044F_F9D21"
+          type: 0
+          textAnimationTime: 0.0165
+          autoContinue: 0
+          transitionDelay: 1
+          textAnimationDelay: 0
+      serializedDialogueAnswerValues:
+      - transformData:
+          position: {x: -768.77435, y: -0.000061035156, z: 0}
+          size: {x: 150, y: 150}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 0
+        keySequenceData:
+          nextKeyID: 0
+          previousKeyID: 0
+        dialogueAnswerTextData:
+          text: "\u041E\u0442\u0432\u0435\u0442"
+      - transformData:
+          position: {x: -768.77435, y: -0.000061035156, z: 0}
+          size: {x: 150, y: 150}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 0
+        keySequenceData:
+          nextKeyID: 0
+          previousKeyID: 0
+        dialogueAnswerTextData:
+          text: "\u041E\u0442\u0432\u0435\u0442"
+      serializedFrameCharacterValues:
+      - transformData:
+          position: {x: 0.35, y: -4.68, z: 0}
+          size: {x: 1, y: 1}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 0
+        characterData:
+          dialogueID: Inner_Fire_Line1_3502A
+          type: 1
+          emotionState: 0
+          selectedPartIndex: 0
+      - transformData:
+          position: {x: -0.854021, y: -0.33011782, z: 0}
+          size: {x: 1, y: 1}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 1
+        characterData:
+          dialogueID: Inner_Fire_Line1_3502A
+          type: 1
+          emotionState: 0
+          selectedPartIndex: 10
+      serializedFrameEffectValues: []
+      serializedFrameLightValues: []
+    flagNextKeyID: 0000000000000000
+    flagData:
+      keys: []
+      values: 
+    flagSequenceData:
+      nextKeyID: 0
+      previousKeyID: 0
+    cutscenePrefab: {fileID: 3943055015768323077, guid: 1d8e5fbeff321d949ac74b1a49264d4a, type: 3}
+    cutscene: {fileID: 0}
+  - id: 2
+    frameKeyTransitionKnobs:
+      keys:
+      - Inner_Fire_Line1_3502A
+      values: 00000000
+    frameKeyGlobalFlagKnobs:
+      keys: []
+      values: 
+    transitionType: 0
+    keyType: 0
+    gameType: 0
+    gameManagerID: 
+    frameKeyValues:
+      keys:
+      - Main Camera_94A7F
+      - Inner_Fire_Line1_3502A
+      - Inner_Fire_AnswerSmall_74479
+      - Inner_Fire_AnswerSmall_91AB3
+      - Noran_73EF6
+      - "\u0421\u0430\u043D\u044F_F9D21"
+      serializedElementValues:
+      - transformData:
+          position: {x: 0, y: 0, z: -10}
+          size: {x: 1, y: 1}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 1
+      serializedDialogueValues:
+      - transformData:
+          position: {x: -138, y: 606, z: 0}
+          size: {x: 1920, y: 1080}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 1
+        keySequenceData:
+          nextKeyID: 3
+          previousKeyID: 0
+        dialogueTextData:
+          text: among us sus
+          speakingCharacterIndex: 0
+          conversationCharacterID: Noran_73EF6
+          conversationCharacters:
+            keys:
+            - Noran
+            - "\u0421\u0430\u043D\u044F"
+            values:
+            - Noran_73EF6
+            - "\u0421\u0430\u043D\u044F_F9D21"
+          type: 0
+          textAnimationTime: 0.0165
+          autoContinue: 0
+          transitionDelay: 1
+          textAnimationDelay: 0
+      serializedDialogueAnswerValues:
+      - transformData:
+          position: {x: -768.77435, y: -0.000061035156, z: 0}
+          size: {x: 150, y: 150}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 0
+        keySequenceData:
+          nextKeyID: 0
+          previousKeyID: 0
+        dialogueAnswerTextData:
+          text: "\u041E\u0442\u0432\u0435\u0442"
+      - transformData:
+          position: {x: -768.77435, y: -0.000061035156, z: 0}
+          size: {x: 150, y: 150}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 0
+        keySequenceData:
+          nextKeyID: 0
+          previousKeyID: 0
+        dialogueAnswerTextData:
+          text: "\u041E\u0442\u0432\u0435\u0442"
+      serializedFrameCharacterValues:
+      - transformData:
+          position: {x: 0, y: -5.03, z: 0}
+          size: {x: 1, y: 1}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 0
+        characterData:
+          dialogueID: Inner_Fire_Line1_3502A
+          type: 1
+          emotionState: 0
+          selectedPartIndex: 0
+      - transformData:
+          position: {x: -0.854021, y: -0.33011782, z: 0}
+          size: {x: 1, y: 1}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 1
+        characterData:
+          dialogueID: Inner_Fire_Line1_3502A
+          type: 1
+          emotionState: 0
+          selectedPartIndex: 10
+      serializedFrameEffectValues: []
+      serializedFrameLightValues: []
+    flagNextKeyID: 0000000000000000
+    flagData:
+      keys: []
+      values: 
+    flagSequenceData:
+      nextKeyID: 0
+      previousKeyID: 0
+    cutscenePrefab: {fileID: 0}
+    cutscene: {fileID: 0}
+  - id: 3
+    frameKeyTransitionKnobs:
+      keys:
+      - Inner_Fire_AnswerSmall_91AB3
+      - Inner_Fire_AnswerSmall_74479
+      values: 0100000000000000
+    frameKeyGlobalFlagKnobs:
+      keys: []
+      values: 
+    transitionType: 1
+    keyType: 0
+    gameType: 0
+    gameManagerID: 
+    frameKeyValues:
+      keys:
+      - Main Camera_94A7F
+      - Inner_Fire_Line1_3502A
+      - Inner_Fire_AnswerSmall_74479
+      - Inner_Fire_AnswerSmall_91AB3
+      - Noran_73EF6
+      - "\u0421\u0430\u043D\u044F_F9D21"
+      serializedElementValues:
+      - transformData:
+          position: {x: 0, y: 0, z: -10}
+          size: {x: 1, y: 1}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 1
+      serializedDialogueValues:
+      - transformData:
+          position: {x: 18, y: 106, z: 0}
+          size: {x: 1920, y: 1080}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 0
+        keySequenceData:
+          nextKeyID: 1
+          previousKeyID: 0
+        dialogueTextData:
+          text: "\u0422\u0435\u043A\u0441\u0442 \u0434\u0438\u0430\u043B\u043E\u0433\u0430"
+          speakingCharacterIndex: 0
+          conversationCharacterID: Noran_73EF6
+          conversationCharacters:
+            keys:
+            - Noran
+            - "\u0421\u0430\u043D\u044F"
+            values:
+            - Noran_73EF6
+            - "\u0421\u0430\u043D\u044F_F9D21"
+          type: 0
+          textAnimationTime: 0.0165
+          autoContinue: 0
+          transitionDelay: 1
+          textAnimationDelay: 0
+      serializedDialogueAnswerValues:
+      - transformData:
+          position: {x: -499, y: 540, z: 0}
+          size: {x: 150, y: 150}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 1
+        keySequenceData:
+          nextKeyID: 4
+          previousKeyID: 0
+        dialogueAnswerTextData:
+          text: test 1
+      - transformData:
+          position: {x: 522, y: 540, z: 0}
+          size: {x: 150, y: 150}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 1
+        keySequenceData:
+          nextKeyID: 4
+          previousKeyID: 0
+        dialogueAnswerTextData:
+          text: test 2
+      serializedFrameCharacterValues:
+      - transformData:
+          position: {x: 0, y: -5.03, z: 0}
+          size: {x: 1, y: 1}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 0
+        characterData:
+          dialogueID: Inner_Fire_Line1_3502A
+          type: 1
+          emotionState: 0
+          selectedPartIndex: 0
+      - transformData:
+          position: {x: -0.854021, y: -0.33011782, z: 0}
+          size: {x: 1, y: 1}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 1
+        characterData:
+          dialogueID: Inner_Fire_Line1_3502A
+          type: 1
+          emotionState: 0
+          selectedPartIndex: 10
+      serializedFrameEffectValues: []
+      serializedFrameLightValues: []
+    flagNextKeyID: 0000000000000000
+    flagData:
+      keys: []
+      values: 
+    flagSequenceData:
+      nextKeyID: 0
+      previousKeyID: 0
+    cutscenePrefab: {fileID: 0}
+    cutscene: {fileID: 0}
+  - id: 4
+    frameKeyTransitionKnobs:
+      keys:
+      - Inner_Fire_Line1_3502A
+      values: 00000000
+    frameKeyGlobalFlagKnobs:
+      keys: []
+      values: 
+    transitionType: 0
+    keyType: 0
+    gameType: 0
+    gameManagerID: 
+    frameKeyValues:
+      keys:
+      - Main Camera_94A7F
+      - Inner_Fire_Line1_3502A
+      - Inner_Fire_AnswerSmall_74479
+      - Inner_Fire_AnswerSmall_91AB3
+      - Noran_73EF6
+      - "\u0421\u0430\u043D\u044F_F9D21"
+      serializedElementValues:
+      - transformData:
+          position: {x: 0, y: 0, z: -10}
+          size: {x: 1, y: 1}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 1
+      serializedDialogueValues:
+      - transformData:
+          position: {x: -138, y: 606, z: 0}
+          size: {x: 1920, y: 1080}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 1
+        keySequenceData:
+          nextKeyID: 2
+          previousKeyID: 0
+        dialogueTextData:
+          text: test end
+          speakingCharacterIndex: 0
+          conversationCharacterID: Noran_73EF6
+          conversationCharacters:
+            keys:
+            - Noran
+            - "\u0421\u0430\u043D\u044F"
+            values:
+            - Noran_73EF6
+            - "\u0421\u0430\u043D\u044F_F9D21"
+          type: 0
+          textAnimationTime: 0.0165
+          autoContinue: 0
+          transitionDelay: 1
+          textAnimationDelay: 0
+      serializedDialogueAnswerValues:
+      - transformData:
+          position: {x: -768.77435, y: -0.000061035156, z: 0}
+          size: {x: 150, y: 150}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 0
+        keySequenceData:
+          nextKeyID: 0
+          previousKeyID: 0
+        dialogueAnswerTextData:
+          text: "\u041E\u0442\u0432\u0435\u0442"
+      - transformData:
+          position: {x: -768.77435, y: -0.000061035156, z: 0}
+          size: {x: 150, y: 150}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 0
+        keySequenceData:
+          nextKeyID: 0
+          previousKeyID: 0
+        dialogueAnswerTextData:
+          text: "\u041E\u0442\u0432\u0435\u0442"
+      serializedFrameCharacterValues:
+      - transformData:
+          position: {x: 0, y: -5.03, z: 0}
+          size: {x: 1, y: 1}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 0
+        characterData:
+          dialogueID: Inner_Fire_Line1_3502A
+          type: 1
+          emotionState: 0
+          selectedPartIndex: 0
+      - transformData:
+          position: {x: -0.854021, y: -0.33011782, z: 0}
+          size: {x: 1, y: 1}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 1
+        characterData:
+          dialogueID: Inner_Fire_Line1_3502A
+          type: 1
+          emotionState: 0
+          selectedPartIndex: 10
+      serializedFrameEffectValues: []
+      serializedFrameLightValues: []
+    flagNextKeyID: 0000000000000000
+    flagData:
+      keys: []
+      values: 
+    flagSequenceData:
+      nextKeyID: 0
+      previousKeyID: 0
+    cutscenePrefab: {fileID: 0}
+    cutscene: {fileID: 0}
+  - id: 5
+    frameKeyTransitionKnobs:
+      keys:
+      - Inner_Fire_Line1_3502A
+      values: 00000000
+    frameKeyGlobalFlagKnobs:
+      keys: []
+      values: 
+    transitionType: 0
+    keyType: 0
+    gameType: 0
+    gameManagerID: 
+    frameKeyValues:
+      keys:
+      - Main Camera_94A7F
+      - Inner_Fire_Line1_3502A
+      - Inner_Fire_AnswerSmall_74479
+      - Inner_Fire_AnswerSmall_91AB3
+      - Noran_73EF6
+      - "\u0421\u0430\u043D\u044F_F9D21"
+      serializedElementValues:
+      - transformData:
+          position: {x: 0, y: 0, z: -10}
+          size: {x: 1, y: 1}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 1
+      serializedDialogueValues:
+      - transformData:
+          position: {x: -138, y: 606, z: 0}
+          size: {x: 1920, y: 1080}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 1
+        keySequenceData:
+          nextKeyID: 2
+          previousKeyID: 0
+        dialogueTextData:
+          text: test end 2
+          speakingCharacterIndex: 2
+          conversationCharacterID: "\u0421\u0430\u043D\u044F_F9D21"
+          conversationCharacters:
+            keys:
+            - Noran
+            - "\u0421\u0430\u043D\u044F"
+            values:
+            - Noran_73EF6
+            - "\u0421\u0430\u043D\u044F_F9D21"
+          type: 0
+          textAnimationTime: 0.0165
+          autoContinue: 0
+          transitionDelay: 1
+          textAnimationDelay: 0
+      serializedDialogueAnswerValues:
+      - transformData:
+          position: {x: -768.77435, y: -0.000061035156, z: 0}
+          size: {x: 150, y: 150}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 0
+        keySequenceData:
+          nextKeyID: 0
+          previousKeyID: 0
+        dialogueAnswerTextData:
+          text: "\u041E\u0442\u0432\u0435\u0442"
+      - transformData:
+          position: {x: -768.77435, y: -0.000061035156, z: 0}
+          size: {x: 150, y: 150}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 0
+        keySequenceData:
+          nextKeyID: 0
+          previousKeyID: 0
+        dialogueAnswerTextData:
+          text: "\u041E\u0442\u0432\u0435\u0442"
+      serializedFrameCharacterValues:
+      - transformData:
+          position: {x: 0, y: -5.03, z: 0}
+          size: {x: 1, y: 1}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 0
+        characterData:
+          dialogueID: Inner_Fire_Line1_3502A
+          type: 1
+          emotionState: 0
+          selectedPartIndex: 0
+      - transformData:
+          position: {x: -0.854021, y: -0.33011782, z: 0}
+          size: {x: 1, y: 1}
+          rotation: {x: -0, y: 0, z: 0}
+          activeStatus: 1
+        characterData:
+          dialogueID: Inner_Fire_Line1_3502A
+          type: 1
+          emotionState: 0
+          selectedPartIndex: 10
+      serializedFrameEffectValues: []
+      serializedFrameLightValues: []
+    flagNextKeyID: 0000000000000000
+    flagData:
+      keys: []
+      values: 
+    flagSequenceData:
+      nextKeyID: 0
+      previousKeyID: 0
+    cutscenePrefab: {fileID: 0}
+    cutscene: {fileID: 0}
+  nodeCanvas: {fileID: 11400000, guid: 27869fbbcfb4a3e4798eed46684a8976, type: 2}
+  usedElementsObjects:
+  - elementObject: {fileID: 11400000, guid: f09224e30d17c1f4f97ea80d60f36783, type: 2}
+    ids:
+    - Inner_Fire_Line1_3502A
+  - elementObject: {fileID: 11400000, guid: f6619c14e28441644b37a6f8bbd6a453, type: 2}
+    ids:
+    - Noran_73EF6
+  - elementObject: {fileID: 11400000, guid: 23fb5e77bac5f8d4381978894bd49edc, type: 2}
+    ids:
+    - Main Camera_94A7F
+  - elementObject: {fileID: 11400000, guid: 47f87220be549ec4db05ba07c276217f, type: 2}
+    ids:
+    - Inner_Fire_AnswerSmall_74479
+    - Inner_Fire_AnswerSmall_91AB3
+  - elementObject: {fileID: 11400000, guid: 52d76848db82bca4fabbbd9f27f20d45, type: 2}
+    ids:
+    - "\u0421\u0430\u043D\u044F_F9D21"

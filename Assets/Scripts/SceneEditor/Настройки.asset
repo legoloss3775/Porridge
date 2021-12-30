@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 560a47425bc099e4b808af499da55478, type: 3}
   m_Name: "\u041D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0438"
   m_EditorClassIdentifier: 
-  selectedFrameIndex: 0
+  selectedFrameIndex: 3
   selectedKeyIndex: 0
   UI_CanvasPrefab: {fileID: 1617878546602089526, guid: 24599586e4412514c915f1c623948e0f, type: 3}
   frameElementsObjects:
@@ -21,6 +21,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a63eb35c20d864e418a017f4beff8991, type: 2}
   - {fileID: 11400000, guid: f09224e30d17c1f4f97ea80d60f36783, type: 2}
   - {fileID: 11400000, guid: 5799dc34a5e8a0648ade55bbe2fed1e4, type: 2}
+  - {fileID: 11400000, guid: 73eb44af1c5ef934eac1472c9b83cffa, type: 2}
   - {fileID: 11400000, guid: 89324d524bbece344823b4c96ff5f9b5, type: 2}
   - {fileID: 11400000, guid: 72ecbab83c8dae64cbf0d01855520f48, type: 2}
   - {fileID: 11400000, guid: 52d76848db82bca4fabbbd9f27f20d45, type: 2}
@@ -38,3 +39,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 90e369784d00b0442a0a42b931062fa2, type: 2}
   - {fileID: 11400000, guid: 4bbbf46c84d2dbf4c8e004dbcd0fa8f9, type: 2}
   - {fileID: 11400000, guid: 2cbaccb665b67224ba1d244271f983c5, type: 2}
+  - {fileID: 11400000, guid: e137fc7bf248b5645b7af58d718e8aba, type: 2}
+  - {fileID: 11400000, guid: 9eb20826a435268448e8121313496ed1, type: 2}

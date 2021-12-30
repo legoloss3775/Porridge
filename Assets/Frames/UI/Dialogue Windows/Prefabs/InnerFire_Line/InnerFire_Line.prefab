@@ -199,14 +199,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1882739269240976246}
-  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: -112, z: -0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -112, z: 0}
   m_LocalScale: {x: 25, y: 25, z: 5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7017645145037971292}
-  m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!2083052967 &6910175869535218206
 VisualEffect:
   m_ObjectHideFlags: 0
@@ -224,10 +224,10 @@ VisualEffect:
   m_PropertySheet:
     m_Float:
       m_Array:
-      - m_Value: 60000
+      - m_Value: 120000
         m_Name: spawnRate
         m_Overridden: 1
-      - m_Value: 0.5
+      - m_Value: 1
         m_Name: intensity
         m_Overridden: 1
     m_Vector2f:
@@ -304,8 +304,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   particleEffect: {fileID: 0}
   speed: 1000
-  spawnRate: 0
-  intensity: 0
+  spawnRate: 120000
+  intensity: 2
 --- !u!1 &2051729761866062128
 GameObject:
   m_ObjectHideFlags: 0
@@ -466,7 +466,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7017645145037971292}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -604,9 +604,9 @@ RectTransform:
   - {fileID: 5058399064224922315}
   - {fileID: 269458555089145543}
   - {fileID: 73991601572248497}
+  - {fileID: 2687445391404871303}
   - {fileID: 2429711451545074816}
   - {fileID: 7017645145465946146}
-  - {fileID: 2687445391404871303}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -674,7 +674,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7017645145037971292}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}

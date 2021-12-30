@@ -18,13 +18,15 @@ namespace FrameCore {
     namespace Serialization {
         #region SERIALIZATION
         [System.Serializable]
-        public class DialogueValues : Values {
-            public KeySequenceData keySequenceData;
+        public class DialogueValues : Values, IKeyTransition {
+            public KeySequenceData keySequenceData { get { return _keySequenceData; }set { _keySequenceData = value; } }
+            [SerializeField]
+            private KeySequenceData _keySequenceData;
             public DialogueTextData dialogueTextData;
             public DialogueValues(Dialogue dialogue) {
                 keySequenceData = new KeySequenceData {
-                    nextKeyID = dialogue.nextKeyID,
-                    previousKeyID = dialogue.previousKeyID,
+                    nextKeyID = dialogue.keySequenceData.nextKeyID,
+                    previousKeyID = dialogue.keySequenceData.previousKeyID,
                 };
                 transformData = new TransformData {
                     position = dialogue.position,
@@ -116,8 +118,9 @@ namespace FrameCore {
                     this.GetComponent<RectTransform>().localRotation = value;
                 }
             }
-            public int nextKeyID { get; set; }
-            public int previousKeyID { get; set; }
+            public KeySequenceData keySequenceData { get { return _keySequenceData; } set { _keySequenceData = value; } }
+            [SerializeField]
+            private KeySequenceData _keySequenceData;
             public string text {
                 get {
                     return GetTextComponent().text;
@@ -129,12 +132,12 @@ namespace FrameCore {
             public string characterNameField {
                 get {
                     if (this != null)
-                        return this.gameObject.transform.GetChild(4).GetComponent<TMPro.TextMeshProUGUI>().text;
-                    else return frameElementObject.prefab.transform.GetChild(4).GetComponent<TMPro.TextMeshProUGUI>().text;
+                        return this.gameObject.transform.GetChild(gameObject.transform.childCount - 2).GetComponent<TMPro.TextMeshProUGUI>().text;
+                    else return frameElementObject.prefab.transform.GetChild(gameObject.transform.childCount - 2).GetComponent<TMPro.TextMeshProUGUI>().text;
                 }
                 set {
                     if (conversationCharacterID != null) {
-                        this.gameObject.transform.GetChild(4).GetComponent<TMPro.TextMeshProUGUI>().text = value;
+                        this.gameObject.transform.GetChild(gameObject.transform.childCount - 2).GetComponent<TMPro.TextMeshProUGUI>().text = value;
                     }
                 }
             }
@@ -189,8 +192,8 @@ namespace FrameCore {
                 if (FrameController.INPUT_BLOCK || autoContinue) return;
 
                 if (Input.GetKeyDown(KeyCode.D)) {
-                    if (nextKeyID != 0) {
-                        FrameManager.SetKey(this.nextKeyID);
+                    if (keySequenceData.nextKeyID != 0) {
+                        FrameManager.SetKey(this.keySequenceData.nextKeyID);
                     }
                 }
             }
@@ -198,11 +201,11 @@ namespace FrameCore {
                 if (!Application.isPlaying) return;
 
                 if (FrameController.animations.Count == 0 && autoContinue) {
-                    if (nextKeyID != 0) {
+                    if (keySequenceData.nextKeyID != 0) {
                         autoContinueWait += Time.deltaTime;
 
                         if (autoContinueWait >= transitionDelay) {
-                            FrameManager.SetKey(this.nextKeyID);
+                            FrameManager.SetKey(this.keySequenceData.nextKeyID);
                             autoContinueWait = 0;
                         }
                     }
@@ -417,8 +420,8 @@ namespace FrameCore {
             #region VALUES_SETTINGS
             public TextMeshProUGUI GetTextComponent() {
                 if (this != null)
-                    return this.gameObject.transform.GetChild(5).GetComponent<TMPro.TextMeshProUGUI>();
-                else return frameElementObject.prefab.transform.GetChild(5).GetComponent<TMPro.TextMeshProUGUI>();
+                    return this.gameObject.transform.GetChild(gameObject.transform.childCount - 1).GetComponent<TMPro.TextMeshProUGUI>();
+                else return frameElementObject.prefab.transform.GetChild(gameObject.transform.childCount - 1).GetComponent<TMPro.TextMeshProUGUI>();
             }
             public override Values GetFrameKeyValuesType() {
                 return new DialogueValues(this);
@@ -426,8 +429,7 @@ namespace FrameCore {
             public override void UpdateValuesFromKey(Values frameKeyValues) {
                 var keyValues = (DialogueValues)frameKeyValues;
 
-                nextKeyID = keyValues.keySequenceData.nextKeyID;
-                previousKeyID = keyValues.keySequenceData.previousKeyID;
+                keySequenceData = keyValues.keySequenceData;
                 activeStatus = keyValues.transformData.activeStatus;
                 position = keyValues.transformData.position;
                 size = keyValues.transformData.size;

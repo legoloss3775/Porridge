@@ -16,7 +16,7 @@ namespace FrameCore.FrameEffects {
         private void Awake() {
             particleEffect = GetComponentInChildren<VisualEffect>();
             button = GetComponent<Button>();
-            particleEffect.SetFloat("spawnRate", spawnRate / 2f);
+            particleEffect.SetFloat("spawnRate", spawnRate );
             _spawnRate = particleEffect.GetFloat("spawnRate");
         }
         private void OnEnable() {
@@ -24,9 +24,9 @@ namespace FrameCore.FrameEffects {
         }
 
         private void Update() {
-            if (particleEffect.GetFloat("spawnRate") > spawnRate / 2f) StopAllCoroutines();
-            if (hoverOver) particleEffect.SetFloat("spawnRate", _spawnRate / 2f);
-            else particleEffect.SetFloat("spawnRate", _spawnRate / 10);
+            if (particleEffect.GetFloat("spawnRate") > spawnRate ) StopAllCoroutines();
+            if (hoverOver) particleEffect.SetFloat("spawnRate", _spawnRate);
+            else particleEffect.SetFloat("spawnRate", _spawnRate / 5);
         }
         public IEnumerator ParticlesOnEnableAnim(float speed) {
             float value = 0;

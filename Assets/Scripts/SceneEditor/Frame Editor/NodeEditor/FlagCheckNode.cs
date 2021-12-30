@@ -78,21 +78,6 @@ public class FlagCheckNode : FrameKeyNode {
                 }
             }
 
-        /**if (frameKey.flagData.keys != null) {
-            foreach (var flag in frameKey.flagData.keys) {
-                GUILayout.BeginHorizontal();
-                GUILayout.Label(flag, FrameEditor.FrameGUIUtility.GetLabelStyle(ORANGE, 25));
-                GUILayout.FlexibleSpace();
-                GUILayout.Label(frameKey.flagData.GetValue(flag).ToString(), FrameEditor.FrameGUIUtility.GetLabelStyle(ORANGE, 25));
-                GUILayout.EndHorizontal();
-            }
-        }**/
-
-        /**if (output1Knob.connected()) {
-            var body = (FrameKeyNode)output1Knob.connection(0).body;
-            frameKey.flagSequenceData.nextKeyID = body.frameKey.id;
-        }**/
-
         FrameKeySelection();
 
         foreach (var knob in outputKnobs) {

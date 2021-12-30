@@ -103,51 +103,41 @@ namespace FrameEditor {
                 GUILayout.FlexibleSpace();
                 GUILayout.EndHorizontal();
 
-                switch (FrameManager.frame.currentKey.keyType) {
-                    case FrameKey.KeyType.Default:
+                switch (FrameManager.frame.currentKey.gameType) {
+                    case GameType.FrameInteraction:
+                        switch (FrameManager.frame.currentKey.keyType) {
+                            case FrameKey.KeyType.Default:
 
-                        FrameCamera.FrameCameraEditing();
+                                FrameCamera.FrameCameraEditing();
 
-                        FrameEffect.FrameEffectEditing();
+                                FrameEffect.FrameEffectEditing();
 
-                        FrameLight.FrameLightEditing();
+                                FrameLight.FrameLightEditing();
 
-                        Background.FrameBackgroundEditing();
+                                Background.FrameBackgroundEditing();
 
-                        Dialogue.FrameDialogueEditing();
+                                Dialogue.FrameDialogueEditing();
 
-                        Character.FrameCharacterEditing();
+                                Character.FrameCharacterEditing();
 
+                                break;
+                            case FrameKey.KeyType.FlagChange:
+                                break;
+                            case FrameKey.KeyType.FlagCheck:
+                                break;
+                        }
                         break;
-                    case FrameKey.KeyType.FlagChange:
+                    case GameType.Cutscene:
+                        Cutscene.CutsceneEditing();
                         break;
-                    case FrameKey.KeyType.FlagCheck:
+                    case GameType.InnerFireFastSession:
                         break;
-                        /**case GameType.InnerFireFastSession:
-if(FrameManager.GetGameManager<FastSessionManager>() != null )
-  fastSessionManager = FrameManager.GetGameManager<FastSessionManager>();
-GUILayout.FlexibleSpace();
-GUILayout.BeginHorizontal();
-GUILayout.FlexibleSpace();
-GUILayout.Label("Игровой менеджер:", FrameGUIUtility.GetLabelStyle(Color.cyan, 25));
-GUILayout.FlexibleSpace();
-GUILayout.EndHorizontal();
-GUILayout.BeginHorizontal();
-GUILayout.FlexibleSpace();
-fastSessionManager = (FastSessionManager)EditorGUILayout.ObjectField(fastSessionManager, typeof(FastSessionManager), true, GUILayout.MaxWidth(300));
-
-if (fastSessionManager != null)
-  FrameManager.frame.currentKey.gameManagerID = fastSessionManager.id;
-if (!manager._gameManagers.Contains(fastSessionManager)) manager._gameManagers.Add(fastSessionManager);
-if (!FrameManager.gameManagers.Contains(fastSessionManager)) FrameManager.gameManagers.Add(fastSessionManager);
-GUILayout.FlexibleSpace();
-GUILayout.EndHorizontal();
-GUILayout.FlexibleSpace();
-break;
-case GameType.InnerFireLongSession:
-break;
-case GameType.InnerFireFreeRoam:
-break;**/
+                    case GameType.InnerFireLongSession:
+                        break;
+                    case GameType.InnerFireFreeRoam:
+                        break;
+                    case GameType.Custom:
+                        break;
                 }
 
                 GUILayout.FlexibleSpace();

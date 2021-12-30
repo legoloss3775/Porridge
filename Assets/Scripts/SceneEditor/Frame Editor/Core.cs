@@ -509,6 +509,7 @@ namespace FrameEditor {
             }
         }
         #endregion
+
         #region TRANSITION_KNOBS
         public static void DeleteInteractableTransitionNode(GameType type, FrameKey key) {
             if (NodeEditor.curNodeCanvas == null) return;
@@ -585,13 +586,14 @@ namespace FrameEditor {
                 knob.SetValue<FrameKey>(node.frameKey);
 
 
-                if (element is FrameCore.UI.Dialogue || element is DialogueAnswer)
+                if (element is IKeyTransition)
                     key.frameKeyTransitionKnobs.Add(element.id, node.connectionKnobs.IndexOf(knob) - 1);
                 NodeEditorFramework.ConnectionPortManager.UpdatePortLists(node);
             }
         }
         #endregion
     }
+    #region CREATION_WINDOW
     /// <summary>
     /// Окно создания элементов
     /// При добавлении нового элемента нужно пополнять список CreationType
@@ -782,5 +784,6 @@ namespace FrameEditor {
         }
     }
 }
+#endregion
 
 #endif

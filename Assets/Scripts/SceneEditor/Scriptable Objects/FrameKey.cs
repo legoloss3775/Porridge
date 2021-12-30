@@ -30,6 +30,9 @@ namespace FrameCore {
 
         public Serialization.KeySequenceData flagSequenceData;
 
+        public GameObject cutscenePrefab;
+        public GameObject cutscene;
+
         public enum TransitionType {
             DialogueLineContinue,
             DialogueAnswerSelection,

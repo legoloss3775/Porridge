@@ -1,4 +1,5 @@
 ﻿
+using FrameCore.Serialization;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,9 +7,12 @@ namespace FrameCore {
 
     namespace Serialization {
         [System.Serializable]
-        public class FrameEffectValues : Values {
+        public class FrameEffectValues : Values, IKeyTransition {
             public FrameEffectData frameEffectData;
             public CameraTurnAnimationData cameraTurnAnimationData;
+            public KeySequenceData keySequenceData { get { return _keySequenceData; } set { _keySequenceData = value; } }
+            [SerializeField]
+            private KeySequenceData _keySequenceData;
             public FrameEffectValues(FrameEffect effect) {
                 transformData = new TransformData {
                     position = effect.position,
@@ -24,6 +28,10 @@ namespace FrameCore {
                     degreesY = effect.cameraTurnAnimationData.degreesY,
                     moveTo = effect.cameraTurnAnimationData.moveTo,
                 };
+                keySequenceData = new KeySequenceData {
+                    nextKeyID = effect.keySequenceData.nextKeyID,
+                    previousKeyID = effect.keySequenceData.previousKeyID,
+                };
             }
             public FrameEffectValues() { }
             [System.Serializable]
@@ -31,6 +39,7 @@ namespace FrameCore {
                 public TransformData transformData;
                 public FrameEffectData frameEffectData;
                 public CameraTurnAnimationData cameraTurnAnimationData;
+                public KeySequenceData keySequenceData;
             }
             [SerializeField]
             public SerializedFrameEffectValues serializedFrameEffectValues {
@@ -39,6 +48,7 @@ namespace FrameCore {
                         transformData = transformData,
                         frameEffectData = frameEffectData,
                         cameraTurnAnimationData = cameraTurnAnimationData,
+                        keySequenceData = keySequenceData,
                     };
                 }
             }
@@ -48,45 +58,26 @@ namespace FrameCore {
                         transformData = svalue.transformData,
                         frameEffectData = svalue.frameEffectData,
                         cameraTurnAnimationData = svalue.cameraTurnAnimationData,
+                        keySequenceData = svalue.keySequenceData,
                     }
                     );
                 }
             }
         }
     }
-    public class FrameEffect : FrameElement {
+    public class FrameEffect : FrameElement, IKeyTransition {
         public float animationSpeed = 1f;
         public float animationDelay = 0;
         public Serialization.CameraTurnAnimationData cameraTurnAnimationData;
 
+        public FrameEffects.EffectPrefab effectPrefab { get { return GetComponent<FrameEffects.EffectPrefab>(); } }
+
+        public KeySequenceData keySequenceData { get { return _keySequenceData; } set { _keySequenceData = value; } }
+        [SerializeField]
+        private KeySequenceData _keySequenceData;
+
         public override void OnKeyChanged() {
-
-            if (GetComponent<FrameEffects.BlackScreenFadeout>() != null && activeStatus != false) {
-                var blackoutScreenFadeout = GetComponent<FrameEffects.BlackScreenFadeout>();
-                Color objectColor = blackoutScreenFadeout.GetComponent<SpriteRenderer>().color;
-                if (blackoutScreenFadeout.toBlack)
-                    blackoutScreenFadeout.GetComponent<SpriteRenderer>().color = new Color(objectColor.r, objectColor.g, objectColor.b, 0f);
-                else
-                    blackoutScreenFadeout.GetComponent<SpriteRenderer>().color = new Color(objectColor.r, objectColor.g, objectColor.b, 1f);
-
-                FrameController.AddAnimationToQueue(blackoutScreenFadeout.gameObject.name, true);
-                blackoutScreenFadeout.StartCoroutine(blackoutScreenFadeout.FadeBlackOut(blackoutScreenFadeout.toBlack, blackoutScreenFadeout.speed));
-            }
-            if (GetComponent<FrameEffects.CameraTurn>() != null && activeStatus != false) {
-                var cameraTurn = GetComponent<FrameEffects.CameraTurn>();
-
-                cameraTurn.rotation = Camera.main.transform.rotation.eulerAngles;
-                FrameController.AddAnimationToQueue(cameraTurn.gameObject.name, true);
-                cameraTurn.StartCoroutine(cameraTurn.TurnCamera(cameraTurn.degreesX, cameraTurn.degreesY, cameraTurn.speed));
-
-            }
-            if (GetComponent<FrameEffects.CameraMove>() != null && activeStatus != false) {
-                var cameraMove = GetComponent<FrameEffects.CameraMove>();
-
-                //cameraMove.moveToPosition = Camera.main.transform.position;
-                FrameController.AddAnimationToQueue(cameraMove.gameObject.name, true);
-                cameraMove.StartCoroutine(cameraMove.MoveCamera(cameraMove.moveToPosition, cameraMove.speed));
-            }
+            if (effectPrefab.gameObject.activeSelf) effectPrefab.OnFrameKeyChanged();
         }
 
         #region VALUES_SETTINGS
@@ -104,6 +95,12 @@ namespace FrameCore {
 
             cameraTurnAnimationData = keyValues.cameraTurnAnimationData;
 
+            keySequenceData = keyValues.keySequenceData;
+
+        }
+
+        public void KeyTransitionInput() {
+            throw new System.NotImplementedException();
         }
         #endregion
     }

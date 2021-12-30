@@ -4,9 +4,7 @@ using UnityEngine;
 namespace FrameCore {
     namespace FrameEffects {
         //[ExecuteInEditMode]
-        public class BlackScreenFadeout : MonoBehaviour {
-            public float speed { get { if (GetComponent<FrameEffect>() != null) return GetComponent<FrameEffect>().animationSpeed; else return 0.5f; } }
-            public float animationDelay { get { if (GetComponent<FrameEffect>() != null) return GetComponent<FrameEffect>().animationDelay; else return 0f; } }
+        public class BlackScreenFadeout : EffectPrefab {
 
             public bool toBlack;
             public bool end = false;
@@ -45,6 +43,18 @@ namespace FrameCore {
                     }
                 }
                 if (!end) FrameController.INPUT_BLOCK = true;**/
+            }
+            public override void OnFrameKeyChanged() {
+
+                var blackoutScreenFadeout = GetComponent<FrameEffects.BlackScreenFadeout>();
+                Color objectColor = blackoutScreenFadeout.GetComponent<SpriteRenderer>().color;
+                if (blackoutScreenFadeout.toBlack)
+                    blackoutScreenFadeout.GetComponent<SpriteRenderer>().color = new Color(objectColor.r, objectColor.g, objectColor.b, 0f);
+                else
+                    blackoutScreenFadeout.GetComponent<SpriteRenderer>().color = new Color(objectColor.r, objectColor.g, objectColor.b, 1f);
+
+                FrameController.AddAnimationToQueue(blackoutScreenFadeout.gameObject.name, true);
+                blackoutScreenFadeout.StartCoroutine(blackoutScreenFadeout.FadeBlackOut(blackoutScreenFadeout.toBlack, blackoutScreenFadeout.speed));
             }
             public IEnumerator FadeBlackOut(bool fadeToBlack = true, float fadeSpeed = 1) {
                 yield return new WaitForSeconds(animationDelay);

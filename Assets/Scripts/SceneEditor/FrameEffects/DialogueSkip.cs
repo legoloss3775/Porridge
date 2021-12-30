@@ -23,8 +23,8 @@ public class DialogueSkip : MonoBehaviour {
     private void Update() {
         if (FrameCore.FrameController.INPUT_BLOCK == false &&
             gameObject.transform.parent.GetComponent<FrameCore.UI.Dialogue>().autoContinue != true) {
-            if (particleEffect.GetFloat("spawnRate") <= 60000) {
-                value = 60000;
+            if (particleEffect.GetFloat("spawnRate") <= 120000) {
+                value = 120000;
                 particleEffect.SetFloat("spawnRate", value);
                 particleEffect.SetFloat("intensity", 1);
             }
