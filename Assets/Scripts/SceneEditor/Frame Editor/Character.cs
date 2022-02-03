@@ -50,7 +50,9 @@ namespace FrameEditor {
             GUILayout.EndHorizontal();
             GUILayout.EndVertical();
             GUILayout.BeginHorizontal();
-            GUILayout.Label(character.id);
+            if(character.activeStatus)
+                GUILayout.Label(character.id, FrameGUIUtility.GetLabelStyle(FrameKeyNode.ORANGE, 15));
+            else GUILayout.Label(character.id);
             GUILayout.FlexibleSpace();
             GUILayout.EndHorizontal();
 

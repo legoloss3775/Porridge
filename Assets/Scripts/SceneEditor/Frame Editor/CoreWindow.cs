@@ -48,6 +48,7 @@ namespace FrameEditor {
 
         private void OnGUI() {
             if (EditorApplication.isCompiling) return;
+
             if (Application.isPlaying) {
                 return;
             }
@@ -112,6 +113,8 @@ namespace FrameEditor {
 
                                 FrameEffect.FrameEffectEditing();
 
+                                FrameAudio.FrameAudioEditing();
+
                                 FrameLight.FrameLightEditing();
 
                                 Background.FrameBackgroundEditing();
@@ -128,7 +131,9 @@ namespace FrameEditor {
                         }
                         break;
                     case GameType.Cutscene:
+
                         Cutscene.CutsceneEditing();
+
                         break;
                     case GameType.InnerFireFastSession:
                         break;

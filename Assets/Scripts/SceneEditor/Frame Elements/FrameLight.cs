@@ -7,7 +7,7 @@ using static FrameCore.FrameElement;
 namespace FrameCore {
     namespace Serialization {
         public class FrameLightValues : Values {
-            public LightData lightData;
+            public FrameLightData lightData;
             public FrameLightValues(FrameLight light) {
                 transformData = new TransformData {
                     position = light.position,
@@ -15,7 +15,7 @@ namespace FrameCore {
                     rotation = light.rotation.eulerAngles,
                     size = light.size,
                 };
-                lightData = new LightData {
+                lightData = new FrameLightData {
                     intensity = light.lightData.intensity,
                     outerRange = light.lightData.outerRange,
                     innerRange = light.lightData.innerRange,
@@ -28,7 +28,7 @@ namespace FrameCore {
             [System.Serializable]
             public struct SerializedFrameLightValues {
                 public TransformData transformData;
-                public LightData lightData;
+                public FrameLightData lightData;
             }
             [SerializeField]
             public SerializedFrameLightValues serializedFrameLightValues {
@@ -51,7 +51,7 @@ namespace FrameCore {
         }
     }
     public class FrameLight : FrameElement {
-        public Serialization.LightData lightData {
+        public Serialization.FrameLightData lightData {
             get {
                 return GetLightData();
             }
@@ -67,8 +67,8 @@ namespace FrameCore {
         public Light2D component { get { return this.gameObject.GetComponent<Light2D>(); } }
 
         #region LIGHT_SETUP
-        public Serialization.LightData GetLightData() {
-            return new Serialization.LightData {
+        public Serialization.FrameLightData GetLightData() {
+            return new Serialization.FrameLightData {
                 intensity = component.intensity,
                 outerRange = component.pointLightOuterRadius,
                 innerRange = component.pointLightInnerRadius,

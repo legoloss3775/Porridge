@@ -103,12 +103,16 @@ namespace FrameCore.Serialization {
         public Vector3 moveTo;
     }
     [System.Serializable]
-    public struct LightData {
+    public struct FrameLightData {
         public float intensity;
         public float outerRange;
         public float innerRange;
         public Color color;
         public float outerAngle;
         public float innerAngle;
+    }
+    [System.Serializable]
+    public struct FrameAudioData {
+        public float volume;
     }
 }

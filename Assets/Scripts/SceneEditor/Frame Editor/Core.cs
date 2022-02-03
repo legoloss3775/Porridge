@@ -135,6 +135,7 @@ namespace FrameEditor {
             FrameEffectEditor,  ///<see cref="FrameEditor.FrameEffect">
             FrameCameraEditor,  ///<see cref="FrameEditor.FrameCamera">
             FrameLightEditor,   ///<see cref="FrameEditor.FrameLight">
+            FrameAudioEditor,   ///<see cref="FrameEditor.FrameAudio">
         }
         //Список для позиций ползунка для каждого из редакторов
         public static SerializableDictionary<EditorType, Vector2> scrollPositions = new SerializableDictionary<EditorType, Vector2> {
@@ -144,6 +145,7 @@ namespace FrameEditor {
         { EditorType.FrameEffectEditor, new Vector2()},
         { EditorType.FrameCameraEditor, new Vector2()},
         { EditorType.FrameLightEditor, new Vector2()},
+        { EditorType.FrameAudioEditor, new Vector2()},
     };
         //Список для поля поиска для каждого из редакторов
         public static SerializableDictionary<EditorType, string> searchTexts = new SerializableDictionary<EditorType, string> {
@@ -153,6 +155,7 @@ namespace FrameEditor {
         { EditorType.FrameEffectEditor, ""},
         { EditorType.FrameCameraEditor, ""},
         { EditorType.FrameLightEditor, ""},
+        { EditorType.FrameAudioEditor, ""},
     };
         //Список для опции сворачивания для каждого из редакторов
         public static SerializableDictionary<EditorType, bool> foldouts = new SerializableDictionary<EditorType, bool> {
@@ -162,6 +165,7 @@ namespace FrameEditor {
         { EditorType.FrameEffectEditor, true},
         { EditorType.FrameCameraEditor, true},
         { EditorType.FrameLightEditor, true},
+        { EditorType.FrameAudioEditor, true},
     };
         //Типы расположений элементов при их отрисовке в ElementEditing
         public enum PositioningType {
@@ -435,6 +439,10 @@ namespace FrameEditor {
                 element.activeStatus = true;
                 elementValues.transformData.activeStatus = true;
                 if (element is IKeyTransition) {
+                    if(element is FrameCore.FrameEffect && !element.id.Contains("AutoContinue")) {
+                        element.SetKeyValuesWhileNotInPlayMode();
+                        return;
+                    }
                     CreateInteractableTransitionNode(element, key);
                 }
             }
@@ -586,8 +594,9 @@ namespace FrameEditor {
                 knob.SetValue<FrameKey>(node.frameKey);
 
 
-                if (element is IKeyTransition)
+                if (element is IKeyTransition) {
                     key.frameKeyTransitionKnobs.Add(element.id, node.connectionKnobs.IndexOf(knob) - 1);
+                }
                 NodeEditorFramework.ConnectionPortManager.UpdatePortLists(node);
             }
         }
@@ -610,6 +619,7 @@ namespace FrameEditor {
             FrameEffect,
             FrameCamera,
             FrameLight,
+            FrameAudio,
         }
         public CreationType type;
         //ID создаваемого элемента записывается в эту статическую переменную, чтобы
@@ -642,6 +652,9 @@ namespace FrameEditor {
                     break;
                 case CreationType.FrameLight:
                     FrameElementCreationSelection<FrameLightSO, FrameCore.FrameLight>();
+                    break;
+                case CreationType.FrameAudio:
+                    FrameElementCreationSelection<FrameAudioSO, FrameCore.FrameAudio>();
                     break;
                 case CreationType.Frame: //для фрейма создана отдельная функция, потому что класс фрейма не относится к FrameElement
                     FrameSelection();

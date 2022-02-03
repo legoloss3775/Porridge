@@ -131,7 +131,6 @@ public class FrameKeyNode : Node {
                 valueKnob.SetValue(frameKey);
                 valueKnob.maxConnectionCount = ConnectionCount.Single;
             }
-
         }
         switch (frameKey.gameType) {
             case GameType.Cutscene:
@@ -207,6 +206,7 @@ public class FrameKeyNode : Node {
         foreach (var value in key.frameKeyValues) {
             UpdateKeyNodeValues(this, value.Key);
         }
+        NodeEditorFramework.Standard.NodeEditorWindow.editor.canvasCache.SaveNodeCanvas("Assets/Frames/NodeCanvases/Canvas_" + FrameManager.frame.id + ".asset");
     }
     protected override void OnDelete() {
         base.OnDelete();
@@ -221,6 +221,7 @@ public class FrameKeyNode : Node {
                 addkey.id = FrameManager.frame.frameKeys.IndexOf(addkey);
         }
         catch (System.Exception) { }
+        NodeEditorFramework.Standard.NodeEditorWindow.editor.canvasCache.SaveNodeCanvas("Assets/Frames/NodeCanvases/Canvas_" + FrameManager.frame.id + ".asset");
     }
     public void UpdateDialogueTransitionKnobs() {
         foreach (var FrameKeyTransitionKnob in frameKey.frameKeyTransitionKnobs)
@@ -228,7 +229,7 @@ public class FrameKeyNode : Node {
                 ValueConnectionKnob valueKnob = (ValueConnectionKnob)outputKnobs[FrameKeyTransitionKnob.Value];
                 if (valueKnob.connected()) {
                     var elementValues = frameKey.GetFrameKeyValuesOfElement(FrameKeyTransitionKnob.Key);
-                    var body = (FrameKeyNode)valueKnob.connection(0).body;
+                    FrameKeyNode body = (FrameKeyNode)valueKnob.connection(0).body;
                     if (elementValues is IKeyTransition dValues) {
                         dValues.keySequenceData = new KeySequenceData { nextKeyID = body.frameKey.id };
                     }
@@ -241,9 +242,16 @@ public class FrameKeyNode : Node {
                 ValueConnectionKnob valueKnob = (ValueConnectionKnob)outputKnobs[FrameKeyTransitionKnob.Value];
                 valueKnob.SetPosition(200);
                 if (valueKnob.connected()) {
-                    var body = (FrameKeyNode)valueKnob.connection(0).body;
-                    var key = frameKey.cutscenePrefab.GetComponent<Cutscene>();
-                    key.keySequenceData = new KeySequenceData { nextKeyID = body.frameKey.id };
+                    FrameKeyNode body = (FrameKeyNode)valueKnob.connection(0).body;
+                    if(frameKey.cutscenePrefab != null) {
+                        if (frameKey.cutscenePrefab.GetComponent<Cutscene>() != null) {
+                            var key = frameKey.cutscenePrefab.GetComponent<Cutscene>();
+                            key.keySequenceData = new KeySequenceData { nextKeyID = body.frameKey.id };
+                        }
+                        else {
+                            Debug.LogError("В катсцене " + frameKey.cutscenePrefab.name + "отсутсвует компонент Cutscene");
+                        }
+                    }
                 }
             }
     }

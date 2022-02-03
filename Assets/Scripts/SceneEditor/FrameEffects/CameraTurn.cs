@@ -50,7 +50,7 @@ namespace FrameCore.FrameEffects {
             if (degreesX > 0) {
                 while (rotation.y < degreesX) {
                     rotation = Camera.main.transform.rotation.eulerAngles;
-                    rotation += new Vector3(0, Time.deltaTime, 0) * speed;
+                    rotation += new Vector3(0, speed, 0) * Time.deltaTime;
                     Camera.main.transform.rotation = Quaternion.Euler(rotation);
                     yield return null;
                 }
@@ -58,7 +58,7 @@ namespace FrameCore.FrameEffects {
             else {
                 while (rotation.y > degreesX) {
                     //rotation = Camera.main.transform.rotation.eulerAngles;
-                    rotation -= new Vector3(0, Time.deltaTime, 0) * speed;
+                    rotation -= new Vector3(0, speed, 0) * Time.deltaTime;
                     Camera.main.transform.rotation = Quaternion.Euler(rotation);
                     yield return null;
                 }
@@ -66,7 +66,7 @@ namespace FrameCore.FrameEffects {
             if (degreesY > 0) {
                 while (rotation.x < degreesY) {
                     rotation = Camera.main.transform.rotation.eulerAngles;
-                    rotation += new Vector3(Time.deltaTime, 0, 0) * speed;
+                    rotation += new Vector3(speed, 0, 0) * Time.deltaTime;
                     Camera.main.transform.rotation = Quaternion.Euler(rotation);
                     yield return null;
                 }
@@ -74,7 +74,7 @@ namespace FrameCore.FrameEffects {
             else {
                 while (rotation.x > degreesY) {
                     rotation = Camera.main.transform.rotation.eulerAngles;
-                    rotation -= new Vector3(Time.deltaTime, 0, 0) * speed;
+                    rotation -= new Vector3(speed, 0, 0) * Time.deltaTime;
                     Camera.main.transform.rotation = Quaternion.Euler(rotation);
                     yield return null;
                 }

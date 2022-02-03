@@ -41,7 +41,7 @@ namespace FrameEditor {
             GUILayout.EndVertical();
 
             if (camera.activeStatus == false) {
-                GUILayout.Label(camera.id, EditorStyles.largeLabel);
+                GUILayout.Label(camera.frameElementObject.name, EditorStyles.largeLabel);
                 GUILayout.FlexibleSpace();
                 GUILayout.Label("Inactive", EditorStyles.largeLabel);
                 GUILayout.EndHorizontal();
@@ -50,7 +50,7 @@ namespace FrameEditor {
 
             GUILayout.BeginVertical();
             GUILayout.BeginHorizontal();
-            GUILayout.Label(camera.id, EditorStyles.largeLabel);
+            GUILayout.Label(camera.frameElementObject.name, FrameGUIUtility.GetLabelStyle(FrameKeyNode.ORANGE, 15));
             GUILayout.EndHorizontal();
             GUILayout.EndVertical();
             GUILayout.FlexibleSpace();

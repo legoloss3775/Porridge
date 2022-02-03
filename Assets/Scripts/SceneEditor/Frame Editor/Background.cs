@@ -42,7 +42,7 @@ namespace FrameEditor {
             GUILayout.EndVertical();
 
             if (background.activeStatus == false) {
-                GUILayout.Label(background.id);
+                GUILayout.Label(background.frameElementObject.name);
                 GUILayout.FlexibleSpace();
                 GUILayout.Label("Inactive");
                 GUILayout.EndHorizontal();
@@ -51,7 +51,7 @@ namespace FrameEditor {
 
             GUILayout.BeginVertical();
             GUILayout.BeginHorizontal();
-            GUILayout.Label(background.id, EditorStyles.largeLabel);
+            GUILayout.Label(background.frameElementObject.name, EditorStyles.largeLabel);
             GUILayout.FlexibleSpace();
             GUILayout.Label(icon);
             GUILayout.EndHorizontal();

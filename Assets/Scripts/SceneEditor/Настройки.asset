@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 560a47425bc099e4b808af499da55478, type: 3}
   m_Name: "\u041D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0438"
   m_EditorClassIdentifier: 
-  selectedFrameIndex: 3
+  selectedFrameIndex: 0
   selectedKeyIndex: 0
   UI_CanvasPrefab: {fileID: 1617878546602089526, guid: 24599586e4412514c915f1c623948e0f, type: 3}
   frameElementsObjects:
@@ -24,20 +24,13 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 73eb44af1c5ef934eac1472c9b83cffa, type: 2}
   - {fileID: 11400000, guid: 89324d524bbece344823b4c96ff5f9b5, type: 2}
   - {fileID: 11400000, guid: 72ecbab83c8dae64cbf0d01855520f48, type: 2}
-  - {fileID: 11400000, guid: 52d76848db82bca4fabbbd9f27f20d45, type: 2}
   - {fileID: 11400000, guid: 23fb5e77bac5f8d4381978894bd49edc, type: 2}
   - {fileID: 11400000, guid: 98bcf4d2568752e4092052bf01171a22, type: 2}
   - {fileID: 11400000, guid: d54297112fbef154a8b483df26349075, type: 2}
   - {fileID: 11400000, guid: 47f87220be549ec4db05ba07c276217f, type: 2}
-  - {fileID: 11400000, guid: 89cb9f70764132542ad28f556ff057fc, type: 2}
-  - {fileID: 11400000, guid: 29e196e2cf239ad49a30a520af503b6d, type: 2}
-  - {fileID: 11400000, guid: 1893b577383adad49a2d17cc3c2feb11, type: 2}
   - {fileID: 11400000, guid: e4a759d621f08a04092d983cd8d36dd3, type: 2}
   - {fileID: 11400000, guid: 5304f1b519d795042ae8a3ed3500e09b, type: 2}
   - {fileID: 11400000, guid: d8a816e8aed4d624ab6016e81170dad1, type: 2}
+  - {fileID: 11400000, guid: 78559f542b3e97142a24111d2402331f, type: 2}
   frames:
-  - {fileID: 11400000, guid: 90e369784d00b0442a0a42b931062fa2, type: 2}
-  - {fileID: 11400000, guid: 4bbbf46c84d2dbf4c8e004dbcd0fa8f9, type: 2}
-  - {fileID: 11400000, guid: 2cbaccb665b67224ba1d244271f983c5, type: 2}
-  - {fileID: 11400000, guid: e137fc7bf248b5645b7af58d718e8aba, type: 2}
-  - {fileID: 11400000, guid: 9eb20826a435268448e8121313496ed1, type: 2}
+  - {fileID: 11400000, guid: 64b61bf1547a9ce489ab98774d41de6f, type: 2}

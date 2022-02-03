@@ -69,7 +69,9 @@ namespace FrameEditor {
             ElementDeletion(dialogueAnswer); //кнопка удаления элемента
             GUILayout.EndHorizontal();
             GUILayout.EndVertical();
-            GUILayout.Label(dialogueAnswer.id);
+            if(dialogueAnswer.activeStatus)
+                GUILayout.Label(dialogueAnswer.id, FrameGUIUtility.GetLabelStyle(FrameKeyNode.ORANGE, 15));
+            else GUILayout.Label(dialogueAnswer.id);
             if (dialogueAnswer.activeStatus == false) {
                 GUILayout.FlexibleSpace();
                 GUILayout.Label("Inactive");
@@ -168,7 +170,9 @@ namespace FrameEditor {
             ElementDeletion(dialogue); //кнопка удаления элемента
             GUILayout.EndHorizontal();
             GUILayout.EndVertical();
-            GUILayout.Label(dialogue.id);
+            if(dialogue.activeStatus)
+                GUILayout.Label(dialogue.id, FrameGUIUtility.GetLabelStyle(FrameKeyNode.ORANGE, 15));
+            else GUILayout.Label(dialogue.id);
             if (dialogue.activeStatus == false) {
                 GUILayout.FlexibleSpace();
                 GUILayout.Label("Inactive");

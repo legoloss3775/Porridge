@@ -25,6 +25,7 @@ namespace FrameCore {
             UpdateFrameAssetsOfType<FrameEffectSO>("Effects");
             UpdateFrameAssetsOfType<FrameCameraSO>("Cameras");
             UpdateFrameAssetsOfType<FrameLightSO>("Lights");
+            UpdateFrameAssetsOfType<FrameAudioSO>("Audio");
             UpdateFrames();
         }
         public static void UpdateFrames() {
@@ -129,6 +130,9 @@ public class FrameKeyDictionary : Dictionary<string, Values>, ISerializationCall
     [SerializeField]
     private List<FrameLightValues.SerializedFrameLightValues> serializedFrameLightValues =
     new List<FrameLightValues.SerializedFrameLightValues>();
+    [SerializeField]
+    private List<FrameAudioValues.SerializedFrameAudioValues> serializedFrameAudioValues =
+        new List<FrameAudioValues.SerializedFrameAudioValues>();
     public virtual void OnBeforeSerialize() {
         keys.Clear();
         values.Clear();
@@ -138,6 +142,7 @@ public class FrameKeyDictionary : Dictionary<string, Values>, ISerializationCall
         serializedFrameCharacterValues.Clear();
         serializedFrameEffectValues.Clear();
         serializedFrameLightValues.Clear();
+        serializedFrameAudioValues.Clear();
 
         try {
             foreach (var pair in this.Where(ch => ch.Value is FrameElementValues)) {
@@ -170,6 +175,11 @@ public class FrameKeyDictionary : Dictionary<string, Values>, ISerializationCall
                 keys.Add(pair.Key);
                 serializedFrameLightValues.Add(values.serializedFrameLightValues);
             }
+            foreach (var pair in this.Where(ch => ch.Value is FrameAudioValues)) {
+                FrameAudioValues values = (FrameAudioValues)pair.Value;
+                keys.Add(pair.Key);
+                serializedFrameAudioValues.Add(values.serializedFrameAudioValues);
+            }
         }
         catch (System.Exception ex) {
             Debug.LogError(ex.Message);
@@ -189,6 +199,7 @@ public class FrameKeyDictionary : Dictionary<string, Values>, ISerializationCall
             .LoadSerialzedFrameKeyCharacterElementValues(serializedFrameCharacterValues, values);
         FrameEffectValues.LoadSerializedFrameEffectValues(serializedFrameEffectValues, values);
         FrameLightValues.LoadSerializedFrameLightValues(serializedFrameLightValues, values);
+        FrameAudioValues.LoadSerializedFrameAudioValues(serializedFrameAudioValues, values);
 
 
         for (int i = 0; i < keys.Count; i++) {

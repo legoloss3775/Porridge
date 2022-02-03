@@ -54,7 +54,7 @@ namespace FrameEditor {
 
             GUILayout.BeginVertical();
             GUILayout.BeginHorizontal();
-            GUILayout.Label(frameEffect.GetName(), FrameGUIUtility.GetLabelStyle(Color.cyan, 15));
+            GUILayout.Label(frameEffect.GetName(), FrameGUIUtility.GetLabelStyle(FrameKeyNode.ORANGE, 15));
             GUILayout.FlexibleSpace();
             GUILayout.EndHorizontal();
             GUILayout.EndVertical();

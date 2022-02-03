@@ -241,6 +241,7 @@ namespace FrameCore {
             FrameSO.LoadElementsOnScene<DialogueAnswerSO, DialogueAnswer>(frame.usedElementsObjects);
             FrameSO.LoadElementsOnScene<CharacterSO, Character>(frame.usedElementsObjects);
             FrameSO.LoadElementsOnScene<FrameLightSO, FrameLight>(frame.usedElementsObjects);
+            FrameSO.LoadElementsOnScene<FrameAudioSO, FrameAudio>(frame.usedElementsObjects);
 
 #if UNITY_EDITOR
             if (Application.isPlaying) return;
